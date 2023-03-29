@@ -1,70 +1,104 @@
-# Getting Started with Create React App
+# Tasks Master
+![Am I Responsive Screenshot]()     
+**Tasks Master**
+[View Live Website.]
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## TABLE OF CONTENTS
 
-## Available Scripts
+## User Experience Design (UXD)
 
-In the project directory, you can run:
+### **STRATEGY**
+#### **Main Goal:**
 
-### `npm start`
+#### **Target Audience:**
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+#### **The Use of Agile Methodology**
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+[<ins>Back to Table of Contents</ins>](#table-of-contents)
 
-### `npm test`
+#### **EPICS:**
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+#### **User Stories:**
+Iteration 1:    
 
-### `npm run build`
+Iteration 2:    
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Iteration 3:    
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Iteration 4:    
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+[<ins>Back to Table of Contents</ins>](#table-of-contents)
 
-### `npm run eject`
+### **SCOPE**
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+#### **Planned Features**
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+[<ins>Back to Table of Contents</ins>](#table-of-contents)
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+### **SKELETON**
+#### **Database Schema**
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+## Features
 
-## Learn More
+[<ins>Back to Table of Contents</ins>](#table-of-contents)
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## Features Left for Future Implementation
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## Fixed Bugs
 
-### Code Splitting
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+## Bugs Left To Fix
 
-### Analyzing the Bundle Size
+[<ins>Back to Table of Contents</ins>](#table-of-contents)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+## Testing
 
-### Making a Progressive Web App
+## Deployment
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+### **Version Control**
 
-### Advanced Configuration
+**Git** was a crucial tool used to track changes that were made in the repository. The following git commands were mainly used in developing this program:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+* `git status` — to show the status of the repository by displaying the files that have been staged and are ready for commit, those that are not, and those that are untracked. 
+* `git add <file name>` — to add file or changes in the file to the staging area before they can be committed
+* `git commit -m "message"` — to add/record files or changes to the local repository
+* `git push` — to upload the local repository to the remote repository, such as GitHub
 
-### Deployment
+### **Heroku Deployment**
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
 
-### `npm run build` fails to minify
+### **Cloning from GitHub**
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+[<ins>Back to Table of Contents</ins>](#table-of-contents)
+
+## Technologies
+This project uses the following tools:
+* [Create React App](https://create-react-app.dev/)
+* Deployment Platform:
+    * [Heroku](https://www.heroku.com)
+* [React-Bootstrap](https://react-bootstrap.github.io/)
+* `Git` - as a version control system, was used to monitor and record changes made when building the site. This allowed for the restoration of an earlier version of the code when it was necessary
+* `Gitpod` - the cloud-based IDE (Integrated Developer Environment) used to code this site
+* `GitHub` - stores the source code repository for this website
+* [Diffchecker](https://www.diffchecker.com/#) - used when comparing codes tested in another IDE to the codes in gitpod     
+* [Grammarly](https://www.grammarly.com/) - used to check the grammar of the contents in this project   
+* Web browsers (Google Chrome, Firefox, Safari, Microsoft Edge) 
+
+[<ins>Back to Table of Contents</ins>](#table-of-contents)
+
+## Credits
+
+* [Stackoverflow](https://stackoverflow.com/questions/65908861/how-to-automatically-create-new-profile-once-a-new-user-is-created-in-django) - How to automatically create a profile for registered users using @receiver decorator and Django signal
+* [Stackoverflow](https://stackoverflow.com/questions/29642390/how-to-filter-serializers-slugrelatedfield-queryset-using-model-field) - Modifying SlugRelatedField to return a filtered queryset
+* [Code Institute's drf-api repo](https://github.com/Code-Institute-Solutions/drf-api/blob/c637122d1a559139cabf1d39b0a3281814091d79/posts/serializers.py) - Code for the image validation
+
+### Content
+
+### Media
+
+
+### References
+* Main References:
+    * [Code Institute](https://codeinstitute.net/ie/)
+
+## Acknowledgment
