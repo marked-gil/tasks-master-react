@@ -77,6 +77,7 @@ This project uses the following tools:
 * Deployment Platform:
     * [Heroku](https://www.heroku.com)
 * [React-Bootstrap](https://react-bootstrap.github.io/)
+* [Google Fonts]gi(https://fonts.google.com/)
 * `Git` - as a version control system, was used to monitor and record changes made when building the site. This allowed for the restoration of an earlier version of the code when it was necessary
 * `Gitpod` - the cloud-based IDE (Integrated Developer Environment) used to code this site
 * `GitHub` - stores the source code repository for this website
