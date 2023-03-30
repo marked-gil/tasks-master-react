@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container';
 import Form from 'react-bootstrap/Form';
@@ -12,7 +11,7 @@ function OffcanvasExample() {
   return (
     <>
       {['lg'].map((expand) => (
-        <Navbar key={expand} expand={expand} className={`mb-3 ${styles.NavBar}`}>
+        <Navbar key={expand} expand={expand} className={`${styles.NavBar}`}>
           <Container fluid>
             <Navbar.Brand href="#" className="p-2 flex-grow-1">LOGO Tasks Master</Navbar.Brand>
             <Navbar.Toggle aria-controls={`offcanvasNavbar-expand-${expand}`} />
