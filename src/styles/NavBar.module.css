@@ -3,6 +3,17 @@
     padding-left: 5rem;
     padding-right: 5rem;
 }
-.NavMenu {
 
+@media screen and (max-width: 850px) {
+    .NavBar {
+        padding-left: 2rem;
+        padding-right: 2rem;
+    }
+}
+
+@media screen and (max-width: 500px) {
+    .NavBar {
+        padding-left: .5rem;
+        padding-right: .5rem;
+    }
 }
