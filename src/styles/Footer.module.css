@@ -1,0 +1,22 @@
+.Footer {
+    padding: 0 5rem;
+    background-color: darkgoldenrod;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 5rem;
+    width: 100%;
+}
+      
+ul {
+    border: 1px solid black;
+    display: flex;
+    justify-content: space-between;
+    padding-left: 0;
+    width: 25rem;
+    align-items: center;
+}
+
+li {
+    list-style-type: none;
+}
