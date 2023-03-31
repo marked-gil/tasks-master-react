@@ -3,7 +3,7 @@ import styles from '../styles/Footer.module.css'
 
 function Footer() {
   return (
-    <div className={styles.Footer}>
+    <footer className={styles.Footer}>
       <p>For Educational Purposes Only.</p>
       <p>2023 - Tasks Master</p>          
       <ul style={{color:'blue'}}>
@@ -13,7 +13,7 @@ function Footer() {
         <li>Instagram</li>
         <li>LinkedIn</li>
       </ul>
-    </div>
+    </footer>
   )
 }
 
