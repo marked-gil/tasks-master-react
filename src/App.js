@@ -8,9 +8,9 @@ import MainContent from './pages/MainContent';
 function App() {
   return (
     <div className={styles.App}>
-      <SignInPage />
-      {/* <SignUpPage />
-      <NavBar />
+      {/* <SignInPage /> */}
+      <SignUpPage />
+      {/* <NavBar />
       <MainContent />
       <Footer /> */}
     </div>

@@ -9,7 +9,7 @@ function SignUpPage() {
       <div className={styles.SignUpBox}>
         <p className="mb-5">LOGO - Tasks Master</p>
         <h1>Sign Up</h1>
-        <Form className={`mt-5 ${styles.Form}`}>
+        <Form className={`d-flex flex-column mt-5 ${styles.Form}`}>
           <Form.Group className="mb-3" controlId="username">
             <Form.Label>Username:</Form.Label>
             <Form.Control type="text" placeholder="Enter a username" />

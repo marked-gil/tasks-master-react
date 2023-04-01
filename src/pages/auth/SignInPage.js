@@ -9,7 +9,7 @@ function SignInPage() {
       <div className={styles.SignInBox}>
         <p className="mb-5">LOGO - Tasks Master</p>
         <h1>Sign In</h1>
-        <Form className={`mt-5 ${styles.Form}`}>
+        <Form className={`d-flex flex-column mt-5 ${styles.Form}`}>
           <Form.Group className="mb-3" controlId="username">
             <Form.Label className={styles.bold}>Username:</Form.Label>
             <Form.Control type="text" placeholder="Enter your username" />
@@ -21,7 +21,7 @@ function SignInPage() {
           </Form.Group>
 
           <Button variant="primary" type="submit">
-            Register
+            Log In
           </Button>
         </Form>
         
