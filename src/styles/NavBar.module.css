@@ -4,6 +4,14 @@
     padding-right: 5rem;
 }
 
+.Nav {
+    gap: 1.5rem;
+}
+
+.Avatar {
+    width: 2rem;
+}
+
 .ClrWhite {
     color: white;
 }

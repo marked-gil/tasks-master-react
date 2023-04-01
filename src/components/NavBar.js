@@ -5,6 +5,7 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import Offcanvas from 'react-bootstrap/Offcanvas';
 import styles from '../styles/NavBar.module.css'
+import Avatar from '../assets/profile-avatar.jpg'
 
 function OffcanvasExample() {
 
@@ -36,10 +37,11 @@ function OffcanvasExample() {
                   />
                   <Button variant="outline-success" className={styles.ClrWhite}>Search</Button>
                 </Form>
-                <Nav className="justify-content-end flex-grow-1 pe-3">
-                  <Nav.Link href="#" className={styles.ClrWhite}>Home</Nav.Link>
-                  <Nav.Link href="#" className={styles.ClrWhite}>My Tasks</Nav.Link>
-                  <Nav.Link href="#" className={styles.ClrWhite}>Sign Out</Nav.Link>
+                <Nav className={`${styles.Nav} justify-content-end align-items-center flex-grow-1 pe-3`}>
+                  <Nav.Link href="#" className={`p-0 ${styles.ClrWhite}`}>Home</Nav.Link>
+                  <Nav.Link href="#" className={`p-0 ${styles.ClrWhite}`}>My Tasks</Nav.Link>
+                  <Nav.Link href="#" className={`p-0 ${styles.ClrWhite}`}>Sign Out</Nav.Link>
+                  <Nav.Link href="#" className="p-0"><img src={Avatar} alt="profile avatar" className={styles.Avatar}/></Nav.Link>
                 </Nav>
               </Offcanvas.Body>
             </Navbar.Offcanvas>
