@@ -1,5 +1,16 @@
 .SideBar {
   background-color: rgb(210, 55, 28);
   width: 35rem;
-  /* min-height: 100%; */
+}
+
+@media screen and (max-width: 1455px) {
+  .SideBar {
+    width: 25rem;
+  }
+}
+
+@media screen and (max-width: 990px) {
+  .SideBar {
+    display: none;
+  }
 }
