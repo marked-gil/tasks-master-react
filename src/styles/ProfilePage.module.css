@@ -1,0 +1,27 @@
+.ProfilePage {
+  padding: 5rem 0 0;
+  display: flex;
+  justify-content: center;
+}
+
+.FormContainer {
+  width: 34rem;
+}
+
+.Form {
+  padding: 2rem 0;
+}
+
+.PageTitle {
+  text-align: center;
+  font-weight: 700;
+}
+
+.bold {
+  font-weight: 600;
+}
+
+.DeleteAccount {
+  color: #cb5757;
+  margin-top: 6rem;
+}
