@@ -5,21 +5,39 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    gap: 5rem;
     height: 5rem;
     width: 100%;
     position: fixed;
+    font-size: 1.2rem;
     bottom: 0;
 }
       
 ul {
-    display: flex;
-    justify-content: space-between;
-    padding-left: 0;
-    width: 25rem;
-    align-items: center;
+    width: 22rem;
+    gap: 1.2rem;
 }
 
 li {
-    color: white;
     list-style-type: none;
+}
+
+.icons {
+    color: white;
+    font-size: 2rem;
+}
+
+@media screen and (max-width: 992px) {
+    .Footer {
+        font-size: 1rem;
+        flex-direction: column;
+        justify-content: center;
+        gap: 0;
+    }
+}
+
+@media screen and (max-width: 1400px) {
+    ul {
+        width: 12rem;
+    }
 }
