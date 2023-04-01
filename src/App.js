@@ -1,13 +1,13 @@
 import styles from './App.module.css';
 import Footer from './components/Footer';
 import NavBar from './components/NavBar'
-import SideBar from './components/SideBar';
+import MainContent from './pages/MainContent';
 
 function App() {
   return (
     <div className={styles.App}>
       <NavBar />
-      <SideBar />
+      <MainContent />
       <Footer />
     </div>
   );

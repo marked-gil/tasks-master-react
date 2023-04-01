@@ -1,0 +1,13 @@
+.MainContent {
+  width: 100%;
+  height: calc(100vh - 142px);
+}
+
+.Row {
+  display: flex;
+  height: 100%;
+}
+
+.Div {
+  background-color: blue;
+}
