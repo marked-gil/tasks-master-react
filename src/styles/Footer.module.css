@@ -1,6 +1,7 @@
 .Footer {
+    color: white;
     padding: 0 5rem;
-    background-color: darkgoldenrod;
+    background-color: #2B4162;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -11,7 +12,6 @@
 }
       
 ul {
-    border: 1px solid black;
     display: flex;
     justify-content: space-between;
     padding-left: 0;
@@ -20,5 +20,6 @@ ul {
 }
 
 li {
+    color: white;
     list-style-type: none;
 }

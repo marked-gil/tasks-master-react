@@ -8,7 +8,7 @@ function MainContent() {
     <Container fluid className={styles.MainContent}>
       <Row className={styles.Row}>
         <SideBar />
-        <Col className={styles.Div} ></Col>
+        <Col></Col>
       </Row>
     </Container>
   )

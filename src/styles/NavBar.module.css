@@ -1,7 +1,11 @@
 .NavBar {
-    background-color: rgb(146, 55, 42);
+    background-color: #721817;
     padding-left: 5rem;
     padding-right: 5rem;
+}
+
+.ClrWhite {
+    color: white;
 }
 
 @media screen and (max-width: 850px) {
