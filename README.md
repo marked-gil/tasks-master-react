@@ -80,6 +80,7 @@ This project uses the following tools:
     * [React-Bootstrap](https://react-bootstrap.github.io/)
     * [React Router DOM](https://v5.reactrouter.com/)
 * [Google Fonts](https://fonts.google.com/)
+* [Freepik](https://www.freepik.com/)
 * `Git` - as a version control system, was used to monitor and record changes made when building the site. This allowed for the restoration of an earlier version of the code when it was necessary
 * `Gitpod` - the cloud-based IDE (Integrated Developer Environment) used to code this site
 * `GitHub` - stores the source code repository for this website
@@ -98,7 +99,7 @@ This project uses the following tools:
 ### Content
 
 ### Media
-
+* Profile Avatar <a href="https://www.freepik.com/free-vector/people-icon-collection_1157380.htm#query=avatar&position=14&from_view=keyword&track=sph">Image by muammark</a> on Freepik
 
 ### References
 * Main References:
