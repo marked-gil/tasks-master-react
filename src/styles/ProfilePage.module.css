@@ -1,14 +1,13 @@
 .ProfilePage {
   padding: 5rem 0 0;
   display: flex;
-  justify-content: center;
-}
-
-.FormContainer {
-  width: 34rem;
+  flex-direction: column;
+  align-items: center;
+  /* justify-content: center; */
 }
 
 .Form {
+  width: 34rem;
   padding: 2rem 0;
 }
 

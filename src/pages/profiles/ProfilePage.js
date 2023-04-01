@@ -2,12 +2,13 @@ import React from 'react';
 import { Row, Col } from 'react-bootstrap';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
+
 import styles from '../../styles/ProfilePage.module.css';
 
 function ProfilePage() {
   return (
     <Col className={styles.ProfilePage}>
-      <div className={styles.FormContainer}>
+      <div>
         <h2 className={styles.PageTitle}>My Profile</h2>
 
         <Form className={styles.Form}>
@@ -51,7 +52,7 @@ function ProfilePage() {
           </div>
         </Form>
         <a href="#" className="d-block mt-4">Change Password</a>
-        <a href="#" className={`d-flex justify-content-end ${styles.DeleteAccount}`}>Delete Account</a>
+        <a href="#" className={`d-flex justify-content-end mt-5 ${styles.DeleteAccount}`}>Delete Account</a>
       </div>
     </Col>
   )
