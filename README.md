@@ -79,6 +79,7 @@ This project uses the following tools:
 * Installed Packages:
     * [React-Bootstrap](https://react-bootstrap.github.io/)
     * [React Router DOM](https://v5.reactrouter.com/)
+    * [Axios](https://axios-http.com/docs/intro)
 * [Google Fonts](https://fonts.google.com/)
 * [Freepik](https://www.freepik.com/)
 * `Git` - as a version control system, was used to monitor and record changes made when building the site. This allowed for the restoration of an earlier version of the code when it was necessary
