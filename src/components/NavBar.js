@@ -38,8 +38,8 @@ function OffcanvasExample() {
                   <Button variant="outline-success" className={styles.ClrWhite}>Search</Button>
                 </Form>
                 <Nav className={`${styles.Nav} justify-content-end align-items-center flex-grow-1 pe-3`}>
-                  <Nav.Link href="#" className={`p-0 ${styles.ClrWhite}`}>Home</Nav.Link>
                   <Nav.Link href="#" className={`p-0 ${styles.ClrWhite}`}>My Tasks</Nav.Link>
+                  <Nav.Link href="#" className={`p-0 ${styles.ClrWhite}`}>My Profile</Nav.Link>
                   <Nav.Link href="#" className={`p-0 ${styles.ClrWhite}`}>Sign Out</Nav.Link>
                   <Nav.Link href="#" className="p-0"><img src={Avatar} alt="profile avatar" className={styles.Avatar}/></Nav.Link>
                 </Nav>
