@@ -4,7 +4,7 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Alert from 'react-bootstrap/Alert';
 import styles from '../../styles/SignUpPage.module.css'
-import { useHistory } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 
 function SignUpPage() {
   const [signUpData, setSignUpData] = useState({
@@ -103,7 +103,7 @@ function SignUpPage() {
 
         <div className="d-flex mt-5">
           <p className="me-5">Already registered?</p>
-          <a href="#">SIGN IN</a>
+          <Link to="/">SIGN IN</Link>
         </div>
 
       </div>

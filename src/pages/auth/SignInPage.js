@@ -1,6 +1,7 @@
 import React from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
+import { Link } from 'react-router-dom';
 import styles from '../../styles/SignInPage.module.css'
 
 function SignInPage() {
@@ -27,7 +28,11 @@ function SignInPage() {
         
         <div className="d-flex flex-column mt-5">
           <a className="mb-4" href="#">Forgot Password?</a>
-          <p>Not registered? <a className="ms-4" href="#">SIGN UP</a></p>
+
+          <div className="d-flex">
+            <p className="me-5">Not registered?</p>
+            <Link to="/signup">SIGN UP</Link>
+          </div>
         </div>
       </div>
     </div>
