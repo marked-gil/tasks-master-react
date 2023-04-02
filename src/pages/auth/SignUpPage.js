@@ -103,7 +103,7 @@ function SignUpPage() {
 
         <div className="d-flex mt-5">
           <p className="me-5">Already registered?</p>
-          <Link to="/sign">SIGN IN</Link>
+          <Link to="/signin">SIGN IN</Link>
         </div>
 
       </div>
