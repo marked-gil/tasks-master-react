@@ -24,3 +24,7 @@ h1 {
 .bold {
   font-weight: 600;
 }
+
+.TextCenter {
+  text-align: center;
+}

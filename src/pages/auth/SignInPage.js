@@ -4,6 +4,7 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import { Link, useHistory } from 'react-router-dom';
 import styles from '../../styles/SignInPage.module.css'
+import { Alert } from 'react-bootstrap';
 
 function SignInPage() {
 
@@ -11,9 +12,9 @@ function SignInPage() {
     username: "",
     password: ""
   });
-
   const { username, password } = signInData;
-  const { errors, setErrors } = useState({});
+
+  const [ errors, setErrors ] = useState({});
 
   const history = useHistory();
 
@@ -23,6 +24,7 @@ function SignInPage() {
       const { data } = await axios.post("/dj-rest-auth/login/", signInData);
       history.push('/profile');
     } catch (err) {
+      console.log(err.response)
       setErrors(err.response?.data);
     }
   };
@@ -38,8 +40,17 @@ function SignInPage() {
     <div className={styles.SignInPage}>
       <div className={styles.SignInBox}>
         <p className="mb-5">LOGO - Tasks Master</p>
+
         <h1>Sign In</h1>
+
         <Form onSubmit={handleSubmit} className={`d-flex flex-column mt-5 ${styles.Form}`}>
+          {errors.non_field_errors?.map((error, idx) => (
+            <Alert className={`mt-1 mb-0 pb-0 pt-0 ${styles.TextCenter}`} key={idx} variant="danger">
+              {error}
+            </Alert>
+            ))
+          }
+
           <Form.Group className="mb-3" controlId="username">
             <Form.Label className={styles.bold}>Username:</Form.Label>
             <Form.Control
@@ -49,6 +60,13 @@ function SignInPage() {
               value={username}
               onChange={handleChange}
             />
+
+            {errors.username?.map((error, idx) => (
+              <Alert className={`mt-1 mb-0 pb-0 pt-0 ${styles.TextCenter}`} key={idx} variant="danger">
+                {error}
+              </Alert>
+              ))
+            }
           </Form.Group>
 
           <Form.Group className="mb-3" controlId="password">
@@ -60,6 +78,13 @@ function SignInPage() {
               value={password}
               onChange={handleChange}
             />
+
+            {errors.password?.map((error, idx) => (
+              <Alert className={`mt-1 mb-0 pb-0 pt-0 ${styles.TextCenter}`} key={idx} variant="danger">
+                {error}
+              </Alert>
+              ))
+            }
           </Form.Group>
 
           <Button variant="primary" type="submit">
