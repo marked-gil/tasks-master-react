@@ -30,7 +30,7 @@ function SignUpPage() {
     event.preventDefault();
     try {
       await axios.post("/dj-rest-auth/registration/", signUpData);
-      history.push('/');
+      history.push('/signin');
     } catch (err) {
       setErrors(err.response?.data)
     }
@@ -103,7 +103,7 @@ function SignUpPage() {
 
         <div className="d-flex mt-5">
           <p className="me-5">Already registered?</p>
-          <Link to="/">SIGN IN</Link>
+          <Link to="/sign">SIGN IN</Link>
         </div>
 
       </div>

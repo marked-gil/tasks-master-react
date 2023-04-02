@@ -10,7 +10,8 @@ function App() {
   return (
     <div className={styles.App}>
       <Switch>
-        <Route exact path="/" render={() => <SignInPage /> } />
+        <Route exact path="/" render={() => <h1>Home</h1>} />
+        <Route exact path="/signin" render={() => <SignInPage /> } />
         <Route exact path="/signup" render={() => <SignUpPage /> } />
         <Route exact path="/profile" render={() => <MainContent /> } />
         <Route render={() => <h1>Page Not Found</h1>}/>
