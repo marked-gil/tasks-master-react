@@ -1,10 +1,10 @@
 import { Route, Switch } from 'react-router-dom';
-import styles from './App.module.css';
-import Footer from './components/Footer';
-import NavBar from './components/NavBar'
+import './api/axiosDefaults';
 import SignInPage from './pages/auth/SignInPage';
 import SignUpPage from './pages/auth/SignUpPage';
 import MainContent from './pages/MainContent';
+import styles from './App.module.css';
+
 
 function App() {
   return (
