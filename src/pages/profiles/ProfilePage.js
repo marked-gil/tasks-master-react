@@ -29,6 +29,7 @@ function ProfilePage () {
   const isOwner = currentUser?.profile_id === id;
 
   const handleChange = (event) => {
+    console.log(currentUser)
     setProfileData({
       ...profileData,
       [event.target.name]: event.target.value

@@ -11,7 +11,7 @@ import { NavLink } from 'react-router-dom';
 import { useCurrentUser, useSetCurrentUser } from '../contexts/CurrentUserContext';
 import { removeTokenTimestamp } from '../utils/utils';
 
-function OffcanvasExample() {
+function NavBar() {
   const setCurrentUser = useSetCurrentUser();
 
   const handleSignOut = async () => {
@@ -56,7 +56,6 @@ function OffcanvasExample() {
                   <Nav.Link href="#" className={`p-0 ${styles.ClrWhite}`}>My Tasks</Nav.Link>
                   <Nav.Link href="#" className={`p-0 ${styles.ClrWhite}`}>My Profile</Nav.Link>
                   <NavLink to="/signin" onClick={handleSignOut} className={`p-0 ${styles.ClrWhite}`}>Sign Out</NavLink>
-                  {/* <Nav.Link href="#" className={`p-0 ${styles.ClrWhite}`}>Sign Out</Nav.Link> */}
                   <Nav.Link href="#" className="p-0"><img src={Avatar} alt="profile avatar" className={styles.Avatar}/></Nav.Link>
                 </Nav>
               </Offcanvas.Body>
@@ -68,4 +67,4 @@ function OffcanvasExample() {
   );
 }
 
-export default OffcanvasExample;
+export default NavBar;
