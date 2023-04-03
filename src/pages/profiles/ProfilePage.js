@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { Row, Col } from 'react-bootstrap';
+import { Row, Col, Alert } from 'react-bootstrap';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import { useHistory, useParams } from 'react-router-dom';
@@ -13,6 +13,9 @@ function ProfilePage () {
   const setCurrentUser = useSetCurrentUser();
   const history = useHistory();
   const {id} = useParams();
+
+  const [ errors, setErrors ] = useState({});
+
   const [profileData, setProfileData] = useState({
     first_name: "",
     last_name: "",
@@ -48,7 +51,6 @@ function ProfilePage () {
 
   useEffect(() => {
     handleMount();
-    setProfileData({...currentUser})
   },[currentUser, id]);
 
   const handleSubmit = async (event) => {
@@ -62,9 +64,8 @@ function ProfilePage () {
 
     try {
       const { data } = await axiosReq.put(`profiles/${id}/`, formData);
-      console.log(data)
     } catch (err) {
-      console.log(err.response)
+      setErrors(err.response?.data);
     }
   }
 
@@ -91,29 +92,43 @@ function ProfilePage () {
           </Form.Group>
 
           <Form.Group as={Row} className="mb-3" controlId="first-name">
-              <Form.Label column sm="2" className={`ps-0 ${styles.bold}`}>First Name:</Form.Label>
-              <Col sm="10" className="p-0">
-                <Form.Control
-                  type="text"
-                  placeholder="Enter your first name"
-                  name="first_name"
-                  value={first_name}
-                  onChange={handleChange}
-                  />
-              </Col>
+            <Form.Label column sm="2" className={`ps-0 ${styles.bold}`}>First Name:</Form.Label>
+            <Col sm="10" className="p-0">
+              <Form.Control
+                type="text"
+                placeholder="Enter your first name"
+                name="first_name"
+                value={first_name}
+                onChange={handleChange}
+              />
+            </Col>
+
+            {errors.first_name?.map((error, idx) => (
+              <Alert className={`mt-1 mb-0 pb-0 pt-0 ${styles.TextCenter}`} key={idx} variant="danger">
+                {error}
+              </Alert>
+              ))
+            }
           </Form.Group>
 
           <Form.Group as={Row} className="mb-3" controlId="last-name">
-              <Form.Label column sm="2" className={`ps-0 ${styles.bold}`}>Last Name:</Form.Label>
-              <Col sm="10" className="p-0">
-                <Form.Control
-                  type="text"
-                  placeholder="Enter your last name"
-                  name="last_name"
-                  value={last_name}
-                  onChange={handleChange}
-                />
-              </Col>
+            <Form.Label column sm="2" className={`ps-0 ${styles.bold}`}>Last Name:</Form.Label>
+            <Col sm="10" className="p-0">
+              <Form.Control
+                type="text"
+                placeholder="Enter your last name"
+                name="last_name"
+                value={last_name}
+                onChange={handleChange}
+              />
+            </Col>
+
+            {errors.last_name?.map((error, idx) => (
+              <Alert className={`mt-1 mb-0 pb-0 pt-0 ${styles.TextCenter}`} key={idx} variant="danger">
+                {error}
+              </Alert>
+              ))
+            }
           </Form.Group>
 
           <Form.Group as={Row} className="mb-3" controlId="email">
@@ -127,6 +142,12 @@ function ProfilePage () {
                 onChange={handleChange}
               />
             </Col>
+            {errors.email?.map((error, idx) => (
+              <Alert className={`mt-1 mb-0 pb-0 pt-0 ${styles.TextCenter}`} key={idx} variant="danger">
+                {error}
+              </Alert>
+              ))
+            }
           </Form.Group>
 
           <div className='d-flex justify-content-center ps-5 pt-4'>
