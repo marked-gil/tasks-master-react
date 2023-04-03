@@ -25,7 +25,7 @@ function SignInPage() {
     try {
       const { data } = await axios.post("/dj-rest-auth/login/", signInData);
       setCurrentUser(data.user)
-      history.push('/profile');
+      history.push('/profile/09797b9f-bb37-4694-8694-40b804b83359');
     } catch (err) {
       console.log(err.response)
       setErrors(err.response?.data);
