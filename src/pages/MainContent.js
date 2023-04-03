@@ -7,8 +7,9 @@ import SideBar from '../components/SideBar'
 import { useCurrentUser } from '../contexts/CurrentUserContext'
 import styles from '../styles/MainContent.module.css'
 import ProfilePage from './profiles/ProfilePage'
+import MyTasksToday from './tasks/MyTasksToday'
 
-function MainContent({ profile }) {
+function MainContent({ profile, tasksToday }) {
 
   return (
     <>
@@ -16,7 +17,8 @@ function MainContent({ profile }) {
       <Container fluid className={styles.MainContent}>
         <Row className={styles.Row}>
           <SideBar />
-          {profile ? <ProfilePage/> 
+          {profile ? <ProfilePage /> 
+          : tasksToday ? <MyTasksToday />
           : <></>
 
           }
