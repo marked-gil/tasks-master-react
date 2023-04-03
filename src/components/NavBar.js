@@ -1,3 +1,4 @@
+import axios from 'axios';
 import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container';
 import Form from 'react-bootstrap/Form';
@@ -6,8 +7,22 @@ import Navbar from 'react-bootstrap/Navbar';
 import Offcanvas from 'react-bootstrap/Offcanvas';
 import styles from '../styles/NavBar.module.css'
 import Avatar from '../assets/profile-avatar.jpg'
+import { NavLink } from 'react-router-dom';
+import { useCurrentUser, useSetCurrentUser } from '../contexts/CurrentUserContext';
+import { removeTokenTimestamp } from '../utils/utils';
 
 function OffcanvasExample() {
+  const setCurrentUser = useSetCurrentUser();
+
+  const handleSignOut = async () => {
+    try {
+      await axios.post("dj-rest-auth/logout/");
+      setCurrentUser(null);
+      removeTokenTimestamp();
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   return (
     <>
@@ -40,7 +55,8 @@ function OffcanvasExample() {
                 <Nav className={`${styles.Nav} justify-content-end align-items-center flex-grow-1 pe-3`}>
                   <Nav.Link href="#" className={`p-0 ${styles.ClrWhite}`}>My Tasks</Nav.Link>
                   <Nav.Link href="#" className={`p-0 ${styles.ClrWhite}`}>My Profile</Nav.Link>
-                  <Nav.Link href="#" className={`p-0 ${styles.ClrWhite}`}>Sign Out</Nav.Link>
+                  <NavLink to="/signin" onClick={handleSignOut} className={`p-0 ${styles.ClrWhite}`}>Sign Out</NavLink>
+                  {/* <Nav.Link href="#" className={`p-0 ${styles.ClrWhite}`}>Sign Out</Nav.Link> */}
                   <Nav.Link href="#" className="p-0"><img src={Avatar} alt="profile avatar" className={styles.Avatar}/></Nav.Link>
                 </Nav>
               </Offcanvas.Body>

@@ -21,9 +21,10 @@ function ProfilePage () {
     last_name: "",
     image: "",
     email: "",
+    username: "",
   });
 
-  const { first_name, last_name, image, email } = profileData;
+  const { first_name, last_name, image, email, username } = profileData;
 
   const isOwner = currentUser?.profile_id === id;
 
@@ -37,12 +38,13 @@ function ProfilePage () {
   const handleMount = async () => {
     try {
       const { data } = await axiosReq.get(`/profiles/${id}`);
-      const {first_name, last_name, image, email } = data;
+      const {first_name, last_name, image, email, owner } = data;
       setProfileData({
         first_name: first_name,
         last_name: last_name,
         image: image,
-        email: email
+        email: email,
+        username: owner
       })
     } catch (err) {
       console.log(err.response)
@@ -83,7 +85,7 @@ function ProfilePage () {
               <Form.Control
                 type="text"
                 readOnly
-                defaultValue={currentUser?.username}
+                defaultValue={username}
               />
               <Form.Text className="text-muted ps-1">
                 Username cannot be changed.

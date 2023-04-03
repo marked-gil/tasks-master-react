@@ -5,7 +5,8 @@ import Form from 'react-bootstrap/Form';
 import { Link, useHistory } from 'react-router-dom';
 import styles from '../../styles/SignInPage.module.css'
 import { Alert } from 'react-bootstrap';
-import { useSetCurrentUser } from '../../contexts/CurrentUserContext';
+import { useCurrentUser, useSetCurrentUser } from '../../contexts/CurrentUserContext';
+import { setTokenTimestamp } from '../../utils/utils';
 
 function SignInPage() {
   const setCurrentUser = useSetCurrentUser();
@@ -24,8 +25,10 @@ function SignInPage() {
     event.preventDefault();
     try {
       const { data } = await axios.post("/dj-rest-auth/login/", signInData);
-      setCurrentUser(data.user)
-      history.push('/profile/09797b9f-bb37-4694-8694-40b804b83359');
+      setCurrentUser(data.user);
+      console.log(data)
+      setTokenTimestamp(data);
+      history.push('/');
     } catch (err) {
       setErrors(err.response?.data);
     }
