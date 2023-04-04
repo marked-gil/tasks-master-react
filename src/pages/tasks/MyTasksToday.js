@@ -1,6 +1,7 @@
 import React from 'react';
 import styles from '../../styles/MyTasksToday.module.css';
 import { Button, Col, Form, ListGroup } from 'react-bootstrap';
+import AddTask from './AddTask';
 
 function MyTasksToday() {
   return (
@@ -61,7 +62,8 @@ function MyTasksToday() {
         </ListGroup>
       </div>
 
-      <a href="#"><i class="fa-solid fa-plus"></i> Add Task</a>
+      <AddTask />
+
     </Col>
   )
 }
