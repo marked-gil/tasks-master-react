@@ -7,18 +7,23 @@ import Modal from 'react-bootstrap/Modal';
 import styles from '../../styles/AddTask.module.css';
 
 function AddTask() {
-  const [ taskData, setTaskData ] = useState({
+  const initialTaskData = { 
     task_name: "",
     details: "",
     category: "At Home",
-    due_date: ""
-  });
+    due_date: moment().format("yyyy-MM-DD")
+  }
+
+  const [ taskData, setTaskData ] = useState(initialTaskData);
 
   const { task_name, details, category, due_date } = taskData;
 
   const [show, setShow] = useState(false);
 
-  const handleClose = () => setShow(false);
+  const handleClose = () => {
+    setShow(false)
+    setTaskData(initialTaskData)
+  };
   const handleShow = () => setShow(true);
 
   const handleChange = (event) => {
