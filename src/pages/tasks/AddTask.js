@@ -5,24 +5,33 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Modal from 'react-bootstrap/Modal';
 import styles from '../../styles/AddTask.module.css';
+import { Alert } from 'react-bootstrap';
 
 function AddTask() {
+
   const initialTaskData = { 
     task_name: "",
     details: "",
     category: "At Home",
-    due_date: moment().format("yyyy-MM-DD")
-  }
+  };
 
   const [ taskData, setTaskData ] = useState(initialTaskData);
+  const { task_name, details, category } = taskData;
 
-  const { task_name, details, category, due_date } = taskData;
+  const [ dueDate, setDueDate ] = useState({
+    due_date: ""
+  })
+  const { due_date } = dueDate;
 
-  const [show, setShow] = useState(false);
+  const [ errors, setErrors ] = useState({});
+
+  const [ show, setShow ] = useState(false);
 
   const handleClose = () => {
-    setShow(false)
-    setTaskData(initialTaskData)
+    setShow(false);
+    setTaskData(initialTaskData);
+    setDueDate({due_date: ""});
+    setErrors({});
   };
   const handleShow = () => setShow(true);
 
@@ -33,14 +42,21 @@ function AddTask() {
     });
   };
 
+  const handleDateChange = (event) => {
+    setDueDate({
+      [event.target.name]: moment(event.target.value).format("yyyy-MM-DD")
+    });
+  };
+
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      const { data } = await axios.post("/tasks/", taskData);
+      const { data } = await axios.post("/tasks/", {...taskData, due_date});
       handleClose();
       console.log(data)
       console.log("ADDED NEW TASK successfully!")
     } catch (err) {
+      setErrors(err.response?.data);
       console.log(err.response?.data)
     }
   }
@@ -69,7 +85,15 @@ function AddTask() {
                 value={task_name}
                 onChange={handleChange}
               />
+
+              {errors.task_name?.map((error, idx) => (
+                <Alert className={`mt-1 mb-0 pb-0 pt-0 ${styles.TextCenter}`} key={idx} variant="danger">
+                  {error}
+                </Alert>
+                ))
+              }
             </Form.Group>
+
             <Form.Group className="mb-3" controlId="taskDescription">
               <Form.Control
                 as="textarea" 
@@ -80,7 +104,15 @@ function AddTask() {
                 maxLength={250}
                 onChange={handleChange}
               />
+
+              {errors.details?.map((error, idx) => (
+                <Alert className={`mt-1 mb-0 pb-0 pt-0 ${styles.TextCenter}`} key={idx} variant="danger">
+                  {error}
+                </Alert>
+                ))
+              }
             </Form.Group>
+
             <Form.Select
               name="category"
               value={category}
@@ -100,9 +132,19 @@ function AddTask() {
                 type="date"
                 id="due_date"
                 name="due_date"
-                value={moment(due_date).format("yyyy-MM-DD")}
-                onChange={handleChange}
+                onChange={handleDateChange}
               />
+
+               {errors.due_date?.map((error, idx) => (
+                <Alert className={`mt-1 mb-0 pb-0 pt-0 ${styles.TextCenter}`} key={idx} variant="danger">
+                  {
+                    error === "Date has wrong format. Use one of these formats instead: YYYY-MM-DD."
+                    ? "You need to provide a due date."
+                    : error
+                  }
+                </Alert>
+                ))
+              }
             </Form.Group>
           </Form>
         </Modal.Body>
