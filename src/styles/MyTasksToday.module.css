@@ -1,0 +1,50 @@
+.MyTasksToday {
+  padding: 5rem 0 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: 1px solid black
+}
+
+.MyTasks {
+  font-size: 2.8rem;
+}
+
+.Title {
+  width: 35rem;
+}
+
+.DateToday {
+  font-size: 1.2rem;
+}
+
+.FilterButton {
+  width: 89%;
+}
+
+.LineIcon {
+  font-size: 2.5rem;
+}
+
+.bold {
+  font-weight: 600;
+}
+
+.FormSelect {
+  width: 10rem;
+  height: 2rem;
+}
+
+.ListGroup {
+  margin-top: 2rem;
+  width: 32rem;
+  align-self: flex-start;
+}
+
+.ListGroupItem {
+  width: 29rem;
+}
+
+.ListIcon {
+  font: 2.5rem;
+}
