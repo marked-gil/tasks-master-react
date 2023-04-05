@@ -84,7 +84,7 @@ function MyTasksToday() {
         </ListGroup>
       </div>
 
-      <AddTask />
+      <AddTask tasks={tasks} setTasks={setTasks} />
 
     </Col>
   )

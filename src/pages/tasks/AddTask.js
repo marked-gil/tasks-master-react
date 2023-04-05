@@ -7,7 +7,7 @@ import Modal from 'react-bootstrap/Modal';
 import styles from '../../styles/AddTask.module.css';
 import { Alert } from 'react-bootstrap';
 
-function AddTask() {
+function AddTask({ tasks, setTasks }) {
 
   const initialTaskData = { 
     task_name: "",
@@ -53,8 +53,7 @@ function AddTask() {
     try {
       const { data } = await axios.post("/tasks/", {...taskData, due_date});
       handleClose();
-      console.log(data)
-      console.log("ADDED NEW TASK successfully!")
+      setTasks({results: [...tasks.results, data]})
     } catch (err) {
       setErrors(err.response?.data);
       console.log(err.response?.data)
