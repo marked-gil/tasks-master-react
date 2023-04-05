@@ -18,16 +18,19 @@ function AddTask({ tasks, setTasks, categories }) {
 
   const [ taskData, setTaskData ] = useState(initialTaskData);
   const [ dueDate, setDueDate ] = useState({due_date: ""});
+  const [ dueTime, setDueTime ] = useState({due_time: ""});
   const [ errors, setErrors ] = useState({});
   const [ show, setShow ] = useState(false);
 
   const { task_name, details, category } = taskData;
   const { due_date } = dueDate;
+  const { due_time } = dueTime;
 
   const handleClose = () => {
     setShow(false);
     setTaskData(initialTaskData);
     setDueDate({due_date: ""});
+    setDueTime({due_time: ""})
     setErrors({});
   };
   const handleShow = () => setShow(true);
@@ -46,12 +49,19 @@ function AddTask({ tasks, setTasks, categories }) {
     });
   };
 
+  const handleTimeChange = (event) => {
+    setDueTime({
+      [event.target.name]: event.target.value
+    })
+  }
+
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      const { data } = await axios.post("/tasks/", {...taskData, due_date});
+      const { data } = await axios.post("/tasks/", {...taskData, due_date, due_time});
       handleClose();
       setTasks({results: [...tasks.results, data]})
+      console.log(data)
     } catch (err) {
       setErrors(err.response?.data);
       console.log(err.response?.data)
@@ -81,6 +91,7 @@ function AddTask({ tasks, setTasks, categories }) {
                 name="task_name"
                 value={task_name}
                 onChange={handleChange}
+                aria-label="Add the task's name"
               />
 
               {errors.task_name?.map((error, idx) => (
@@ -103,6 +114,7 @@ function AddTask({ tasks, setTasks, categories }) {
                 placeholder="Description" 
                 maxLength={250}
                 onChange={handleChange}
+                aria-label="Add the task's description or details"
               />
 
               {errors.details?.map((error, idx) => (
@@ -113,64 +125,71 @@ function AddTask({ tasks, setTasks, categories }) {
               }
             </Form.Group>
 
-            <CategorySelect
-              category={category}
-              handleChange={handleChange}
-              categories={categories}
-              errors={errors}
-            />
-
-            {/* <Form.Group>
-              <Form.Select
-                name="category"
-                defaultValue={category}
-                onChange={handleChange}
-                size="sm" 
-                aria-label="Select task category"
-              >
-                <option value="" disabled>Choose your category</option>
-                {categories.results.map((cat) => (
-                  <option
-                    value={cat.category_name}
-                    key={cat.category_name}
-                  >
-                    {cat.category_name}
-                  </option>
-                ))}
-              </Form.Select>
-
-              {errors.category?.map((error, idx) => (
-                <Alert className={`mt-1 mb-0 pb-0 pt-0 ${styles.TextCenter}`} key={idx} variant="danger">
-                  { 
-                    error === "This field may not be null."
-                    ? "You need to select a category."
-                    : error
-                  }
-                </Alert>
-                ))
-              }
-            </Form.Group> */}
-
-            <Form.Group>
-              <Form.Label htmlFor="due_date">Due Date</Form.Label>
-              <Form.Control
-                type="date"
-                id="due_date"
-                name="due_date"
-                onChange={handleDateChange}
+            <div className="d-flex justify-content-between">
+              <CategorySelect
+                category={category}
+                handleChange={handleChange}
+                categories={categories}
+                errors={errors}
               />
 
-               {errors.due_date?.map((error, idx) => (
-                <Alert className={`mt-1 mb-0 pb-0 pt-0 ${styles.TextCenter}`} key={idx} variant="danger">
-                  {
-                    error === "Date has wrong format. Use one of these formats instead: YYYY-MM-DD."
-                    ? "You need to provide a due date."
-                    : error
+              <div className="d-flex">
+                <Form.Group>
+                  <Form.Label htmlFor="due_date">Due Date</Form.Label>
+                  <Form.Control
+                    type="date"
+                    id="due_date"
+                    name="due_date"
+                    onChange={handleDateChange}
+                    size="sm"
+                    aria-label="Add tasks due date"
+                  />
+
+                  {errors.due_date?.map((error, idx) => (
+                    <Alert className={`mt-1 mb-0 pb-0 pt-0 ${styles.TextCenter}`} key={idx} variant="danger">
+                      {
+                        error === "Date has wrong format. Use one of these formats instead: YYYY-MM-DD."
+                        ? "You need to provide a due date."
+                        : error
+                      }
+                    </Alert>
+                    ))
                   }
-                </Alert>
-                ))
-              }
-            </Form.Group>
+                </Form.Group>
+
+                <Form.Group>
+                  <Form.Label htmlFor="due_time">Due Time</Form.Label>
+                  <Form.Control
+                    type="time"
+                    id="due_time"
+                    name="due_time"
+                    value={due_time}
+                    onChange={handleTimeChange}
+                    size="sm"
+                    aria-label="Add task's due time"
+                  />
+                </Form.Group>
+
+                <Form.Group>
+                  <Form.Label htmlFor="priority">Priority</Form.Label>
+                  <Form.Select
+                    id="priority"
+                    name="category"
+                    defaultValue={category}
+                    onChange={handleChange}
+                    size="sm" 
+                    aria-label="Select task category"
+                  >
+                    <option value="" disabled>Choose your category</option>
+                    {categories.results.map((cat) => (
+                      <option value={cat.category_name} key={cat.category_name}>
+                        {cat.category_name}
+                      </option>
+                    ))}
+                  </Form.Select>
+                </Form.Group>
+              </div>
+            </div>
           </Form>
         </Modal.Body>
 
