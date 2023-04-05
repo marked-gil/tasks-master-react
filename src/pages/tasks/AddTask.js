@@ -87,7 +87,10 @@ function AddTask({ tasks, setTasks }) {
 
               {errors.task_name?.map((error, idx) => (
                 <Alert className={`mt-1 mb-0 pb-0 pt-0 ${styles.TextCenter}`} key={idx} variant="danger">
-                  {error}
+                  {error === 'This field must be unique for the "due_date" date.'
+                  ? "Task with the same name already exists for this date."
+                  : error
+                }
                 </Alert>
                 ))
               }
