@@ -15,7 +15,7 @@ function MyTasksToday() {
   const [ categories, setCategories ] = useState({ results: []})
   const [ filters, setFilters ] = useState({})
 
-  const { category_name, progress } = filters;
+  const { category_name, progress, order_by } = filters;
 
   useEffect(() => {
     getCategories(setCategories);
@@ -42,7 +42,6 @@ function MyTasksToday() {
       ...filters,
       [event.target.name]: event.target.value
     })
-    console.log(event.target.value)
   }
 
   const handleFilterSubmit = async (event) => {
@@ -51,10 +50,10 @@ function MyTasksToday() {
     try {
       const status = progress === 'all' ? "" : progress
       const cat_name = category_name === 'all' ? "" : category_name
-
+      
       const { data } = await axiosReq.get(
         `/tasks/?due_date=${moment().format("yyyy-MM-DD")}&progress=${status ? status : ""
-        }&category=${cat_name ? cat_name : ""}`
+        }&category=${cat_name ? cat_name : ""}&ordering=${order_by ? order_by : ""}`
       );
 
       setTasks(data)
@@ -75,10 +74,10 @@ function MyTasksToday() {
         {/* Tasks Status Filter */}
         <Form>
           <div className="d-flex">
-            <p className={`me-4 mb-0 ${styles.bold}`}>Progress: </p>
+            <p className={`me-3 mb-0 ${styles.bold}`}>Progress: </p>
             <Form.Select
               size="sm"
-              className={`me-3 ms-2 ${styles.FormSelect}`}
+              className={`me-3 ${styles.FormSelect}`}
               aria-label="Select progress status"
               name="progress"
               onChange={handleFilterChange}
@@ -93,30 +92,17 @@ function MyTasksToday() {
                 </option>
               ))}
             </Form.Select>
-
-            {/* {['Completed', 'Todo', 'Overdue', 'Shared'].map((status) => (
-              <div key={status} className="me-4" >
-                <Form.Check 
-                  type="checkbox"
-                  id={status}
-                  label={status}
-                  name="progress"
-                  value={status.toLowerCase()}
-                  onChange={handleFilterChange}
-                />
-              </div>
-            ))} */}
           </div>
           
           <div className="d-flex">
             {/* Category */}
             <p className={`me-3 mb-0 ${styles.bold}`}>Category: </p>
             <Form.Select
-              size="sm"
               className={`me-3 ${styles.FormSelect}`}
               aria-label="Select category"
               name="category_name"
               onChange={handleFilterChange}
+              size="sm"
             >
               <option value="all">All Categories</option>
               {categories.results.map((cat) => (
@@ -131,12 +117,20 @@ function MyTasksToday() {
             
             {/* Ordering of Tasks */}
             <p className={`me-3 ${styles.bold}`}>Order by: </p>
-            <Form.Select size="sm" className={`me-3 ${styles.FormSelect}`} aria-label="Order today's tasks">
-              {['Due Time', 'Priority'].map((opt) => (
-                <option name="order_by" value={opt} key={opt}>{opt}</option>
-              ))}
+            <Form.Select 
+              name="order_by" 
+              className={`me-3 ${styles.FormSelect}`}
+              onChange={handleFilterChange}
+              aria-label="Order today's tasks" 
+              size="sm"
+            >
+              <option value="due_time">Due Time - Ascending</option>
+              <option value="-due_time">Due Time - Descending</option>
+              <option value="priority">Priority - Ascending</option>
+              <option value="-priority">Priority - Descending</option>
             </Form.Select>
           </div>
+
           <Button className={styles.FilterButton} variant="primary" size="sm" onClick={handleFilterSubmit}>
             Filter
           </Button>
