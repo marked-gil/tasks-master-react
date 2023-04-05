@@ -3,8 +3,11 @@ import { Button } from 'react-bootstrap';
 import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
 import Popover from 'react-bootstrap/Popover';
 import { axiosRes } from '../api/axiosDefaults';
+import { useHistory } from 'react-router-dom';
 
 function TaskPopover({ children, task, setTasks }) {
+
+  const history = useHistory();
 
   const handleDelete = async (event) => {
     event.preventDefault();
@@ -18,10 +21,14 @@ function TaskPopover({ children, task, setTasks }) {
     }
   }
 
+  const handleView = () => {
+    history.push(`/task/${task.id}`)
+  }
+
   const popover = (
     <Popover id="popover-basic">
       <Popover.Body className="p-0">
-        <Button className="me-1" size="sm">Edit</Button>
+        <Button onClick={handleView} className="me-1" size="sm">View</Button>
         <Button onClick={handleDelete} variant="danger" size="sm">Delete</Button>
       </Popover.Body>
     </Popover>
