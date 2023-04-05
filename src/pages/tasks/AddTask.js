@@ -63,7 +63,7 @@ function AddTask({ tasks, setTasks }) {
   return (
     <>
       <Button variant="primary" onClick={handleShow}>
-      <i class="fa-solid fa-plus"></i> Add Task
+      <i className="fa-solid fa-plus"></i> Add Task
       </Button>
 
       <Modal size="lg" show={show} onHide={handleClose}>

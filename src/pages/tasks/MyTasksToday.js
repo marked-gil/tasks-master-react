@@ -31,7 +31,7 @@ function MyTasksToday() {
       <div className={styles.Container}>
         <div className={`d-flex justify-content-between ${styles.Title}`}>
           <h2 className={`${styles.MyTasks}`}>My Tasks</h2>
-          <span className={styles.LineIcon}><i class="fa-solid fa-ellipsis-vertical"></i></span> 
+          <span className={styles.LineIcon}><i className="fa-solid fa-ellipsis-vertical"></i></span> 
           <h2>Today <span className={`d-block ${styles.DateToday}`}>12 March 2023, Thursday</span></h2>
         </div>
 
@@ -40,7 +40,7 @@ function MyTasksToday() {
           <div className="d-flex">
             <p className={`me-4 mb-0 ${styles.bold}`}>Show: </p>
             {['Completed', 'To-do', 'Overdue', 'Shared'].map((status) => (
-              <div key={status} className="me-4">
+              <div key={status} className="me-4" >
                 <Form.Check 
                   type="checkbox"
                   id={status}
@@ -55,7 +55,7 @@ function MyTasksToday() {
             <p className={`me-3 mb-0 ${styles.bold}`}>Category: </p>
             <Form.Select size="sm" className={`me-3 ${styles.FormSelect}`} aria-label="Select category">
               {['All', 'At Home', 'At Work'].map((category) => (
-                <option value={category}>{category}</option>
+                <option value={category} key={category}>{category}</option>
               ))}
             </Form.Select>
             
@@ -63,7 +63,7 @@ function MyTasksToday() {
             <p className={`me-3 ${styles.bold}`}>Order by: </p>
             <Form.Select size="sm" className={`me-3 ${styles.FormSelect}`} aria-label="Order today's tasks">
               {['Due Time', 'Priority'].map((opt) => (
-                <option value={opt}>{opt}</option>
+                <option value={opt} key={opt}>{opt}</option>
               ))}
             </Form.Select>
           </div>
@@ -75,10 +75,16 @@ function MyTasksToday() {
       
         <ListGroup className={styles.ListGroup}>
           {tasks.results.map((task) => (
-            <div className="d-flex align-items-center mb-2">
-              <i class="fa-solid fa-grip-vertical fa-xl"></i>
-              <ListGroup.Item className={`ms-2 me-1 ${styles.ListGroupItem}`} action variant="light">{task.task_name}</ListGroup.Item>
-              <i class="fa-solid fa-ellipsis-vertical fa-lg"></i>
+            <div className="d-flex align-items-center mb-2" key={task.task_name}>
+              <i className="fa-solid fa-grip-vertical fa-xl"></i>
+              <ListGroup.Item
+                className={`ms-2 me-1 ${styles.ListGroupItem}`} 
+                action 
+                variant="light" 
+              >
+                {task.task_name}
+              </ListGroup.Item>
+              <i className="fa-solid fa-ellipsis-vertical fa-lg"></i>
             </div>              
           ))}
         </ListGroup>
