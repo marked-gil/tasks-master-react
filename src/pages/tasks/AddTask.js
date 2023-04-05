@@ -6,6 +6,7 @@ import Form from 'react-bootstrap/Form';
 import Modal from 'react-bootstrap/Modal';
 import styles from '../../styles/AddTask.module.css';
 import { Alert } from 'react-bootstrap';
+import CategorySelect from '../../components/CategorySelect';
 
 function AddTask({ tasks, setTasks, categories }) {
 
@@ -51,7 +52,6 @@ function AddTask({ tasks, setTasks, categories }) {
       const { data } = await axios.post("/tasks/", {...taskData, due_date});
       handleClose();
       setTasks({results: [...tasks.results, data]})
-      console.log(category)
     } catch (err) {
       setErrors(err.response?.data);
       console.log(err.response?.data)
@@ -113,23 +113,43 @@ function AddTask({ tasks, setTasks, categories }) {
               }
             </Form.Group>
 
-            <Form.Select
-              name="category"
-              defaultValue={category}
-              onChange={handleChange}
-              size="sm" 
-              aria-label="Select task category"
-            >
-              <option value="" disabled>Choose your category</option>
-              {categories.results.map((cat) => (
-                <option
-                  value={cat.category_name}
-                  key={cat.category_name}
-                >
-                  {cat.category_name}
-                </option>
-              ))}
-            </Form.Select>
+            <CategorySelect
+              category={category}
+              handleChange={handleChange}
+              categories={categories}
+              errors={errors}
+            />
+
+            {/* <Form.Group>
+              <Form.Select
+                name="category"
+                defaultValue={category}
+                onChange={handleChange}
+                size="sm" 
+                aria-label="Select task category"
+              >
+                <option value="" disabled>Choose your category</option>
+                {categories.results.map((cat) => (
+                  <option
+                    value={cat.category_name}
+                    key={cat.category_name}
+                  >
+                    {cat.category_name}
+                  </option>
+                ))}
+              </Form.Select>
+
+              {errors.category?.map((error, idx) => (
+                <Alert className={`mt-1 mb-0 pb-0 pt-0 ${styles.TextCenter}`} key={idx} variant="danger">
+                  { 
+                    error === "This field may not be null."
+                    ? "You need to select a category."
+                    : error
+                  }
+                </Alert>
+                ))
+              }
+            </Form.Group> */}
 
             <Form.Group>
               <Form.Label htmlFor="due_date">Due Date</Form.Label>
