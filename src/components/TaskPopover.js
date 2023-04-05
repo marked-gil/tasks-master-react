@@ -4,12 +4,15 @@ import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
 import Popover from 'react-bootstrap/Popover';
 import { axiosRes } from '../api/axiosDefaults';
 
-function TaskPopover({ children, task }) {
+function TaskPopover({ children, task, setTasks }) {
 
   const handleDelete = async (event) => {
     event.preventDefault();
     try {
       await axiosRes.delete(`/tasks/${task.id}`)
+      setTasks(prevState => (
+        {results: prevState.results.filter(item => item.id !== task.id)}
+      ))
     } catch (err) {
       console.log(err.response?.data)
     }

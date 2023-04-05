@@ -39,6 +39,7 @@ function MyTasksToday() {
         const { data } = await axiosReq.get(
           `/tasks/?due_date=${moment().format("yyyy-MM-DD")}&progress=&category=`
         );
+        // console.log(data)
         setTasks(data)
       } catch (err) {
         console.log(err.response?.data)
@@ -142,7 +143,7 @@ function MyTasksToday() {
               >
                 {task.task_name}
               </ListGroup.Item>
-              <TaskPopover task={task} >
+              <TaskPopover task={task} setTasks={setTasks} >
                 <div className={`p-2 ${styles.VerticalEllipsis}`}>
                   <i className={`fa-solid fa-ellipsis-vertical fa-lg`}></i>
                 </div>
