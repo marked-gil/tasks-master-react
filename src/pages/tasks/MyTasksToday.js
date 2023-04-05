@@ -5,6 +5,7 @@ import { Button, Col, Form, ListGroup } from 'react-bootstrap';
 import AddTask from './AddTask';
 import { axiosReq } from '../../api/axiosDefaults';
 import { useCurrentUser } from '../../contexts/CurrentUserContext';
+import TaskPopover from '../../components/TaskPopover';
 
 function MyTasksToday() {
   const currentUser = useCurrentUser();
@@ -141,7 +142,9 @@ function MyTasksToday() {
               >
                 {task.task_name}
               </ListGroup.Item>
-              <i className="fa-solid fa-ellipsis-vertical fa-lg"></i>
+              <TaskPopover task={task} >
+                <i className="fa-solid fa-ellipsis-vertical fa-lg"></i>
+              </TaskPopover>
             </div>              
           ))}
         </ListGroup>
