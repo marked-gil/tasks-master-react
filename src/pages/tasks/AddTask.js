@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import moment from 'moment';
 import Button from 'react-bootstrap/Button';
@@ -6,6 +6,7 @@ import Form from 'react-bootstrap/Form';
 import Modal from 'react-bootstrap/Modal';
 import styles from '../../styles/AddTask.module.css';
 import { Alert } from 'react-bootstrap';
+import { axiosReq } from '../../api/axiosDefaults';
 
 function AddTask({ tasks, setTasks }) {
 
@@ -16,16 +17,12 @@ function AddTask({ tasks, setTasks }) {
   };
 
   const [ taskData, setTaskData ] = useState(initialTaskData);
-  const { task_name, details, category } = taskData;
-
-  const [ dueDate, setDueDate ] = useState({
-    due_date: ""
-  })
-  const { due_date } = dueDate;
-
+  const [ dueDate, setDueDate ] = useState({due_date: ""});
   const [ errors, setErrors ] = useState({});
-
   const [ show, setShow ] = useState(false);
+
+  const { task_name, details, category } = taskData;
+  const { due_date } = dueDate;
 
   const handleClose = () => {
     setShow(false);
@@ -72,7 +69,7 @@ function AddTask({ tasks, setTasks }) {
         </Modal.Header>
 
         <Modal.Body>
-          <Form onSubmit={handleSubmit}>
+          <Form>
             <Form.Group className="mb-3" controlId="taskName">
               <Form.Control
                 type="text"

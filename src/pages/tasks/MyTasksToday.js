@@ -10,6 +10,27 @@ function MyTasksToday() {
   const currentUser = useCurrentUser();
 
   const [ tasks, setTasks ] = useState({ results: []})
+  const [ categories, setCategories ] = useState({ results: []})
+  const [ filters, setFilters ] = useState({
+    category_name: "",
+    progress: "",
+    shared_to: true
+  })
+
+  const { category_name, progress } = filters;
+
+  useEffect(() => {
+    const getCategories = async () => {
+      try {
+        const { data } = await axiosReq.get(`/categories/`);
+        setCategories(data)
+      } catch (err) {
+        console.log(err);
+      }
+    };
+
+    getCategories();
+  }, []);
 
   useEffect(() => {
     const handleMount = async () => {
@@ -26,6 +47,26 @@ function MyTasksToday() {
     handleMount();
   }, [currentUser])
 
+  const handleFilterChange = (event) => {
+    setFilters({
+      ...filters,
+      [event.target.name]: event.target.value
+    })
+    console.log(event.target.value)
+  }
+
+  const handleFilterSubmit = async (event) => {
+    event.preventDefault();
+    try {
+      const { data } = await axiosReq.get(
+        `/tasks/?due_date=${moment().format("yyyy-MM-DD")}&progress=${progress}&category=${category_name}`
+      );
+      setTasks(data)
+    } catch (err) {
+      console.log(err.response?.data)
+    }
+  }
+
   return (
     <Col className={styles.MyTasksToday}>
       <div className={styles.Container}>
@@ -39,12 +80,15 @@ function MyTasksToday() {
         <Form>
           <div className="d-flex">
             <p className={`me-4 mb-0 ${styles.bold}`}>Show: </p>
-            {['Completed', 'To-do', 'Overdue', 'Shared'].map((status) => (
+            {['Completed', 'Todo', 'Overdue', 'Shared'].map((status) => (
               <div key={status} className="me-4" >
                 <Form.Check 
                   type="checkbox"
                   id={status}
                   label={status}
+                  name="progress"
+                  value={status.toLowerCase()}
+                  onChange={handleFilterChange}
                 />
               </div>
             ))}
@@ -53,9 +97,21 @@ function MyTasksToday() {
           <div className="d-flex">
             {/* Category */}
             <p className={`me-3 mb-0 ${styles.bold}`}>Category: </p>
-            <Form.Select size="sm" className={`me-3 ${styles.FormSelect}`} aria-label="Select category">
-              {['All', 'At Home', 'At Work'].map((category) => (
-                <option value={category} key={category}>{category}</option>
+            <Form.Select
+              size="sm"
+              className={`me-3 ${styles.FormSelect}`}
+              aria-label="Select category"
+              name="category_name"
+              onChange={handleFilterChange}
+            >
+              <option value="All" >All</option>
+              {categories.results.map((cat) => (
+                <option
+                  value={cat.id}
+                  key={cat.category_name}
+                >
+                  {cat.category_name}
+                </option>
               ))}
             </Form.Select>
             
@@ -63,14 +119,15 @@ function MyTasksToday() {
             <p className={`me-3 ${styles.bold}`}>Order by: </p>
             <Form.Select size="sm" className={`me-3 ${styles.FormSelect}`} aria-label="Order today's tasks">
               {['Due Time', 'Priority'].map((opt) => (
-                <option value={opt} key={opt}>{opt}</option>
+                <option name="order_by" value={opt} key={opt}>{opt}</option>
               ))}
             </Form.Select>
           </div>
-          <Button className={styles.FilterButton} variant="primary" size="sm">
+          <Button className={styles.FilterButton} variant="primary" size="sm" onClick={handleFilterSubmit}>
             Filter
           </Button>
         </Form>
+
         <p className="align-self-start"><span className={styles.bold}>Filtered by:</span> to-do, all category | <span className={styles.bold}>Ordered by:</span> due time - ascending</p>
       
         <ListGroup className={styles.ListGroup}>
