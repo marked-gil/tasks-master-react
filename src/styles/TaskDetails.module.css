@@ -1,0 +1,14 @@
+.TaskDetails {
+  padding: 5rem 0 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.Container {
+  /* border: 1px solid black */
+}
+
+.TaskName {
+  width: 30rem;
+}

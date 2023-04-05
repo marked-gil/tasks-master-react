@@ -32,6 +32,7 @@ function MyTasksToday() {
           `/tasks/?due_date=${moment().format("yyyy-MM-DD")}&progress=&category=`
         );
         setTasks(data)
+        console.log(data)
       } catch (err) {
         console.log(err.response?.data)
       }
@@ -62,7 +63,7 @@ function MyTasksToday() {
 
   return (
     <Col className={styles.MyTasksToday}>
-      <div className={styles.Container}>
+      <div>
         <div className={`d-flex justify-content-between ${styles.Title}`}>
           <h2 className={`${styles.MyTasks}`}>My Tasks</h2>
           <span className={styles.LineIcon}><i className="fa-solid fa-ellipsis-vertical"></i></span> 

@@ -14,6 +14,7 @@ function App() {
         <Route exact path="/signin" render={() => <SignInPage /> } />
         <Route exact path="/signup" render={() => <SignUpPage /> } />
         <Route exact path="/profile/:id" render={() => <MainContent profile /> } />
+        <Route exact path="/task/:id" render={() => <MainContent taskDetails />} />
         <Route render={() => <h1>Page Not Found</h1>}/>
       </Switch>
     </div>

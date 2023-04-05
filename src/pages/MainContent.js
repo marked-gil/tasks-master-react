@@ -1,15 +1,14 @@
-import React, { useEffect, useMemo, useRef, useState } from 'react'
-import { Container, Row, Col } from 'react-bootstrap'
-import { useParams } from 'react-router-dom'
+import React from 'react'
+import { Container, Row } from 'react-bootstrap'
 import Footer from '../components/Footer'
 import NavBar from '../components/NavBar'
 import SideBar from '../components/SideBar'
-import { useCurrentUser } from '../contexts/CurrentUserContext'
 import styles from '../styles/MainContent.module.css'
 import ProfilePage from './profiles/ProfilePage'
 import MyTasksToday from './tasks/MyTasksToday'
+import TaskDetails from './tasks/TaskDetails'
 
-function MainContent({ profile, tasksToday }) {
+function MainContent({ profile, tasksToday, taskDetails }) {
 
   return (
     <>
@@ -18,9 +17,9 @@ function MainContent({ profile, tasksToday }) {
         <Row className={styles.Row}>
           <SideBar />
           {profile ? <ProfilePage /> 
-          : tasksToday ? <MyTasksToday />
-          : <></>
-
+            : tasksToday ? <MyTasksToday />
+            : taskDetails ? <TaskDetails />
+            : <></>
           }
         </Row>
       </Container>
