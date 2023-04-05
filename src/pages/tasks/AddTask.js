@@ -19,18 +19,21 @@ function AddTask({ tasks, setTasks, categories }) {
   const [ taskData, setTaskData ] = useState(initialTaskData);
   const [ dueDate, setDueDate ] = useState({due_date: ""});
   const [ dueTime, setDueTime ] = useState({due_time: ""});
+  const [ priorityLevel, setPriorityLevel ] = useState({priority: 1});
   const [ errors, setErrors ] = useState({});
   const [ show, setShow ] = useState(false);
 
   const { task_name, details, category } = taskData;
   const { due_date } = dueDate;
   const { due_time } = dueTime;
+  const { priority } = priorityLevel;
 
   const handleClose = () => {
     setShow(false);
     setTaskData(initialTaskData);
     setDueDate({due_date: ""});
-    setDueTime({due_time: ""})
+    setDueTime({due_time: ""});
+    setPriorityLevel({priority: 1});
     setErrors({});
   };
   const handleShow = () => setShow(true);
@@ -55,10 +58,17 @@ function AddTask({ tasks, setTasks, categories }) {
     })
   }
 
+  const handlePriorityChange = (event) => {
+    setPriorityLevel({
+      [event.target.name]: event.target.value
+    })
+    console.log(event.target.value)
+  }
+
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      const { data } = await axios.post("/tasks/", {...taskData, due_date, due_time});
+      const { data } = await axios.post("/tasks/", {...taskData, due_date, due_time, priority});
       handleClose();
       setTasks({results: [...tasks.results, data]})
       console.log(data)
@@ -174,16 +184,16 @@ function AddTask({ tasks, setTasks, categories }) {
                   <Form.Label htmlFor="priority">Priority</Form.Label>
                   <Form.Select
                     id="priority"
-                    name="category"
-                    defaultValue={category}
-                    onChange={handleChange}
+                    name="priority"
+                    defaultValue={priority}
+                    onChange={handlePriorityChange}
                     size="sm" 
-                    aria-label="Select task category"
+                    aria-label="Select a priority level"
                   >
-                    <option value="" disabled>Choose your category</option>
-                    {categories.results.map((cat) => (
-                      <option value={cat.category_name} key={cat.category_name}>
-                        {cat.category_name}
+                    <option value="" disabled>Select Priority Level</option>
+                    {[{Low: 1}, {Medium: 2}, {High: 3}].map(level => (
+                      <option value={Object.values(level)[0]} key={Object.values(level)[0]}>
+                        {Object.keys(level)[0]}
                       </option>
                     ))}
                   </Form.Select>
