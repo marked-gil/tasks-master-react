@@ -68,7 +68,7 @@ function MyTasksToday() {
         <div className={`d-flex justify-content-between ${styles.Title}`}>
           <h2 className={`${styles.MyTasks}`}>My Tasks</h2>
           <span className={styles.LineIcon}><i className="fa-solid fa-ellipsis-vertical"></i></span> 
-          <h2>Today <span className={`d-block ${styles.DateToday}`}>12 March 2023, Thursday</span></h2>
+          <h2>Today <span className={`d-block ${styles.DateToday}`}>{moment().format("D MMMM YYYY, dddd")}</span></h2>
         </div>
 
         {/* Tasks Status Filter */}
