@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import moment from 'moment';
 import Button from 'react-bootstrap/Button';
@@ -6,13 +6,14 @@ import Form from 'react-bootstrap/Form';
 import Modal from 'react-bootstrap/Modal';
 import styles from '../../styles/AddTask.module.css';
 import { Alert } from 'react-bootstrap';
+import { getCategories } from '../../api/categoryMethods';
 
-function AddTask({ tasks, setTasks }) {
+function AddTask({ tasks, setTasks, categories, setCategories }) {
 
   const initialTaskData = { 
     task_name: "",
     details: "",
-    category: "At Home",
+    category: "",
   };
 
   const [ taskData, setTaskData ] = useState(initialTaskData);
@@ -36,6 +37,7 @@ function AddTask({ tasks, setTasks }) {
       ...taskData,
       [event.target.name]: event.target.value,
     });
+    console.log(event.target.value)
   };
 
   const handleDateChange = (event) => {
@@ -50,6 +52,7 @@ function AddTask({ tasks, setTasks }) {
       const { data } = await axios.post("/tasks/", {...taskData, due_date});
       handleClose();
       setTasks({results: [...tasks.results, data]})
+      console.log(category)
     } catch (err) {
       setErrors(err.response?.data);
       console.log(err.response?.data)
@@ -113,15 +116,20 @@ function AddTask({ tasks, setTasks }) {
 
             <Form.Select
               name="category"
-              value={category}
+              defaultValue={category}
               onChange={handleChange}
               size="sm" 
               aria-label="Select task category"
             >
-              <option>Category</option>
-              <option value="1">One</option>
-              <option value="2">Two</option>
-              <option value="3">Three</option>
+              <option value="" disabled>Choose your category</option>
+              {categories.results.map((cat) => (
+                <option
+                  value={cat.category_name}
+                  key={cat.category_name}
+                >
+                  {cat.category_name}
+                </option>
+              ))}
             </Form.Select>
 
             <Form.Group>

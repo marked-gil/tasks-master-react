@@ -144,7 +144,12 @@ function MyTasksToday() {
         </ListGroup>
       </div>
 
-      <AddTask tasks={tasks} setTasks={setTasks} />
+      <AddTask
+        tasks={tasks}
+        setTasks={setTasks}
+        categories={categories}
+        setCategories={setCategories}
+      />
 
     </Col>
   )
