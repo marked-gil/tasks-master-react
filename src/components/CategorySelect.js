@@ -7,7 +7,9 @@ import styles from '../styles/CategorySelect.module.css'
 function CategorySelect({ category, handleChange, categories, errors }) {
   return (
     <Form.Group>
+      <Form.Label htmlFor="category">Category</Form.Label>
       <Form.Select
+        id="category"
         name="category"
         defaultValue={category}
         onChange={handleChange}
