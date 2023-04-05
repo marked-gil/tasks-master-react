@@ -36,6 +36,13 @@ function TaskDetails() {
     handleMount();
   }, [id] )
 
+  const handleChange = (event) => {
+    setTaskData({
+      ...taskData,
+      [event.target.name]: event.target.value
+    })
+  }
+
   return (
     <Col className={styles.TaskDetails}>
       <div className={styles.Container}>
@@ -52,11 +59,12 @@ function TaskDetails() {
           <Form.Control
             type="text"
             placeholder="Task Name"
+            readOnly
             maxLength={50}
             className={styles.TaskName}
             name="task_name"
             defaultValue={task_name}
-            // onChange={handleChange}
+            onChange={handleChange}
             aria-label="Add the task's name"
           />
           <Button size="sm">edit</Button>
@@ -78,10 +86,11 @@ function TaskDetails() {
             as="textarea" 
             rows={3} 
             name="details"
+            readOnly
             defaultValue={details}
             placeholder="Description" 
             maxLength={250}
-            // onChange={handleChange}
+            onChange={handleChange}
             aria-label="Add the task's description or details"
           />
           <Button size="sm">edit</Button>
