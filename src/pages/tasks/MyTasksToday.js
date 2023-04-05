@@ -13,11 +13,7 @@ function MyTasksToday() {
 
   const [ tasks, setTasks ] = useState({ results: []})
   const [ categories, setCategories ] = useState({ results: []})
-  const [ filters, setFilters ] = useState({
-    category_name: "",
-    progress: "",
-    shared_to: true
-  })
+  const [ filters, setFilters ] = useState({})
 
   const { category_name, progress } = filters;
 
@@ -29,7 +25,7 @@ function MyTasksToday() {
     const handleMount = async () => {
       try {
         const { data } = await axiosReq.get(
-          `/tasks/?due_date=${moment().format("yyyy-MM-DD")}&progress=&category=`
+          `/tasks/?due_date=${moment().format("yyyy-MM-DD")}`
         );
         setTasks(data)
         console.log(data)
@@ -51,10 +47,16 @@ function MyTasksToday() {
 
   const handleFilterSubmit = async (event) => {
     event.preventDefault();
+
     try {
+      const status = progress === 'all' ? "" : progress
+      const cat_name = category_name === 'all' ? "" : category_name
+
       const { data } = await axiosReq.get(
-        `/tasks/?due_date=${moment().format("yyyy-MM-DD")}&progress=${progress}&category=${category_name}`
+        `/tasks/?due_date=${moment().format("yyyy-MM-DD")}&progress=${status ? status : ""
+        }&category=${cat_name ? cat_name : ""}`
       );
+
       setTasks(data)
     } catch (err) {
       console.log(err.response?.data)
@@ -73,8 +75,26 @@ function MyTasksToday() {
         {/* Tasks Status Filter */}
         <Form>
           <div className="d-flex">
-            <p className={`me-4 mb-0 ${styles.bold}`}>Show: </p>
-            {['Completed', 'Todo', 'Overdue', 'Shared'].map((status) => (
+            <p className={`me-4 mb-0 ${styles.bold}`}>Progress: </p>
+            <Form.Select
+              size="sm"
+              className={`me-3 ms-2 ${styles.FormSelect}`}
+              aria-label="Select progress status"
+              name="progress"
+              onChange={handleFilterChange}
+            >
+              <option value="all">All Statuses</option>
+              {['to-do', 'overdue', 'completed'].map((status) => (
+                <option
+                  value={status}
+                  key={status}
+                >
+                  {status}
+                </option>
+              ))}
+            </Form.Select>
+
+            {/* {['Completed', 'Todo', 'Overdue', 'Shared'].map((status) => (
               <div key={status} className="me-4" >
                 <Form.Check 
                   type="checkbox"
@@ -85,7 +105,7 @@ function MyTasksToday() {
                   onChange={handleFilterChange}
                 />
               </div>
-            ))}
+            ))} */}
           </div>
           
           <div className="d-flex">
@@ -98,7 +118,7 @@ function MyTasksToday() {
               name="category_name"
               onChange={handleFilterChange}
             >
-              <option value="All" >All</option>
+              <option value="all">All Categories</option>
               {categories.results.map((cat) => (
                 <option
                   value={cat.id}
