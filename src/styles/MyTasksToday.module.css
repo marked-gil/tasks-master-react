@@ -48,3 +48,7 @@
 .ListIcon {
   font: 2.5rem;
 }
+
+.VerticalEllipsis:hover {
+  cursor: pointer;
+}

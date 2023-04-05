@@ -143,7 +143,9 @@ function MyTasksToday() {
                 {task.task_name}
               </ListGroup.Item>
               <TaskPopover task={task} >
-                <i className="fa-solid fa-ellipsis-vertical fa-lg"></i>
+                <div className={`p-2 ${styles.VerticalEllipsis}`}>
+                  <i className={`fa-solid fa-ellipsis-vertical fa-lg`}></i>
+                </div>
               </TaskPopover>
             </div>              
           ))}

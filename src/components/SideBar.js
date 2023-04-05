@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react'
+import React from 'react'
 import { useCurrentUser } from '../contexts/CurrentUserContext'
 import styles from '../styles/SideBar.module.css'
 
