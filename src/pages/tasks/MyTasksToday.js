@@ -1,9 +1,31 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import moment from 'moment';
 import styles from '../../styles/MyTasksToday.module.css';
 import { Button, Col, Form, ListGroup } from 'react-bootstrap';
 import AddTask from './AddTask';
+import { axiosReq } from '../../api/axiosDefaults';
+import { useCurrentUser } from '../../contexts/CurrentUserContext';
 
 function MyTasksToday() {
+  const currentUser = useCurrentUser();
+
+  const [ tasks, setTasks ] = useState({ results: []})
+
+  useEffect(() => {
+    const handleMount = async () => {
+      try {
+        const { data } = await axiosReq.get(
+          `/tasks/?due_date=${moment().format("yyyy-MM-DD")}&progress=&category=`
+        );
+        setTasks(data)
+      } catch (err) {
+        console.log(err.response?.data)
+      }
+    }
+
+    handleMount();
+  }, [currentUser])
+
   return (
     <Col className={styles.MyTasksToday}>
       <div className={styles.Container}>
@@ -52,10 +74,10 @@ function MyTasksToday() {
         <p className="align-self-start"><span className={styles.bold}>Filtered by:</span> to-do, all category | <span className={styles.bold}>Ordered by:</span> due time - ascending</p>
       
         <ListGroup className={styles.ListGroup}>
-          {['task 1', 'task 2', 'task 3', 'task 4'].map((task) => (
+          {tasks.results.map((task) => (
             <div className="d-flex align-items-center mb-2">
               <i class="fa-solid fa-grip-vertical fa-xl"></i>
-              <ListGroup.Item className={`ms-2 me-1 ${styles.ListGroupItem}`} action variant="light">{task}</ListGroup.Item>
+              <ListGroup.Item className={`ms-2 me-1 ${styles.ListGroupItem}`} action variant="light">{task.task_name}</ListGroup.Item>
               <i class="fa-solid fa-ellipsis-vertical fa-lg"></i>
             </div>              
           ))}
