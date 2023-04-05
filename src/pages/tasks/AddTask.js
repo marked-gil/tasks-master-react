@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import axios from 'axios';
 import moment from 'moment';
 import Button from 'react-bootstrap/Button';
@@ -6,9 +6,8 @@ import Form from 'react-bootstrap/Form';
 import Modal from 'react-bootstrap/Modal';
 import styles from '../../styles/AddTask.module.css';
 import { Alert } from 'react-bootstrap';
-import { getCategories } from '../../api/categoryMethods';
 
-function AddTask({ tasks, setTasks, categories, setCategories }) {
+function AddTask({ tasks, setTasks, categories }) {
 
   const initialTaskData = { 
     task_name: "",
