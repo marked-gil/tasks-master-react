@@ -6,6 +6,7 @@ import AddTask from './AddTask';
 import { axiosReq } from '../../api/axiosDefaults';
 import { useCurrentUser } from '../../contexts/CurrentUserContext';
 import TaskPopover from '../../components/TaskPopover';
+import { getCategories } from '../../api/categoryMethods';
 
 function MyTasksToday() {
   const currentUser = useCurrentUser();
@@ -21,16 +22,7 @@ function MyTasksToday() {
   const { category_name, progress } = filters;
 
   useEffect(() => {
-    const getCategories = async () => {
-      try {
-        const { data } = await axiosReq.get(`/categories/`);
-        setCategories(data)
-      } catch (err) {
-        console.log(err);
-      }
-    };
-
-    getCategories();
+    getCategories(setCategories);
   }, []);
 
   useEffect(() => {
@@ -39,7 +31,6 @@ function MyTasksToday() {
         const { data } = await axiosReq.get(
           `/tasks/?due_date=${moment().format("yyyy-MM-DD")}&progress=&category=`
         );
-        // console.log(data)
         setTasks(data)
       } catch (err) {
         console.log(err.response?.data)
