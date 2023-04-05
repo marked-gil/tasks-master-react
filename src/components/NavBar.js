@@ -8,7 +8,7 @@ import Offcanvas from 'react-bootstrap/Offcanvas';
 import styles from '../styles/NavBar.module.css'
 import Avatar from '../assets/profile-avatar.jpg'
 import { NavLink } from 'react-router-dom';
-import { useCurrentUser, useSetCurrentUser } from '../contexts/CurrentUserContext';
+import { useSetCurrentUser } from '../contexts/CurrentUserContext';
 import { removeTokenTimestamp } from '../utils/utils';
 
 function NavBar() {
