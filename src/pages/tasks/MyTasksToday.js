@@ -12,6 +12,7 @@ import { getTasksToday } from '../../api/taskMethods';
 function MyTasksToday() {
   const currentUser = useCurrentUser();
 
+  const [ changeInTasks, setChangeInTasks ] = useState({})
   const [ tasks, setTasks ] = useState({ results: []});
   const [ categories, setCategories ] = useState({ results: []});
   const [ filters, setFilters ] = useState({});
@@ -24,20 +25,7 @@ function MyTasksToday() {
 
   useEffect(() => {
     getTasksToday(setTasks);
-    // const handleMount = async () => {
-    //   try {
-    //     const { data } = await axiosReq.get(
-    //       `/tasks/?due_date=${moment().format("yyyy-MM-DD")}`
-    //     );
-    //     setTasks(data)
-    //     console.log(data)
-    //   } catch (err) {
-    //     console.log(err.response?.data)
-    //   }
-    // }
-
-    // handleMount();
-  }, [currentUser])
+  }, [currentUser, changeInTasks])
 
   const handleFilterChange = (event) => {
     setFilters({
@@ -64,6 +52,26 @@ function MyTasksToday() {
       console.log(err.response?.data)
     }
   }
+
+  const TasksListItem = (task) => (
+      <div className="d-flex align-items-center mb-2" key={task.id}>
+        <i className="fa-solid fa-grip-vertical fa-xl"></i>
+        <ListGroup.Item
+          className={`ms-2 me-1 ${styles.ListGroupItem}`} 
+          action 
+          variant="light"
+        >
+          {task.task_name}
+        </ListGroup.Item>
+
+        <TaskPopover task={task} setTasks={setTasks} setChangeInTasks={setChangeInTasks} >
+          <div className={`p-2 ${styles.VerticalEllipsis}`}>
+            <i className={`fa-solid fa-ellipsis-vertical fa-lg`}></i>
+          </div>
+        </TaskPopover>
+      </div>
+  )
+  
 
   return (
     <Col className={styles.MyTasksToday}>
@@ -145,25 +153,7 @@ function MyTasksToday() {
         </p> */}
       
         <ListGroup className={styles.ListGroup}>
-          {tasks.results.map((task) => (
-            <div className="d-flex align-items-center mb-2" key={task.task_name}>
-              <i className="fa-solid fa-grip-vertical fa-xl"></i>
-              <ListGroup.Item
-                className={`ms-2 me-1 ${styles.ListGroupItem}`} 
-                action 
-                variant="light" 
-              >
-                {task.task_name}
-              </ListGroup.Item>
-
-              <TaskPopover task={task} setTasks={setTasks} >
-                <div className={`p-2 ${styles.VerticalEllipsis}`}>
-                  <i className={`fa-solid fa-ellipsis-vertical fa-lg`}></i>
-                </div>
-              </TaskPopover>
-
-            </div>              
-          ))}
+          {tasks.results.map((task) => !task.is_completed ? TasksListItem(task) : "")}
         </ListGroup>
       </div>
 

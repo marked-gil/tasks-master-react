@@ -6,7 +6,7 @@ import Popover from 'react-bootstrap/Popover';
 import { axiosReq, axiosRes } from '../api/axiosDefaults';
 import { useHistory } from 'react-router-dom';
 
-function TaskPopover({ children, task, setTasks }) {
+function TaskPopover({ children, task, setTasks, setChangeInTasks }) {
 
   const history = useHistory();
 
@@ -36,7 +36,13 @@ function TaskPopover({ children, task, setTasks }) {
     }
 
     try {
-      await axiosReq.put(`/tasks/${task.id}`, taskData);
+      const { data } = await axiosReq.put(`/tasks/${task.id}`, taskData);
+      console.log(data)
+      setChangeInTasks(data)
+      setTasks(prevState => ({
+        ...prevState,
+        data
+      }))
     } catch (err) {
       console.log(err.response?.data)
     }
