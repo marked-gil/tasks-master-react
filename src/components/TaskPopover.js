@@ -1,8 +1,9 @@
 import React from 'react';
+import moment from 'moment';
 import { Button } from 'react-bootstrap';
 import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
 import Popover from 'react-bootstrap/Popover';
-import { axiosRes } from '../api/axiosDefaults';
+import { axiosReq, axiosRes } from '../api/axiosDefaults';
 import { useHistory } from 'react-router-dom';
 
 function TaskPopover({ children, task, setTasks }) {
@@ -25,17 +26,34 @@ function TaskPopover({ children, task, setTasks }) {
     history.push(`/task/${task.id}`)
   }
 
+  const handleComplete = async (event) => {
+    event.preventDefault();
+    
+    const taskData = {
+      ...task,
+      "due_date": moment(new Date(task.due_date)).format("yyyy-MM-DD"),
+      "is_completed": true
+    }
+
+    try {
+      await axiosReq.put(`/tasks/${task.id}`, taskData);
+    } catch (err) {
+      console.log(err.response?.data)
+    }
+  }
+
   const popover = (
     <Popover id="popover-basic">
       <Popover.Body className="p-0">
+        <Button onClick={handleDelete} className="me-1" variant="danger" size="sm">Delete</Button>
         <Button onClick={handleView} className="me-1" size="sm">View</Button>
-        <Button onClick={handleDelete} variant="danger" size="sm">Delete</Button>
+        <Button onClick={handleComplete} size="sm">Done</Button>
       </Popover.Body>
     </Popover>
   );
   
   return (
-    <OverlayTrigger trigger="click" rootClose placement="right" overlay={popover}>
+    <OverlayTrigger trigger="click" rootClose placement="left" overlay={popover}>
       { children }
     </OverlayTrigger>
   )

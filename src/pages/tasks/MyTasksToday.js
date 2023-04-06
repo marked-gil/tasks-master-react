@@ -11,9 +11,9 @@ import { getCategories } from '../../api/categoryMethods';
 function MyTasksToday() {
   const currentUser = useCurrentUser();
 
-  const [ tasks, setTasks ] = useState({ results: []})
-  const [ categories, setCategories ] = useState({ results: []})
-  const [ filters, setFilters ] = useState({})
+  const [ tasks, setTasks ] = useState({ results: []});
+  const [ categories, setCategories ] = useState({ results: []});
+  const [ filters, setFilters ] = useState({});
 
   const { category_name, progress, order_by } = filters;
 
@@ -57,6 +57,7 @@ function MyTasksToday() {
       );
 
       setTasks(data)
+
     } catch (err) {
       console.log(err.response?.data)
     }
@@ -136,7 +137,10 @@ function MyTasksToday() {
           </Button>
         </Form>
 
-        <p className="align-self-start"><span className={styles.bold}>Filtered by:</span> to-do, all category | <span className={styles.bold}>Ordered by:</span> due time - ascending</p>
+        {/* <p className="align-self-start">
+          <span className={styles.bold}>Filtered by:</span><span>{progress ? progress : "All Statuses"}</span>, <span>{category_name}</span> | 
+          <span className={styles.bold}>Ordered by:</span> <span>{order_by}</span>
+        </p> */}
       
         <ListGroup className={styles.ListGroup}>
           {tasks.results.map((task) => (
@@ -149,11 +153,13 @@ function MyTasksToday() {
               >
                 {task.task_name}
               </ListGroup.Item>
+
               <TaskPopover task={task} setTasks={setTasks} >
                 <div className={`p-2 ${styles.VerticalEllipsis}`}>
                   <i className={`fa-solid fa-ellipsis-vertical fa-lg`}></i>
                 </div>
               </TaskPopover>
+
             </div>              
           ))}
         </ListGroup>
