@@ -7,6 +7,7 @@ import { axiosReq } from '../../api/axiosDefaults';
 import { useCurrentUser } from '../../contexts/CurrentUserContext';
 import TaskPopover from '../../components/TaskPopover';
 import { getCategories } from '../../api/categoryMethods';
+import { getTasksToday } from '../../api/taskMethods';
 
 function MyTasksToday() {
   const currentUser = useCurrentUser();
@@ -22,19 +23,20 @@ function MyTasksToday() {
   }, []);
 
   useEffect(() => {
-    const handleMount = async () => {
-      try {
-        const { data } = await axiosReq.get(
-          `/tasks/?due_date=${moment().format("yyyy-MM-DD")}`
-        );
-        setTasks(data)
-        console.log(data)
-      } catch (err) {
-        console.log(err.response?.data)
-      }
-    }
+    getTasksToday(setTasks);
+    // const handleMount = async () => {
+    //   try {
+    //     const { data } = await axiosReq.get(
+    //       `/tasks/?due_date=${moment().format("yyyy-MM-DD")}`
+    //     );
+    //     setTasks(data)
+    //     console.log(data)
+    //   } catch (err) {
+    //     console.log(err.response?.data)
+    //   }
+    // }
 
-    handleMount();
+    // handleMount();
   }, [currentUser])
 
   const handleFilterChange = (event) => {
