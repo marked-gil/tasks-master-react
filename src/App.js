@@ -1,8 +1,8 @@
-import { Redirect, Route, Switch, useParams } from 'react-router-dom';
+import { Redirect, Route, Switch } from 'react-router-dom';
 import './api/axiosDefaults';
 import SignInPage from './pages/auth/SignInPage';
 import SignUpPage from './pages/auth/SignUpPage';
-import MainContent from './pages/MainContent';
+import MainPageContainer from './pages/MainPageContainer';
 import styles from './App.module.css';
 
 function App() {
@@ -10,11 +10,11 @@ function App() {
   return (
     <div className={styles.App}>
       <Switch>
-        <Route exact path="/" render={() => <MainContent tasksTodayPage />} />
+        <Route exact path="/" render={() => <MainPageContainer tasksTodayPage />} />
         <Route exact path="/signin" render={() => <SignInPage /> } />
         <Route exact path="/signup" render={() => <SignUpPage /> } />
-        <Route exact path="/profile/:id" render={() => <MainContent profile /> } />
-        <Route exact path="/task/:id" render={() => <MainContent taskDetailsPage />} />
+        <Route exact path="/profile/:id" render={() => <MainPageContainer profile /> } />
+        <Route exact path="/task/:id" render={() => <MainPageContainer taskDetailsPage />} />
         <Route render={() => <h1>Page Not Found</h1>}/>
       </Switch>
     </div>

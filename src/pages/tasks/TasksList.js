@@ -22,8 +22,8 @@ function TasksList({tasks, setTasks, setChangeInTasks, showCompletedTasks}) {
         action 
         variant="light"
       >
-        {task.task_name}
-        {/* {task} */}
+        {/* {task.task_name} */}
+        {task}
       </ListGroup.Item>
 
       <TaskPopover task={task} setTasks={setTasks} setChangeInTasks={setChangeInTasks} >
@@ -43,19 +43,19 @@ function TasksList({tasks, setTasks, setChangeInTasks, showCompletedTasks}) {
 )
 
   return (
-    <ListGroup className={styles.ListGroup}>
-      {tasks.results.map((task) => (
-        showCompletedTasks ? TasksListItem(task, task.is_completed)
-        : !task.is_completed ? TasksListItem(task) : ""
-      ))}
-    </ListGroup>
-
     // <ListGroup className={styles.ListGroup}>
-    //   {['Task 1 Task 1 Task 1 Task 1 Task 1 Task 1 Task 1 Task 1 Task 1', 'Task 2', 'Task 3'].map((task) => (
+    //   {tasks.results.map((task) => (
     //     showCompletedTasks ? TasksListItem(task, task.is_completed)
     //     : !task.is_completed ? TasksListItem(task) : ""
     //   ))}
     // </ListGroup>
+
+    <ListGroup className={styles.ListGroup}>
+      {['Task 1 Task 1 Task 1 Task 1 Task 1 Task 1 Task 1 Task 1 Task 1', 'Task 2', 'Task 3'].map((task) => (
+        showCompletedTasks ? TasksListItem(task, task.is_completed)
+        : !task.is_completed ? TasksListItem(task) : ""
+      ))}
+    </ListGroup>
   )    
 };
 
