@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import moment from 'moment';
 import styles from '../../styles/MyTasksToday.module.css';
-import { Button, Col, Form, ListGroup } from 'react-bootstrap';
+import { Col, ListGroup } from 'react-bootstrap';
 import AddTask from './AddTask';
 import { axiosReq } from '../../api/axiosDefaults';
 import { useCurrentUser } from '../../contexts/CurrentUserContext';
@@ -9,6 +9,7 @@ import TaskPopover from '../../components/TaskPopover';
 import { getCategories } from '../../api/categoryMethods';
 import { getTasksToday } from '../../api/taskMethods';
 import ErrorDisplay from '../../components/ErrorDisplay';
+import TasksFilter from '../../components/TasksFilter';
 
 function MyTasksToday() {
   const currentUser = useCurrentUser();
@@ -22,20 +23,13 @@ function MyTasksToday() {
 
   const { category_name, progress, order_by } = filters;
 
-  // useEffect(() => {
-  //   getCategories(setCategories);
-  // }, []);
+  useEffect(() => {
+    getCategories(setCategories);
+  }, []);
 
-  // useEffect(() => {
-  //   getTasksToday(setTasks);
-  // }, [currentUser, changeInTasks])
-
-  const handleFilterChange = (event) => {
-    setFilters({
-      ...filters,
-      [event.target.name]: event.target.value
-    })
-  }
+  useEffect(() => {
+    getTasksToday(setTasks);
+  }, [currentUser, changeInTasks])
 
   const handleFilterSubmit = async (event) => {
     event.preventDefault();
@@ -75,10 +69,6 @@ function MyTasksToday() {
         </TaskPopover>
       </div>
   )
-  
-  const handleCompletedTasks = (event) => {
-    setShowCompletedTasks(event.target.checked)
-  }
 
   return (
     <Col className={styles.MyTasksToday}>
@@ -91,87 +81,21 @@ function MyTasksToday() {
           <h2>Today <span className={`d-block ${styles.DateToday}`}>{moment().format("D MMMM YYYY, dddd")}</span></h2>
         </div>
 
-        {/* Tasks Status Filter */}
-        <Form className="d-flex flex-wrap justify-content-between">
-          <div className="d-flex">
-            <p className={`me-3 mb-0 ${styles.bold}`}>Progress: </p>
-            <Form.Select
-              size="sm"
-              className={`me-3 ${styles.FormSelect}`}
-              aria-label="Select progress status"
-              name="progress"
-              onChange={handleFilterChange}
-            >
-              <option value="all">All Statuses</option>
-              {['to-do', 'overdue', 'completed'].map((status) => (
-                <option
-                  value={status}
-                  key={status}
-                >
-                  {status}
-                </option>
-              ))}
-            </Form.Select>
-          </div>
-          
-          <div className="d-flex">
-            {/* Ordering of Tasks */}
-            <p className={`me-3 ${styles.bold}`}>Order by: </p>
-            <Form.Select 
-              name="order_by" 
-              className={styles.OrderByField}
-              onChange={handleFilterChange}
-              aria-label="Order today's tasks" 
-              size="sm"
-            >
-              <option value="due_time">Due Time - Ascending</option>
-              <option value="-due_time">Due Time - Descending</option>
-              <option value="priority">Priority - Ascending</option>
-              <option value="-priority">Priority - Descending</option>
-            </Form.Select>
-          </div>
-
-          <div className="d-flex">
-            {/* Category */}
-            <p className={`me-3 mb-0 ${styles.bold}`}>Category: </p>
-            <Form.Select
-              className={`me-3 ${styles.FormSelect}`}
-              aria-label="Select category"
-              name="category_name"
-              onChange={handleFilterChange}
-              size="sm"
-            >
-              <option value="all">All Categories</option>
-              {categories.results.map((cat) => (
-                <option
-                  value={cat.id}
-                  key={cat.category_name}
-                >
-                  {cat.category_name}
-                </option>
-              ))}
-            </Form.Select>
-          </div>
-
-          <Button className={styles.FilterButton} variant="primary" size="sm" onClick={handleFilterSubmit}>
-              Filter
-            </Button>
-        </Form>
-
-        <Form.Check 
-            type="checkbox"
-            id="show_completed_tasks"
-            label="Show Completed Tasks"
-            name="show_completed_tasks"
-            value={showCompletedTasks}
-            onClick={handleCompletedTasks}
-          />
+        <TasksFilter
+          setFilters={setFilters}
+          categories={categories}
+          handleFilterSubmit={handleFilterSubmit}
+          setShowCompletedTasks={setShowCompletedTasks}
+          showCompletedTasks={showCompletedTasks}
+        />
 
         {/* <p className="align-self-start">
           <span className={styles.bold}>Filtered by:</span><span>{progress ? progress : "All Statuses"}</span>, <span>{category_name}</span> | 
           <span className={styles.bold}>Ordered by:</span> <span>{order_by}</span>
         </p> */}
-      
+        
+        <hr />
+
         <ListGroup className={styles.ListGroup}>
           {tasks.results.map((task) => (
             showCompletedTasks ? TasksListItem(task, task.is_completed)

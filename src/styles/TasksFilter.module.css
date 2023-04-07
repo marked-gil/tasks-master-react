@@ -1,0 +1,17 @@
+.bold {
+  font-weight: 600;
+}
+
+.FormSelect {
+  width: 10rem;
+  height: 2rem;
+}
+
+.OrderByField {
+  width: 12rem;
+  height: 2rem;
+}
+
+.FilterButton {
+  width: 17rem;
+}
