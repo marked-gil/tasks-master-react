@@ -16,8 +16,9 @@ function App() {
         <Route exact path="/signup" render={() => <SignUpPage /> } />
         <Route exact path="/profile/:id" render={() => <MainPageContainer profile /> } />
         <Route exact path="/task/:id" render={() => <MainPageContainer taskDetailsPage />} />
-        <Route exact path={`/tasks/:${moment().add(1, 'days').format('YYYY-MM-DD')}`} render={() => <MainPageContainer tasksPerDatePage />} />
-        <Route exact path={`/tasks/:${moment().format('YYYY-MM-DD')}`} render={() => <MainPageContainer tasksPerDatePage />} />
+        <Route exact path="/tasks/:due_date" render={() => <MainPageContainer tasksPerDatePage />} />
+        {/* <Route exact path={`/tasks/:${moment().add(1, 'days').format('YYYY-MM-DD')}`} render={() => <MainPageContainer tasksPerDatePage />} /> */}
+        {/* <Route exact path={`/tasks/:${moment().format('YYYY-MM-DD')}`} render={() => <MainPageContainer tasksPerDatePage />} /> */}
         <Route render={() => <h1>Page Not Found</h1>}/>
       </Switch>
     </div>

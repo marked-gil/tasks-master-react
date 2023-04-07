@@ -4,7 +4,6 @@ import styles from '../../styles/TasksTodayPage.module.css';
 import Col from 'react-bootstrap/Col';
 import AddTask from './AddTask';
 import { axiosReq } from '../../api/axiosDefaults';
-import { useCurrentUser } from '../../contexts/CurrentUserContext';
 import { getCategories } from '../../api/categoryMethods';
 import { getTasks } from '../../api/taskMethods';
 import ErrorDisplay from '../../components/ErrorDisplay';
@@ -12,7 +11,6 @@ import TasksFilter from '../../components/TasksFilter';
 import TasksList from './TasksList';
 
 function TasksTodayPage() {
-  // const currentUser = useCurrentUser();
 
   const dateToday = moment().format();
 
