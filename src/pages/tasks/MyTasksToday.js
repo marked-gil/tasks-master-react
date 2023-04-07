@@ -8,6 +8,7 @@ import { useCurrentUser } from '../../contexts/CurrentUserContext';
 import TaskPopover from '../../components/TaskPopover';
 import { getCategories } from '../../api/categoryMethods';
 import { getTasksToday } from '../../api/taskMethods';
+import ErrorDisplay from '../../components/ErrorDisplay';
 
 function MyTasksToday() {
   const currentUser = useCurrentUser();
@@ -17,16 +18,17 @@ function MyTasksToday() {
   const [ tasks, setTasks ] = useState({ results: []});
   const [ categories, setCategories ] = useState({ results: []});
   const [ filters, setFilters ] = useState({});
+  const [ error, setError ] = useState({});
 
   const { category_name, progress, order_by } = filters;
 
-  useEffect(() => {
-    getCategories(setCategories);
-  }, []);
+  // useEffect(() => {
+  //   getCategories(setCategories);
+  // }, []);
 
-  useEffect(() => {
-    getTasksToday(setTasks);
-  }, [currentUser, changeInTasks])
+  // useEffect(() => {
+  //   getTasksToday(setTasks);
+  // }, [currentUser, changeInTasks])
 
   const handleFilterChange = (event) => {
     setFilters({
@@ -46,11 +48,10 @@ function MyTasksToday() {
         `/tasks/?due_date=${moment().format("yyyy-MM-DD")}&progress=${status ? status : ""
         }&category=${cat_name ? cat_name : ""}&ordering=${order_by ? order_by : ""}`
       );
-
       setTasks(data)
-
     } catch (err) {
-      console.log(err.response?.data)
+      console.log(err.response)
+      setError(err.response)
     }
   }
 
@@ -81,15 +82,17 @@ function MyTasksToday() {
 
   return (
     <Col className={styles.MyTasksToday}>
-      <div>
-        <div className={`d-flex justify-content-between ${styles.Title}`}>
+      <div className={styles.InnerContainer}>
+        {error?.data && <ErrorDisplay error={error} />}
+
+        <div className={`d-flex justify-content-between`}>
           <h2 className={`${styles.MyTasks}`}>My Tasks</h2>
           <span className={styles.LineIcon}><i className="fa-solid fa-ellipsis-vertical"></i></span> 
           <h2>Today <span className={`d-block ${styles.DateToday}`}>{moment().format("D MMMM YYYY, dddd")}</span></h2>
         </div>
 
         {/* Tasks Status Filter */}
-        <Form>
+        <Form className="d-flex flex-wrap justify-content-between">
           <div className="d-flex">
             <p className={`me-3 mb-0 ${styles.bold}`}>Progress: </p>
             <Form.Select
@@ -112,6 +115,23 @@ function MyTasksToday() {
           </div>
           
           <div className="d-flex">
+            {/* Ordering of Tasks */}
+            <p className={`me-3 ${styles.bold}`}>Order by: </p>
+            <Form.Select 
+              name="order_by" 
+              className={styles.OrderByField}
+              onChange={handleFilterChange}
+              aria-label="Order today's tasks" 
+              size="sm"
+            >
+              <option value="due_time">Due Time - Ascending</option>
+              <option value="-due_time">Due Time - Descending</option>
+              <option value="priority">Priority - Ascending</option>
+              <option value="-priority">Priority - Descending</option>
+            </Form.Select>
+          </div>
+
+          <div className="d-flex">
             {/* Category */}
             <p className={`me-3 mb-0 ${styles.bold}`}>Category: </p>
             <Form.Select
@@ -131,26 +151,11 @@ function MyTasksToday() {
                 </option>
               ))}
             </Form.Select>
-            
-            {/* Ordering of Tasks */}
-            <p className={`me-3 ${styles.bold}`}>Order by: </p>
-            <Form.Select 
-              name="order_by" 
-              className={`me-3 ${styles.FormSelect}`}
-              onChange={handleFilterChange}
-              aria-label="Order today's tasks" 
-              size="sm"
-            >
-              <option value="due_time">Due Time - Ascending</option>
-              <option value="-due_time">Due Time - Descending</option>
-              <option value="priority">Priority - Ascending</option>
-              <option value="-priority">Priority - Descending</option>
-            </Form.Select>
           </div>
 
           <Button className={styles.FilterButton} variant="primary" size="sm" onClick={handleFilterSubmit}>
-            Filter
-          </Button>
+              Filter
+            </Button>
         </Form>
 
         <Form.Check 

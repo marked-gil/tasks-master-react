@@ -1,4 +1,5 @@
 .MyTasksToday {
+  position: relative;
   padding: 5rem 0 0;
   display: flex;
   flex-direction: column;
@@ -6,12 +7,13 @@
   border: 1px solid black
 }
 
-.MyTasks {
-  font-size: 2.8rem;
+.InnerContainer {
+  width: 36rem;
+  border: 1px solid blue;
 }
 
-.Title {
-  width: 35rem;
+.MyTasks {
+  font-size: 2.8rem;
 }
 
 .DateToday {
@@ -19,7 +21,7 @@
 }
 
 .FilterButton {
-  width: 89%;
+  width: 17rem;
 }
 
 .LineIcon {
@@ -32,6 +34,11 @@
 
 .FormSelect {
   width: 10rem;
+  height: 2rem;
+}
+
+.OrderByField {
+  width: 12rem;
   height: 2rem;
 }
 
