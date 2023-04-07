@@ -41,7 +41,7 @@ function TaskPopover({ children, task, setTasks, setChangeInTasks }) {
       setChangeInTasks(data)
       setTasks(prevState => ({
         ...prevState,
-        data
+        results: [data]
       }))
     } catch (err) {
       console.log(err.response?.data)

@@ -13,6 +13,7 @@ function MyTasksToday() {
   const currentUser = useCurrentUser();
 
   const [ changeInTasks, setChangeInTasks ] = useState({})
+  const [ showCompletedTasks, setShowCompletedTasks ] = useState(false)
   const [ tasks, setTasks ] = useState({ results: []});
   const [ categories, setCategories ] = useState({ results: []});
   const [ filters, setFilters ] = useState({});
@@ -53,11 +54,13 @@ function MyTasksToday() {
     }
   }
 
-  const TasksListItem = (task) => (
+  const TasksListItem = (task, completed) => (
+
       <div className="d-flex align-items-center mb-2" key={task.id}>
         <i className="fa-solid fa-grip-vertical fa-xl"></i>
-        <ListGroup.Item
-          className={`ms-2 me-1 ${styles.ListGroupItem}`} 
+
+          <ListGroup.Item
+          className={`ms-2 me-1 ${styles.ListGroupItem} ${completed ? styles.Completed : ""}`} 
           action 
           variant="light"
         >
@@ -72,6 +75,9 @@ function MyTasksToday() {
       </div>
   )
   
+  const handleCompletedTasks = (event) => {
+    setShowCompletedTasks(event.target.checked)
+  }
 
   return (
     <Col className={styles.MyTasksToday}>
@@ -147,13 +153,25 @@ function MyTasksToday() {
           </Button>
         </Form>
 
+        <Form.Check 
+            type="checkbox"
+            id="show_completed_tasks"
+            label="Show Completed Tasks"
+            name="show_completed_tasks"
+            value={showCompletedTasks}
+            onClick={handleCompletedTasks}
+          />
+
         {/* <p className="align-self-start">
           <span className={styles.bold}>Filtered by:</span><span>{progress ? progress : "All Statuses"}</span>, <span>{category_name}</span> | 
           <span className={styles.bold}>Ordered by:</span> <span>{order_by}</span>
         </p> */}
       
         <ListGroup className={styles.ListGroup}>
-          {tasks.results.map((task) => !task.is_completed ? TasksListItem(task) : "")}
+          {tasks.results.map((task) => (
+            showCompletedTasks ? TasksListItem(task, task.is_completed)
+            : !task.is_completed ? TasksListItem(task) : ""
+          ))}
         </ListGroup>
       </div>
 

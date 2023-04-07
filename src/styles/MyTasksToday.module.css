@@ -52,3 +52,7 @@
 .VerticalEllipsis:hover {
   cursor: pointer;
 }
+
+.Completed {
+  background-color: #f2b4645d;
+}
