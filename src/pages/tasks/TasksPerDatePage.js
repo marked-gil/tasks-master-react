@@ -9,11 +9,12 @@ import ErrorDisplay from '../../components/ErrorDisplay';
 import TasksFilter from '../../components/TasksFilter';
 import TasksList from './TasksList';
 import AddTask from './AddTask';
-import { useParams } from 'react-router-dom';
+import { useHistory, useParams } from 'react-router-dom';
 
 function TasksPerDatePage() {
 
   const {due_date} = useParams();
+  const history = useHistory();
   const is_DueDateTomorrow = moment().add(1, 'days').format('YYYY-MM-DD') === due_date;
 
   const [ changeInTasks, setChangeInTasks ] = useState({})
@@ -25,13 +26,19 @@ function TasksPerDatePage() {
 
   const { category_name, progress, order_by } = filters;
 
-  // useEffect(() => {
-  //   getCategories(setCategories);
-  // }, []);
+  useEffect(() => {
+    if (due_date === moment().format('YYYY-MM-DD')) {
+      history.push("/")
+    }
+  }, [due_date, history])
 
-  // useEffect(() => {
-  //   getTasks(setTasks, moment(due_date));
-  // }, [changeInTasks, due_date]);
+  useEffect(() => {
+    getCategories(setCategories);
+  }, []);
+
+  useEffect(() => {
+    getTasks(setTasks, moment(due_date));
+  }, [changeInTasks, due_date]);
 
   const handleFilterSubmit = async (event) => {
     event.preventDefault();
