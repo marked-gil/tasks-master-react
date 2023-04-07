@@ -1,11 +1,21 @@
 .ListGroupItem {
   width: 29rem;
+  padding-top: 5px;
+  padding-bottom: 14px;
 }
 
 .Completed {
-  background-color: #f2b4645d;
+  background-color: #edc6935d;
 }
 
 .VerticalEllipsis:hover {
   cursor: pointer;
+}
+
+.Legend {
+  border-radius: 3px;
+  background-color: #e8bdaa;
+  font-size: 13px;
+  right: 94px;
+  bottom: -5px;
 }
