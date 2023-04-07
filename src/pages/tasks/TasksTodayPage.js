@@ -6,13 +6,15 @@ import AddTask from './AddTask';
 import { axiosReq } from '../../api/axiosDefaults';
 import { useCurrentUser } from '../../contexts/CurrentUserContext';
 import { getCategories } from '../../api/categoryMethods';
-import { getTasksToday } from '../../api/taskMethods';
+import { getTasks } from '../../api/taskMethods';
 import ErrorDisplay from '../../components/ErrorDisplay';
 import TasksFilter from '../../components/TasksFilter';
 import TasksList from './TasksList';
 
 function TasksTodayPage() {
-  const currentUser = useCurrentUser();
+  // const currentUser = useCurrentUser();
+
+  const dateToday = moment().format();
 
   const [ changeInTasks, setChangeInTasks ] = useState({})
   const [ showCompletedTasks, setShowCompletedTasks ] = useState(false)
@@ -28,8 +30,8 @@ function TasksTodayPage() {
   }, []);
 
   useEffect(() => {
-    getTasksToday(setTasks);
-  }, [currentUser, changeInTasks])
+    getTasks(setTasks, dateToday);
+  }, [changeInTasks, dateToday])
 
   const handleFilterSubmit = async (event) => {
     event.preventDefault();
@@ -57,7 +59,7 @@ function TasksTodayPage() {
         <div className={`d-flex justify-content-between`}>
           <h2 className={`${styles.MyTasks}`}>My Tasks</h2>
           <span className={styles.LineIcon}><i className="fa-solid fa-ellipsis-vertical"></i></span> 
-          <h2>Today <span className={`d-block ${styles.DateToday}`}>{moment().format("D MMMM YYYY, dddd")}</span></h2>
+          <h2>Today <span className={`d-block ${styles.DateToday}`}>{moment(dateToday).format("D MMMM YYYY, dddd")}</span></h2>
         </div>
 
         <TasksFilter

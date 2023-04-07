@@ -1,5 +1,6 @@
 import React from 'react'
 import { useCurrentUser } from '../contexts/CurrentUserContext'
+import moment from 'moment';
 import styles from '../styles/SideBar.module.css'
 import { Link } from 'react-router-dom';
 
@@ -17,7 +18,7 @@ const SideBar = () => {
           <Link to="/"><i className="fa-solid fa-calendar-week"></i> Today</Link>
         </li>
         <li className="mb-2">
-          <Link><i className="fa-sharp fa-solid fa-forward"></i> Tomorrow</Link>
+          <Link to={`/tasks/${moment().add(1, 'days').format('YYYY-MM-DD')}`}><i className="fa-sharp fa-solid fa-forward"></i> Tomorrow</Link>
         </li>
         <li className="mb-2">
           <Link><i className="fa-solid fa-list-check"></i> All My Tasks</Link>

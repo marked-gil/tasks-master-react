@@ -2,14 +2,18 @@ import { axiosReq } from "./axiosDefaults";
 import moment from 'moment';
 
 
-export const getTasksToday = async (setTasks) => {
+export const getTasks = async (setTasks, date) => {
+
   try {
-    const { data } = await axiosReq.get(
-      `/tasks/?due_date=${moment().format("yyyy-MM-DD")}`
-    );
-    setTasks(data)
-    console.log(data)
+    if (date === moment().format()) {
+      const { data } = await axiosReq.get(
+        `/tasks/?due_date=${moment(date).format("yyyy-MM-DD")}`
+      );
+      setTasks(data)
+    }
+
   } catch (err) {
     console.log(err.response?.data)
   }
 }
+

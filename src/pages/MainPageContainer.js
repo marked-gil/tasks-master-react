@@ -7,8 +7,9 @@ import styles from '../styles/MainPageContainer.module.css'
 import ProfilePage from './profiles/ProfilePage'
 import TasksTodayPage from './tasks/TasksTodayPage'
 import TaskDetailsPage from './tasks/TaskDetailsPage'
+import TasksPerDatePage from './tasks/TasksPerDatePage'
 
-function MainContent({ profile, tasksTodayPage, taskDetailsPage }) {
+function MainContent({ profile, tasksTodayPage, taskDetailsPage, tasksPerDatePage }) {
 
   return (
     <>
@@ -19,6 +20,7 @@ function MainContent({ profile, tasksTodayPage, taskDetailsPage }) {
           {profile ? <ProfilePage /> 
             : tasksTodayPage ? <TasksTodayPage />
             : taskDetailsPage ? <TaskDetailsPage />
+            : tasksPerDatePage ? <TasksPerDatePage /> 
             : <></>
           }
         </Row>
