@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import moment from 'moment';
-import styles from '../../styles/MyTasksToday.module.css';
+import styles from '../../styles/TasksTodayPage.module.css';
 import { Col, ListGroup } from 'react-bootstrap';
 import AddTask from './AddTask';
 import { axiosReq } from '../../api/axiosDefaults';
@@ -11,7 +11,7 @@ import { getTasksToday } from '../../api/taskMethods';
 import ErrorDisplay from '../../components/ErrorDisplay';
 import TasksFilter from '../../components/TasksFilter';
 
-function MyTasksToday() {
+function TasksTodayPage() {
   const currentUser = useCurrentUser();
 
   const [ changeInTasks, setChangeInTasks ] = useState({})
@@ -88,11 +88,6 @@ function MyTasksToday() {
           setShowCompletedTasks={setShowCompletedTasks}
           showCompletedTasks={showCompletedTasks}
         />
-
-        {/* <p className="align-self-start">
-          <span className={styles.bold}>Filtered by:</span><span>{progress ? progress : "All Statuses"}</span>, <span>{category_name}</span> | 
-          <span className={styles.bold}>Ordered by:</span> <span>{order_by}</span>
-        </p> */}
         
         <hr />
 
@@ -115,4 +110,4 @@ function MyTasksToday() {
   )
 }
 
-export default MyTasksToday;
+export default TasksTodayPage;

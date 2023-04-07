@@ -5,10 +5,10 @@ import NavBar from '../components/NavBar'
 import SideBar from '../components/SideBar'
 import styles from '../styles/MainContent.module.css'
 import ProfilePage from './profiles/ProfilePage'
-import MyTasksToday from './tasks/MyTasksToday'
-import TaskDetails from './tasks/TaskDetails'
+import TasksTodayPage from './tasks/TasksTodayPage'
+import TaskDetailsPage from './tasks/TaskDetailsPage'
 
-function MainContent({ profile, tasksToday, taskDetails }) {
+function MainContent({ profile, tasksTodayPage, taskDetailsPage }) {
 
   return (
     <>
@@ -17,8 +17,8 @@ function MainContent({ profile, tasksToday, taskDetails }) {
         <Row className={styles.Row}>
           <SideBar />
           {profile ? <ProfilePage /> 
-            : tasksToday ? <MyTasksToday />
-            : taskDetails ? <TaskDetails />
+            : tasksTodayPage ? <TasksTodayPage />
+            : taskDetailsPage ? <TaskDetailsPage />
             : <></>
           }
         </Row>

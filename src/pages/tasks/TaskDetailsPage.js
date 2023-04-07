@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import styles from '../../styles/TaskDetails.module.css';
+import styles from '../../styles/TaskDetailsPage.module.css';
 import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import { axiosReq } from '../../api/axiosDefaults';
 import { useParams } from 'react-router-dom';
 
-function TaskDetails() {
+function TaskDetailsPage() {
 
   const [ taskData, setTaskData ] = useState({})
 
@@ -108,4 +108,4 @@ function TaskDetails() {
   )
 };
 
-export default TaskDetails;
+export default TaskDetailsPage;
