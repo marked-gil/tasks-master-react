@@ -1,0 +1,11 @@
+.ListGroupItem {
+  width: 29rem;
+}
+
+.Completed {
+  background-color: #f2b4645d;
+}
+
+.VerticalEllipsis:hover {
+  cursor: pointer;
+}

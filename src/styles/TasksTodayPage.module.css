@@ -28,18 +28,6 @@
   align-self: flex-start;
 }
 
-.ListGroupItem {
-  width: 29rem;
-}
-
 .ListIcon {
   font: 2.5rem;
-}
-
-.VerticalEllipsis:hover {
-  cursor: pointer;
-}
-
-.Completed {
-  background-color: #f2b4645d;
 }

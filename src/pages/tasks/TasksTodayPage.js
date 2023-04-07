@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import moment from 'moment';
 import styles from '../../styles/TasksTodayPage.module.css';
-import { Col, ListGroup } from 'react-bootstrap';
+import Col from 'react-bootstrap/Col';
 import AddTask from './AddTask';
 import { axiosReq } from '../../api/axiosDefaults';
 import { useCurrentUser } from '../../contexts/CurrentUserContext';
-import TaskPopover from '../../components/TaskPopover';
 import { getCategories } from '../../api/categoryMethods';
 import { getTasksToday } from '../../api/taskMethods';
 import ErrorDisplay from '../../components/ErrorDisplay';
 import TasksFilter from '../../components/TasksFilter';
+import TasksList from './TasksList';
 
 function TasksTodayPage() {
   const currentUser = useCurrentUser();
@@ -49,27 +49,6 @@ function TasksTodayPage() {
     }
   }
 
-  const TasksListItem = (task, completed) => (
-
-      <div className="d-flex align-items-center mb-2" key={task.id}>
-        <i className="fa-solid fa-grip-vertical fa-xl"></i>
-
-          <ListGroup.Item
-          className={`ms-2 me-1 ${styles.ListGroupItem} ${completed ? styles.Completed : ""}`} 
-          action 
-          variant="light"
-        >
-          {task.task_name}
-        </ListGroup.Item>
-
-        <TaskPopover task={task} setTasks={setTasks} setChangeInTasks={setChangeInTasks} >
-          <div className={`p-2 ${styles.VerticalEllipsis}`}>
-            <i className={`fa-solid fa-ellipsis-vertical fa-lg`}></i>
-          </div>
-        </TaskPopover>
-      </div>
-  )
-
   return (
     <Col className={styles.MyTasksToday}>
       <div className={styles.InnerContainer}>
@@ -91,12 +70,13 @@ function TasksTodayPage() {
         
         <hr />
 
-        <ListGroup className={styles.ListGroup}>
-          {tasks.results.map((task) => (
-            showCompletedTasks ? TasksListItem(task, task.is_completed)
-            : !task.is_completed ? TasksListItem(task) : ""
-          ))}
-        </ListGroup>
+        <TasksList
+          tasks={tasks}
+          setTasks={setTasks}
+          setChangeInTasks={setChangeInTasks} 
+          showCompletedTasks={showCompletedTasks}
+        />
+
       </div>
 
       <AddTask
