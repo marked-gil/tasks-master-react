@@ -22,9 +22,10 @@ const SideBar = () => {
     <div className={styles.SideBar}>
       <p>Hi, {currentUser?.username}!</p>
       <ul className="ps-0 mb-5">
-        <li className="mb-2">
+        <li className="mb-2 d-flex">
           <DatePicker
-            label="Select Tasks Date" 
+            className={`${styles.DatePicker} me-2`}
+            label="Find Tasks by Date" 
             value={tasksDate} 
             onChange={newValue => setTasksDate(newValue)}
             slotProps={{
@@ -33,7 +34,7 @@ const SideBar = () => {
               },
             }}
           />
-          <Button onClick={handleDateSelection}>Go</Button>
+          <Button className={`align-self-start ${styles.DatePickerBtn}`} onClick={handleDateSelection}>Go</Button>
         </li>
         <li className="mb-2">
           <Link><i className="fa-solid fa-plus"></i> Add Task</Link>

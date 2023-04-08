@@ -5,6 +5,14 @@
   font-size: 1.2rem;
 }
 
+.DatePicker {
+  min-width: 231px;
+}
+
+.DatePickerBtn {
+  height: 56px;
+}
+
 @media screen and (max-width: 1455px) {
   .SideBar {
     width: 25rem;
