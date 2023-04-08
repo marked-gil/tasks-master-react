@@ -3,7 +3,14 @@ import TaskPopover from '../../components/TaskPopover';
 import { ListGroup } from 'react-bootstrap';
 import styles from '../../styles/TasksList.module.css';
 
-function TasksList({tasks, setTasks, setChangeInTasks, showCompletedTasks}) {
+function TasksList(props) {
+
+  const {
+    tasks,
+    setTasks,
+    setChangeInTasks,
+    showCompletedTasks
+  } = props;
 
   const taskPriority = (task) => {
     return (
@@ -22,11 +29,11 @@ function TasksList({tasks, setTasks, setChangeInTasks, showCompletedTasks}) {
         action 
         variant="light"
       >
-        {/* {task.task_name} */}
-        {task}
+        {task.task_name}
+        {/* {task} */}
       </ListGroup.Item>
 
-      <TaskPopover task={task} setTasks={setTasks} setChangeInTasks={setChangeInTasks} >
+      <TaskPopover task={task} setTasks={setTasks} setChangeInTasks={setChangeInTasks}>
         <div className={`p-2 ${styles.VerticalEllipsis}`}>
           <i className={`fa-solid fa-ellipsis-vertical fa-lg`}></i>
         </div>
@@ -43,19 +50,19 @@ function TasksList({tasks, setTasks, setChangeInTasks, showCompletedTasks}) {
 )
 
   return (
-    // <ListGroup className={styles.ListGroup}>
-    //   {tasks.results.map((task) => (
-    //     showCompletedTasks ? TasksListItem(task, task.is_completed)
-    //     : !task.is_completed ? TasksListItem(task) : ""
-    //   ))}
-    // </ListGroup>
-
     <ListGroup className={styles.ListGroup}>
-      {['Task 1 Task 1 Task 1 Task 1 Task 1 Task 1 Task 1 Task 1 Task 1', 'Task 2', 'Task 3'].map((task) => (
+      {tasks.results.map((task) => (
         showCompletedTasks ? TasksListItem(task, task.is_completed)
         : !task.is_completed ? TasksListItem(task) : ""
       ))}
     </ListGroup>
+
+    // <ListGroup className={styles.ListGroup}>
+    //   {['Task 1 Task 1 Task 1 Task 1 Task 1 Task 1 Task 1 Task 1 Task 1', 'Task 2', 'Task 3'].map((task) => (
+    //     showCompletedTasks ? TasksListItem(task, task.is_completed)
+    //     : !task.is_completed ? TasksListItem(task) : ""
+    //   ))}
+    // </ListGroup>
   )    
 };
 

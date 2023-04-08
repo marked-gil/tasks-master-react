@@ -37,7 +37,6 @@ function TaskPopover({ children, task, setTasks, setChangeInTasks }) {
 
     try {
       const { data } = await axiosReq.put(`/tasks/${task.id}`, taskData);
-      console.log(data)
       setChangeInTasks(data)
       setTasks(prevState => ({
         ...prevState,

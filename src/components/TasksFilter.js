@@ -5,12 +5,13 @@ import styles from '../styles/TasksFilter.module.css';
 function TasksFilter(props) {
 
   const {
-    setFilters, 
+    setFilters,
     categories, 
-    handleFilterSubmit, 
     setShowCompletedTasks, 
-    showCompletedTasks
+    showCompletedTasks,
+    handleFilterSubmit
   } = props;
+
 
   const handleFilterChange = (event) => {
     setFilters(prevState => (
@@ -90,9 +91,14 @@ function TasksFilter(props) {
           </Form.Select>
         </div>
 
-        <Button className={styles.FilterButton} variant="primary" size="sm" onClick={handleFilterSubmit}>
-            Filter
-          </Button>
+        <Button
+          className={styles.FilterButton}
+          variant="primary"
+          size="sm"
+          onClick={handleFilterSubmit}
+        >
+          Filter
+        </Button>
       </Form>
 
       {/* SHOW COMPLETED TASKS TOGGLE */}

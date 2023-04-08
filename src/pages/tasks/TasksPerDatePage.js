@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import moment from 'moment';
 import { getCategories } from '../../api/categoryMethods';
 import { getTasks } from '../../api/taskMethods';
-import { axiosReq } from '../../api/axiosDefaults';
 import { Col } from 'react-bootstrap';
 import styles from '../../styles/TasksPerDatePage.module.css';
 import ErrorDisplay from '../../components/ErrorDisplay';
@@ -17,14 +16,11 @@ function TasksPerDatePage() {
   const history = useHistory();
   const is_DueDateTomorrow = moment().add(1, 'days').format('YYYY-MM-DD') === due_date;
 
-  const [ changeInTasks, setChangeInTasks ] = useState({})
+  const [ isFromFilter, setIsFromFilter ] = useState(false)
   const [ showCompletedTasks, setShowCompletedTasks ] = useState(false)
   const [ tasks, setTasks ] = useState({ results: []});
   const [ categories, setCategories ] = useState({ results: []});
-  const [ filters, setFilters ] = useState({});
   const [ error, setError ] = useState({});
-
-  const { category_name, progress, order_by } = filters;
 
   useEffect(() => {
     if (due_date === moment().format('YYYY-MM-DD')) {
@@ -34,29 +30,15 @@ function TasksPerDatePage() {
 
   useEffect(() => {
     getCategories(setCategories);
-  }, []);
+  }, [isFromFilter]);
 
   useEffect(() => {
-    getTasks(setTasks, moment(due_date));
-  }, [changeInTasks, due_date]);
-
-  const handleFilterSubmit = async (event) => {
-    event.preventDefault();
-
-    try {
-      const status = progress === 'all' ? "" : progress
-      const cat_name = category_name === 'all' ? "" : category_name
-      
-      const { data } = await axiosReq.get(
-        `/tasks/?due_date=${moment(due_date).format("yyyy-MM-DD")}&progress=${status ? status : ""
-        }&category=${cat_name ? cat_name : ""}&ordering=${order_by ? order_by : ""}`
-      );
-      setTasks(data)
-    } catch (err) {
-      console.log(err.response)
-      setError(err.response)
+    !isFromFilter && getTasks(setTasks, due_date);
+    return () => {
+      setIsFromFilter(false)
+      console.log("isFromFilter")
     }
-  }
+  }, [isFromFilter, due_date]);
 
   return (
     <Col className={styles.MyTasks}>
@@ -72,11 +54,13 @@ function TasksPerDatePage() {
         </div>
 
         <TasksFilter
-          setFilters={setFilters}
+          due_date={due_date}
+          setError={setError}
+          setTasks={setTasks}
           categories={categories}
-          handleFilterSubmit={handleFilterSubmit}
           setShowCompletedTasks={setShowCompletedTasks}
           showCompletedTasks={showCompletedTasks}
+          setIsFromFilter={setIsFromFilter}
         />
         
         <hr />
@@ -84,7 +68,6 @@ function TasksPerDatePage() {
         <TasksList
           tasks={tasks}
           setTasks={setTasks}
-          setChangeInTasks={setChangeInTasks} 
           showCompletedTasks={showCompletedTasks}
         />
       </div>
@@ -93,7 +76,6 @@ function TasksPerDatePage() {
         tasks={tasks}
         setTasks={setTasks}
         categories={categories}
-        setCategories={setCategories}
       />
     </Col>
   )
