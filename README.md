@@ -82,6 +82,7 @@ This project uses the following tools:
     * [Axios](https://axios-http.com/docs/intro)
     * [jwt-decode](https://github.com/auth0/jwt-decode) - helps to decode JWTs token
     * [Moment.js](https://momentjs.com/) - helps to parse, validate, manipulate, and display dates and times in Javascript
+    * [MUI X](https://mui.com/x/react-date-pickers/date-picker/) - where the datepicker was taken from.
 * [Google Fonts](https://fonts.google.com/)
 * [Freepik](https://www.freepik.com/)
 * `Git` - as a version control system, was used to monitor and record changes made when building the site. This allowed for the restoration of an earlier version of the code when it was necessary
