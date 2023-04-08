@@ -40,7 +40,7 @@ function TasksList(props) {
       </TaskPopover>
 
       {/* DUE TIME */}
-      <p className="ms-auto mb-0">{task.due_time ? task.due_time : <i class="me-3 fa-solid fa-minus"></i>}</p>
+      <p className="ms-auto mb-0">{task.due_time ? task.due_time : <i className="me-3 fa-solid fa-minus"></i>}</p>
       {/* LEGEND */}
       <p className={`position-absolute mb-0 ps-1 pe-1 ${styles.Legend}`}>
         {task.category} | {task.progress} | {taskPriority(task)}
