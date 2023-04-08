@@ -1,19 +1,28 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { useCurrentUser } from '../contexts/CurrentUserContext'
 import moment from 'moment';
 import styles from '../styles/SideBar.module.css'
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 
 const SideBar = () => {
   const currentUser = useCurrentUser();
+
+  const [ tasksDate, setTasksDate ] = useState(null)
+  const history = useHistory();
+
+  useEffect(() => {
+    if (tasksDate) {
+      history.push(`/tasks/${moment(tasksDate).format('YYYY-MM-DD')}`)
+    }
+  }, [tasksDate, history])
 
   return (
     <div className={styles.SideBar}>
       <p>Hi, {currentUser?.username}!</p>
       <ul className="ps-0 mb-5">
         <li className="mb-2">
-          <DatePicker />
+          <DatePicker label="Select Tasks Date" value={tasksDate} onChange={newValue => setTasksDate(newValue)}/>
         </li>
         <li className="mb-2">
           <Link><i className="fa-solid fa-plus"></i> Add Task</Link>
