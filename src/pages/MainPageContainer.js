@@ -8,7 +8,7 @@ import ProfilePage from './profiles/ProfilePage'
 import TasksTodayPage from './tasks/TasksTodayPage'
 import TaskDetailsPage from './tasks/TaskDetailsPage'
 import TasksPerDatePage from './tasks/TasksPerDatePage'
-import AllTasksPage from './tasks/AllTasksPage'
+import AllToDoTasksPage from './tasks/AllToDoTasksPage'
 
 function MainPageContainer(props) {
 
@@ -17,7 +17,7 @@ function MainPageContainer(props) {
     tasksTodayPage, 
     taskDetailsPage, 
     tasksPerDatePage, 
-    allTasksPage 
+    allTodoTasksPage,
   } = props;
 
   return (
@@ -30,7 +30,7 @@ function MainPageContainer(props) {
             : tasksTodayPage ? <TasksTodayPage />
             : taskDetailsPage ? <TaskDetailsPage />
             : tasksPerDatePage ? <TasksPerDatePage /> 
-            : allTasksPage ? <AllTasksPage/> 
+            : allTodoTasksPage ? <AllToDoTasksPage/> 
             : <></>
           }
         </Row>

@@ -1,17 +1,13 @@
 import React, { useState } from 'react';
-import moment from 'moment';
 import { Col } from 'react-bootstrap';
 import ErrorDisplay from '../../components/ErrorDisplay';
-import styles from '../../styles/AllTasksPage.module.css';
+import styles from '../../styles/AllToDoTasksPage.module.css';
 
-
-function AllTasksPage() {
-
+function AllToDoTasksPage() {
   const [ error, setError ] = useState({});
 
-
   return (
-    <Col className={styles.AllTasks}>
+    <Col className={styles.AllTodoTasks}>
       <div className={styles.InnerContainer}>
         {error?.data && <ErrorDisplay error={error} />}
 
@@ -27,4 +23,4 @@ function AllTasksPage() {
   )
 };
 
-export default AllTasksPage;
+export default AllToDoTasksPage;
