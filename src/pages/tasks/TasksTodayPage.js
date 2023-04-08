@@ -1,16 +1,17 @@
 import React, { useEffect, useState } from 'react';
-import { axiosReq } from '../../api/axiosDefaults';
 import moment from 'moment';
 import styles from '../../styles/TasksTodayPage.module.css';
 import Col from 'react-bootstrap/Col';
 import AddTask from './AddTask';
 import { getCategories } from '../../api/categoryMethods';
-import { getTasks } from '../../api/taskMethods';
+import { getFilteredTasks, getTasks } from '../../api/taskMethods';
 import ErrorDisplay from '../../components/ErrorDisplay';
 import TasksFilter from '../../components/TasksFilter';
 import TasksList from './TasksList';
 
 function TasksTodayPage() {
+
+  const due_date = moment().format();
 
   const [ changeInTasks, setChangeInTasks ] = useState({})
   const [ showCompletedTasks, setShowCompletedTasks ] = useState(false)
@@ -18,35 +19,19 @@ function TasksTodayPage() {
   const [ categories, setCategories ] = useState({ results: []});
   const [ error, setError ] = useState({});
   const [ filters, setFilters ] = useState({});
-  const { category_name, progress, order_by } = filters;
 
 
   useEffect(() => {
     getCategories(setCategories);
-  }, [changeInTasks]);
+  }, []);
 
   useEffect(() => {
     getTasks(setTasks);
-  }, []);
+  }, [changeInTasks]);
 
   const handleFilterSubmit = async (event) => {
     event.preventDefault();
-
-    try {
-      const status = progress === 'all' ? "" : progress
-      const cat_name = category_name === 'all' ? "" : category_name
-      
-      console.log(progress, category_name)
-      const { data } = await axiosReq.get(
-        `/tasks/?due_date=${moment().format("yyyy-MM-DD")}&progress=${status ? status : ""
-        }&category=${cat_name ? cat_name : ""}&ordering=${order_by ? order_by : ""}`
-      );
-      setTasks(data);
-      console.log("reached",data)
-    } catch (err) {
-      console.log(err.response)
-      setError(err.response);
-    }
+    getFilteredTasks(filters, due_date, setTasks, setError);
   }
 
   return (
