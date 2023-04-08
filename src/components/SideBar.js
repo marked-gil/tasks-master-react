@@ -3,6 +3,7 @@ import { useCurrentUser } from '../contexts/CurrentUserContext'
 import moment from 'moment';
 import styles from '../styles/SideBar.module.css'
 import { Link } from 'react-router-dom';
+import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 
 const SideBar = () => {
   const currentUser = useCurrentUser();
@@ -11,6 +12,9 @@ const SideBar = () => {
     <div className={styles.SideBar}>
       <p>Hi, {currentUser?.username}!</p>
       <ul className="ps-0 mb-5">
+        <li className="mb-2">
+          <DatePicker />
+        </li>
         <li className="mb-2">
           <Link><i className="fa-solid fa-plus"></i> Add Task</Link>
         </li>

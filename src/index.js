@@ -5,12 +5,16 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { CurrentUserProvider } from './contexts/CurrentUserContext';
+import { LocalizationProvider } from '@mui/x-date-pickers';
+import { AdapterMoment } from '@mui/x-date-pickers/AdapterMoment'
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <Router>
     <CurrentUserProvider>
-      <App />
+      <LocalizationProvider dateAdapter={AdapterMoment}>
+        <App />
+      </LocalizationProvider>
     </CurrentUserProvider>
   </Router>
 );
