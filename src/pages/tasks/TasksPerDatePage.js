@@ -13,10 +13,12 @@ import { useHistory, useParams } from 'react-router-dom';
 function TasksPerDatePage() {
 
   const {due_date} = useParams();
+  const dateToday = moment().format('YYYY-MM-DD')
 
   const history = useHistory();
   
   const is_DueDateTomorrow = moment().add(1, 'days').format('YYYY-MM-DD') === due_date;
+  const is_DueDatePrevious = due_date < dateToday
   
   const [ changeInTasks, setChangeInTasks ] = useState({})
   const [ showCompletedTasks, setShowCompletedTasks ] = useState(false)
@@ -26,10 +28,10 @@ function TasksPerDatePage() {
   const [ filters, setFilters ] = useState({});
 
   useEffect(() => {
-    if (due_date === moment().format('YYYY-MM-DD')) {
+    if (due_date === dateToday) {
       history.push("/")
     }
-  }, [due_date, history])
+  }, [due_date, history, dateToday])
 
   useEffect(() => {
     getCategories(setCategories);
@@ -52,7 +54,7 @@ function TasksPerDatePage() {
         <div className={`d-flex justify-content-between`}>
           <h2 className={`${styles.Heading}`}>My Tasks</h2>
           <span className={styles.LineIcon}><i className="fa-solid fa-ellipsis-vertical"></i></span> 
-          <h2>{`${is_DueDateTomorrow ? "TOMORROW" : "UPCOMING" }`}
+          <h2>{`${is_DueDateTomorrow ? "TOMORROW" : is_DueDatePrevious ? "PREVIOUS" : "UPCOMING" }`}
             <span className={`d-block ${styles.Date}`}>{moment(due_date).format("D MMMM YYYY, dddd")}</span>
           </h2>
         </div>
