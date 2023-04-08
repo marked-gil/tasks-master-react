@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import moment from 'moment';
 import { getCategories } from '../../api/categoryMethods';
-import { getTasks } from '../../api/taskMethods';
+import { getFilteredTasks, getTasks } from '../../api/taskMethods';
 import { Col } from 'react-bootstrap';
 import styles from '../../styles/TasksPerDatePage.module.css';
 import ErrorDisplay from '../../components/ErrorDisplay';
@@ -13,14 +13,17 @@ import { useHistory, useParams } from 'react-router-dom';
 function TasksPerDatePage() {
 
   const {due_date} = useParams();
-  const history = useHistory();
-  const is_DueDateTomorrow = moment().add(1, 'days').format('YYYY-MM-DD') === due_date;
 
-  const [ isFromFilter, setIsFromFilter ] = useState(false)
+  const history = useHistory();
+  
+  const is_DueDateTomorrow = moment().add(1, 'days').format('YYYY-MM-DD') === due_date;
+  
+  const [ changeInTasks, setChangeInTasks ] = useState({})
   const [ showCompletedTasks, setShowCompletedTasks ] = useState(false)
   const [ tasks, setTasks ] = useState({ results: []});
   const [ categories, setCategories ] = useState({ results: []});
   const [ error, setError ] = useState({});
+  const [ filters, setFilters ] = useState({});
 
   useEffect(() => {
     if (due_date === moment().format('YYYY-MM-DD')) {
@@ -30,15 +33,16 @@ function TasksPerDatePage() {
 
   useEffect(() => {
     getCategories(setCategories);
-  }, [isFromFilter]);
+  }, []);
 
   useEffect(() => {
-    !isFromFilter && getTasks(setTasks, due_date);
-    return () => {
-      setIsFromFilter(false)
-      console.log("isFromFilter")
-    }
-  }, [isFromFilter, due_date]);
+    getTasks(setTasks, due_date);
+  }, [changeInTasks, due_date]);
+
+  const handleFilterSubmit = async (event) => {
+    event.preventDefault();
+    getFilteredTasks(filters, due_date, setTasks, setError);
+  };
 
   return (
     <Col className={styles.MyTasks}>
@@ -54,13 +58,11 @@ function TasksPerDatePage() {
         </div>
 
         <TasksFilter
-          due_date={due_date}
-          setError={setError}
-          setTasks={setTasks}
+          setFilters={setFilters}
           categories={categories}
           setShowCompletedTasks={setShowCompletedTasks}
           showCompletedTasks={showCompletedTasks}
-          setIsFromFilter={setIsFromFilter}
+          handleFilterSubmit={handleFilterSubmit}
         />
         
         <hr />
@@ -68,6 +70,7 @@ function TasksPerDatePage() {
         <TasksList
           tasks={tasks}
           setTasks={setTasks}
+          setChangeInTasks={setChangeInTasks}
           showCompletedTasks={showCompletedTasks}
         />
       </div>

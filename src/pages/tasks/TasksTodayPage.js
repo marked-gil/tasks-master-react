@@ -32,7 +32,7 @@ function TasksTodayPage() {
   const handleFilterSubmit = async (event) => {
     event.preventDefault();
     getFilteredTasks(filters, due_date, setTasks, setError);
-  }
+  };
 
   return (
     <Col className={styles.MyTasksToday}>
@@ -41,7 +41,7 @@ function TasksTodayPage() {
 
         <div className={`d-flex justify-content-between`}>
           <h2 className={`${styles.MyTasks}`}>My Tasks</h2>
-          <span className={styles.LineIcon}><i className="fa-solid fa-ellipsis-vertical"></i></span> 
+            <span className={styles.LineIcon}><i className="fa-solid fa-ellipsis-vertical"></i></span> 
           <h2>Today <span className={`d-block ${styles.DateToday}`}>{moment().format("D MMMM YYYY, dddd")}</span></h2>
         </div>
 
@@ -69,7 +69,6 @@ function TasksTodayPage() {
         setTasks={setTasks}
         categories={categories}
       />
-
     </Col>
   )
 }
