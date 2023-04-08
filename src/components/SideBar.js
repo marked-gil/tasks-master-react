@@ -24,7 +24,7 @@ const SideBar = () => {
       <ul className="ps-0 mb-5">
         <li className="mb-2 d-flex">
           <DatePicker
-            className={`${styles.DatePicker} me-2`}
+            className={`me-2`}
             label="Find Tasks by Date" 
             value={tasksDate} 
             onChange={newValue => setTasksDate(newValue)}
