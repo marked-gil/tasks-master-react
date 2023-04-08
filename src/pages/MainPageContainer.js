@@ -8,8 +8,17 @@ import ProfilePage from './profiles/ProfilePage'
 import TasksTodayPage from './tasks/TasksTodayPage'
 import TaskDetailsPage from './tasks/TaskDetailsPage'
 import TasksPerDatePage from './tasks/TasksPerDatePage'
+import AllTasksPage from './tasks/AllTasksPage'
 
-function MainContent({ profile, tasksTodayPage, taskDetailsPage, tasksPerDatePage }) {
+function MainPageContainer(props) {
+
+  const { 
+    profile, 
+    tasksTodayPage, 
+    taskDetailsPage, 
+    tasksPerDatePage, 
+    allTasksPage 
+  } = props;
 
   return (
     <>
@@ -21,14 +30,14 @@ function MainContent({ profile, tasksTodayPage, taskDetailsPage, tasksPerDatePag
             : tasksTodayPage ? <TasksTodayPage />
             : taskDetailsPage ? <TaskDetailsPage />
             : tasksPerDatePage ? <TasksPerDatePage /> 
+            : allTasksPage ? <AllTasksPage/> 
             : <></>
           }
         </Row>
       </Container>
       <Footer />
     </>
-    
   )
 }
 
-export default MainContent
+export default MainPageContainer;
