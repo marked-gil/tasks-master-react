@@ -145,7 +145,6 @@ function AddTask({ tasks, setTasks, categories }) {
 
               <div className="d-flex">
                 <Form.Group>
-                  <Form.Label htmlFor="due_date">Due Date</Form.Label>
                   <Form.Control
                     type="date"
                     id="due_date"
