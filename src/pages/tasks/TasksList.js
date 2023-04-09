@@ -43,10 +43,10 @@ function TasksList(props) {
       </TaskPopover>
 
       {/* DUE DATE OR TIME */}
-      <p className="ms-auto mb-0">
+      <p className={`ms-auto mb-0 ${styles.DateTime}`}>
         {!!showTime && task.due_time }
-        {!task.due_time && <i className="me-3 fa-solid fa-minus"></i>}
-        {!!showDate && moment(task.due_date).format("DD MMM YYYY")}
+        {!!showTime && !task.due_time && <i className="me-3 fa-solid fa-minus"></i>}
+        {!!showDate && moment(task.due_date).format("DD MMM `YY")}
       </p>
       {/* LEGEND */}
       <p className={`position-absolute mb-0 ps-1 pe-1 ${styles.Legend}`}>

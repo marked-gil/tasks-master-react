@@ -1,5 +1,5 @@
 .ListGroupItem {
-  width: 29rem;
+  width: 28rem;
   padding-top: 5px;
   padding-bottom: 14px;
 }
@@ -16,6 +16,10 @@
   border-radius: 3px;
   background-color: #e8bdaa;
   font-size: 13px;
-  right: 94px;
+  right: 105px;
   bottom: -5px;
+}
+
+.DateTime {
+  font-size: 15px;
 }
