@@ -1,4 +1,5 @@
 import React from 'react';
+import moment from 'moment';
 import TaskPopover from '../../components/TaskPopover';
 import { ListGroup } from 'react-bootstrap';
 import styles from '../../styles/TasksList.module.css';
@@ -31,8 +32,8 @@ function TasksList(props) {
         action 
         variant="light"
       >
-        {/* {task.task_name} */}
-        {task}
+        {task.task_name}
+        {/* {task} */}
       </ListGroup.Item>
 
       <TaskPopover task={task} setTasks={setTasks} setChangeInTasks={setChangeInTasks}>
@@ -43,9 +44,9 @@ function TasksList(props) {
 
       {/* DUE DATE OR TIME */}
       <p className="ms-auto mb-0">
-        { !!showTime && task.due_time }
+        {!!showTime && task.due_time }
         {!task.due_time && <i className="me-3 fa-solid fa-minus"></i>}
-        {!!showDate && task.due_date}
+        {!!showDate && moment(task.due_date).format("DD MMM YYYY")}
       </p>
       {/* LEGEND */}
       <p className={`position-absolute mb-0 ps-1 pe-1 ${styles.Legend}`}>
@@ -63,7 +64,7 @@ function TasksList(props) {
     </ListGroup>
 
     // <ListGroup className={styles.ListGroup}>
-    //   {['Task 1 Task 1 Task 1 Task 1 Task 1 Task 1 Task 1 Task 1 Task 1', 'Task 2', 'Task 3'].map((task) => (
+    //   {['Task 1', 'Task 2', 'Task 3'].map((task) => (
     //     showCompletedTasks ? TasksListItem(task, task.is_completed)
     //     : !task.is_completed ? TasksListItem(task) : ""
     //   ))}

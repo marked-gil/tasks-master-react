@@ -1,10 +1,20 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Col } from 'react-bootstrap';
 import ErrorDisplay from '../../components/ErrorDisplay';
 import styles from '../../styles/AllToDoTasksPage.module.css';
+import TasksList from './TasksList';
+import { getTodoTasks } from '../../api/taskMethods';
 
 function AllToDoTasksPage() {
+
+  const [ changeInTasks, setChangeInTasks ] = useState({})
+  const [ showCompletedTasks, setShowCompletedTasks ] = useState(false)
+  const [ tasks, setTasks ] = useState({ results: []});
   const [ error, setError ] = useState({});
+
+  useEffect(() => {
+    getTodoTasks(setTasks,setError)
+  }, []);
 
   return (
     <Col className={styles.AllTodoTasks}>
@@ -18,11 +28,14 @@ function AllToDoTasksPage() {
         </div>
 
         <hr />
-
-        {/* {["Task 1", "Task 2", "Task 3", "Task 4"].map(() => (
-          
-        ))} */}
-
+        
+        <TasksList
+          tasks={tasks}
+          setTasks={setTasks}
+          setChangeInTasks={setChangeInTasks}
+          showCompletedTasks={showCompletedTasks}
+          showDate
+        />
       </div>
     </Col>
   )

@@ -33,3 +33,17 @@ export const getFilteredTasks = async (filters, due_date, setTasks, setError) =>
     setError(err.response);
   }
 }
+
+
+export const getTodoTasks = async (setTasks, setError) => {
+
+  try {
+    const { data } = await axiosReq.get(
+      `/tasks/?progress=to-do`
+    );
+    setTasks(data);
+  } catch (err) {
+    console.log(err.response)
+    setError(err.response);
+  }
+}
