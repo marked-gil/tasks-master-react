@@ -46,7 +46,7 @@ const SideBar = () => {
           <Link to={`/tasks/${moment().add(1, 'days').format('YYYY-MM-DD')}`}><i className="fa-sharp fa-solid fa-forward"></i> Tomorrow</Link>
         </li>
         <li className="mb-2">
-          <Link><i className="fa-solid fa-list-check"></i> All My Tasks</Link>
+          <Link to="/all-todos"><i className="fa-solid fa-list-check"></i> All Todo Tasks</Link>
         </li>
         <li className="mb-2">
           <Link><i className="fa-sharp fa-solid fa-share"></i> Shared Tasks</Link>

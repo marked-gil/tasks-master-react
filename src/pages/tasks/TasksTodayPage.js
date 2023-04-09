@@ -60,6 +60,7 @@ function TasksTodayPage() {
           setTasks={setTasks}
           setChangeInTasks={setChangeInTasks}
           showCompletedTasks={showCompletedTasks}
+          showTime
         />
 
       </div>

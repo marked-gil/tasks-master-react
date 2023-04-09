@@ -9,7 +9,9 @@ function TasksList(props) {
     tasks,
     setTasks,
     setChangeInTasks,
-    showCompletedTasks
+    showCompletedTasks,
+    showDate,
+    showTime,
   } = props;
 
   const taskPriority = (task) => {
@@ -29,8 +31,8 @@ function TasksList(props) {
         action 
         variant="light"
       >
-        {task.task_name}
-        {/* {task} */}
+        {/* {task.task_name} */}
+        {task}
       </ListGroup.Item>
 
       <TaskPopover task={task} setTasks={setTasks} setChangeInTasks={setChangeInTasks}>
@@ -39,13 +41,16 @@ function TasksList(props) {
         </div>
       </TaskPopover>
 
-      {/* DUE TIME */}
-      <p className="ms-auto mb-0">{task.due_time ? task.due_time : <i className="me-3 fa-solid fa-minus"></i>}</p>
+      {/* DUE DATE OR TIME */}
+      <p className="ms-auto mb-0">
+        { !!showTime && task.due_time }
+        {!task.due_time && <i className="me-3 fa-solid fa-minus"></i>}
+        {!!showDate && task.due_date}
+      </p>
       {/* LEGEND */}
       <p className={`position-absolute mb-0 ps-1 pe-1 ${styles.Legend}`}>
         {task.category} | {task.progress} | {taskPriority(task)}
       </p>
-
     </div>
 )
 
