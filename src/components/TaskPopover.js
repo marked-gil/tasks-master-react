@@ -3,7 +3,7 @@ import moment from 'moment';
 import { Button } from 'react-bootstrap';
 import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
 import Popover from 'react-bootstrap/Popover';
-import { axiosReq, axiosRes } from '../api/axiosDefaults';
+import { axiosReq } from '../api/axiosDefaults';
 import { useHistory } from 'react-router-dom';
 import { deleteTask } from '../api/taskMethods';
 
