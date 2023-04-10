@@ -1,4 +1,4 @@
-import { axiosReq } from "./axiosDefaults";
+import { axiosReq, axiosRes } from "./axiosDefaults";
 import moment from 'moment';
 
 
@@ -17,8 +17,6 @@ export const getTasks = async (setTasks, due_date) => {
 export const getFilteredTasks = async (filters, due_date, setTasks, setError) => {
 
   const { category_name, progress, order_by } = filters;
-
-
   try {
     const status = progress === 'all' ? "" : progress
     const cat_name = category_name === 'all' ? "" : category_name
@@ -34,7 +32,6 @@ export const getFilteredTasks = async (filters, due_date, setTasks, setError) =>
   }
 }
 
-
 export const getTodoTasks = async (setTasks, setError) => {
 
   try {
@@ -45,5 +42,17 @@ export const getTodoTasks = async (setTasks, setError) => {
   } catch (err) {
     console.log(err.response)
     setError(err.response);
+  }
+}
+
+export const deleteTask = async (task, setTasks) => {
+  // event.preventDefault();
+  try {
+    await axiosRes.delete(`/tasks/${task.id}`)
+    setTasks(prevState => (
+      {results: prevState.results.filter(item => item.id !== task.id)}
+    ))
+  } catch (err) {
+    console.log(err.response?.data)
   }
 }

@@ -5,22 +5,23 @@ import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
 import Popover from 'react-bootstrap/Popover';
 import { axiosReq, axiosRes } from '../api/axiosDefaults';
 import { useHistory } from 'react-router-dom';
+import { deleteTask } from '../api/taskMethods';
 
 function TaskPopover({ children, task, setTasks, setChangeInTasks }) {
 
   const history = useHistory();
 
-  const handleDelete = async (event) => {
-    event.preventDefault();
-    try {
-      await axiosRes.delete(`/tasks/${task.id}`)
-      setTasks(prevState => (
-        {results: prevState.results.filter(item => item.id !== task.id)}
-      ))
-    } catch (err) {
-      console.log(err.response?.data)
-    }
-  }
+  // const handleDelete = async (event) => {
+  //   event.preventDefault();
+  //   try {
+  //     await axiosRes.delete(`/tasks/${task.id}`)
+  //     setTasks(prevState => (
+  //       {results: prevState.results.filter(item => item.id !== task.id)}
+  //     ))
+  //   } catch (err) {
+  //     console.log(err.response?.data)
+  //   }
+  // }
 
   const handleView = () => {
     history.push(`/task/${task.id}`)
@@ -45,6 +46,10 @@ function TaskPopover({ children, task, setTasks, setChangeInTasks }) {
     } catch (err) {
       console.log(err.response?.data)
     }
+  }
+
+  const handleDelete = () => {
+    deleteTask(task, setTasks);
   }
 
   const popover = (
