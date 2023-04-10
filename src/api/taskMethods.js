@@ -46,12 +46,25 @@ export const getTodoTasks = async (setTasks, setError) => {
 }
 
 export const deleteTask = async (task, setTasks) => {
-  // event.preventDefault();
+
+  let task_id = ""
+
+  if (typeof task === 'object') {
+    task_id = task.id
+  } else if (typeof task === 'string') {
+    task_id = task
+  } else {
+    console.log(typeof task)
+  }
+
   try {
-    await axiosRes.delete(`/tasks/${task.id}`)
-    setTasks(prevState => (
-      {results: prevState.results.filter(item => item.id !== task.id)}
-    ))
+    await axiosRes.delete(`/tasks/${task_id}`)
+
+    if (setTasks) {
+      setTasks(prevState => (
+        {results: prevState.results.filter(item => item.id !== task.id)}
+      ))
+    }
   } catch (err) {
     console.log(err.response?.data)
   }

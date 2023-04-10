@@ -4,12 +4,14 @@ import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import { axiosReq } from '../../api/axiosDefaults';
-import { useParams } from 'react-router-dom';
+import { useHistory, useParams } from 'react-router-dom';
 import { FloatingLabel } from 'react-bootstrap';
 import { getCategories } from '../../api/categoryMethods';
+import { deleteTask } from '../../api/taskMethods';
 
 function TaskDetailsPage() {
 
+  const history = useHistory();
   const { id } = useParams();
   const [ categories, setCategories ] = useState({ results: []});
   const [ taskData, setTaskData ] = useState({});
@@ -51,10 +53,18 @@ function TaskDetailsPage() {
     ))
   }
 
+  const handleDelete = () => {
+    deleteTask(id)
+    history.push("/")
+  }
+
   return (
     <Col className={styles.TaskDetails}>
       <div className={`${styles.Container} position-relative`}>
         <h2 className={`${styles.MyTasks}`}>Task Details</h2>
+        {/* DELETE BUTTON */}
+        <Button onClick={handleDelete} size="sm" variant='danger' className={styles.DeleteButton}>Delete Task</Button>
+
         <div className="d-flex flex-column mb-2">
           <p className="mb-0">Category: {category} <a href="">edit</a></p>
           <p className="mb-0">
@@ -63,7 +73,6 @@ function TaskDetailsPage() {
             <span>{progress}</span> <a href="">edit</a>
           </p>  
         </div>
-        <Button size="sm" variant='danger' className={styles.DeleteButton}>Delete Task</Button>
         <Form.Group className="mb-3 position-relative" controlId="taskName">
           <FloatingLabel controlId="floatingTaskNameArea" label="Task Name">
             <Form.Control
