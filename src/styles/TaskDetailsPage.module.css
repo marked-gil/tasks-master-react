@@ -12,3 +12,9 @@
 .TaskName {
   width: 30rem;
 }
+
+.DeleteButton {
+  position: absolute;
+  top: 5px;
+  right: 0;
+}
