@@ -10,6 +10,7 @@ import TaskDetailsPage from './tasks/TaskDetailsPage'
 import TasksPerDatePage from './tasks/TasksPerDatePage'
 import AllToDoTasksPage from './tasks/AllToDoTasksPage'
 import { getCategories } from '../api/categoryMethods'
+import OverdueTasksPage from './tasks/OverdueTasksPage'
 
 function MainPageContainer(props) {
 
@@ -19,6 +20,7 @@ function MainPageContainer(props) {
     taskDetailsPage, 
     tasksPerDatePage, 
     allTodoTasksPage,
+    overdueTasksPage,
   } = props;
 
   const [ newCategoryAdded, setNewCategoryAdded ] = useState(false);
@@ -41,6 +43,7 @@ function MainPageContainer(props) {
             : taskDetailsPage ? <TaskDetailsPage />
             : tasksPerDatePage ? <TasksPerDatePage /> 
             : allTodoTasksPage ? <AllToDoTasksPage /> 
+            : overdueTasksPage ? <OverdueTasksPage />
             : <></>
           }
         </Row>

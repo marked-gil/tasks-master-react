@@ -15,6 +15,7 @@ function App() {
         <Route exact path="/signup" render={() => <SignUpPage /> } />
         <Route exact path="/profile/:id" render={() => <MainPageContainer profile /> } />
         <Route exact path="/all-todos" render={() => <MainPageContainer allTodoTasksPage />} />
+        <Route exact path="/overdue-tasks" render={() => <MainPageContainer overdueTasksPage />} />
         <Route exact path="/task/:id" render={() => <MainPageContainer taskDetailsPage />} />
         <Route exact path="/tasks/:due_date" render={() => <MainPageContainer tasksPerDatePage />} />
         <Route render={() => <h1>Page Not Found</h1>}/>
