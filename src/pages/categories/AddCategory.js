@@ -2,7 +2,7 @@ import axios from 'axios';
 import React, { useState } from 'react';
 import { Button, Form, Modal } from 'react-bootstrap';
 
-function AddCategory() {
+function AddCategory({ categories, setCategories, setNewCategoryAdded }) {
 
   const initialCategoryData = { 
     category_name: "",
@@ -29,8 +29,9 @@ function AddCategory() {
     console.log("submitted");
     try {
       const { data } = await axios.post("/categories/", {...categoryData});
+      setCategories({results: [...categories.results, data]})
+      setNewCategoryAdded(true);
       handleClose();
-      console.log("cat added:", data)
     } catch (err) {
       console.log(err.response?.data)
     }

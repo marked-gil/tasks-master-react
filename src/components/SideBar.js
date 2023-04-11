@@ -7,7 +7,7 @@ import { DatePicker } from '@mui/x-date-pickers';
 import { Button } from 'react-bootstrap';
 import AddCategory from '../pages/categories/AddCategory';
 
-const SideBar = () => {
+const SideBar = ({ categories, setCategories, setNewCategoryAdded }) => {
   const currentUser = useCurrentUser();
 
   const [ tasksDate, setTasksDate ] = useState(null)
@@ -26,7 +26,7 @@ const SideBar = () => {
         <li className="mb-2 d-flex">
           <DatePicker
             className={`me-2`}
-            label="Find Tasks by Date" 
+            label="Find Tasks by Date"
             value={tasksDate} 
             onChange={newValue => setTasksDate(newValue)}
             slotProps={{
@@ -60,16 +60,17 @@ const SideBar = () => {
       <div>
         <div className="d-flex align-items-center">
           <h2 className="me-3">Categories</h2>
-          <AddCategory />
+          <AddCategory categories={categories} setCategories={setCategories} setNewCategoryAdded={setNewCategoryAdded} />
         </div>
   
         <ul className="ps-0">
-          <li className="mb-2">
-            <Link>At Home</Link>
-          </li>
-          <li className="mb-2">
-            <Link>At Work</Link>
-          </li>
+          {
+            categories.results.map(item => 
+              <li className="mb-2" key={item.category_name}>
+                <Link>{item.category_name}</Link>
+              </li>
+            )
+          }
         </ul>
       </div>
       <Link><i className="fa-solid fa-check-double"></i> Recently Completed Tasks</Link>

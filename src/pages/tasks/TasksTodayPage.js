@@ -3,27 +3,20 @@ import moment from 'moment';
 import styles from '../../styles/TasksTodayPage.module.css';
 import Col from 'react-bootstrap/Col';
 import AddTask from './AddTask';
-import { getCategories } from '../../api/categoryMethods';
 import { getFilteredTasks, getTasks } from '../../api/taskMethods';
 import ErrorDisplay from '../../components/ErrorDisplay';
 import TasksFilter from '../../components/TasksFilter';
 import TasksList from './TasksList';
 
-function TasksTodayPage() {
+function TasksTodayPage({ categories }) {
 
   const due_date = moment().format();
 
   const [ changeInTasks, setChangeInTasks ] = useState({})
   const [ showCompletedTasks, setShowCompletedTasks ] = useState(false)
   const [ tasks, setTasks ] = useState({ results: []});
-  const [ categories, setCategories ] = useState({ results: []});
   const [ error, setError ] = useState({});
   const [ filters, setFilters ] = useState({});
-
-
-  useEffect(() => {
-    getCategories(setCategories);
-  }, []);
 
   useEffect(() => {
     getTasks(setTasks);
