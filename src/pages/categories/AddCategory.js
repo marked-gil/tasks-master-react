@@ -1,6 +1,7 @@
 import axios from 'axios';
 import React, { useState } from 'react';
-import { Button, Form, Modal } from 'react-bootstrap';
+import { Alert, Button, Form, Modal } from 'react-bootstrap';
+import styles from '../../styles/AddCategory.module.css';
 
 function AddCategory({ categories, setCategories, setNewCategoryAdded }) {
 
@@ -11,11 +12,13 @@ function AddCategory({ categories, setCategories, setNewCategoryAdded }) {
 
   const [ show, setShow ] = useState(false);
   const [ categoryData, setCategoryData ] = useState(initialCategoryData);
-
   const { category_name, description } = categoryData;
+  const [ errors, setErrors ] = useState({});
 
   const handleClose = () => {
-    setShow(false)
+    setShow(false);
+    setCategoryData(initialCategoryData);
+    setErrors({});
   }
 
   const handleChange = (event) => {
@@ -26,13 +29,14 @@ function AddCategory({ categories, setCategories, setNewCategoryAdded }) {
   };
 
   const handleSubmit = async () => {
-    console.log("submitted");
     try {
       const { data } = await axios.post("/categories/", {...categoryData});
       setCategories({results: [...categories.results, data]})
       setNewCategoryAdded(true);
       handleClose();
+      console.log("submitted");
     } catch (err) {
+      setErrors(err.response?.data);
       console.log(err.response?.data)
     }
   }
@@ -62,6 +66,21 @@ function AddCategory({ categories, setCategories, setNewCategoryAdded }) {
                 onChange={handleChange}
                 aria-label="Add the category name"
               />
+              {errors.category_name?.map((error, idx) => (
+                <Alert className={`mt-1 mb-0 pb-0 pt-0 ${styles.TextCenter}`} key={idx} variant="danger">
+                  {error === "This field may not be blank."
+                    ? "Category Name is required."
+                    : error
+                  }
+                </Alert>
+                ))
+              }
+              {errors.non_field_errors?.map((error, idx) => (
+                <Alert className={`mt-1 mb-0 pb-0 pt-0 ${styles.TextCenter}`} key={idx} variant="danger">
+                  { error }
+                </Alert>
+                ))
+              }
             </Form.Group>
 
             <Form.Group className="mb-3" controlId="categoryDescription">
