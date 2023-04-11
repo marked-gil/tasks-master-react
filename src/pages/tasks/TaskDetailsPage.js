@@ -19,6 +19,7 @@ function TaskDetailsPage() {
   const [ editCategory, setEditCategory ] = useState(false);
   const [ editDuePriority, setEditDuePriority ] = useState(false);
   const [ editTaskName, setEditTaskName ] = useState(false);
+  const [ editTaskDescription, setEditTaskDescription ] = useState(false);
 
   const {
     task_name, 
@@ -60,6 +61,10 @@ function TaskDetailsPage() {
     setEditTaskName(!editTaskName);
   };
 
+  const cancelEditTaskDescription = () => {
+    setEditTaskDescription(!editTaskDescription);
+  };
+
   const handleDataChange = (event) => {
     setTaskData(prevState => (
       {
@@ -76,6 +81,7 @@ function TaskDetailsPage() {
       setEditCategory(false)
       setEditDuePriority(false)
       setEditTaskName(false)
+      setEditTaskDescription(false)
       console.log("Updated", data)
     } catch (err) {
       console.log(err.response?.data)
@@ -271,21 +277,39 @@ function TaskDetailsPage() {
               as="textarea" 
               style={{height: '150px'}}
               name="details"
-              readOnly
+              readOnly={!editTaskDescription}
               defaultValue={details}
               maxLength={250}
-              // onChange={handleChange}
-              aria-label="Add the task's description or details"
+              onChange={handleDataChange}
+              aria-label="Edit task description"
             />
           </FloatingLabel>
           
-          <Button size="sm" className={`position-absolute bottom-0 end-0`}>edit</Button>
+          {/* <Button size="sm" className={`position-absolute bottom-0 end-0`}>edit</Button> */}
           {/* {errors.details?.map((error, idx) => (
             <Alert className={`mt-1 mb-0 pb-0 pt-0 ${styles.TextCenter}`} key={idx} variant="danger">
               {error}
             </Alert>
             ))
           } */}
+
+          { 
+            editTaskDescription && 
+            <div className={`position-absolute bottom-0 end-0`}>
+              <Button variant="link" size="sm" onClick={cancelEditTaskDescription}>
+                cancel
+              </Button>
+              <Button variant="link" size="sm" onClick={handleSave} className={styles.bold}>
+                SAVE
+              </Button>
+            </div>
+          }  
+          { 
+            !editTaskDescription &&
+            <Button variant="link" size="sm" onClick={setEditTaskDescription} className={`position-absolute bottom-0 end-0`}>
+              edit
+            </Button> 
+          }
         </Form.Group>
         
         {/* COMMENT SECTION */}
