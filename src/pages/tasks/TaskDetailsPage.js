@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import styles from '../../styles/TaskDetailsPage.module.css';
 import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
@@ -8,7 +8,6 @@ import { useHistory, useParams } from 'react-router-dom';
 import { FloatingLabel } from 'react-bootstrap';
 import { getCategories } from '../../api/categoryMethods';
 import { deleteTask } from '../../api/taskMethods';
-import { DatePicker } from '@mui/x-date-pickers';
 import moment from 'moment';
 
 function TaskDetailsPage() {
@@ -19,6 +18,7 @@ function TaskDetailsPage() {
   const [ taskData, setTaskData ] = useState({});
   const [ editCategory, setEditCategory ] = useState(false);
   const [ editDuePriority, setEditDuePriority ] = useState(false);
+  const [ editTaskName, setEditTaskName ] = useState(false);
 
   const {
     task_name, 
@@ -34,7 +34,7 @@ function TaskDetailsPage() {
     getCategories(setCategories);
   }, [setCategories])
 
- useMemo(() => {
+  useMemo(() => {
     const handleMount = async () => {
           try {
             const { data } = await axiosReq.get(`/tasks/${id}`);
@@ -49,12 +49,16 @@ function TaskDetailsPage() {
   }, [id])
 
   const cancelEditCategory = () => {
-    setEditCategory(!editCategory)
-  }
+    setEditCategory(!editCategory);
+  };
 
   const canceEditDuePriority = () => {
-    setEditDuePriority(!editDuePriority)
-  }
+    setEditDuePriority(!editDuePriority);
+  };
+
+  const cancelEditTaskName = () => {
+    setEditTaskName(!editTaskName);
+  };
 
   const handleDataChange = (event) => {
     setTaskData(prevState => (
@@ -62,8 +66,8 @@ function TaskDetailsPage() {
         ...prevState,
         [event.target.name]: event.target.value
       }
-    ))
-  }
+    ));
+  };
 
   const handleSave = async (event) => {
     try {
@@ -71,16 +75,17 @@ function TaskDetailsPage() {
       setTaskData(data)
       setEditCategory(false)
       setEditDuePriority(false)
+      setEditTaskName(false)
       console.log("Updated", data)
     } catch (err) {
       console.log(err.response?.data)
     }
-  }
+  };
 
   const handleDelete = () => {
     deleteTask(id)
     history.push("/")
-  }
+  };
 
   const priorityDueForm = <>
     <div className="d-flex">
@@ -211,12 +216,9 @@ function TaskDetailsPage() {
               <div className="align-self-center">
                 <Button onClick={canceEditDuePriority} variant="link" size="sm" className="ms-3 p-0">cancel</Button>
                 <Button onClick={handleSave} variant="link" size="sm" className="ms-2 p-0">Save</Button>
-              </div>
-
-            }
+              </div>}
             { !editDuePriority &&
-              <Button onClick={setEditDuePriority} variant="link" size="sm" className="ms-3 p-0">edit</Button>
-            }
+              <Button onClick={setEditDuePriority} variant="link" size="sm" className="ms-3 p-0">edit</Button> }
           </p>
         </div>
 
@@ -224,17 +226,33 @@ function TaskDetailsPage() {
           <FloatingLabel controlId="floatingTaskNameArea" label="Task Name">
             <Form.Control
               type="text"
-              // placeholder="Task Name"
-              readOnly
+              readOnly={!editTaskName}
               maxLength={50}
               className={styles.TaskName}
               name="task_name"
               defaultValue={task_name}
-              // onChange={handleChange}
-              aria-label="Add the task's name"
+              onChange={handleDataChange}
+              aria-label="Edit the task name"
             />
           </FloatingLabel>
-          <Button size="sm" className={`position-absolute bottom-0 end-0`}>edit</Button>
+
+          { 
+            editTaskName && 
+            <div className={`position-absolute bottom-0 end-0`}>
+              <Button variant="link" size="sm" onClick={cancelEditTaskName}>
+                cancel
+              </Button>
+              <Button variant="link" size="sm" onClick={handleSave} className={styles.bold}>
+                SAVE
+              </Button>
+            </div>
+          }  
+          { 
+            !editTaskName &&
+            <Button variant="link" size="sm" onClick={setEditTaskName} className={`position-absolute bottom-0 end-0`}>
+              edit
+            </Button> 
+          }
 
           {/* {errors.task_name?.map((error, idx) => (
             <Alert className={`mt-1 mb-0 pb-0 pt-0 ${styles.TextCenter}`} key={idx} variant="danger">
