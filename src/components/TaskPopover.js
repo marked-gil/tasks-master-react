@@ -11,18 +11,6 @@ function TaskPopover({ children, task, setTasks, setChangeInTasks }) {
 
   const history = useHistory();
 
-  // const handleDelete = async (event) => {
-  //   event.preventDefault();
-  //   try {
-  //     await axiosRes.delete(`/tasks/${task.id}`)
-  //     setTasks(prevState => (
-  //       {results: prevState.results.filter(item => item.id !== task.id)}
-  //     ))
-  //   } catch (err) {
-  //     console.log(err.response?.data)
-  //   }
-  // }
-
   const handleView = () => {
     history.push(`/task/${task.id}`)
   }
