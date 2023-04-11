@@ -8,6 +8,8 @@ import { useHistory, useParams } from 'react-router-dom';
 import { FloatingLabel } from 'react-bootstrap';
 import { getCategories } from '../../api/categoryMethods';
 import { deleteTask } from '../../api/taskMethods';
+import { DateTimePicker } from '@mui/x-date-pickers';
+import moment from 'moment';
 
 function TaskDetailsPage() {
 
@@ -15,6 +17,8 @@ function TaskDetailsPage() {
   const { id } = useParams();
   const [ categories, setCategories ] = useState({ results: []});
   const [ taskData, setTaskData ] = useState({});
+  const [ editCategory, setEditCategory ] = useState(false);
+  const [ editDuePriority, setEditDuePriority ] = useState(false);
 
   const {
     task_name, 
@@ -26,9 +30,9 @@ function TaskDetailsPage() {
     progress
   } = taskData;
 
-  useEffect(() => {
+  useMemo(() => {
     getCategories(setCategories);
-  }, []);
+  }, [setCategories])
 
  useMemo(() => {
     const handleMount = async () => {
@@ -58,6 +62,40 @@ function TaskDetailsPage() {
     history.push("/")
   }
 
+  const priorityDueForm = <>
+    <div className="d-flex">
+      <DateTimePicker
+        label="Set Date and Time"
+        className={`mt-3 me-2 ${styles.DateTimePicker}`}
+        value={moment(due_date, due_time)}
+        slotProps={{
+          textField: {
+            helperText: 'MM / DD / YYYY',
+          },
+        }}
+      />
+
+      <Form.Group className={`align-self-center mb-3 ${styles.PriorityForm}`}>
+        <Form.Label htmlFor="priority" className="mb-0">Priority</Form.Label>
+        <Form.Select
+          id="priority"
+          name="priority"
+          defaultValue={priority}
+          // onChange={handlePriorityChange}
+          // size="sm" 
+          aria-label="Select a priority level"
+        >
+          <option value="" disabled>Select Priority Level</option>
+          {[{Low: 1}, {Medium: 2}, {High: 3}].map(level => (
+            <option value={Object.values(level)[0]} key={Object.values(level)[0]}>
+              {Object.keys(level)[0]}
+            </option>
+          ))}
+        </Form.Select>
+      </Form.Group>
+    </div>
+  </>
+
   return (
     <Col className={styles.TaskDetails}>
       <div className={`${styles.Container} position-relative`}>
@@ -65,14 +103,67 @@ function TaskDetailsPage() {
         {/* DELETE BUTTON */}
         <Button onClick={handleDelete} size="sm" variant='danger' className={styles.DeleteButton}>Delete Task</Button>
 
-        <div className="d-flex flex-column mb-2">
-          <p className="mb-0">Category: {category} <a href="">edit</a></p>
-          <p className="mb-0">
-            <span>Due: {due_date} {due_time ? `- ${due_time}` : ""}</span> | 
-            <span>{priority === 1 ? "Low" : priority === 2 ? "Medium" : "High"}</span> | 
-            <span>{progress}</span> <a href="">edit</a>
-          </p>  
+        <div className="d-flex flex-column mt-3 mb-4">
+          <p className={`d-flex mb-0 ${styles.CategoryWrapper}`}>
+            <span className={`me-4`}>Category:</span>
+            { 
+              editCategory ? 
+                <>
+                  {/* CATEGORIES */}
+                  <div className="d-flex">
+                    <Form.Select
+                      className={`me-3 pt-0 pb-0 ${styles.EditFormSelect }`}
+                      aria-label="Select category"
+                      name="category_name"
+                      // onChange={handleFilterChange}
+                      size="sm"
+                    >
+                      {categories.results.map((cat) => (
+                        <option
+                          value={cat.id}
+                          key={cat.category_name}
+                        >
+                          {cat.category_name}
+                        </option>
+                        ))
+                      }
+                    </Form.Select>
+                  </div>
+                </>
+              : <span className={styles.bold}>{category}</span>
+            }
+            { editCategory &&
+              <Button variant="link" onClick={setEditCategory} className="ms-3 p-0" size="sm">Save</Button> 
+            }
+            { !editCategory && 
+              <Button variant="link" onClick={setEditCategory} className="ms-5 p-0" size="sm">edit</Button> 
+            }
+          </p>
+          {/* DUE DATETIME | PRIORITY | PROGRESS */}
+          <p className="d-flex justify-content-between mb-0">
+            { editDuePriority ? <>{priorityDueForm}</> 
+              : <>
+                <div>
+                  <span className="me-2">Due:</span> <span className={styles.bold}>{due_date} {due_time ? `- ${due_time}` : ""}</span>
+                </div> | 
+                <span>{priority === 1 ? "Low" : priority === 2 ? "Medium" : "High"}</span> | 
+                <span>{progress}</span>
+              </>
+            }
+            
+            { editDuePriority &&
+              <div className="align-self-center">
+                <Button onClick={setEditDuePriority} variant="link" size="sm" className="ms-3 p-0">cancel</Button>
+                <Button onClick={setEditDuePriority} variant="link" size="sm" className="ms-2 p-0">Save</Button>
+              </div>
+
+            }
+            { !editDuePriority &&
+              <Button onClick={setEditDuePriority} variant="link" size="sm" className="ms-3 me-3 p-0">edit</Button>
+            }
+          </p>
         </div>
+
         <Form.Group className="mb-3 position-relative" controlId="taskName">
           <FloatingLabel controlId="floatingTaskNameArea" label="Task Name">
             <Form.Control

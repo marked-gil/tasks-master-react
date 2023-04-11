@@ -8,6 +8,9 @@
 .Container {
   /* border: 1px solid black */
 }
+.CategoryWrapper {
+  /* border: 1px solid black; */
+}
 
 .TaskName {
   width: 30rem;
@@ -17,4 +20,20 @@
   position: absolute;
   top: 5px;
   right: 0;
+}
+
+.bold {
+  font-weight: 600;
+}
+
+.EditFormSelect {
+  width: 12rem;
+}
+
+.DateTimePicker {
+  width: 14rem;
+}
+
+.PriorityForm {
+  width: 8rem;
 }
