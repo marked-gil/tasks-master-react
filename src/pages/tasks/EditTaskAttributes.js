@@ -15,7 +15,8 @@ function EditTaskAttributes(props) {
     due_time,
     priority,
     progress,
-    closeAllEdits
+    closeAllEdits,
+    setCloseAllEdits,
   } =props
 
   const [ editCategory, setEditCategory ] = useState(false);
@@ -26,7 +27,8 @@ function EditTaskAttributes(props) {
       setEditCategory(false);
       setEditDuePriority(false);
     }
-  }, [closeAllEdits])
+    return setCloseAllEdits(false)
+  }, [closeAllEdits, setCloseAllEdits])
 
   const cancelEditCategory = () => {
     setEditCategory(!editCategory);

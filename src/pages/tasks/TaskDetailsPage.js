@@ -103,6 +103,7 @@ function TaskDetailsPage() {
           priority={priority}
           progress={progress}
           closeAllEdits={closeAllEdits}
+          setCloseAllEdits={setCloseAllEdits}
         />
 
         {/* TASK NAME */}
