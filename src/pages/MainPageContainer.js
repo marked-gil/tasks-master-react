@@ -31,7 +31,6 @@ function MainPageContainer(props) {
     setNewCategoryAdded(false)
   }, [setCategories, newCategoryAdded]);
 
-
   return (
     <>
       <NavBar />

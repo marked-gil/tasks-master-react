@@ -53,7 +53,7 @@ const SideBar = ({ categories, setCategories, setNewCategoryAdded }) => {
           <Link><i className="fa-sharp fa-solid fa-share"></i> Shared Tasks</Link>
         </li>
         <li className="mb-2">
-          <Link><i className="fa-sharp fa-solid fa-bell"></i> Overdue Tasks</Link>
+          <Link to="/overdue-tasks"><i className="fa-sharp fa-solid fa-bell"></i> Overdue Tasks</Link>
         </li>
       </ul>
 

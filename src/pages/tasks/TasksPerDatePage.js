@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import moment from 'moment';
-import { getCategories } from '../../api/categoryMethods';
 import { getFilteredTasks, getTasks } from '../../api/taskMethods';
 import { Col } from 'react-bootstrap';
 import styles from '../../styles/TasksPerDatePage.module.css';
