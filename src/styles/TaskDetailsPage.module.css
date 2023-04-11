@@ -37,3 +37,11 @@
 .PriorityForm {
   width: 8rem;
 }
+
+.ProfileAvatar {
+  position: absolute;
+  top: 0;
+  right: -130px;
+  font-size: 14px;
+  width: 125px;
+}

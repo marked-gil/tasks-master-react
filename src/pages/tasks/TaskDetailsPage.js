@@ -9,6 +9,7 @@ import { FloatingLabel } from 'react-bootstrap';
 import { getCategories } from '../../api/categoryMethods';
 import { deleteTask } from '../../api/taskMethods';
 import moment from 'moment';
+import ProfileAvatar from '../../components/ProfileAvatar';
 
 function TaskDetailsPage() {
 
@@ -22,6 +23,7 @@ function TaskDetailsPage() {
   const [ editTaskDescription, setEditTaskDescription ] = useState(false);
 
   const {
+    owner,
     task_name, 
     details, 
     category, 
@@ -312,6 +314,16 @@ function TaskDetailsPage() {
           }
         </Form.Group>
         
+
+        {/* OWNER AVATAR */}
+        <ProfileAvatar
+          owner={owner}
+          isOwner={true}
+          showName={true}
+          imageWidth={"2rem"}
+          className={styles.ProfileAvatar} 
+        />
+
         {/* COMMENT SECTION */}
         <div>
           <a href="">Add comment</a>
