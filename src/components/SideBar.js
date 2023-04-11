@@ -5,6 +5,7 @@ import styles from '../styles/SideBar.module.css'
 import { Link, useHistory } from 'react-router-dom';
 import { DatePicker } from '@mui/x-date-pickers';
 import { Button } from 'react-bootstrap';
+import AddCategory from '../pages/categories/AddCategory';
 
 const SideBar = () => {
   const currentUser = useCurrentUser();
@@ -55,11 +56,13 @@ const SideBar = () => {
           <Link><i className="fa-sharp fa-solid fa-bell"></i> Overdue Tasks</Link>
         </li>
       </ul>
+
       <div>
         <div className="d-flex align-items-center">
           <h2 className="me-3">Categories</h2>
-          <Link><i className="fa-solid fa-plus"></i> Add New</Link>
+          <AddCategory />
         </div>
+  
         <ul className="ps-0">
           <li className="mb-2">
             <Link>At Home</Link>

@@ -89,6 +89,7 @@ function TaskDetailsPage() {
     <Col className={styles.TaskDetails}>
       <div className={`${styles.Container} position-relative`}>
         <h2 className={`${styles.MyTasks}`}>Task Details</h2>
+
         {/* DELETE BUTTON */}
         <Button onClick={handleDelete} size="sm" variant='danger' className={styles.DeleteButton}>Delete Task</Button>
 
