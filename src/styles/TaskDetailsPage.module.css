@@ -40,7 +40,7 @@
 
 .ProfileAvatar {
   position: absolute;
-  top: 0;
+  top: 2rem;
   right: -130px;
   font-size: 14px;
   width: 125px;
