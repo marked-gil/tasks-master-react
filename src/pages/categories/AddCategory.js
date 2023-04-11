@@ -60,7 +60,7 @@ function AddCategory({ categories, setCategories, setNewCategoryAdded }) {
                 placeholder="Category Name"
                 autoFocus
                 maxLength={50}
-                // className={styles.TaskName}
+                className={styles.CategoryName}
                 name="category_name"
                 value={category_name}
                 onChange={handleChange}
