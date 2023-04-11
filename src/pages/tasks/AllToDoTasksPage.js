@@ -1,11 +1,12 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Col } from 'react-bootstrap';
 import ErrorDisplay from '../../components/ErrorDisplay';
 import styles from '../../styles/AllToDoTasksPage.module.css';
 import TasksList from './TasksList';
 import { getTodoTasks } from '../../api/taskMethods';
+import AddTask from './AddTask';
 
-function AllToDoTasksPage() {
+function AllToDoTasksPage({ categories }) {
 
   const [ changeInTasks, setChangeInTasks ] = useState({})
   const [ tasks, setTasks ] = useState({ results: []});
@@ -35,6 +36,12 @@ function AllToDoTasksPage() {
           showDate
         />
       </div>
+
+      <AddTask
+        tasks={tasks}
+        setTasks={setTasks}
+        categories={categories}
+      />
     </Col>
   )
 };

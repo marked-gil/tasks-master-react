@@ -33,7 +33,6 @@ function TasksList(props) {
         variant="light"
       >
         {task.task_name}
-        {/* {task} */}
       </ListGroup.Item>
 
       <TaskPopover task={task} setTasks={setTasks} setChangeInTasks={setChangeInTasks}>
@@ -63,12 +62,6 @@ function TasksList(props) {
       ))}
     </ListGroup>
 
-    // <ListGroup className={styles.ListGroup}>
-    //   {['Task 1', 'Task 2', 'Task 3'].map((task) => (
-    //     showCompletedTasks ? TasksListItem(task, task.is_completed)
-    //     : !task.is_completed ? TasksListItem(task) : ""
-    //   ))}
-    // </ListGroup>
   )    
 };
 
