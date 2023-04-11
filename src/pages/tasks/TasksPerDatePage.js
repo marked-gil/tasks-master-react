@@ -10,7 +10,7 @@ import TasksList from './TasksList';
 import AddTask from './AddTask';
 import { useHistory, useParams } from 'react-router-dom';
 
-function TasksPerDatePage() {
+function TasksPerDatePage({ categories }) {
 
   const {due_date} = useParams();
   const dateToday = moment().format('YYYY-MM-DD')
@@ -23,7 +23,6 @@ function TasksPerDatePage() {
   const [ changeInTasks, setChangeInTasks ] = useState({})
   const [ showCompletedTasks, setShowCompletedTasks ] = useState(false)
   const [ tasks, setTasks ] = useState({ results: []});
-  const [ categories, setCategories ] = useState({ results: []});
   const [ error, setError ] = useState({});
   const [ filters, setFilters ] = useState({});
 
@@ -32,10 +31,6 @@ function TasksPerDatePage() {
       history.push("/")
     }
   }, [due_date, history, dateToday])
-
-  useEffect(() => {
-    getCategories(setCategories);
-  }, []);
 
   useEffect(() => {
     getTasks(setTasks, due_date);

@@ -41,7 +41,7 @@ function MainPageContainer(props) {
           {profile ? <ProfilePage /> 
             : tasksTodayPage ? <TasksTodayPage categories={categories} />
             : taskDetailsPage ? <TaskDetailsPage />
-            : tasksPerDatePage ? <TasksPerDatePage /> 
+            : tasksPerDatePage ? <TasksPerDatePage categories={categories} /> 
             : allTodoTasksPage ? <AllToDoTasksPage categories={categories} /> 
             : overdueTasksPage ? <OverdueTasksPage />
             : <></>
