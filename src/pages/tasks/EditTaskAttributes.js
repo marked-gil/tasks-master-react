@@ -131,7 +131,7 @@ function EditTaskAttributes(props) {
   return (
     <>
       <div className="d-flex flex-column mt-3 mb-4">
-          <div className={`d-flex mb-0 ${styles.CategoryWrapper}`}>
+          <div className={`d-flex mb-0`}>
             <span className={`me-4`}>Category:</span>
             { editCategory && CategoryForm }
             { !editCategory && <span className={styles.bold}>{category}</span> }
