@@ -16,7 +16,7 @@ function CategorySelect({ category, handleChange, categories, errors }) {
         size="sm" 
         aria-label="Select task category"
       >
-        <option value="" disabled>Choose your category</option>
+        <option value="">Choose your category</option>
         {categories.results.map((cat) => (
           <option value={cat.category_name} key={cat.category_name}>
             {cat.category_name}

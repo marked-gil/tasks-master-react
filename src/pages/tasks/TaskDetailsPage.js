@@ -8,7 +8,7 @@ import { useHistory, useParams } from 'react-router-dom';
 import { FloatingLabel } from 'react-bootstrap';
 import { getCategories } from '../../api/categoryMethods';
 import { deleteTask } from '../../api/taskMethods';
-import { DateTimePicker } from '@mui/x-date-pickers';
+import { DatePicker } from '@mui/x-date-pickers';
 import moment from 'moment';
 
 function TaskDetailsPage() {
@@ -48,13 +48,33 @@ function TaskDetailsPage() {
         handleMount();
   }, [id])
 
-  const handleChange = (event) => {
+  const cancelEditCategory = () => {
+    setEditCategory(!editCategory)
+  }
+
+  const canceEditDuePriority = () => {
+    setEditDuePriority(!editDuePriority)
+  }
+
+  const handleDataChange = (event) => {
     setTaskData(prevState => (
       {
         ...prevState,
         [event.target.name]: event.target.value
       }
     ))
+  }
+
+  const handleSave = async (event) => {
+    try {
+      const { data } = await axiosReq.put(`/tasks/${id}`, {...taskData})
+      setTaskData(data)
+      setEditCategory(false)
+      setEditDuePriority(false)
+      console.log("Updated", data)
+    } catch (err) {
+      console.log(err.response?.data)
+    }
   }
 
   const handleDelete = () => {
@@ -64,16 +84,42 @@ function TaskDetailsPage() {
 
   const priorityDueForm = <>
     <div className="d-flex">
-      <DateTimePicker
-        label="Set Date and Time"
-        className={`mt-3 me-2 ${styles.DateTimePicker}`}
-        value={moment(due_date, due_time)}
-        slotProps={{
-          textField: {
-            helperText: 'MM / DD / YYYY',
-          },
-        }}
-      />
+      <Form.Group>
+        <Form.Label htmlFor="due_date" className="mb-0">Due Date</Form.Label>
+        <Form.Control
+          type="date"
+          id="due_date"
+          name="due_date"
+          value={due_date}
+          onChange={handleDataChange}
+          size="sm"
+          aria-label="Select a due date"
+        />
+
+        {/* {errors.due_date?.map((error, idx) => (
+          <Alert className={`mt-1 mb-0 pb-0 pt-0 ${styles.TextCenter}`} key={idx} variant="danger">
+            {
+              error === "Date has wrong format. Use one of these formats instead: YYYY-MM-DD."
+              ? "You need to provide a due date."
+              : error
+            }
+          </Alert>
+          ))
+        } */}
+      </Form.Group>
+
+      <Form.Group>
+        <Form.Label htmlFor="due_time" className="mb-0">Due Time</Form.Label>
+        <Form.Control
+          type="time"
+          id="due_time"
+          name="due_time"
+          value={due_time}
+          onChange={handleDataChange}
+          size="sm"
+          aria-label="Select a due time"
+        />
+      </Form.Group>
 
       <Form.Group className={`align-self-center mb-3 ${styles.PriorityForm}`}>
         <Form.Label htmlFor="priority" className="mb-0">Priority</Form.Label>
@@ -81,9 +127,9 @@ function TaskDetailsPage() {
           id="priority"
           name="priority"
           defaultValue={priority}
-          // onChange={handlePriorityChange}
-          // size="sm" 
+          onChange={handleDataChange}
           aria-label="Select a priority level"
+          size="sm"
         >
           <option value="" disabled>Select Priority Level</option>
           {[{Low: 1}, {Medium: 2}, {High: 3}].map(level => (
@@ -114,13 +160,15 @@ function TaskDetailsPage() {
                     <Form.Select
                       className={`me-3 pt-0 pb-0 ${styles.EditFormSelect }`}
                       aria-label="Select category"
-                      name="category_name"
-                      // onChange={handleFilterChange}
+                      name="category"
+                      defaultValue={category}
+                      onChange={handleDataChange}
                       size="sm"
                     >
+                      <option value="" disabled>Choose your category</option>
                       {categories.results.map((cat) => (
                         <option
-                          value={cat.id}
+                          value={cat.category_name}
                           key={cat.category_name}
                         >
                           {cat.category_name}
@@ -133,7 +181,14 @@ function TaskDetailsPage() {
               : <span className={styles.bold}>{category}</span>
             }
             { editCategory &&
-              <Button variant="link" onClick={setEditCategory} className="ms-3 p-0" size="sm">Save</Button> 
+              <div>
+                <Button onClick={cancelEditCategory} variant="link" size="sm" className="ms-3 p-0">
+                  cancel
+                </Button>
+                <Button variant="link" onClick={handleSave} className="m2-3 p-0" size="sm">
+                  Save
+                </Button> 
+              </div>
             }
             { !editCategory && 
               <Button variant="link" onClick={setEditCategory} className="ms-5 p-0" size="sm">edit</Button> 
@@ -144,7 +199,8 @@ function TaskDetailsPage() {
             { editDuePriority ? <>{priorityDueForm}</> 
               : <>
                 <div>
-                  <span className="me-2">Due:</span> <span className={styles.bold}>{due_date} {due_time ? `- ${due_time}` : ""}</span>
+                  <span className="me-2"> Due: </span>
+                  <span className={styles.bold}> {moment(due_date).format("DD MMMM YYYY")} {due_time ? `- ${due_time}` : ""} </span>
                 </div> | 
                 <span>{priority === 1 ? "Low" : priority === 2 ? "Medium" : "High"}</span> | 
                 <span>{progress}</span>
@@ -153,13 +209,13 @@ function TaskDetailsPage() {
             
             { editDuePriority &&
               <div className="align-self-center">
-                <Button onClick={setEditDuePriority} variant="link" size="sm" className="ms-3 p-0">cancel</Button>
-                <Button onClick={setEditDuePriority} variant="link" size="sm" className="ms-2 p-0">Save</Button>
+                <Button onClick={canceEditDuePriority} variant="link" size="sm" className="ms-3 p-0">cancel</Button>
+                <Button onClick={handleSave} variant="link" size="sm" className="ms-2 p-0">Save</Button>
               </div>
 
             }
             { !editDuePriority &&
-              <Button onClick={setEditDuePriority} variant="link" size="sm" className="ms-3 me-3 p-0">edit</Button>
+              <Button onClick={setEditDuePriority} variant="link" size="sm" className="ms-3 p-0">edit</Button>
             }
           </p>
         </div>
@@ -174,7 +230,7 @@ function TaskDetailsPage() {
               className={styles.TaskName}
               name="task_name"
               defaultValue={task_name}
-              onChange={handleChange}
+              // onChange={handleChange}
               aria-label="Add the task's name"
             />
           </FloatingLabel>
@@ -200,7 +256,7 @@ function TaskDetailsPage() {
               readOnly
               defaultValue={details}
               maxLength={250}
-              onChange={handleChange}
+              // onChange={handleChange}
               aria-label="Add the task's description or details"
             />
           </FloatingLabel>
