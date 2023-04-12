@@ -16,7 +16,7 @@ function TasksTodayPage({ categories }) {
   const [ showCompletedTasks, setShowCompletedTasks ] = useState(false)
   const [ tasks, setTasks ] = useState({ results: []});
   const [ error, setError ] = useState({});
-  const [ filters, setFilters ] = useState({});
+  const [ filters, setFilters ] = useState({category_name: "", progress: "", order_by: ""});
 
   useEffect(() => {
     getTasks(setTasks);
@@ -24,7 +24,7 @@ function TasksTodayPage({ categories }) {
 
   const handleFilterSubmit = async (event) => {
     event.preventDefault();
-    getFilteredTasks(filters, setTasks, setError, due_date);
+    getFilteredTasks({filters, setTasks, setError, due_date});
   };
 
   return (
@@ -44,6 +44,7 @@ function TasksTodayPage({ categories }) {
           setShowCompletedTasks={setShowCompletedTasks}
           showCompletedTasks={showCompletedTasks}
           handleFilterSubmit={handleFilterSubmit}
+          removeOrderByDate
         />
         
         <hr />

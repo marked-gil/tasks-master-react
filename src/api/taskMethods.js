@@ -13,17 +13,40 @@ export const getTasks = async (setTasks, due_date) => {
   }
 }
 
-export const getFilteredTasks = async (filters, setTasks, setError, due_date) => {
+export const getFilteredTasks = async (
+    {
+      filters,
+      setTasks,
+      setError,
+      todoTasksOnly,
+      due_date,
+      category
+    }
+  ) => {
+
   const { category_name, progress, order_by } = filters;
+
   try {
-    const status = progress === 'all' ? "" : progress
-    const cat_name = category_name === 'all' ? "" : category_name
-    
-    const { data } = await axiosReq.get(
-      `/tasks/?due_date=${moment(due_date).format("yyyy-MM-DD")}&progress=${status ? status : ""
-      }&category=${cat_name ? cat_name : ""}&ordering=${order_by ? order_by : ""}`
-    );
-    setTasks(data);
+    if (todoTasksOnly) {
+      const { data } = await axiosReq.get(
+        `/tasks/?due_date=&progress=to-do&category=${category_name}&ordering=${order_by ? order_by : ""}`
+      );
+      setTasks(data);
+    } else if (category) {
+      const { data } = await axiosReq.get(
+        `/tasks/??due_date=&progress=${progress
+        }&category=${category}&ordering=${order_by ? order_by : ""}`
+      );
+      console.log("filtered by Cat", data)
+      setTasks(data);
+    } else {
+      const { data } = await axiosReq.get(
+        `/tasks/?due_date=${moment(due_date).format("yyyy-MM-DD")}&progress=${progress
+        }&category=${category_name}&ordering=${order_by ? order_by : ""}`
+      );
+      setTasks(data);
+    }
+
   } catch (err) {
     console.log(err.response)
     setError(err.response);

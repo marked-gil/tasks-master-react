@@ -16,7 +16,7 @@ function TasksByCategoryPage({ categories }) {
   const [ tasks, setTasks ] = useState({ results: []});
   const [ categoryData, setCategoryData ] = useState({});
   const [ showCompletedTasks, setShowCompletedTasks ] = useState(false);
-  const [ filters, setFilters ] = useState({});
+  const [ filters, setFilters ] = useState({category_name: "", progress: "", order_by: ""});
   const [ error, setError ] = useState({});
 
   useEffect(() => {
@@ -28,7 +28,8 @@ function TasksByCategoryPage({ categories }) {
   }, [changeInTasks, id])
   
   const handleFilterSubmit = async () => {
-    getFilteredTasks(filters, setTasks, setError);
+    console.log(filters)
+    getFilteredTasks({filters, setTasks, setError, category: categoryData.id});
   };
 
 
@@ -49,8 +50,9 @@ function TasksByCategoryPage({ categories }) {
           setShowCompletedTasks={setShowCompletedTasks}
           showCompletedTasks={showCompletedTasks}
           handleFilterSubmit={handleFilterSubmit}
+          removeCategoryField
+          removeOrderByTime
         />
-
 
         <hr />
       

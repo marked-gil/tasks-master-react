@@ -11,7 +11,7 @@ import { useHistory, useParams } from 'react-router-dom';
 
 function TasksPerDatePage({ categories }) {
 
-  const {due_date} = useParams();
+  const { due_date } = useParams();
   const dateToday = moment().format('YYYY-MM-DD')
 
   const history = useHistory();
@@ -23,7 +23,7 @@ function TasksPerDatePage({ categories }) {
   const [ showCompletedTasks, setShowCompletedTasks ] = useState(false)
   const [ tasks, setTasks ] = useState({ results: []});
   const [ error, setError ] = useState({});
-  const [ filters, setFilters ] = useState({});
+  const [ filters, setFilters ] = useState({category_name: "", progress: "", order_by: ""});
 
   useEffect(() => {
     if (due_date === dateToday) {
@@ -37,7 +37,7 @@ function TasksPerDatePage({ categories }) {
 
   const handleFilterSubmit = async (event) => {
     event.preventDefault();
-    getFilteredTasks(filters, setTasks, setError, due_date);
+    getFilteredTasks({filters, setTasks, setError, due_date});
   };
 
   return (
@@ -59,6 +59,8 @@ function TasksPerDatePage({ categories }) {
           setShowCompletedTasks={setShowCompletedTasks}
           showCompletedTasks={showCompletedTasks}
           handleFilterSubmit={handleFilterSubmit}
+          removeOrderByDate
+          removeProgressField
         />
         
         <hr />

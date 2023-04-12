@@ -9,7 +9,12 @@ function TasksFilter(props) {
     categories, 
     setShowCompletedTasks, 
     showCompletedTasks,
-    handleFilterSubmit
+    handleFilterSubmit,
+    removeCategoryField,
+    removeProgressField,
+    removeOrderByTime,
+    removeOrderByDate,
+    is_DueDatePrevious
   } = props;
 
 
@@ -28,29 +33,25 @@ function TasksFilter(props) {
 
   return (
     <>
-      {/* Tasks Status Filter */}
       <Form className="d-flex flex-wrap justify-content-between">
         {/* PROGRESS */}
-        <div className="d-flex">
-          <p className={`me-3 mb-0 ${styles.bold}`}>Progress: </p>
-          <Form.Select
-            size="sm"
-            className={`me-3 ${styles.FormSelect}`}
-            aria-label="Select progress status"
-            name="progress"
-            onChange={handleFilterChange}
-          >
-            <option value="all">All Statuses</option>
-            {['to-do', 'overdue', 'completed'].map((status) => (
-              <option
-                value={status}
-                key={status}
-              >
-                {status}
-              </option>
-            ))}
-          </Form.Select>
-        </div>
+        {
+          !removeProgressField && 
+          <div className="d-flex">
+            <p className={`me-3 mb-0 ${styles.bold}`}>Progress: </p>
+            <Form.Select
+              size="sm"
+              className={`me-3 ${styles.FormSelect}`}
+              aria-label="Select progress status"
+              name="progress"
+              onChange={handleFilterChange}
+            >
+              <option value="">All Statuses</option>
+              <option value="to-do">To-do</option>
+              <option value="overdue">Overdue</option>
+            </Form.Select>
+          </div>
+        }
           
         {/* ORDER BY */}
         <div className="d-flex">
@@ -62,15 +63,17 @@ function TasksFilter(props) {
             aria-label="Order today's tasks" 
             size="sm"
           >
-            <option value="due_time">Due Time - Ascending</option>
-            <option value="-due_time">Due Time - Descending</option>
+            {!removeOrderByTime && <option value="due_time">Due Time - Ascending</option>}
+            {!removeOrderByTime && <option value="-due_time">Due Time - Descending</option>}
+            {!removeOrderByDate && <option value="due_date">Due Date - Ascending</option>}
+            {!removeOrderByDate && <option value="-due_date">Due Date - Descending</option>}
             <option value="priority">Priority - Ascending</option>
             <option value="-priority">Priority - Descending</option>
           </Form.Select>
         </div>
 
         {/* CATEGORIES */}
-        <div className="d-flex">
+        { !removeCategoryField && <div className="d-flex">
           <p className={`me-3 mb-0 ${styles.bold}`}>Category: </p>
           <Form.Select
             className={`me-3 ${styles.FormSelect}`}
@@ -79,7 +82,7 @@ function TasksFilter(props) {
             onChange={handleFilterChange}
             size="sm"
           >
-            <option value="all">All Categories</option>
+            <option value="">All Categories</option>
             {categories.results.map((cat) => (
               <option
                 value={cat.id}
@@ -89,10 +92,10 @@ function TasksFilter(props) {
               </option>
             ))}
           </Form.Select>
-        </div>
-
+        </div>}
+        
         <Button
-          className={styles.FilterButton}
+          className={`${styles.FilterButton} ${(removeCategoryField || removeProgressField) && "flex-fill"}`}
           variant="primary"
           size="sm"
           onClick={handleFilterSubmit}
@@ -102,16 +105,17 @@ function TasksFilter(props) {
       </Form>
 
       {/* SHOW COMPLETED TASKS TOGGLE */}
-      <Form.Check 
-        type="checkbox"
-        id="show_completed_tasks"
-        label="Show Completed Tasks"
-        name="show_completed_tasks"
-        value={showCompletedTasks}
-        onClick={handleCompletedTasks}
-        className="mt-4"
-      />
-
+      {setShowCompletedTasks &&
+        <Form.Check 
+          type="checkbox"
+          id="show_completed_tasks"
+          label="Show Completed Tasks"
+          name="show_completed_tasks"
+          value={showCompletedTasks}
+          onClick={handleCompletedTasks}
+          className="mt-4"
+        />
+      }
   </>
   )
 };
