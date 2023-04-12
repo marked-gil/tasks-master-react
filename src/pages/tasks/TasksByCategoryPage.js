@@ -4,9 +4,9 @@ import ErrorDisplay from '../../components/ErrorDisplay';
 import TasksList from './TasksList';
 import AddTask from './AddTask';
 import styles from '../../styles/TasksByCategoryPage.module.css';
-import { axiosReq } from '../../api/axiosDefaults';
 import { useParams } from 'react-router-dom';
 import { getCategory } from '../../api/categoryMethods';
+import { getTasksByCategory } from '../../api/taskMethods';
 
 function TasksByCategoryPage({ categories }) {
 
@@ -21,17 +21,7 @@ function TasksByCategoryPage({ categories }) {
   }, [id]);
 
   useEffect(() => {
-    const getTasksByCategory = async () => {
-      try {
-        const { data } = await axiosReq.get(`/tasks/?category=${id}`)
-        setTasks(data)
-        console.log("Tasks By Category", data)
-      } catch (err) {
-        console.log(err.response?.data)
-        setError(err.response?.data)
-      }
-    }
-    getTasksByCategory();
+    getTasksByCategory(id, setTasks, setError);
   }, [changeInTasks, id])
   
   return (

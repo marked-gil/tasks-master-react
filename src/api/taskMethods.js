@@ -42,6 +42,17 @@ export const getTodoTasks = async (setTasks, setError) => {
   }
 }
 
+export const getTasksByCategory = async (categoryID, setTasks, setError) => {
+  try {
+    const { data } = await axiosReq.get(`/tasks/?category=${categoryID}`)
+    setTasks(data)
+  } catch (err) {
+    console.log(err.response?.data)
+    setError(err.response?.data)
+  }
+}
+
+
 export const deleteTask = async (task, setTasks) => {
   let task_id = ""
 
