@@ -8,3 +8,13 @@ export const getCategories = async (setter) => {
     console.log(err);
   }
 };
+
+export const getCategory = async (categoryID, setCategoryData, setError) => {
+  try {
+    const { data } = await axiosReq.get(`/categories/${categoryID}`);
+    setCategoryData(data);
+  } catch (err) {
+    console.log(err.response?.data)
+    setError(err.response?.data);
+  }
+}

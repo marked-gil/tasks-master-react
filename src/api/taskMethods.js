@@ -3,7 +3,6 @@ import moment from 'moment';
 
 
 export const getTasks = async (setTasks, due_date) => {
-
   try {
     const { data } = await axiosReq.get(
       `/tasks/?due_date=${moment(due_date).format("yyyy-MM-DD")}`
@@ -15,7 +14,6 @@ export const getTasks = async (setTasks, due_date) => {
 }
 
 export const getFilteredTasks = async (filters, due_date, setTasks, setError) => {
-
   const { category_name, progress, order_by } = filters;
   try {
     const status = progress === 'all' ? "" : progress
@@ -33,7 +31,6 @@ export const getFilteredTasks = async (filters, due_date, setTasks, setError) =>
 }
 
 export const getTodoTasks = async (setTasks, setError) => {
-
   try {
     const { data } = await axiosReq.get(
       `/tasks/?progress=to-do`
@@ -46,7 +43,6 @@ export const getTodoTasks = async (setTasks, setError) => {
 }
 
 export const deleteTask = async (task, setTasks) => {
-
   let task_id = ""
 
   if (typeof task === 'object') {

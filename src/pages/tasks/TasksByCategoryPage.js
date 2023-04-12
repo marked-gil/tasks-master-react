@@ -6,6 +6,7 @@ import AddTask from './AddTask';
 import styles from '../../styles/TasksByCategoryPage.module.css';
 import { axiosReq } from '../../api/axiosDefaults';
 import { useParams } from 'react-router-dom';
+import { getCategory } from '../../api/categoryMethods';
 
 function TasksByCategoryPage({ categories }) {
 
@@ -16,17 +17,7 @@ function TasksByCategoryPage({ categories }) {
   const [ error, setError ] = useState({});
 
   useEffect(() => {
-    const getCategory = async () => {
-      try {
-        const { data } = await axiosReq.get(`/categories/${id}`);
-        setCategoryData(data);
-        console.log("Category data", data)
-      } catch (err) {
-        console.log(err.response?.data)
-        setError(err.response?.data);
-      }
-    }
-    getCategory();
+    getCategory(id, setCategoryData, setError);
   }, [id]);
 
   useEffect(() => {
