@@ -3,7 +3,7 @@ import { Col } from 'react-bootstrap';
 import ErrorDisplay from '../../components/ErrorDisplay';
 import TasksList from './TasksList';
 import styles from '../../styles/OverdueTasksPage.module.css';
-import { axiosReq } from '../../api/axiosDefaults';
+import { getOverdueTasks } from '../../api/taskMethods';
 
 function OverdueTasksPage() {
 
@@ -12,22 +12,8 @@ function OverdueTasksPage() {
   const [ error, setError ] = useState({});
 
   useEffect(() => {
-    const getOverdueTasks = async () => {
-      try {
-        const { data } = await axiosReq.get(
-          `/tasks/?progress=overdue`
-        );
-        setTasks(data);
-        console.log(data)
-      } catch (err) {
-        console.log(err.response?.data)
-        setError(err.response?.data)
-      }
-    }
-
-    getOverdueTasks();
+    getOverdueTasks(setTasks, setError);
   }, [changeInTasks])
-
 
   return (
     <Col className={styles.OverdueTasks}>

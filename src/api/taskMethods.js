@@ -52,6 +52,17 @@ export const getTasksByCategory = async (categoryID, setTasks, setError) => {
   }
 }
 
+export const getOverdueTasks = async (setTasks, setError) => {
+  try {
+    const { data } = await axiosReq.get(
+      `/tasks/?progress=overdue`
+    );
+    setTasks(data);
+  } catch (err) {
+    console.log(err.response?.data)
+    setError(err.response?.data)
+  }
+}
 
 export const deleteTask = async (task, setTasks) => {
   let task_id = ""
