@@ -13,7 +13,7 @@ function AllToDoTasksPage({ categories }) {
   const [ error, setError ] = useState({});
 
   useEffect(() => {
-    getTodoTasks(setTasks,setError)
+    getTodoTasks(setTasks, setError)
   }, [changeInTasks]);
 
   return (
