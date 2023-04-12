@@ -14,7 +14,6 @@ function TasksFilter(props) {
     removeProgressField,
     removeOrderByTime,
     removeOrderByDate,
-    is_DueDatePrevious
   } = props;
 
 

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Button, Col, Form } from 'react-bootstrap';
+import { Col } from 'react-bootstrap';
 import ErrorDisplay from '../../components/ErrorDisplay';
 import TasksList from './TasksList';
 import AddTask from './AddTask';
@@ -31,7 +31,6 @@ function TasksByCategoryPage({ categories }) {
     console.log(filters)
     getFilteredTasks({filters, setTasks, setError, category: categoryData.id});
   };
-
 
   return (
     <Col className={styles.TasksByCategory}>

@@ -18,9 +18,10 @@ export const getFilteredTasks = async (
       filters,
       setTasks,
       setError,
+      overdueTasksOnly,
       todoTasksOnly,
       due_date,
-      category
+      category,
     }
   ) => {
 
@@ -30,6 +31,11 @@ export const getFilteredTasks = async (
     if (todoTasksOnly) {
       const { data } = await axiosReq.get(
         `/tasks/?due_date=&progress=to-do&category=${category_name}&ordering=${order_by ? order_by : ""}`
+      );
+      setTasks(data);
+    } else if (overdueTasksOnly) {
+      const { data } = await axiosReq.get(
+        `/tasks/?due_date=&progress=overdue&category=${category_name}&ordering=${order_by ? order_by : ""}`
       );
       setTasks(data);
     } else if (category) {
