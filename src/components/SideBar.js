@@ -4,19 +4,30 @@ import moment from 'moment';
 import styles from '../styles/SideBar.module.css'
 import { Link, useHistory } from 'react-router-dom';
 import { DatePicker } from '@mui/x-date-pickers';
-import { Button } from 'react-bootstrap';
+import { Button, Form } from 'react-bootstrap';
 import AddCategory from '../pages/categories/AddCategory';
 
 const SideBar = ({ categories, setCategories, setNewCategoryAdded }) => {
   const currentUser = useCurrentUser();
 
-  const [ tasksDate, setTasksDate ] = useState(null)
+  const [ tasksDate, setTasksDate ] = useState(null);
+  const [ categoryID, setCategoryID ] = useState("");
   const history = useHistory();
 
   const handleDateSelection = (event) => {
     if (tasksDate) {
           history.push(`/tasks/${moment(tasksDate).format('YYYY-MM-DD')}`)
         }
+  };
+
+  const handleCategoryChange = (event) => {
+    setCategoryID(event.target.value)
+  };
+
+  const handleSubmitCategory = () => {
+    if (categoryID) {
+      history.push(`/categories/${categoryID}`)
+    }
   }
 
   return (
@@ -60,18 +71,33 @@ const SideBar = ({ categories, setCategories, setNewCategoryAdded }) => {
       <div>
         <div className="d-flex align-items-center">
           <h2 className="me-3">Categories</h2>
-          <AddCategory categories={categories} setCategories={setCategories} setNewCategoryAdded={setNewCategoryAdded} />
+
+          <AddCategory
+            categories={categories}
+            setCategories={setCategories}
+            setNewCategoryAdded={setNewCategoryAdded}
+          />
         </div>
-  
-        <ul className="ps-0">
-          {
-            categories.results.map(item => 
-              <li className="mb-2" key={item.category_name}>
-                <Link>{item.category_name}</Link>
-              </li>
-            )
-          }
-        </ul>
+        
+        <div className="d-flex">
+          <Form.Select
+            className={`me-2`}
+            style={{width: "15rem"}}
+            aria-label="Select category"
+            name="category_name"
+            onChange={handleCategoryChange}
+            size="lg"
+          >
+            <option>Select a Category</option>
+            {categories.results.map((cat) => (
+              <option value={cat.id} key={cat.category_name}>
+                {cat.category_name}
+              </option>
+            ))}
+          </Form.Select>
+          
+          <Button onClick={handleSubmitCategory}>Go</Button>
+        </div>
       </div>
       <Link><i className="fa-solid fa-check-double"></i> Recently Completed Tasks</Link>
     </div>
