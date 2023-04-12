@@ -43,7 +43,6 @@ function AddTask({ tasks, setTasks, categories }) {
       ...taskData,
       [event.target.name]: event.target.value,
     });
-    console.log(event.target.value)
   };
 
   const handleDateChange = (event) => {
@@ -62,7 +61,6 @@ function AddTask({ tasks, setTasks, categories }) {
     setPriorityLevel({
       [event.target.name]: event.target.value
     })
-    console.log(event.target.value)
   }
 
   const handleSubmit = async (event) => {
