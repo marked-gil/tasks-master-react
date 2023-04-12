@@ -13,7 +13,7 @@ export const getTasks = async (setTasks, due_date) => {
   }
 }
 
-export const getFilteredTasks = async (filters, due_date, setTasks, setError) => {
+export const getFilteredTasks = async (filters, setTasks, setError, due_date) => {
   const { category_name, progress, order_by } = filters;
   try {
     const status = progress === 'all' ? "" : progress

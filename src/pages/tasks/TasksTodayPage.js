@@ -24,7 +24,7 @@ function TasksTodayPage({ categories }) {
 
   const handleFilterSubmit = async (event) => {
     event.preventDefault();
-    getFilteredTasks(filters, due_date, setTasks, setError);
+    getFilteredTasks(filters, setTasks, setError, due_date);
   };
 
   return (
