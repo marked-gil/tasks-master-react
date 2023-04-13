@@ -66,6 +66,9 @@ const SideBar = ({ categories, setCategories, setNewCategoryAdded }) => {
         <li className="mb-2">
           <Link to="/overdue-tasks"><i className="fa-sharp fa-solid fa-bell"></i> Overdue Tasks</Link>
         </li>
+        <li>
+          <Link to="/completed-tasks"><i className="fa-solid fa-check-double"></i> Completed Tasks</Link>
+        </li>
       </ul>
 
       <div>
@@ -99,7 +102,6 @@ const SideBar = ({ categories, setCategories, setNewCategoryAdded }) => {
           <Button onClick={handleSubmitCategory}>Go</Button>
         </div>
       </div>
-      <Link><i className="fa-solid fa-check-double"></i> Recently Completed Tasks</Link>
     </div>
   )
 }
