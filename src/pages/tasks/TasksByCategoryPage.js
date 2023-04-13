@@ -28,7 +28,6 @@ function TasksByCategoryPage({ categories }) {
   }, [changeInTasks, id])
   
   const handleFilterSubmit = async () => {
-    console.log(filters)
     getFilteredTasks({filters, setTasks, setError, category: categoryData.id});
   };
 

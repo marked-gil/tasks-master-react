@@ -3,16 +3,12 @@ import { Col } from 'react-bootstrap';
 import ErrorDisplay from '../../components/ErrorDisplay';
 import TasksFilter from '../../components/TasksFilter';
 import TasksList from './TasksList';
-import AddTask from './AddTask';
 import styles from '../../styles/CompletedTasksPage.module.css';
-import { getFilteredTasks, getTasksByCategory } from '../../api/taskMethods';
-import { getCategory } from '../../api/categoryMethods';
 import { axiosReq } from '../../api/axiosDefaults';
+import { getFilteredTasks } from '../../api/taskMethods';
 
 function CompletedTasksPage({ categories }) {
 
-  const [ categoryData, setCategoryData ] = useState({});
-  const [ changeInTasks, setChangeInTasks ] = useState({});
   const [ tasks, setTasks ] = useState({ results: []});
   const [ filters, setFilters ] = useState({category_name: "", progress: "", order_by: ""});
   const [ error, setError ] = useState({});
@@ -20,7 +16,6 @@ function CompletedTasksPage({ categories }) {
   useEffect(() => {
     const getCompletedTasks = async () => {
       try {
-
         const { data } = await axiosReq.get(
           `/tasks/?progress=completed&ordering=-due_date`
         )
@@ -30,13 +25,11 @@ function CompletedTasksPage({ categories }) {
         setError(err.response)
       }
     }
-
     getCompletedTasks();
   }, [])
 
   const handleFilterSubmit = async () => {
-    console.log(filters)
-    getFilteredTasks({filters, setTasks, setError, category: categoryData.id});
+    getFilteredTasks({filters, setTasks, setError, completedTasksOnly: true });
   };
 
   return (
@@ -54,8 +47,8 @@ function CompletedTasksPage({ categories }) {
           setFilters={setFilters}
           categories={categories}
           handleFilterSubmit={handleFilterSubmit}
-          removeCategoryField
           removeOrderByTime
+          removeProgressField
         />
 
         <hr />
@@ -63,9 +56,9 @@ function CompletedTasksPage({ categories }) {
         <TasksList
           tasks={tasks}
           setTasks={setTasks}
-          setChangeInTasks={setChangeInTasks}
           showCompletedTasks={true}
           showDate
+          removeDoneButton
         />
       </div>
 

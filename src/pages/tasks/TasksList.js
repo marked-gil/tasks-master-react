@@ -13,6 +13,7 @@ function TasksList(props) {
     showCompletedTasks,
     showDate,
     showTime,
+    removeDoneButton,
   } = props;
 
   const taskPriority = (task) => {
@@ -35,7 +36,12 @@ function TasksList(props) {
         {task.task_name}
       </ListGroup.Item>
 
-      <TaskPopover task={task} setTasks={setTasks} setChangeInTasks={setChangeInTasks}>
+      <TaskPopover 
+        task={task} 
+        setTasks={setTasks} 
+        setChangeInTasks={setChangeInTasks}
+        removeDoneButton={removeDoneButton}
+      >
         <div className={`p-2 ${styles.VerticalEllipsis}`}>
           <i className={`fa-solid fa-ellipsis-vertical fa-lg`}></i>
         </div>

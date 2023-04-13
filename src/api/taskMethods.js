@@ -18,6 +18,7 @@ export const getFilteredTasks = async (
       filters,
       setTasks,
       setError,
+      completedTasksOnly,
       overdueTasksOnly,
       todoTasksOnly,
       due_date,
@@ -36,6 +37,11 @@ export const getFilteredTasks = async (
     } else if (overdueTasksOnly) {
       const { data } = await axiosReq.get(
         `/tasks/?due_date=&progress=overdue&category=${category_name}&ordering=${order_by ? order_by : ""}`
+      );
+      setTasks(data);
+    } else if (completedTasksOnly) {
+      const { data } = await axiosReq.get(
+        `/tasks/?due_date=&progress=completed&category=${category_name}&ordering=${order_by ? order_by : ""}`
       );
       setTasks(data);
     } else if (category) {

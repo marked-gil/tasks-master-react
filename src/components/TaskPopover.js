@@ -7,7 +7,7 @@ import { axiosReq } from '../api/axiosDefaults';
 import { useHistory } from 'react-router-dom';
 import { deleteTask } from '../api/taskMethods';
 
-function TaskPopover({ children, task, setTasks, setChangeInTasks }) {
+function TaskPopover({ children, task, setTasks, setChangeInTasks, removeDoneButton }) {
 
   const history = useHistory();
 
@@ -45,7 +45,7 @@ function TaskPopover({ children, task, setTasks, setChangeInTasks }) {
       <Popover.Body className="p-0">
         <Button onClick={handleDelete} className="me-1" variant="danger" size="sm">Delete</Button>
         <Button onClick={handleView} className="me-1" size="sm">View</Button>
-        <Button onClick={handleComplete} size="sm">Done</Button>
+        {!removeDoneButton && <Button onClick={handleComplete} size="sm">Done</Button>}
       </Popover.Body>
     </Popover>
   );
