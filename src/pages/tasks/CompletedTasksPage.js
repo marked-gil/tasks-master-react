@@ -7,6 +7,7 @@ import AddTask from './AddTask';
 import styles from '../../styles/CompletedTasksPage.module.css';
 import { getFilteredTasks, getTasksByCategory } from '../../api/taskMethods';
 import { getCategory } from '../../api/categoryMethods';
+import { axiosReq } from '../../api/axiosDefaults';
 
 function CompletedTasksPage({ categories }) {
 
@@ -15,6 +16,23 @@ function CompletedTasksPage({ categories }) {
   const [ tasks, setTasks ] = useState({ results: []});
   const [ filters, setFilters ] = useState({category_name: "", progress: "", order_by: ""});
   const [ error, setError ] = useState({});
+
+  useEffect(() => {
+    const getCompletedTasks = async () => {
+      try {
+
+        const { data } = await axiosReq.get(
+          `/tasks/?progress=completed`
+        )
+        setTasks(data)
+      } catch (err) {
+        console.log(err.response)
+        setError(err.response)
+      }
+    }
+
+    getCompletedTasks();
+  }, [])
 
   const handleFilterSubmit = async () => {
     console.log(filters)
@@ -29,7 +47,7 @@ function CompletedTasksPage({ categories }) {
         <div className={`d-flex justify-content-between`}>
           <h2 className={`${styles.Heading}`}>My Tasks</h2>
           <span className={styles.LineIcon}><i className="fa-solid fa-ellipsis-vertical"></i></span> 
-          <h2 className={`${styles.Heading}`}>{categoryData.category_name}</h2>
+          <h2 className={`${styles.Heading}`}>COMPLETED</h2>
         </div>
 
         <TasksFilter 
@@ -51,11 +69,6 @@ function CompletedTasksPage({ categories }) {
         />
       </div>
 
-      <AddTask
-        tasks={tasks}
-        setTasks={setTasks}
-        categories={categories}
-      />
     </Col>
   )
 };
