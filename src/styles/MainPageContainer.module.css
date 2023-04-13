@@ -1,6 +1,6 @@
 .MainContent {
   width: 100%;
-  height: calc(100vh - 142px);
+  flex: 1 0 auto;
 }
 
 .Row {
