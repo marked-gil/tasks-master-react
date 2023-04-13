@@ -17,7 +17,7 @@ function AddTask({ tasks, setTasks, categories }) {
   };
 
   const [ taskData, setTaskData ] = useState(initialTaskData);
-  const [ dueDate, setDueDate ] = useState({due_date: ""});
+  const [ dueDate, setDueDate ] = useState({due_date: "" });
   const [ dueTime, setDueTime ] = useState({due_time: ""});
   const [ priorityLevel, setPriorityLevel ] = useState({priority: 1});
   const [ errors, setErrors ] = useState({});
@@ -47,7 +47,7 @@ function AddTask({ tasks, setTasks, categories }) {
 
   const handleDateChange = (event) => {
     setDueDate({
-      [event.target.name]: moment(event.target.value).format("yyyy-MM-DD")
+      [event.target.name]: moment(event.target.value).format("YYYY-MM-DD")
     });
   };
 
@@ -65,6 +65,7 @@ function AddTask({ tasks, setTasks, categories }) {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+
     try {
       const { data } = await axios.post("/tasks/", {...taskData, due_date, due_time, priority});
       handleClose();
@@ -142,7 +143,8 @@ function AddTask({ tasks, setTasks, categories }) {
               />
 
               <div className="d-flex">
-                <Form.Group>
+                <Form.Group className="me-1">
+                  <Form.Label htmlFor="due_date">Due Date</Form.Label>
                   <Form.Control
                     type="date"
                     id="due_date"
@@ -151,7 +153,6 @@ function AddTask({ tasks, setTasks, categories }) {
                     size="sm"
                     aria-label="Add tasks due date"
                   />
-
                   {errors.due_date?.map((error, idx) => (
                     <Alert className={`mt-1 mb-0 pb-0 pt-0 ${styles.TextCenter}`} key={idx} variant="danger">
                       {
@@ -164,7 +165,7 @@ function AddTask({ tasks, setTasks, categories }) {
                   }
                 </Form.Group>
 
-                <Form.Group>
+                <Form.Group className="me-1">
                   <Form.Label htmlFor="due_time">Due Time</Form.Label>
                   <Form.Control
                     type="time"
