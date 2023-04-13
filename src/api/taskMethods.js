@@ -25,9 +25,7 @@ export const getFilteredTasks = async (
       category,
     }
   ) => {
-
   const { category_name, progress, order_by } = filters;
-
   try {
     if (todoTasksOnly) {
       const { data } = await axiosReq.get(

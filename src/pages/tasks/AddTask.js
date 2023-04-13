@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import axios from 'axios';
 import moment from 'moment';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
@@ -7,8 +6,9 @@ import Modal from 'react-bootstrap/Modal';
 import styles from '../../styles/AddTask.module.css';
 import { Alert } from 'react-bootstrap';
 import CategorySelect from '../../components/CategorySelect';
+import axios from 'axios';
 
-function AddTask({ tasks, setTasks, categories }) {
+function AddTask({ tasks, setTasks, categories, setSuccessFeedback }) {
 
   const initialTaskData = { 
     task_name: "",
@@ -64,15 +64,15 @@ function AddTask({ tasks, setTasks, categories }) {
   }
 
   const handleSubmit = async (event) => {
-    event.preventDefault();
+    const success_message = `Task has been successfully added and it's deadline is ${moment(due_date).format("Do MMMM YYYY")} .`
 
     try {
       const { data } = await axios.post("/tasks/", {...taskData, due_date, due_time, priority});
       handleClose();
-      setTasks({results: [...tasks.results, data]})
-      console.log(data)
+      setTasks({results: [...tasks.results, data]});
+      setSuccessFeedback(success_message)
     } catch (err) {
-      setErrors(err.response?.data);
+      setErrors(err.response?.data)
       console.log(err.response?.data)
     }
   }
