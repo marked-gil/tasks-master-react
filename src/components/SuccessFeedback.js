@@ -7,7 +7,7 @@ function SuccessFeedback({ message }) {
   if (show) {
     return (
       <Alert variant="success" onClose={() => setShow(false)} dismissible>
-        <p>{message}</p>
+        {message}
       </Alert>
     );
   }
