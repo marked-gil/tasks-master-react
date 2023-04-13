@@ -10,6 +10,7 @@ import { getCategories } from '../../api/categoryMethods';
 import { deleteTask } from '../../api/taskMethods';
 import ProfileAvatar from '../../components/ProfileAvatar';
 import EditTaskAttributes from './EditTaskAttributes';
+import ShareTaskModal from './ShareTaskModal';
 
 function TaskDetailsPage() {
 
@@ -20,6 +21,7 @@ function TaskDetailsPage() {
   const [ editTaskName, setEditTaskName ] = useState(false);
   const [ editTaskDescription, setEditTaskDescription ] = useState(false);
   const [ closeAllEdits, setCloseAllEdits ] = useState(false);
+  const [ showShareModal, setShowShareModal ] = useState(true);
 
   const {
     owner,
@@ -74,7 +76,6 @@ function TaskDetailsPage() {
       setCloseAllEdits(true)
       setEditTaskName(false)
       setEditTaskDescription(false)
-      console.log("Updated", data)
     } catch (err) {
       console.log(err.response?.data)
     }
@@ -89,10 +90,22 @@ function TaskDetailsPage() {
     <Col className={styles.TaskDetails}>
       <div className={`${styles.Container} position-relative`}>
         <h2 className={`${styles.MyTasks}`}>Task Details</h2>
+        
+        <div className="position-absolute top-0 end-0">
+          {/* SHARE BUTTON */}
+          <Button onClick={()=> {setShowShareModal(true)}} className={`me-4 ps-3 pe-3`} size="sm" variant="primary">
+            <i className="fa-solid fa-share-nodes me-1"></i> Share
+          </Button>
+          {/* DELETE BUTTON */}
+          <Button onClick={handleDelete} size="sm" variant='danger'>Delete Task</Button>
+        </div>
 
-        {/* DELETE BUTTON */}
-        <Button onClick={handleDelete} size="sm" variant='danger' className={styles.DeleteButton}>Delete Task</Button>
-
+        <ShareTaskModal
+          show={showShareModal}
+          taskData={taskData}
+          onHide={() => setShowShareModal(false)} 
+        />
+        
         {/* TASK ATTRIBUTES */}
         <EditTaskAttributes 
           handleDataChange={handleDataChange}

@@ -49,7 +49,7 @@ function TasksList(props) {
 
       {/* DUE DATE OR TIME */}
       <p className={`ms-auto mb-0 ${styles.DateTime}`}>
-        {!!showTime && task.due_time }
+        {!!showTime && task.due_time}
         {!!showTime && !task.due_time && <i className="me-3 fa-solid fa-minus"></i>}
         {!!showDate && moment(task.due_date).format("DD MMM `YY")}
       </p>
