@@ -102,7 +102,7 @@ function TaskDetailsPage() {
 
         <ShareTaskModal
           show={showShareModal}
-          taskData={taskData}
+          task_name={task_name}
           onHide={() => setShowShareModal(false)} 
         />
         

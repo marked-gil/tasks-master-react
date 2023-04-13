@@ -1,4 +1,8 @@
 .TaskName {
-  font-size: 14px;
   bottom: -16px;
+  font-size: 14px;
+}
+
+.smallFont {
+  font-size: 14px;
 }

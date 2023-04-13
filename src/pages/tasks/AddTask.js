@@ -63,8 +63,9 @@ function AddTask({ tasks, setTasks, categories, setSuccessFeedback }) {
     })
   }
 
-  const handleSubmit = async (event) => {
-    const success_message = `Task has been successfully added and it's deadline is ${moment(due_date).format("Do MMMM YYYY")} .`
+  const handleSubmit = async () => {
+    const success_message = `Task has been successfully added and it's deadline is ${
+      moment(due_date).format("Do MMMM YYYY")} .`
 
     try {
       const { data } = await axios.post("/tasks/", {...taskData, due_date, due_time, priority});
