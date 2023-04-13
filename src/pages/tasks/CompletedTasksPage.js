@@ -22,7 +22,7 @@ function CompletedTasksPage({ categories }) {
       try {
 
         const { data } = await axiosReq.get(
-          `/tasks/?progress=completed`
+          `/tasks/?progress=completed&ordering=-due_date`
         )
         setTasks(data)
       } catch (err) {
