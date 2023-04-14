@@ -31,20 +31,26 @@ function ShareTaskModal(props) {
   };
 
   const handleSearch = async () => {
-    console.log(taskData.shared_to.length)
-    if (taskData.shared_to.length !== 4) {
+    if (userSearch === taskData.owner) {
+      setFeedback("You are already the owner of the task.")
+      setUserProfile({});
+    } else if (taskData.shared_to.length !== 4) {
       try {
         const { data } = await axiosReq.get(`/profiles/?search=${userSearch}`)
-        setUserProfile(data.results[0])
+        setUserProfile(data.results[0]);
+        setFeedback("")
       } catch (err) {
         console.log(err.response?.data)
       }
     } else {
-      setFeedback("You can only share to a maximum of 4 users.")
+      setFeedback("You can only share to a maximum of 4 users.");
     }
   }
 
   const AddNewUserToTask = async () => {
+    if (taskData.shared_to.includes(userProfile.owner)) {
+      setFeedback(`The task is already shared to @${userProfile.owner}.`)
+    } else {
       try {
         const { data } = await axiosReq.put(`/tasks/${task_id}`, {
           ...taskData, "shared_to": [...taskData.shared_to, userProfile.owner]
@@ -55,6 +61,7 @@ function ShareTaskModal(props) {
       } catch (err) {
         console.log(err.response?.data)
       }
+    }
   }
 
   return (
@@ -89,14 +96,14 @@ function ShareTaskModal(props) {
                   <span className="me-3">{userProfile?.owner}</span>
                   <i className="fa-solid fa-user-plus"></i>
                 </Button>
-                <p className={`mb-0 mt-3 ${styles.smallFont}`}>Click username to share task.</p>
+                {!feedback && <p className={`mb-0 mt-3 ${styles.smallFont}`}>Click username to share task.</p>}
               </>
             }
           </div>
 
           {
             feedback && 
-            <p className="mb-0 d-flex justify-content-center" style={{ color:"red" }}>
+            <p className={`mt-3 mb-0 d-flex justify-content-center ${styles.smallFont}`} style={{ color:"red" }}>
               <span>{feedback}</span>
             </p>
           }
