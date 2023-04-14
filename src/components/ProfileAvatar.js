@@ -12,6 +12,8 @@ function ProfileAvatar(props) {
     imageWidth, 
     image,
     isDeletable,
+    taskData,
+    setTaskData,
     className
   } = props;
 
@@ -32,7 +34,11 @@ function ProfileAvatar(props) {
       onMouseLeave={handleMouseLeave}
     > 
       {(showDelete && isDeletable) && 
-        <UserSharingPopover>
+        <UserSharingPopover
+          taskData={taskData}
+          setTaskData={setTaskData}
+          sharingUser={owner}
+        >
           <i className="fa-solid fa-trash-can fa-lg position-absolute" 
           style={{ color:"red", top:"10px", left:"10px", cursor:"pointer" }}></i>
         </UserSharingPopover>

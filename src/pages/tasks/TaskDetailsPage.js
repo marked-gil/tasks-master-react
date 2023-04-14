@@ -217,6 +217,8 @@ function TaskDetailsPage() {
                   imageWidth={"1.5rem"}
                   isDeletable
                   className={styles.SharedToAvatar}
+                  taskData={taskData}
+                  setTaskData={setTaskData}
                 />
             </>
           ))}
