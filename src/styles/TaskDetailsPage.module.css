@@ -21,10 +21,24 @@
   width: 14rem;
 }
 
-.ProfileAvatar {
+.OwnerAvatar {
   position: absolute;
-  top: 2rem;
-  right: -130px;
+  top: 1rem;
+  right: -170px;
   font-size: 14px;
   width: 125px;
+}
+
+.Avatars {
+  position: absolute;
+  top: 8rem;
+  right: -170px;
+  gap: 1rem;
+  width: 125px;
+  height: 18rem;
+  font-size: .95rem;
+}
+
+.SharedToAvatar {
+  font-size: 14px;
 }

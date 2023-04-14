@@ -9,9 +9,9 @@ function ShareTaskModal(props) {
 
   const {
     task_name, 
-    set_task_data,
-    task_data,
+    taskData,
     task_id,
+    handleShareTask
   } = props;
 
   const [ userSearch, setUserSearch ] = useState("");
@@ -41,10 +41,11 @@ function ShareTaskModal(props) {
   const AddNewUserToTask = async () => {
     try {
       const { data } = await axiosReq.put(`/tasks/${task_id}`, {
-        ...task_data, "shared_to": [...task_data.shared_to, userProfile.owner]
+        ...taskData, "shared_to": [...taskData.shared_to, userProfile.owner]
       })
-      set_task_data(data)
+      handleShareTask(data)
       setUserProfile({})
+      console.log(data)
     } catch (err) {
       console.log(err.response?.data)
     }

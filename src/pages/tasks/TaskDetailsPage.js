@@ -3,8 +3,9 @@ import styles from '../../styles/TaskDetailsPage.module.css';
 import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
+import Avatar from '../../assets/profile-avatar.jpg';
 import { axiosReq } from '../../api/axiosDefaults';
-import { useHistory, useParams } from 'react-router-dom';
+import { Link, useHistory, useParams } from 'react-router-dom';
 import { FloatingLabel } from 'react-bootstrap';
 import { getCategories } from '../../api/categoryMethods';
 import { deleteTask } from '../../api/taskMethods';
@@ -31,6 +32,7 @@ function TaskDetailsPage() {
     due_time, 
     priority, 
     progress,
+    shared_to,
   } = taskData;
 
   useMemo(() => {
@@ -65,7 +67,11 @@ function TaskDetailsPage() {
         [event.target.name]: event.target.value
       }
     ));
-  };  
+  };
+
+  const handleShareTask = (newTaskData) => {
+    setTaskData(newTaskData);
+  }
 
   const handleSave = async (event) => {
     try {
@@ -91,12 +97,14 @@ function TaskDetailsPage() {
         <h2 className={`${styles.MyTasks}`}>Task Details</h2>
         
         <div className="position-absolute top-0 end-0">
+          
           {/* SHARE BUTTON */}
           <ShareTaskModal
             task_name={task_name}
             task_id={id}
             set_task_data={setTaskData}
-            task_data={taskData}
+            taskData={taskData}
+            handleShareTask={handleShareTask}
           />
 
           {/* DELETE BUTTON */}
@@ -149,16 +157,6 @@ function TaskDetailsPage() {
               edit
             </Button> 
           }
-
-          {/* {errors.task_name?.map((error, idx) => (
-            <Alert className={`mt-1 mb-0 pb-0 pt-0 ${styles.TextCenter}`} key={idx} variant="danger">
-              {error === 'This field must be unique for the "due_date" date.'
-              ? "Task with the same name already exists for this date."
-              : error
-            }
-            </Alert>
-            ))
-          } */}
         </Form.Group>
         
         {/* TASK DESCRIPTION */}
@@ -175,15 +173,6 @@ function TaskDetailsPage() {
               aria-label="Edit task description"
             />
           </FloatingLabel>
-          
-          {/* <Button size="sm" className={`position-absolute bottom-0 end-0`}>edit</Button> */}
-          {/* {errors.details?.map((error, idx) => (
-            <Alert className={`mt-1 mb-0 pb-0 pt-0 ${styles.TextCenter}`} key={idx} variant="danger">
-              {error}
-            </Alert>
-            ))
-          } */}
-
           { 
             editTaskDescription && 
             <div className={`position-absolute bottom-0 end-0`}>
@@ -202,20 +191,38 @@ function TaskDetailsPage() {
             </Button> 
           }
         </Form.Group>
-        
 
         {/* OWNER AVATAR */}
         <ProfileAvatar
           owner={owner}
           isOwner={true}
           showName={true}
+          img_src={Avatar}
           imageWidth={"2rem"}
-          className={styles.ProfileAvatar} 
+          className={styles.OwnerAvatar} 
         />
+
+        <div className={`d-flex flex-column position-absolute ${styles.Avatars}`}>
+          <p className={`mb-0 align-self-center ${styles.bold}`}>
+            <i className="fa-solid fa-share-nodes"></i> Sharing with:
+          </p>
+          {shared_to?.map(user => (
+            <ProfileAvatar
+              key={user}
+              owner={user}
+              isOwner={false}
+              showName={true}
+              // image={Avatar}
+              imageWidth={"1.5rem"}
+              className={styles.SharedToAvatar} 
+            />
+          ))}
+        </div>
+        
 
         {/* COMMENT SECTION */}
         <div>
-          <a href="">Add comment</a>
+          <Link>Add comment</Link>
           <div>
             <h2>Comments</h2>
           </div>

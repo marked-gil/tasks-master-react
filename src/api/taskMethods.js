@@ -8,6 +8,7 @@ export const getTasks = async (setTasks, due_date) => {
       `/tasks/?due_date=${moment(due_date).format("yyyy-MM-DD")}`
     );
     setTasks(data)
+    console.log(data)
   } catch (err) {
     console.log(err.response?.data)
   }
