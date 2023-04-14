@@ -7,7 +7,14 @@ import { axiosReq } from '../api/axiosDefaults';
 import { useHistory } from 'react-router-dom';
 import { deleteTask } from '../api/taskMethods';
 
-function TaskPopover({ children, task, setTasks, setChangeInTasks, removeDoneButton }) {
+function TaskPopover(props) {
+  
+  const { 
+    children, 
+    task, 
+    setTasks, 
+    setChangeInTasks,
+  } = props;
 
   const history = useHistory();
 
@@ -15,9 +22,7 @@ function TaskPopover({ children, task, setTasks, setChangeInTasks, removeDoneBut
     history.push(`/task/${task.id}`)
   }
 
-  const handleComplete = async (event) => {
-    event.preventDefault();
-    
+  const handleComplete = async () => {
     const taskData = {
       ...task,
       "due_date": moment(new Date(task.due_date)).format("yyyy-MM-DD"),
@@ -36,6 +41,19 @@ function TaskPopover({ children, task, setTasks, setChangeInTasks, removeDoneBut
     }
   }
 
+  const handleUndo = async () => {
+    try {
+      const { data } = await axiosReq.put(`/tasks/${task.id}`, {...task, "datetime_completed": null, "is_completed": false});
+      // setChangeInTasks(data)
+      setTasks(prevState => ({
+        ...prevState,
+        results: [data]
+      }))
+    } catch (err) {
+      console.log(err)
+    }
+  }
+
   const handleDelete = () => {
     deleteTask(task, setTasks);
   }
@@ -45,7 +63,8 @@ function TaskPopover({ children, task, setTasks, setChangeInTasks, removeDoneBut
       <Popover.Body className="p-0">
         <Button onClick={handleDelete} className="me-1" variant="danger" size="sm">Delete</Button>
         <Button onClick={handleView} className="me-1" size="sm">View</Button>
-        {!removeDoneButton && <Button onClick={handleComplete} size="sm">Done</Button>}
+        {!task.is_completed && <Button onClick={handleComplete} size="sm">Done</Button>}
+        {task.is_completed && <Button onClick={handleUndo} size="sm">Undo</Button>}
       </Popover.Body>
     </Popover>
   );

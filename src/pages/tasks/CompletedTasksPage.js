@@ -20,6 +20,7 @@ function CompletedTasksPage({ categories }) {
           `/tasks/?progress=completed&ordering=-due_date`
         )
         setTasks(data)
+        console.log(data)
       } catch (err) {
         console.log(err.response)
         setError(err.response)
@@ -58,7 +59,6 @@ function CompletedTasksPage({ categories }) {
           setTasks={setTasks}
           showCompletedTasks={true}
           showDate
-          removeDoneButton
         />
       </div>
 

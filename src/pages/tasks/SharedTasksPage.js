@@ -69,7 +69,6 @@ function SharedTasksPage({ categories }) {
           setTasks={setTasks}
           showCompletedTasks={true}
           showDate
-          removeDoneButton
         />
       </div>
 
