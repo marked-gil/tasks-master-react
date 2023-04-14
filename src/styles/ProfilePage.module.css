@@ -5,6 +5,11 @@
   align-items: center;
 }
 
+.profileImage {
+  width: 8rem;
+  border: 1px solid firebrick;
+}
+
 .Form {
   width: 34rem;
   padding: 2rem 0;
@@ -20,10 +25,26 @@
 }
 
 .DeleteAccount {
+  right: 0;
   color: #cb5757;
-  margin-top: 6rem;
+  border: 1px solid rgb(231, 116, 50);
 }
 
 .TextCenter {
   text-align: center;
+}
+
+.smallInfo {
+  bottom: 1.8rem;
+  left: 15rem;
+}
+
+.uploadIcon {
+  position: absolute;
+  bottom: 16px;
+  left: 100px;
+}
+
+.uploadIcon:hover {
+  cursor: pointer;
 }

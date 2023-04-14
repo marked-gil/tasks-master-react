@@ -6,7 +6,12 @@ function SuccessFeedback({ message }) {
 
   if (show) {
     return (
-      <Alert variant="success" onClose={() => setShow(false)} dismissible>
+      <Alert
+        variant="success"
+        onClose={() => setShow(false)} 
+        dismissible
+        style={{ marginTop:"-35px"}}
+      >
         {message}
       </Alert>
     );
