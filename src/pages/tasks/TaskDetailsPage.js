@@ -21,7 +21,6 @@ function TaskDetailsPage() {
   const [ editTaskName, setEditTaskName ] = useState(false);
   const [ editTaskDescription, setEditTaskDescription ] = useState(false);
   const [ closeAllEdits, setCloseAllEdits ] = useState(false);
-  const [ showShareModal, setShowShareModal ] = useState(true);
 
   const {
     owner,
@@ -31,7 +30,7 @@ function TaskDetailsPage() {
     due_date, 
     due_time, 
     priority, 
-    progress
+    progress,
   } = taskData;
 
   useMemo(() => {
@@ -43,7 +42,6 @@ function TaskDetailsPage() {
           try {
             const { data } = await axiosReq.get(`/tasks/${id}`);
             setTaskData(data)
-            console.log("this is the data returned:", data)
           } catch (err) {
             console.log(err.response?.data)
           }
@@ -76,6 +74,7 @@ function TaskDetailsPage() {
       setCloseAllEdits(true)
       setEditTaskName(false)
       setEditTaskDescription(false)
+      console.log(data)
     } catch (err) {
       console.log(err.response?.data)
     }
@@ -93,19 +92,17 @@ function TaskDetailsPage() {
         
         <div className="position-absolute top-0 end-0">
           {/* SHARE BUTTON */}
-          <Button onClick={()=> {setShowShareModal(true)}} className={`me-4 ps-3 pe-3`} size="sm" variant="primary">
-            <i className="fa-solid fa-share-nodes me-1"></i> Share
-          </Button>
+          <ShareTaskModal
+            task_name={task_name}
+            task_id={id}
+            set_task_data={setTaskData}
+            task_data={taskData}
+          />
+
           {/* DELETE BUTTON */}
           <Button onClick={handleDelete} size="sm" variant='danger'>Delete Task</Button>
         </div>
 
-        <ShareTaskModal
-          show={showShareModal}
-          task_name={task_name}
-          onHide={() => setShowShareModal(false)} 
-        />
-        
         {/* TASK ATTRIBUTES */}
         <EditTaskAttributes 
           handleDataChange={handleDataChange}
