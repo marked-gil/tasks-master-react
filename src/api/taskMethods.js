@@ -48,7 +48,6 @@ export const getFilteredTasks = async (
         `/tasks/??due_date=&progress=${progress
         }&category=${category}&ordering=${order_by ? order_by : ""}`
       );
-      console.log("filtered by Cat", data)
       setTasks(data);
     } else {
       const { data } = await axiosReq.get(

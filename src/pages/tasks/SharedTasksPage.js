@@ -13,6 +13,7 @@ function SharedTasksPage({ categories }) {
   const id = currentUser?.pk
 
   const [ tasks, setTasks ] = useState({ results: []});
+  const [ showCompletedTasks, setShowCompletedTasks ] = useState(false);
   const [ filters, setFilters ] = useState({category_name: "", progress: "", order_by: ""});
   const [ error, setError ] = useState({});
 
@@ -32,6 +33,15 @@ function SharedTasksPage({ categories }) {
     }
   }, [id]);
 
+  const handleFilterSubmit = async () => {
+    getFilteredTasks({
+      filters, 
+      setTasks, 
+      setError, 
+      completedTasksOnly: true 
+    });
+  };
+
   return (
     <Col className={styles.SharedTasksPage}>
       <div className={styles.InnerContainer}>
@@ -46,9 +56,10 @@ function SharedTasksPage({ categories }) {
         <TasksFilter 
           setFilters={setFilters}
           categories={categories}
-          // handleFilterSubmit={handleFilterSubmit}
+          setShowCompletedTasks={setShowCompletedTasks}
+          showCompletedTasks={showCompletedTasks}
+          handleFilterSubmit={handleFilterSubmit}
           removeOrderByTime
-          removeProgressField
         />
 
         <hr />
