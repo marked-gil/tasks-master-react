@@ -207,15 +207,18 @@ function TaskDetailsPage() {
             <i className="fa-solid fa-share-nodes"></i> Sharing with:
           </p>
           {shared_to?.map(user => (
-            <ProfileAvatar
-              key={user}
-              owner={user}
-              isOwner={false}
-              showName={true}
-              // image={Avatar}
-              imageWidth={"1.5rem"}
-              className={styles.SharedToAvatar} 
-            />
+            <>
+                <ProfileAvatar
+                  key={user}
+                  owner={user}
+                  isOwner={false}
+                  showName={true}
+                  // image={Avatar}
+                  imageWidth={"1.5rem"}
+                  isDeletable
+                  className={styles.SharedToAvatar}
+                />
+            </>
           ))}
         </div>
         

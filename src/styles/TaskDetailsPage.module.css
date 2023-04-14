@@ -41,4 +41,10 @@
 
 .SharedToAvatar {
   font-size: 14px;
+  border: 1px solid transparent;
+  position: relative;
+}
+
+.SharedToAvatar:hover {
+  box-shadow: 0 0 2px rgb(41, 118, 211);
 }
