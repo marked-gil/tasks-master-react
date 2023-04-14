@@ -11,12 +11,18 @@ function UserSharingPopover({ children, taskData, setTaskData, sharingUser }) {
 
   const removeUserFromTask = async () => {
     const usersLeft = shared_to.filter(user => user !== sharingUser)
-    console.log(usersLeft)
     try {
-      const { data } = await axiosReq.put(`/tasks/${id}`, {
-        ...taskData, "shared_to": usersLeft
-      })
-      setTaskData(data)
+      if (usersLeft.length === 0) {
+        const { data } = await axiosReq.put(`/tasks/${id}`, {
+          ...taskData, "is_shared": false, "shared_to": usersLeft
+        })
+        setTaskData(data)
+      } else {
+        const { data } = await axiosReq.put(`/tasks/${id}`, {
+          ...taskData, "shared_to": usersLeft
+        })
+        setTaskData(data)
+      }
     } catch (err) {
       console.log(err.response?.data)
     }

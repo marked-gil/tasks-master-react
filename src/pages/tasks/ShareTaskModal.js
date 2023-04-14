@@ -53,10 +53,11 @@ function ShareTaskModal(props) {
     } else {
       try {
         const { data } = await axiosReq.put(`/tasks/${task_id}`, {
-          ...taskData, "shared_to": [...taskData.shared_to, userProfile.owner]
+          ...taskData, "is_shared":true, "shared_to": [...taskData.shared_to, userProfile.owner]
         })
         handleShareTask(data)
         setUserProfile({})
+        setFeedback(`@${userProfile.owner} is added to the task.`)
         console.log(data)
       } catch (err) {
         console.log(err.response?.data)
