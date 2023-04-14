@@ -49,7 +49,7 @@ const SideBar = ({ categories, setCategories, setNewCategoryAdded }) => {
           <Button className={`align-self-start ${styles.DatePickerBtn}`} onClick={handleDateSelection}>Go</Button>
         </li>
         <li className="mb-2">
-          <Link><i className="fa-solid fa-plus"></i> Add Task</Link>
+          {/* <Link><i className="fa-solid fa-plus"></i> Add Task</Link> */}
         </li>
         <li className="mb-2">
           <Link to="/"><i className="fa-solid fa-calendar-week"></i> Today</Link>

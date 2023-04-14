@@ -8,11 +8,12 @@ import Offcanvas from 'react-bootstrap/Offcanvas';
 import styles from '../styles/NavBar.module.css'
 import Avatar from '../assets/profile-avatar.jpg'
 import { NavLink } from 'react-router-dom';
-import { useSetCurrentUser } from '../contexts/CurrentUserContext';
+import { useCurrentUser, useSetCurrentUser } from '../contexts/CurrentUserContext';
 import { removeTokenTimestamp } from '../utils/utils';
 
 function NavBar() {
   const setCurrentUser = useSetCurrentUser();
+  const currentUser =useCurrentUser();
 
   const handleSignOut = async () => {
     try {
@@ -53,10 +54,10 @@ function NavBar() {
                   <Button variant="outline-success" className={styles.ClrWhite}>Search</Button>
                 </Form>
                 <Nav className={`${styles.Nav} justify-content-end align-items-center flex-grow-1 pe-3`}>
-                  <Nav.Link href="#" className={`p-0 ${styles.ClrWhite}`}>My Tasks</Nav.Link>
-                  <Nav.Link href="#" className={`p-0 ${styles.ClrWhite}`}>My Profile</Nav.Link>
+                  <NavLink to="/all-todos" className={`p-0 ${styles.ClrWhite}`}>My Tasks</NavLink>
+                  <NavLink to={`/profile/${currentUser?.pk}`} className={`p-0 ${styles.ClrWhite}`}>My Profile</NavLink>
                   <NavLink to="/signin" onClick={handleSignOut} className={`p-0 ${styles.ClrWhite}`}>Sign Out</NavLink>
-                  <Nav.Link href="#" className="p-0"><img src={Avatar} alt="profile avatar" className={styles.Avatar}/></Nav.Link>
+                  <NavLink to="" className="p-0"><img src={Avatar} alt="profile avatar" className={styles.Avatar}/></NavLink>
                 </Nav>
               </Offcanvas.Body>
             </Navbar.Offcanvas>
