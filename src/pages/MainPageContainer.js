@@ -13,6 +13,7 @@ import { getCategories } from '../api/categoryMethods'
 import OverdueTasksPage from './tasks/OverdueTasksPage'
 import TasksByCategoryPage from './tasks/TasksByCategoryPage'
 import CompletedTasksPage from './tasks/CompletedTasksPage'
+import SharedTasksPage from './tasks/SharedTasksPage'
 
 function MainPageContainer(props) {
 
@@ -25,6 +26,7 @@ function MainPageContainer(props) {
     overdueTasksPage,
     tasksByCategoryPage,
     completedTasksPage,
+    sharedTasksPage,
   } = props;
 
   const [ newCategoryAdded, setNewCategoryAdded ] = useState(false);
@@ -49,6 +51,7 @@ function MainPageContainer(props) {
             : overdueTasksPage ? <OverdueTasksPage categories={categories} />
             : tasksByCategoryPage ? <TasksByCategoryPage categories={categories} />
             : completedTasksPage ? <CompletedTasksPage categories={categories} />
+            : sharedTasksPage ? <SharedTasksPage categories={categories} />
             : <></>
           }
         </Row>
