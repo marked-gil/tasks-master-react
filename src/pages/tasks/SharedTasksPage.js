@@ -35,10 +35,11 @@ function SharedTasksPage({ categories }) {
 
   const handleFilterSubmit = async () => {
     getFilteredTasks({
-      filters, 
-      setTasks, 
-      setError, 
-      completedTasksOnly: true 
+      filters,
+      setTasks,
+      setError,
+      sharedTasksOnly: true,
+      user_id: id
     });
   };
 

@@ -19,11 +19,13 @@ export const getFilteredTasks = async (
       filters,
       setTasks,
       setError,
+      sharedTasksOnly,
       completedTasksOnly,
       overdueTasksOnly,
       todoTasksOnly,
       due_date,
       category,
+      user_id
     }
   ) => {
   const { category_name, progress, order_by } = filters;
@@ -45,9 +47,14 @@ export const getFilteredTasks = async (
       setTasks(data);
     } else if (category) {
       const { data } = await axiosReq.get(
-        `/tasks/??due_date=&progress=${progress
-        }&category=${category}&ordering=${order_by ? order_by : ""}`
+        `/tasks/?due_date=&progress=${progress}&category=${category}&ordering=${
+          order_by ? order_by : ""}`
       );
+      setTasks(data);
+    } else if (sharedTasksOnly) {
+      const { data } = await axiosReq.get(
+        `/tasks/?shared_to=${user_id}&progress=${progress}&category=${category}&ordering=${order_by ? order_by : ""}`
+      ); 
       setTasks(data);
     } else {
       const { data } = await axiosReq.get(
