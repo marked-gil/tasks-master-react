@@ -20,9 +20,8 @@ function SharedTasksPage({ categories }) {
   useEffect(() => {
     const getSharedTasks = async () => {
       try {
-        const { data } = await axiosReq.get(`/tasks/?shared_to=${id}`);
+        const { data } = await axiosReq.get(`/tasks/?is_shared=true`);
         setTasks(data);
-        console.log("shared", data)
       } catch (err) {
         console.log(err.response?.data);
         setError(err.response)
