@@ -16,6 +16,7 @@ function ShareTaskModal(props) {
 
   const [ userSearch, setUserSearch ] = useState("");
   const [ userProfile, setUserProfile ] = useState({});
+  const [ feedback, setFeedback ] = useState("");
   const [ show, setShow] = useState(false);
 
   const handleShow = () => setShow(true);
@@ -30,25 +31,30 @@ function ShareTaskModal(props) {
   };
 
   const handleSearch = async () => {
-    try {
-      const { data } = await axiosReq.get(`/profiles/?search=${userSearch}`)
-      setUserProfile(data.results[0])
-    } catch (err) {
-      console.log(err.response?.data)
+    console.log(taskData.shared_to.length)
+    if (taskData.shared_to.length !== 4) {
+      try {
+        const { data } = await axiosReq.get(`/profiles/?search=${userSearch}`)
+        setUserProfile(data.results[0])
+      } catch (err) {
+        console.log(err.response?.data)
+      }
+    } else {
+      setFeedback("You can only share to a maximum of 4 users.")
     }
   }
 
   const AddNewUserToTask = async () => {
-    try {
-      const { data } = await axiosReq.put(`/tasks/${task_id}`, {
-        ...taskData, "shared_to": [...taskData.shared_to, userProfile.owner]
-      })
-      handleShareTask(data)
-      setUserProfile({})
-      console.log(data)
-    } catch (err) {
-      console.log(err.response?.data)
-    }
+      try {
+        const { data } = await axiosReq.put(`/tasks/${task_id}`, {
+          ...taskData, "shared_to": [...taskData.shared_to, userProfile.owner]
+        })
+        handleShareTask(data)
+        setUserProfile({})
+        console.log(data)
+      } catch (err) {
+        console.log(err.response?.data)
+      }
   }
 
   return (
@@ -87,6 +93,13 @@ function ShareTaskModal(props) {
               </>
             }
           </div>
+
+          {
+            feedback && 
+            <p className="mb-0 d-flex justify-content-center" style={{ color:"red" }}>
+              <span>{feedback}</span>
+            </p>
+          }
 
         </Modal.Body>
         <Modal.Footer>
