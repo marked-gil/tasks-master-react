@@ -97,7 +97,6 @@ function TaskDetailsPage() {
         <h2 className={`${styles.MyTasks}`}>Task Details</h2>
         
         <div className="position-absolute top-0 end-0">
-          
           {/* SHARE BUTTON */}
           <ShareTaskModal
             task_name={task_name}
@@ -140,8 +139,7 @@ function TaskDetailsPage() {
             />
           </FloatingLabel>
 
-          { 
-            editTaskName && 
+          {editTaskName && 
             <div className={`position-absolute bottom-0 end-0`}>
               <Button variant="link" size="sm" onClick={cancelEditTaskName}>
                 cancel
@@ -149,14 +147,11 @@ function TaskDetailsPage() {
               <Button variant="link" size="sm" onClick={handleSave} className={styles.bold}>
                 SAVE
               </Button>
-            </div>
-          }  
-          { 
-            !editTaskName &&
+            </div>}
+          {!editTaskName &&
             <Button variant="link" size="sm" onClick={setEditTaskName} className={`position-absolute bottom-0 end-0`}>
               edit
-            </Button> 
-          }
+            </Button>}
         </Form.Group>
         
         {/* TASK DESCRIPTION */}
@@ -173,8 +168,8 @@ function TaskDetailsPage() {
               aria-label="Edit task description"
             />
           </FloatingLabel>
-          { 
-            editTaskDescription && 
+          
+          {editTaskDescription && 
             <div className={`position-absolute bottom-0 end-0`}>
               <Button variant="link" size="sm" onClick={cancelEditTaskDescription}>
                 cancel
@@ -182,14 +177,12 @@ function TaskDetailsPage() {
               <Button variant="link" size="sm" onClick={handleSave} className={styles.bold}>
                 SAVE
               </Button>
-            </div>
-          }  
-          { 
-            !editTaskDescription &&
+            </div>}  
+          {!editTaskDescription &&
             <Button variant="link" size="sm" onClick={setEditTaskDescription} className={`position-absolute bottom-0 end-0`}>
               edit
-            </Button> 
-          }
+            </Button>}
+
         </Form.Group>
 
         {/* OWNER AVATAR */}
@@ -203,25 +196,28 @@ function TaskDetailsPage() {
         />
 
         <div className={`d-flex flex-column position-absolute ${styles.Avatars}`}>
-          <p className={`mb-0 align-self-center ${styles.bold}`}>
-            <i className="fa-solid fa-share-nodes"></i> Sharing with:
-          </p>
+          {taskData.is_shared &&
+            <p className={`mb-0 align-self-center ${styles.bold}`}>
+              <i className="fa-solid fa-share-nodes"></i> Sharing with:
+            </p>}
+          
           {shared_to?.map(user => (
             <>
-                <ProfileAvatar
-                  key={user}
-                  owner={user}
-                  isOwner={false}
-                  showName={true}
-                  // image={Avatar}
-                  imageWidth={"1.5rem"}
-                  isDeletable
-                  className={styles.SharedToAvatar}
-                  taskData={taskData}
-                  setTaskData={setTaskData}
-                />
+              <ProfileAvatar
+                key={user}
+                owner={user}
+                isOwner={false}
+                showName={true}
+                // image={Avatar}
+                imageWidth={"1.5rem"}
+                isDeletable
+                className={styles.SharedToAvatar}
+                taskData={taskData}
+                setTaskData={setTaskData}
+              />
             </>
-          ))}
+            ))
+          }
         </div>
         
 
