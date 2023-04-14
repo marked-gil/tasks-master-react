@@ -168,8 +168,21 @@ function ProfilePage () {
             </div>
           </Form>
         <div className="d-flex flex-column">
-          <Button variant="link" className="mt-5 align-self-start">Change Password</Button>
-          <Button variant="link" className={`align-self-end mt-4 mb-4 ${styles.DeleteAccount}`}>Delete Account</Button>
+          <Button
+            variant="secondary" 
+            size="sm" 
+            className="mt-5 align-self-start"
+          >
+            Change Password
+          </Button>
+
+          <Button 
+            variant="danger" 
+            className={`align-self-end mt-4 mb-4 ${styles.DeleteAccount}`}
+            size="sm"
+          >
+            Delete Account
+          </Button>
         </div>
       </div>
     </Col>
