@@ -1,17 +1,15 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Row, Col, Alert } from 'react-bootstrap';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
-import { useHistory, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { axiosReq } from '../../api/axiosDefaults';
-import { CurrentUserContext, useCurrentUser, useSetCurrentUser } from '../../contexts/CurrentUserContext';
+import { useCurrentUser } from '../../contexts/CurrentUserContext';
 
 import styles from '../../styles/ProfilePage.module.css';
 
 function ProfilePage () {
   const currentUser = useCurrentUser();
-  const setCurrentUser = useSetCurrentUser();
-  const history = useHistory();
   const {id} = useParams();
 
   const [ errors, setErrors ] = useState({});
@@ -26,7 +24,7 @@ function ProfilePage () {
 
   const { first_name, last_name, image, email, username } = profileData;
 
-  const isOwner = currentUser?.profile_id === id;
+  // const isOwner = currentUser?.profile_id === id;
 
   const handleChange = (event) => {
     console.log(currentUser)
@@ -52,9 +50,9 @@ function ProfilePage () {
     }
   }
 
-  useEffect(() => {
-    handleMount();
-  },[currentUser, id]);
+  // useEffect(() => {
+  //   handleMount();
+  // },[currentUser, id]);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -154,15 +152,15 @@ function ProfilePage () {
           </Form.Group>
 
           <div className='d-flex justify-content-center ps-5 pt-4'>
-            <a href='#' className='me-5 align-self-end'>cancel</a>
+            {/* <a href='#' className='me-5 align-self-end'>cancel</a> */}
             <Button variant="primary" type="submit">
               Update
             </Button>
           </div>
 
         </Form>
-        <a href="#" className="d-block mt-4">Change Password</a>
-        <a href="#" className={`d-flex justify-content-end mt-5 ${styles.DeleteAccount}`}>Delete Account</a>
+        {/* <a href="#" className="d-block mt-4">Change Password</a>
+        <a href="#" className={`d-flex justify-content-end mt-5 ${styles.DeleteAccount}`}>Delete Account</a> */}
       </div>
     </Col>
   )
