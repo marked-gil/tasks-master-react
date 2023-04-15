@@ -12,8 +12,15 @@ function ProfilePage () {
 
   const currentUser = useCurrentUser();
   const profile_id = currentUser?.profile_id
+  const initialData = { 
+    owner: "",
+    first_name: "",
+    last_name: "",
+    email: "",
+    image: "",
+  }
 
-  const [ profileData, setProfileData ] = useState({});
+  const [ profileData, setProfileData ] = useState(initialData);
   const [ successFeedback, setSuccessFeedback ] = useState("");
   const [ errors, setErrors ] = useState({});
 

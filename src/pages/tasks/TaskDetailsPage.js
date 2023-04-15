@@ -201,10 +201,10 @@ function TaskDetailsPage() {
               <i className="fa-solid fa-share-nodes"></i> Sharing with:
             </p>}
           
-          {shared_to?.map(user => (
+          {shared_to?.map((user, idx) => (
             <>
               <ProfileAvatar
-                key={user}
+                key={idx}
                 owner={user}
                 isOwner={false}
                 showName={true}
