@@ -3,15 +3,13 @@ import { Row, Col, Alert } from 'react-bootstrap';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import { axiosReq } from '../../api/axiosDefaults';
-import { useCurrentUser } from '../../contexts/CurrentUserContext';
 
 import styles from '../../styles/ProfilePage.module.css';
 import SuccessFeedback from '../../components/SuccessFeedback';
 import UpdateProfileImage from './UpdateProfileImage';
 
-function ProfilePage () {
+function ProfilePage ({ currentUser }) {
 
-  const currentUser = useCurrentUser();
   const profile_id = currentUser?.profile_id
   const initialData = { 
     owner: "",

@@ -14,6 +14,7 @@ import OverdueTasksPage from './tasks/OverdueTasksPage'
 import TasksByCategoryPage from './tasks/TasksByCategoryPage'
 import CompletedTasksPage from './tasks/CompletedTasksPage'
 import SharedTasksPage from './tasks/SharedTasksPage'
+import { useCurrentUser } from '../contexts/CurrentUserContext'
 
 function MainPageContainer(props) {
 
@@ -29,6 +30,7 @@ function MainPageContainer(props) {
     sharedTasksPage,
   } = props;
 
+  const currentUser = useCurrentUser();
   const [ newCategoryAdded, setNewCategoryAdded ] = useState(false);
   const [ categories, setCategories ] = useState({ results: []});
 
@@ -43,7 +45,7 @@ function MainPageContainer(props) {
       <Container fluid className={styles.MainContent}>
         <Row className={styles.Row}>
           <SideBar categories={categories} setCategories={setCategories} setNewCategoryAdded={setNewCategoryAdded}/>
-          {profile ? <ProfilePage /> 
+          {profile ? <ProfilePage currentUser={currentUser} /> 
             : tasksTodayPage ? <TasksTodayPage categories={categories} />
             : taskDetailsPage ? <TaskDetailsPage />
             : tasksPerDatePage ? <TasksPerDatePage categories={categories} /> 
