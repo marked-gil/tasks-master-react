@@ -21,20 +21,16 @@ function UpdateProfileImage({ profile_id, profileData, setProfileData, className
 
   const handleSubmit = async () => {
     const formData = new FormData();
-    formData.append('first_name', profileData.first_name);
-    formData.append('last_name', profileData.last_name);
-    formData.append('email', profileData.email);
     formData.append('image', imageFile?.current?.files[0]);
 
     try {
       console.log(formData)
-      const { data } = await axiosReq.patch(`profiles/${profile_id}`, formData);
+      const { data } = await axiosReq.put(`profiles/${profile_id}/`, formData);
       setProfileData(data);
-      console.log(data)
       URL.revokeObjectURL(imageSource);
       handleClose();
     } catch (err) {
-      console.log(err)
+      console.log(err.response?.data)
     }
   };
 

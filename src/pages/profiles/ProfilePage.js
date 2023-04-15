@@ -64,7 +64,7 @@ function ProfilePage () {
     formData.append('email', email);
 
     try {
-      const { data } = await axiosReq.put(`profiles/${profile_id}`, formData);
+      const { data } = await axiosReq.put(`profiles/${profile_id}/`, formData);
       setProfileData(data)
       setSuccessFeedback("Your profile information is successfully updated.")
     } catch (err) {
