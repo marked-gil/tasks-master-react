@@ -28,7 +28,8 @@ function ProfileAvatar(props) {
   };
 
   return (
-    <div 
+    <div
+      key={owner}
       className={`d-flex flex-column align-items-center ${className}`}
       onMouseEnter={handleMouseHover}
       onMouseLeave={handleMouseLeave}
