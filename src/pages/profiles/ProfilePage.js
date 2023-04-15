@@ -7,6 +7,7 @@ import { useCurrentUser } from '../../contexts/CurrentUserContext';
 
 import styles from '../../styles/ProfilePage.module.css';
 import SuccessFeedback from '../../components/SuccessFeedback';
+import UpdateProfileImage from './UpdateProfileImage';
 
 function ProfilePage () {
 
@@ -81,7 +82,12 @@ function ProfilePage () {
           <Form onSubmit={handleSubmit} className={styles.Form}>
             <div className="d-flex position-relative mb-5">
               <img src={image} alt="profile" className={styles.profileImage} />
-              <i className={`fa-solid fa-arrow-up-from-bracket fa-lg ${styles.uploadIcon}`}></i>
+              <UpdateProfileImage
+                profile_id={profile_id}
+                profileData={profileData}
+                setProfileData={setProfileData}
+                className={styles.uploadIcon}
+              />
 
               {/* USERNAME */}
               <Form.Group 
