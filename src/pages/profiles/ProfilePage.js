@@ -86,6 +86,7 @@ function ProfilePage () {
                 profile_id={profile_id}
                 profileData={profileData}
                 setProfileData={setProfileData}
+                setSuccessFeedback={setSuccessFeedback}
                 className={styles.uploadIcon}
               />
 

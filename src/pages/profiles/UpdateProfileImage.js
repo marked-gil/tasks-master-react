@@ -2,8 +2,16 @@ import React, { useEffect, useRef, useState } from 'react';
 import { Button, Figure, Form, Modal } from 'react-bootstrap';
 import { axiosReq } from '../../api/axiosDefaults';
 
-function UpdateProfileImage({ profile_id, profileData, setProfileData, className }) {
+function UpdateProfileImage(props) {
   
+  const { 
+    profile_id, 
+    profileData, 
+    setProfileData, 
+    setSuccessFeedback, 
+    className 
+  } = props;
+
   const [ imageSource, setImageSource ] = useState("");
   const [ errors, setErrors ] = useState({})
   const [show, setShow] = useState(false);
@@ -32,6 +40,7 @@ function UpdateProfileImage({ profile_id, profileData, setProfileData, className
       try {
         const { data } = await axiosReq.put(`profiles/${profile_id}/`, formData);
         setProfileData(data);
+        setSuccessFeedback("Profile picture successfully updated.")
         handleClose();
         URL.revokeObjectURL(imageSource);
       } catch (err) {
