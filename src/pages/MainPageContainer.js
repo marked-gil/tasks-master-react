@@ -44,7 +44,7 @@ function MainPageContainer(props) {
       <NavBar />
       <Container fluid className={styles.MainContent}>
         <Row className={styles.Row}>
-          <SideBar categories={categories} setCategories={setCategories} setNewCategoryAdded={setNewCategoryAdded}/>
+          <SideBar currentUser={currentUser} />
           {profile ? <ProfilePage currentUser={currentUser} /> 
             : tasksTodayPage ? <TasksTodayPage categories={categories} />
             : taskDetailsPage ? <TaskDetailsPage />

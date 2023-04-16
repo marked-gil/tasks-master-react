@@ -2,8 +2,9 @@ import axios from 'axios';
 import React, { useState } from 'react';
 import { Alert, Button, Form, Modal } from 'react-bootstrap';
 import styles from '../../styles/AddCategory.module.css';
+import LoadingIcon from '../../components/LoadingIcon';
 
-function AddCategory({ categories, setCategories, setNewCategoryAdded }) {
+function AddCategory({ categories, setCategories }) {
 
   const initialCategoryData = { 
     category_name: "",
@@ -13,6 +14,7 @@ function AddCategory({ categories, setCategories, setNewCategoryAdded }) {
   const [ show, setShow ] = useState(false);
   const [ categoryData, setCategoryData ] = useState(initialCategoryData);
   const { category_name, description } = categoryData;
+  const [ isLoaded , setIsLoaded ] = useState(true);
   const [ errors, setErrors ] = useState({});
 
   const handleClose = () => {
@@ -30,14 +32,15 @@ function AddCategory({ categories, setCategories, setNewCategoryAdded }) {
 
   const handleSubmit = async () => {
     try {
+      setIsLoaded(false);
       const { data } = await axios.post("/categories/", {...categoryData});
       setCategories({results: [...categories.results, data]})
-      setNewCategoryAdded(true);
       handleClose();
-      console.log("submitted");
+      setIsLoaded(true);
     } catch (err) {
       setErrors(err.response?.data);
       console.log(err.response?.data)
+      setIsLoaded(true);
     }
   }
 
@@ -48,6 +51,7 @@ function AddCategory({ categories, setCategories, setNewCategoryAdded }) {
       </Button>
 
       <Modal size="lg" show={show} onHide={handleClose}>
+        {!isLoaded && <LoadingIcon size="5" />}
         <Modal.Header closeButton>
           <Modal.Title className="ps-3">Add Category</Modal.Title>
         </Modal.Header>

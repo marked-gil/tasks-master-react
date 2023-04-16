@@ -1,25 +1,42 @@
-import React, { useState } from 'react'
-import { useCurrentUser } from '../contexts/CurrentUserContext'
+import React, { useEffect, useState } from 'react'
 import moment from 'moment';
 import styles from '../styles/SideBar.module.css'
 import { Link, useHistory } from 'react-router-dom';
 import { DatePicker } from '@mui/x-date-pickers';
 import { Button, Form } from 'react-bootstrap';
 import AddCategory from '../pages/categories/AddCategory';
+import { axiosReq } from '../api/axiosDefaults';
+import LoadingIcon from './LoadingIcon';
 
-const SideBar = ({ categories, setCategories, setNewCategoryAdded }) => {
-  const currentUser = useCurrentUser();
+const SideBar = ({ currentUser }) => {
 
   const [ tasksDate, setTasksDate ] = useState(null);
+  const [ categories, setCategories ] = useState({ results: []});
   const [ categoryID, setCategoryID ] = useState("");
+  const [ isLoaded , setIsLoaded ] = useState(false);
   const history = useHistory();
+
+  useEffect(() => {
+    const getCategories = async () => {
+      try {
+        const { data } = await axiosReq.get(`/categories/`);
+        setCategories(data);
+        setIsLoaded(true);
+      } catch (err) {
+        console.log(err);
+        setIsLoaded(true);
+      }
+    };
+
+    getCategories();
+  },[])
 
   const handleDateSelection = (event) => {
     if (tasksDate) {
           history.push(`/tasks/${moment(tasksDate).format('YYYY-MM-DD')}`)
         }
   };
-
+  
   const handleCategoryChange = (event) => {
     setCategoryID(event.target.value)
   };
@@ -31,9 +48,12 @@ const SideBar = ({ categories, setCategories, setNewCategoryAdded }) => {
   }
 
   return (
-    <div className={styles.SideBar}>
+    <div className={`${styles.SideBar}`}>
+
       <p>Hi, {currentUser?.username}!</p>
-      <ul className="ps-0 mb-5">
+
+      <ul className="ps-0 mb-5 position-relative ">
+        {!isLoaded && <LoadingIcon size="4" />}
         <li className="mb-2 d-flex">
           <DatePicker
             className={`me-2`}
@@ -78,7 +98,6 @@ const SideBar = ({ categories, setCategories, setNewCategoryAdded }) => {
           <AddCategory
             categories={categories}
             setCategories={setCategories}
-            setNewCategoryAdded={setNewCategoryAdded}
           />
         </div>
         
