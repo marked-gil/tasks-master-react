@@ -6,13 +6,13 @@ import AddTask from './AddTask';
 import styles from '../../styles/TasksByCategoryPage.module.css';
 import { useParams } from 'react-router-dom';
 import { getCategory } from '../../api/categoryMethods';
-import { getFilteredTasks, getTasksByCategory } from '../../api/taskMethods';
+import { getFilteredTasks } from '../../api/taskMethods';
 import TasksFilter from '../../components/TasksFilter';
+import { axiosReq } from '../../api/axiosDefaults';
 
 function TasksByCategoryPage({ categories }) {
 
   const { id } = useParams();
-  const [ changeInTasks, setChangeInTasks ] = useState({});
   const [ tasks, setTasks ] = useState({ results: []});
   const [ categoryData, setCategoryData ] = useState({});
   const [ showCompletedTasks, setShowCompletedTasks ] = useState(false);
@@ -24,8 +24,17 @@ function TasksByCategoryPage({ categories }) {
   }, [id]);
 
   useEffect(() => {
+    const getTasksByCategory = async () => {
+      try {
+        const { data } = await axiosReq.get(`/tasks/?category=${id}`)
+        setTasks(data)
+      } catch (err) {
+        console.log(err.response?.data)
+        setError(err.response?.data)
+      }
+    }
     getTasksByCategory(id, setTasks, setError);
-  }, [changeInTasks, id])
+  }, [id])
   
   const handleFilterSubmit = async () => {
     getFilteredTasks({filters, setTasks, setError, category: categoryData.id});
@@ -56,8 +65,6 @@ function TasksByCategoryPage({ categories }) {
       
         <TasksList
           tasks={tasks}
-          setTasks={setTasks}
-          setChangeInTasks={setChangeInTasks}
           showCompletedTasks={showCompletedTasks}
           showDate
         />
