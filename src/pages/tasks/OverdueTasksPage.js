@@ -3,19 +3,30 @@ import { Col } from 'react-bootstrap';
 import ErrorDisplay from '../../components/ErrorDisplay';
 import TasksList from './TasksList';
 import styles from '../../styles/OverdueTasksPage.module.css';
-import { getFilteredTasks, getOverdueTasks } from '../../api/taskMethods';
+import { getFilteredTasks } from '../../api/taskMethods';
 import TasksFilter from '../../components/TasksFilter';
+import { axiosReq } from '../../api/axiosDefaults';
 
 function OverdueTasksPage({ categories }) {
 
-  const [ changeInTasks, setChangeInTasks ] = useState({})
   const [ tasks, setTasks ] = useState({ results: []});
   const [ filters, setFilters ] = useState({category_name: "", progress: "", order_by: ""});
   const [ error, setError ] = useState({});
 
   useEffect(() => {
-    getOverdueTasks(setTasks, setError);
-  }, [changeInTasks]);
+    const getOverdueTasks = async () => {
+      try {
+        const { data } = await axiosReq.get(
+          `/tasks/?progress=overdue`
+        );
+        setTasks(data);
+      } catch (err) {
+        console.log(err.response?.data)
+        setError(err.response?.data)
+      }
+    } 
+    getOverdueTasks();
+  }, []);
 
   const handleFilterSubmit = async () => {
     console.log(filters)
@@ -45,8 +56,6 @@ function OverdueTasksPage({ categories }) {
       
       <TasksList
         tasks={tasks}
-        setTasks={setTasks}
-        setChangeInTasks={setChangeInTasks}
         showDate
       />
     </div>
