@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Col } from 'react-bootstrap';
+import { Button, Card, Col } from 'react-bootstrap';
 import ErrorDisplay from '../../components/ErrorDisplay';
 import TasksList from './TasksList';
 import AddTask from './AddTask';
@@ -51,7 +51,19 @@ function TasksByCategoryPage({ categories }) {
           <h2 className={`${styles.Heading}`}>{categoryData.category_name}</h2>
         </div>
 
-        <TasksFilter 
+        <div className="d-flex justify-content-between mb-3">
+          <Card className="mt-2" style={{width:"80%"}}>
+            <Card.Body className="pt-0">
+              <Card.Title className="">Description:</Card.Title>
+              <Card.Text className="ps-4 pe-4">{categoryData.description}</Card.Text>
+            </Card.Body>
+          </Card>
+          <Button size="sm" className="align-self-center" style={{width:"5rem", height: "2rem"}}>Edit</Button>
+        </div>
+
+        <hr />
+
+        <TasksFilter
           setFilters={setFilters}
           categories={categories}
           setShowCompletedTasks={setShowCompletedTasks}
