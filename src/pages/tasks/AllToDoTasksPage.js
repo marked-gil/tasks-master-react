@@ -3,20 +3,31 @@ import { Col } from 'react-bootstrap';
 import ErrorDisplay from '../../components/ErrorDisplay';
 import styles from '../../styles/AllToDoTasksPage.module.css';
 import TasksList from './TasksList';
-import { getFilteredTasks, getTodoTasks } from '../../api/taskMethods';
+import { getFilteredTasks } from '../../api/taskMethods';
 import AddTask from './AddTask';
 import TasksFilter from '../../components/TasksFilter';
+import { axiosReq } from '../../api/axiosDefaults';
 
 function AllToDoTasksPage({ categories }) {
 
-  const [ changeInTasks, setChangeInTasks ] = useState({});
   const [ tasks, setTasks ] = useState({ results: []});
   const [ filters, setFilters ] = useState({category_name: "", progress: "", order_by: ""});
   const [ error, setError ] = useState({});
 
   useEffect(() => {
-    getTodoTasks(setTasks, setError)
-  }, [changeInTasks]);
+    const getTodoTasks = async () => {
+      try {
+        const { data } = await axiosReq.get(
+          `/tasks/?progress=to-do`
+        );
+        setTasks(data);
+      } catch (err) {
+        console.log(err.response)
+        setError(err.response);
+      }
+    }
+    getTodoTasks()
+  }, []);
 
   const handleFilterSubmit = async () => {
     getFilteredTasks({filters, setTasks, setError, todoTasksOnly:true});
@@ -45,8 +56,6 @@ function AllToDoTasksPage({ categories }) {
         
         <TasksList
           tasks={tasks}
-          setTasks={setTasks}
-          setChangeInTasks={setChangeInTasks}
           showDate
         />
       </div>

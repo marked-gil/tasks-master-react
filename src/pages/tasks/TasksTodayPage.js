@@ -15,7 +15,6 @@ function TasksTodayPage({ categories }) {
 
   const due_date = moment().format("YYYY-MM-DD")
 
-  // const [ changeInTasks, setChangeInTasks ] = useState({})
   const [ showCompletedTasks, setShowCompletedTasks ] = useState(false)
   const [ tasks, setTasks ] = useState({ results: []});
   const [ successFeedback, setSuccessFeedback ] = useState("");
