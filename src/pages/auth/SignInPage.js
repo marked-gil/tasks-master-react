@@ -8,8 +8,9 @@ import { Alert } from 'react-bootstrap';
 import { useCurrentUser, useSetCurrentUser } from '../../contexts/CurrentUserContext';
 import { setTokenTimestamp } from '../../utils/utils';
 
-function SignInPage() {
+function SignInPage({setIsLoggedIn}) {
   const setCurrentUser = useSetCurrentUser();
+  const currentUser = useCurrentUser();
 
   const [signInData, setSignInData] = useState({
     username: "",
@@ -26,6 +27,7 @@ function SignInPage() {
     try {
       const { data } = await axios.post("/dj-rest-auth/login/", signInData);
       setCurrentUser(data.user);
+      setIsLoggedIn(!!currentUser);
       setTokenTimestamp(data);
       history.push('/');
     } catch (err) {
@@ -97,7 +99,7 @@ function SignInPage() {
         </Form>
         
         <div className="d-flex flex-column mt-5">
-          <a className="mb-4" href="#">Forgot Password?</a>
+          <Link to="/" className="mb-4" href="#">Forgot Password?</Link>
 
           <div className="d-flex">
             <p className="me-5">Not registered?</p>
