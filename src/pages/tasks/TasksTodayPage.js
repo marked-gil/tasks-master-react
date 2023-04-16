@@ -71,7 +71,7 @@ function TasksTodayPage({ categories }) {
 
         <TasksList
           tasks={tasks}
-          setTasks={setTasks}
+          // setTasks={setTasks}
           // setChangeInTasks={setChangeInTasks}
           showCompletedTasks={showCompletedTasks}
           showTime

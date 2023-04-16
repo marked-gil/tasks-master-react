@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import moment from 'moment';
 import TaskPopover from '../../components/TaskPopover';
 import { ListGroup } from 'react-bootstrap';
@@ -8,12 +8,16 @@ function TasksList(props) {
 
   const {
     tasks,
-    setTasks,
-    setChangeInTasks,
     showCompletedTasks,
     showDate,
     showTime,
   } = props;
+
+  const [ tasksList, setTasksList ] = useState({results: []});
+
+  useEffect(() => {
+    setTasksList(tasks)
+  },[tasks])
 
   const taskPriority = (task) => {
     return (
@@ -36,9 +40,8 @@ function TasksList(props) {
       </ListGroup.Item>
 
       <TaskPopover 
-        task={task} 
-        setTasks={setTasks} 
-        setChangeInTasks={setChangeInTasks}
+        task={task}
+        setTasksList={setTasksList}
       >
         <div className={`p-2 ${styles.VerticalEllipsis}`}>
           <i className={`fa-solid fa-ellipsis-vertical fa-lg`}></i>
@@ -60,12 +63,11 @@ function TasksList(props) {
 
   return (
     <ListGroup className={styles.ListGroup}>
-      {tasks.results.map((task) => (
+      {tasksList.results.map((task) => (
         showCompletedTasks ? TasksListItem(task, task.is_completed)
         : !task.is_completed ? TasksListItem(task) : ""
       ))}
     </ListGroup>
-
   )    
 };
 

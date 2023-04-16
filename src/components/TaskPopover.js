@@ -1,19 +1,17 @@
-import React from 'react';
+import React, { useState } from 'react';
 import moment from 'moment';
 import { Button } from 'react-bootstrap';
 import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
 import Popover from 'react-bootstrap/Popover';
-import { axiosReq } from '../api/axiosDefaults';
+import { axiosReq, axiosRes } from '../api/axiosDefaults';
 import { useHistory } from 'react-router-dom';
-import { deleteTask } from '../api/taskMethods';
 
 function TaskPopover(props) {
   
   const { 
     children, 
     task, 
-    setTasks, 
-    setChangeInTasks,
+    setTasksList, 
   } = props;
 
   const history = useHistory();
@@ -22,32 +20,32 @@ function TaskPopover(props) {
     history.push(`/task/${task.id}`)
   }
 
-  const handleComplete = async () => {
+  const handleComplete = () => {
     const taskData = {
       ...task,
       "due_date": moment(new Date(task.due_date)).format("yyyy-MM-DD"),
       "is_completed": true
     }
 
-    try {
-      const { data } = await axiosReq.put(`/tasks/${task.id}`, taskData);
-      setChangeInTasks(data)
-      setTasks(prevState => ({
-        ...prevState,
-        results: [data]
-      }))
-    } catch (err) {
-      console.log(err.response?.data)
+    const updateTasks = async () => {
+      try {
+        const { data } = await axiosReq.put(`/tasks/${task.id}`, taskData);
+        setTasksList(prevState => ({
+          results: [...prevState.results.filter(item => item.id !== task.id), data]
+        }))
+      } catch (err) {
+        console.log(err.response?.data)
+      }
     }
-  }
+    updateTasks();
+  };
 
   const handleUndo = async () => {
     try {
-      const { data } = await axiosReq.put(`/tasks/${task.id}`, {...task, "datetime_completed": null, "is_completed": false});
-      // setChangeInTasks(data)
-      setTasks(prevState => ({
-        ...prevState,
-        results: [data]
+      const { data } = await axiosReq.put(`/tasks/${task.id}`, {
+        ...task, "datetime_completed": null, "is_completed": false});
+        setTasksList(prevState => ({
+        results: [...prevState.results.filter(item => item.id !== task.id), data]
       }))
     } catch (err) {
       console.log(err)
@@ -55,7 +53,29 @@ function TaskPopover(props) {
   }
 
   const handleDelete = () => {
-    deleteTask(task, setTasks);
+    const deleteTask = async () => {
+      let task_id = ""
+      if (typeof task === 'object') {
+        task_id = task.id
+      } else if (typeof task === 'string') {
+        task_id = task
+      } else {
+        console.log(typeof task)
+      }
+    
+      try {
+        await axiosRes.delete(`/tasks/${task_id}`)
+        if (setTasksList) {
+          setTasksList(prevState => (
+            {results: prevState.results.filter(item => item.id !== task.id)}
+          ))
+        }
+      } catch (err) {
+        console.log(err.response?.data)
+      }
+    }
+
+    deleteTask();
   }
 
   const popover = (
@@ -70,7 +90,7 @@ function TaskPopover(props) {
   );
   
   return (
-    <OverlayTrigger trigger="click" rootClose placement="left" overlay={popover}>
+    <OverlayTrigger trigger="click" rootClose rootCloseEvent="click" placement="left" overlay={popover}>
       { children }
     </OverlayTrigger>
   )
