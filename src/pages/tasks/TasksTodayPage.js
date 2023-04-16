@@ -3,26 +3,42 @@ import moment from 'moment';
 import styles from '../../styles/TasksTodayPage.module.css';
 import Col from 'react-bootstrap/Col';
 import AddTask from './AddTask';
-import { getFilteredTasks, getTasks } from '../../api/taskMethods';
+import { getFilteredTasks } from '../../api/taskMethods';
 import ErrorDisplay from '../../components/ErrorDisplay';
 import TasksFilter from '../../components/TasksFilter';
 import TasksList from './TasksList';
 import SuccessFeedback from '../../components/SuccessFeedback';
+import { axiosReq } from '../../api/axiosDefaults';
+import LoadingIcon from '../../components/LoadingIcon';
 
 function TasksTodayPage({ categories }) {
 
   const due_date = moment().format("YYYY-MM-DD")
 
-  const [ changeInTasks, setChangeInTasks ] = useState({})
+  // const [ changeInTasks, setChangeInTasks ] = useState({})
   const [ showCompletedTasks, setShowCompletedTasks ] = useState(false)
   const [ tasks, setTasks ] = useState({ results: []});
   const [ successFeedback, setSuccessFeedback ] = useState("");
   const [ error, setError ] = useState({});
   const [ filters, setFilters ] = useState({category_name: "", progress: "", order_by: ""});
+  const [ isLoaded, setIsLoaded ] = useState(false);
 
   useEffect(() => {
-    getTasks(setTasks);
-  }, [changeInTasks]);
+    const getTasks = async () => {
+      try {
+        const { data } = await axiosReq.get(
+          `/tasks/?due_date=${moment(due_date).format("yyyy-MM-DD")}`
+        );
+        setTasks(data);
+        setIsLoaded(true);
+      } catch (err) {
+        console.log(err.response?.data)
+        setIsLoaded(true);
+      }
+    }
+    getTasks();
+  }, [due_date]);
+  
 
   const handleFilterSubmit = async (event) => {
     event.preventDefault();
@@ -31,7 +47,8 @@ function TasksTodayPage({ categories }) {
 
   return (
     <Col className={styles.MyTasksToday}>
-      <div className={styles.InnerContainer}>
+      <div className={`position-relative ${styles.InnerContainer}`}>
+        {!isLoaded && <LoadingIcon size="6" />}
         {error?.data && <ErrorDisplay error={error} />}
         {successFeedback && <SuccessFeedback message={successFeedback} />}
 
@@ -55,7 +72,7 @@ function TasksTodayPage({ categories }) {
         <TasksList
           tasks={tasks}
           setTasks={setTasks}
-          setChangeInTasks={setChangeInTasks}
+          // setChangeInTasks={setChangeInTasks}
           showCompletedTasks={showCompletedTasks}
           showTime
         />
