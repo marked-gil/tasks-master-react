@@ -10,11 +10,11 @@ function SignOutLink({ className }) {
   const handleSignOut = async () => {
 
     try {
-      setCurrentUser(null);
       await axios.post("dj-rest-auth/logout/");
+      setCurrentUser(null);
       removeTokenTimestamp();
     } catch (err) {
-      console.log(err.response);
+      console.log(err);
     }
   };
 
