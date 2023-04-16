@@ -66,8 +66,7 @@ function SharedTasksPage({ categories }) {
       
         <TasksList
           tasks={tasks}
-          setTasks={setTasks}
-          showCompletedTasks={true}
+          showCompletedTasks={showCompletedTasks}
           showDate
         />
       </div>
