@@ -7,6 +7,7 @@ import { axiosReq } from '../../api/axiosDefaults';
 import styles from '../../styles/ProfilePage.module.css';
 import SuccessFeedback from '../../components/SuccessFeedback';
 import UpdateProfileImage from './UpdateProfileImage';
+import LoadingIcon from '../../components/LoadingIcon';
 
 function ProfilePage ({ currentUser }) {
 
@@ -21,6 +22,7 @@ function ProfilePage ({ currentUser }) {
 
   const [ profileData, setProfileData ] = useState(initialData);
   const [ successFeedback, setSuccessFeedback ] = useState("");
+  const [ isLoaded, setIsLoaded ] = useState(false);
   const [ errors, setErrors ] = useState({});
 
   const {
@@ -43,9 +45,11 @@ function ProfilePage ({ currentUser }) {
       const handleMount = async () => {
         try {
           const { data } = await axiosReq.get(`/profiles/${profile_id}`);
-          setProfileData(data)
+          setProfileData(data);
+          setIsLoaded(true);
         } catch (err) {
-          console.log(err.response)
+          console.log(err.response?.data)
+          setIsLoaded(true);
         }
       }
 
@@ -62,19 +66,25 @@ function ProfilePage ({ currentUser }) {
     formData.append('email', email);
 
     try {
+      setIsLoaded(false);
       const { data } = await axiosReq.put(`profiles/${profile_id}/`, formData);
       setProfileData(data)
+      setIsLoaded(true)
       setSuccessFeedback("Your profile information is successfully updated.")
     } catch (err) {
       console.log(err.response?.data)
       setErrors(err.response?.data);
+      setIsLoaded(true);
     }
   }
 
   return (
     <Col className={styles.ProfilePage}>
-      <div>
+      <div className="position-relative">
+
+        {!isLoaded && <LoadingIcon size="8" />}
         {successFeedback && <SuccessFeedback message={successFeedback} />}
+
         <h2 className={styles.PageTitle}>My Profile</h2>
 
           <Form onSubmit={handleSubmit} className={styles.Form}>

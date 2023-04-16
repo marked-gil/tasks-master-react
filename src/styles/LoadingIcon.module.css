@@ -1,0 +1,9 @@
+.LoadingIcon {
+  z-index: 1031;
+  position: absolute;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  width: 100%;
+  height: 100%;
+}
