@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Button, Figure, Form, Modal } from 'react-bootstrap';
 import { axiosReq } from '../../api/axiosDefaults';
+import LoadingIcon from '../../components/LoadingIcon';
 
 function UpdateProfileImage(props) {
   
@@ -13,7 +14,8 @@ function UpdateProfileImage(props) {
   } = props;
 
   const [ imageSource, setImageSource ] = useState("");
-  const [ errors, setErrors ] = useState({})
+  const [ errors, setErrors ] = useState({});
+  const [ isLoaded, setIsLoaded ] = useState(true);
   const [show, setShow] = useState(false);
   const imageFile = useRef();
 
@@ -38,13 +40,16 @@ function UpdateProfileImage(props) {
     formData.append('image', imageFile?.current?.files[0]);
     if (imageFile?.current?.files[0]) {
       try {
+        setIsLoaded(false)
         const { data } = await axiosReq.put(`profiles/${profile_id}/`, formData);
         setProfileData(data);
         setSuccessFeedback("Profile picture successfully updated.")
         handleClose();
         URL.revokeObjectURL(imageSource);
+        setIsLoaded(true)
       } catch (err) {
         setErrors(err.response?.data)
+        setIsLoaded(true)
       }
     }
   };
@@ -58,6 +63,7 @@ function UpdateProfileImage(props) {
       </i>
 
       <Modal show={show} onHide={handleClose}>
+      {!isLoaded && <LoadingIcon size="8" />}
         <Modal.Header closeButton>
           <Modal.Title>Update Profile Image</Modal.Title>
         </Modal.Header>

@@ -48,8 +48,7 @@ function ProfilePage ({ currentUser }) {
           setProfileData(data);
           setIsLoaded(true);
         } catch (err) {
-          console.log(err.response?.data)
-          setIsLoaded(true);
+          console.log(err.response?.data);
         }
       }
 
@@ -68,13 +67,12 @@ function ProfilePage ({ currentUser }) {
     try {
       setIsLoaded(false);
       const { data } = await axiosReq.put(`profiles/${profile_id}/`, formData);
-      setProfileData(data)
-      setIsLoaded(true)
-      setSuccessFeedback("Your profile information is successfully updated.")
-    } catch (err) {
-      console.log(err.response?.data)
-      setErrors(err.response?.data);
+      setProfileData(data);
+      setSuccessFeedback("Your profile information is successfully updated.");
       setIsLoaded(true);
+    } catch (err) {
+      console.log(err.response?.data);
+      setErrors(err.response?.data);
     }
   }
 
