@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { Button, Figure, Form, Modal } from 'react-bootstrap';
 import { axiosReq } from '../../api/axiosDefaults';
 import LoadingIcon from '../../components/LoadingIcon';
+import { useSetCurrentUser } from '../../contexts/CurrentUserContext';
 
 function UpdateProfileImage(props) {
   
@@ -12,6 +13,8 @@ function UpdateProfileImage(props) {
     setSuccessFeedback, 
     className 
   } = props;
+
+  const setCurrentUser = useSetCurrentUser();
 
   const [ imageSource, setImageSource ] = useState("");
   const [ errors, setErrors ] = useState({});
@@ -43,6 +46,10 @@ function UpdateProfileImage(props) {
         setIsLoaded(false)
         const { data } = await axiosReq.put(`profiles/${profile_id}/`, formData);
         setProfileData(data);
+        setCurrentUser(prevState => ({
+          ...prevState,
+          "profile_image": data.image
+        }));
         setSuccessFeedback("Profile picture successfully updated.")
         handleClose();
         URL.revokeObjectURL(imageSource);
