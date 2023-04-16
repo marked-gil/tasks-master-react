@@ -5,12 +5,11 @@ import Form from 'react-bootstrap/Form';
 import { Link, useHistory } from 'react-router-dom';
 import styles from '../../styles/SignInPage.module.css'
 import { Alert } from 'react-bootstrap';
-import { useCurrentUser, useSetCurrentUser } from '../../contexts/CurrentUserContext';
+import { useSetCurrentUser } from '../../contexts/CurrentUserContext';
 import { setTokenTimestamp } from '../../utils/utils';
 
-function SignInPage({setIsLoggedIn}) {
+function SignInPage() {
   const setCurrentUser = useSetCurrentUser();
-  const currentUser = useCurrentUser();
 
   const [signInData, setSignInData] = useState({
     username: "",
@@ -27,7 +26,6 @@ function SignInPage({setIsLoggedIn}) {
     try {
       const { data } = await axios.post("/dj-rest-auth/login/", signInData);
       setCurrentUser(data.user);
-      setIsLoggedIn(!!currentUser);
       setTokenTimestamp(data);
       history.push('/');
     } catch (err) {
@@ -50,7 +48,7 @@ function SignInPage({setIsLoggedIn}) {
         <h1>Sign In</h1>
 
         <Form onSubmit={handleSubmit} className={`d-flex flex-column mt-5 ${styles.Form}`}>
-          {errors.non_field_errors?.map((error, idx) => (
+          {errors?.non_field_errors?.map((error, idx) => (
             <Alert className={`mt-1 mb-0 pb-0 pt-0 ${styles.TextCenter}`} key={idx} variant="danger">
               {error}
             </Alert>
@@ -67,7 +65,7 @@ function SignInPage({setIsLoggedIn}) {
               onChange={handleChange}
             />
 
-            {errors.username?.map((error, idx) => (
+            {errors?.username?.map((error, idx) => (
               <Alert className={`mt-1 mb-0 pb-0 pt-0 ${styles.TextCenter}`} key={idx} variant="danger">
                 {error}
               </Alert>
@@ -85,7 +83,7 @@ function SignInPage({setIsLoggedIn}) {
               onChange={handleChange}
             />
 
-            {errors.password?.map((error, idx) => (
+            {errors?.password?.map((error, idx) => (
               <Alert className={`mt-1 mb-0 pb-0 pt-0 ${styles.TextCenter}`} key={idx} variant="danger">
                 {error}
               </Alert>
