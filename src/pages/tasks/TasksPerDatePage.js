@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import moment from 'moment';
-import { getFilteredTasks, getTasks } from '../../api/taskMethods';
+import { getFilteredTasks } from '../../api/taskMethods';
 import { Col } from 'react-bootstrap';
 import styles from '../../styles/TasksPerDatePage.module.css';
 import ErrorDisplay from '../../components/ErrorDisplay';
@@ -8,6 +8,7 @@ import TasksFilter from '../../components/TasksFilter';
 import TasksList from './TasksList';
 import AddTask from './AddTask';
 import { useHistory, useParams } from 'react-router-dom';
+import { axiosReq } from '../../api/axiosDefaults';
 
 function TasksPerDatePage({ categories }) {
 
@@ -19,7 +20,6 @@ function TasksPerDatePage({ categories }) {
   const is_DueDateTomorrow = moment().add(1, 'days').format('YYYY-MM-DD') === due_date;
   const is_DueDatePrevious = due_date < dateToday
   
-  const [ changeInTasks, setChangeInTasks ] = useState({})
   const [ showCompletedTasks, setShowCompletedTasks ] = useState(false)
   const [ tasks, setTasks ] = useState({ results: []});
   const [ error, setError ] = useState({});
@@ -32,8 +32,18 @@ function TasksPerDatePage({ categories }) {
   }, [due_date, history, dateToday])
 
   useEffect(() => {
-    getTasks(setTasks, due_date);
-  }, [changeInTasks, due_date]);
+    const getTasks = async () => {
+      try {
+        const { data } = await axiosReq.get(
+          `/tasks/?due_date=${moment(due_date).format("yyyy-MM-DD")}`
+        );
+        setTasks(data)
+      } catch (err) {
+        console.log(err.response?.data)
+      }
+    }
+    getTasks();
+  }, [due_date]);
 
   const handleFilterSubmit = async (event) => {
     event.preventDefault();
@@ -67,8 +77,6 @@ function TasksPerDatePage({ categories }) {
 
         <TasksList
           tasks={tasks}
-          setTasks={setTasks}
-          setChangeInTasks={setChangeInTasks}
           showCompletedTasks={showCompletedTasks}
           showTime
         />
