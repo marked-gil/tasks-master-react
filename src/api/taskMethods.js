@@ -1,19 +1,6 @@
 import { axiosReq, axiosRes } from "./axiosDefaults";
 import moment from 'moment';
 
-
-export const getTasks = async (setTasks, due_date) => {
-  try {
-    const { data } = await axiosReq.get(
-      `/tasks/?due_date=${moment(due_date).format("yyyy-MM-DD")}`
-    );
-    setTasks(data)
-    console.log(data)
-  } catch (err) {
-    console.log(err.response?.data)
-  }
-}
-
 export const getFilteredTasks = async (
     {
       filters,
@@ -69,40 +56,6 @@ export const getFilteredTasks = async (
     setError(err.response);
   }
 }
-
-export const getTodoTasks = async (setTasks, setError) => {
-  try {
-    const { data } = await axiosReq.get(
-      `/tasks/?progress=to-do`
-    );
-    setTasks(data);
-  } catch (err) {
-    console.log(err.response)
-    setError(err.response);
-  }
-}
-
-export const getTasksByCategory = async (categoryID, setTasks, setError) => {
-  try {
-    const { data } = await axiosReq.get(`/tasks/?category=${categoryID}`)
-    setTasks(data)
-  } catch (err) {
-    console.log(err.response?.data)
-    setError(err.response?.data)
-  }
-}
-
-export const getOverdueTasks = async (setTasks, setError) => {
-  try {
-    const { data } = await axiosReq.get(
-      `/tasks/?progress=overdue`
-    );
-    setTasks(data);
-  } catch (err) {
-    console.log(err.response?.data)
-    setError(err.response?.data)
-  }
-} 
 
 export const deleteTask = async (task, setTasks) => {
   let task_id = ""
