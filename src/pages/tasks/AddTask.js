@@ -78,7 +78,6 @@ function AddTask({ tasks, setTasks, categories, setSuccessFeedback }) {
       setIsLoaded(true);
     } catch (err) {
       setErrors(err.response?.data);
-      console.log(err.response?.data);
       setIsLoaded(true);
     }
   }
@@ -110,7 +109,7 @@ function AddTask({ tasks, setTasks, categories, setSuccessFeedback }) {
                 aria-label="Add the task's name"
               />
 
-              {errors.task_name?.map((error, idx) => (
+              {errors?.task_name?.map((error, idx) => (
                 <Alert className={`mt-1 mb-0 pb-0 pt-0 ${styles.TextCenter}`} key={idx} variant="danger">
                   {error === 'This field must be unique for the "due_date" date.'
                   ? "Task with the same name already exists for this date."
@@ -133,7 +132,7 @@ function AddTask({ tasks, setTasks, categories, setSuccessFeedback }) {
                 aria-label="Add the task's description or details"
               />
 
-              {errors.details?.map((error, idx) => (
+              {errors?.details?.map((error, idx) => (
                 <Alert className={`mt-1 mb-0 pb-0 pt-0 ${styles.TextCenter}`} key={idx} variant="danger">
                   {error}
                 </Alert>
@@ -160,7 +159,7 @@ function AddTask({ tasks, setTasks, categories, setSuccessFeedback }) {
                     size="sm"
                     aria-label="Add tasks due date"
                   />
-                  {errors.due_date?.map((error, idx) => (
+                  {errors?.due_date?.map((error, idx) => (
                     <Alert className={`mt-1 mb-0 pb-0 pt-0 ${styles.TextCenter}`} key={idx} variant="danger">
                       {
                         error === "Date has wrong format. Use one of these formats instead: YYYY-MM-DD."

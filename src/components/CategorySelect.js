@@ -17,14 +17,14 @@ function CategorySelect({ category, handleChange, categories, errors }) {
         aria-label="Select task category"
       >
         <option value="">Choose your category</option>
-        {categories.results.map((cat) => (
+        {categories?.results.map((cat) => (
           <option value={cat.category_name} key={cat.category_name}>
             {cat.category_name}
           </option>
         ))}
       </Form.Select>
 
-      {errors.category?.map((error, idx) => (
+      {errors?.category?.map((error, idx) => (
         <Alert
           className={`mt-1 mb-0 pb-0 pt-0 ${styles.TextCenter}`} key={idx} variant="danger"
         >
