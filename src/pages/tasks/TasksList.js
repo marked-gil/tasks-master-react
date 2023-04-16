@@ -9,6 +9,7 @@ function TasksList(props) {
   const {
     tasks,
     showCompletedTasks,
+    showCompletedTasksOnly,
     showDate,
     showTime,
   } = props;
@@ -63,7 +64,12 @@ function TasksList(props) {
 
   return (
     <ListGroup className={styles.ListGroup}>
-      {tasksList.results.map((task) => (
+      {showCompletedTasksOnly && 
+        tasksList.results.map((task) => (
+          task.is_completed ? TasksListItem(task, task.is_completed) : ""
+        ))
+      }
+      {!showCompletedTasksOnly && tasksList.results.map((task) => (
         showCompletedTasks ? TasksListItem(task, task.is_completed)
         : !task.is_completed ? TasksListItem(task) : ""
       ))}

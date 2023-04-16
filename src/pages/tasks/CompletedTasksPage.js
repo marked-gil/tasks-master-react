@@ -20,7 +20,6 @@ function CompletedTasksPage({ categories }) {
           `/tasks/?progress=completed&ordering=-due_date`
         )
         setTasks(data)
-        console.log(data)
       } catch (err) {
         console.log(err.response)
         setError(err.response)
@@ -56,12 +55,10 @@ function CompletedTasksPage({ categories }) {
       
         <TasksList
           tasks={tasks}
-          setTasks={setTasks}
-          showCompletedTasks={true}
+          showCompletedTasksOnly
           showDate
         />
       </div>
-
     </Col>
   )
 };
