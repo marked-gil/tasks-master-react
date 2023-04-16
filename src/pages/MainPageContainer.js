@@ -41,7 +41,7 @@ function MainPageContainer(props) {
 
   return (
     <>
-      <NavBar />
+      <NavBar currentUser={currentUser} />
       <Container fluid className={styles.MainContent}>
         <Row className={styles.Row}>
           <SideBar currentUser={currentUser} />

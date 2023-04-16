@@ -6,14 +6,12 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import Offcanvas from 'react-bootstrap/Offcanvas';
 import styles from '../styles/NavBar.module.css'
-import Avatar from '../assets/profile-avatar.jpg'
 import { NavLink } from 'react-router-dom';
-import { useCurrentUser, useSetCurrentUser } from '../contexts/CurrentUserContext';
+import { useSetCurrentUser } from '../contexts/CurrentUserContext';
 import { removeTokenTimestamp } from '../utils/utils';
 
-function NavBar() {
+function NavBar({ currentUser }) {
   const setCurrentUser = useSetCurrentUser();
-  const currentUser =useCurrentUser();
 
   const handleSignOut = async () => {
     try {
@@ -57,7 +55,7 @@ function NavBar() {
                   <NavLink to="/all-todos" className={`p-0 ${styles.ClrWhite}`}>My Tasks</NavLink>
                   <NavLink to={`/profile/${currentUser?.pk}`} className={`p-0 ${styles.ClrWhite}`}>My Profile</NavLink>
                   <NavLink to="/signin" onClick={handleSignOut} className={`p-0 ${styles.ClrWhite}`}>Sign Out</NavLink>
-                  <NavLink to="" className="p-0"><img src={Avatar} alt="profile avatar" className={styles.Avatar}/></NavLink>
+                  <NavLink to="" className="p-0"><img src={currentUser?.profile_image} alt="profile avatar" className={styles.Avatar}/></NavLink>
                 </Nav>
               </Offcanvas.Body>
             </Navbar.Offcanvas>
