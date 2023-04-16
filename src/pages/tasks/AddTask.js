@@ -7,6 +7,7 @@ import styles from '../../styles/AddTask.module.css';
 import { Alert } from 'react-bootstrap';
 import CategorySelect from '../../components/CategorySelect';
 import axios from 'axios';
+import LoadingIcon from '../../components/LoadingIcon';
 
 function AddTask({ tasks, setTasks, categories, setSuccessFeedback }) {
 
@@ -22,6 +23,7 @@ function AddTask({ tasks, setTasks, categories, setSuccessFeedback }) {
   const [ priorityLevel, setPriorityLevel ] = useState({priority: 1});
   const [ errors, setErrors ] = useState({});
   const [ show, setShow ] = useState(false);
+  const [ isLoaded, setIsLoaded ] = useState(true);
 
   const { task_name, details, category } = taskData;
   const { due_date } = dueDate;
@@ -68,13 +70,16 @@ function AddTask({ tasks, setTasks, categories, setSuccessFeedback }) {
       moment(due_date).format("Do MMMM YYYY")} .`
 
     try {
+      setIsLoaded(false);
       const { data } = await axios.post("/tasks/", {...taskData, due_date, due_time, priority});
       handleClose();
       setTasks({results: [...tasks.results, data]});
-      setSuccessFeedback(success_message)
+      setSuccessFeedback(success_message);
+      setIsLoaded(true);
     } catch (err) {
-      setErrors(err.response?.data)
-      console.log(err.response?.data)
+      setErrors(err.response?.data);
+      console.log(err.response?.data);
+      setIsLoaded(true);
     }
   }
 
@@ -89,7 +94,8 @@ function AddTask({ tasks, setTasks, categories, setSuccessFeedback }) {
           <Modal.Title>Add Task</Modal.Title>
         </Modal.Header>
 
-        <Modal.Body>
+        <Modal.Body className="position-relative">
+          {!isLoaded && <LoadingIcon size="6" />}
           <Form>
             <Form.Group className="mb-3" controlId="taskName">
               <Form.Control
