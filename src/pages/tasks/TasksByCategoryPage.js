@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Card, Col } from 'react-bootstrap';
+import { Button, Card, Col } from 'react-bootstrap';
 import ErrorDisplay from '../../components/ErrorDisplay';
 import TasksList from './TasksList';
 import AddTask from './AddTask';
@@ -59,12 +59,22 @@ function TasksByCategoryPage({ categories }) {
               <Card.Text className="ps-4 pe-4">{categoryData.description}</Card.Text>
             </Card.Body>
           </Card>
-          <EditCategory 
-            id={id}
-            categoryData={categoryData}
-            setCategoryData={setCategoryData}
-            className="align-self-center" 
-          />
+          <div className="d-flex flex-column justify-content-center">
+            <EditCategory 
+              id={id}
+              categoryData={categoryData}
+              setCategoryData={setCategoryData}
+              className="mb-2" 
+            />
+            <Button 
+              variant="danger" 
+              size="sm" 
+              style={{ width:"4rem" }}
+              className="align-self-end"
+            >
+              Delete
+            </Button>
+          </div>
         </div>
 
         <hr />

@@ -45,7 +45,7 @@ function EditCategory({ id, className, categoryData, setCategoryData }) {
         variant="primary" 
         size="sm" 
         className={className} 
-        style={{width:"5rem", height: "2rem"}}
+        style={{width:"6rem", height: "2rem"}}
       >
         Edit
       </Button>
