@@ -28,6 +28,7 @@ function MainPageContainer(props) {
     tasksByCategoryPage,
     completedTasksPage,
     sharedTasksPage,
+    isLoggedIn,
   } = props;
 
   const currentUser = useCurrentUser();
@@ -46,7 +47,7 @@ function MainPageContainer(props) {
         <Row className={styles.Row}>
           <SideBar currentUser={currentUser} />
           {profile ? <ProfilePage currentUser={currentUser} /> 
-            : tasksTodayPage ? <TasksTodayPage categories={categories} />
+            : tasksTodayPage ? <TasksTodayPage categories={categories} isLoggedIn={isLoggedIn}/>
             : taskDetailsPage ? <TaskDetailsPage />
             : tasksPerDatePage ? <TasksPerDatePage categories={categories} /> 
             : allTodoTasksPage ? <AllToDoTasksPage categories={categories} /> 

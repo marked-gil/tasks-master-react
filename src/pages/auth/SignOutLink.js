@@ -14,6 +14,7 @@ function SignOutLink({ className }) {
       setCurrentUser(null);
       removeTokenTimestamp();
     } catch (err) {
+      setCurrentUser(null);
       console.log(err);
     }
   };
