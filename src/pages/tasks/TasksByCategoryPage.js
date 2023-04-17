@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Button, Card, Col } from 'react-bootstrap';
+import { Card, Col } from 'react-bootstrap';
 import ErrorDisplay from '../../components/ErrorDisplay';
 import TasksList from './TasksList';
 import AddTask from './AddTask';
@@ -9,6 +9,7 @@ import { getCategory } from '../../api/categoryMethods';
 import { getFilteredTasks } from '../../api/taskMethods';
 import TasksFilter from '../../components/TasksFilter';
 import { axiosReq } from '../../api/axiosDefaults';
+import EditCategory from '../categories/EditCategory';
 
 function TasksByCategoryPage({ categories }) {
 
@@ -58,7 +59,12 @@ function TasksByCategoryPage({ categories }) {
               <Card.Text className="ps-4 pe-4">{categoryData.description}</Card.Text>
             </Card.Body>
           </Card>
-          <Button size="sm" className="align-self-center" style={{width:"5rem", height: "2rem"}}>Edit</Button>
+          <EditCategory 
+            id={id}
+            categoryData={categoryData}
+            setCategoryData={setCategoryData}
+            className="align-self-center" 
+          />
         </div>
 
         <hr />
