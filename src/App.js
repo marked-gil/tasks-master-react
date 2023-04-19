@@ -86,13 +86,13 @@ function App() {
           isLoggedIn={isLoggedIn} 
           render={() => <MainPageContainer profile /> } 
         />
-        <ProtectedRoute 
+        <Route 
           exact 
           path="/all-todos" 
           isLoggedIn={isLoggedIn} 
           render={() => <MainPageContainer allTodoTasksPage />} 
         />
-        <ProtectedRoute 
+        <Route 
           exact 
           path="/overdue-tasks" 
           isLoggedIn={isLoggedIn} 

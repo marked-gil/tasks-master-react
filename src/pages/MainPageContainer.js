@@ -28,7 +28,6 @@ function MainPageContainer(props) {
     tasksByCategoryPage,
     completedTasksPage,
     sharedTasksPage,
-    isLoggedIn,
   } = props;
 
   const currentUser = useCurrentUser()
@@ -45,14 +44,21 @@ function MainPageContainer(props) {
       <NavBar currentUser={currentUser} />
       <Container fluid className={styles.MainContent}>
         <Row className={styles.Row}>
-          <SideBar currentUser={currentUser} />
+          <SideBar 
+            currentUser={currentUser} 
+            categories={categories} 
+            setCategories={setCategories} 
+          />
           {profile ? <ProfilePage currentUser={currentUser} /> 
-            : tasksTodayPage ? <TasksTodayPage categories={categories} isLoggedIn={isLoggedIn}/>
-            : taskDetailsPage ? <TaskDetailsPage />
+            : tasksTodayPage ? <TasksTodayPage categories={categories} />
+            : taskDetailsPage ? <TaskDetailsPage categories={categories} />
             : tasksPerDatePage ? <TasksPerDatePage categories={categories} /> 
             : allTodoTasksPage ? <AllToDoTasksPage categories={categories} /> 
             : overdueTasksPage ? <OverdueTasksPage categories={categories} />
-            : tasksByCategoryPage ? <TasksByCategoryPage categories={categories} />
+            : tasksByCategoryPage ? <TasksByCategoryPage 
+                categories={categories} 
+                setCategories={setCategories} 
+              />
             : completedTasksPage ? <CompletedTasksPage categories={categories} />
             : sharedTasksPage ? <SharedTasksPage categories={categories} />
             : <></>

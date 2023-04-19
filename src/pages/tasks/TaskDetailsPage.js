@@ -7,17 +7,15 @@ import Avatar from '../../assets/profile-avatar.jpg';
 import { axiosReq } from '../../api/axiosDefaults';
 import { Link, useHistory, useParams } from 'react-router-dom';
 import { FloatingLabel } from 'react-bootstrap';
-import { getCategories } from '../../api/categoryMethods';
 import { deleteTask } from '../../api/taskMethods';
 import ProfileAvatar from '../../components/ProfileAvatar';
 import EditTaskAttributes from './EditTaskAttributes';
 import ShareTaskModal from './ShareTaskModal';
 
-function TaskDetailsPage() {
+function TaskDetailsPage({ categories }) {
 
   const history = useHistory();
   const { id } = useParams();
-  const [ categories, setCategories ] = useState({ results: []});
   const [ taskData, setTaskData ] = useState({});
   const [ editTaskName, setEditTaskName ] = useState(false);
   const [ editTaskDescription, setEditTaskDescription ] = useState(false);
@@ -34,10 +32,6 @@ function TaskDetailsPage() {
     progress,
     shared_to,
   } = taskData;
-
-  useMemo(() => {
-    getCategories(setCategories);
-  }, [setCategories])
 
   useMemo(() => {
     const handleMount = async () => {

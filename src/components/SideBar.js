@@ -1,35 +1,17 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import moment from 'moment';
 import styles from '../styles/SideBar.module.css'
 import { Link, useHistory } from 'react-router-dom';
 import { DatePicker } from '@mui/x-date-pickers';
 import { Button, Form } from 'react-bootstrap';
 import AddCategory from '../pages/categories/AddCategory';
-import { axiosReq } from '../api/axiosDefaults';
 import LoadingIcon from './LoadingIcon';
 
-const SideBar = ({ currentUser }) => {
+const SideBar = ({ currentUser, setCategories, categories }) => {
 
   const [ tasksDate, setTasksDate ] = useState(null);
-  const [ categories, setCategories ] = useState({ results: []});
   const [ categoryID, setCategoryID ] = useState("");
-  const [ isLoaded , setIsLoaded ] = useState(false);
   const history = useHistory();
-
-  useEffect(() => {
-    const getCategories = async () => {
-      try {
-        const { data } = await axiosReq.get(`/categories/`);
-        setCategories(data);
-        setIsLoaded(true);
-      } catch (err) {
-        console.log(err);
-        setIsLoaded(true);
-      }
-    };
-
-    getCategories();
-  },[])
 
   const handleDateSelection = (event) => {
     if (tasksDate) {
@@ -53,7 +35,7 @@ const SideBar = ({ currentUser }) => {
       <p>Hi, {currentUser?.username}!</p>
 
       <ul className="ps-0 mb-5 position-relative ">
-        {!isLoaded && <LoadingIcon size="4" />}
+        {/* {!isLoaded && <LoadingIcon size="4" />} */}
         <li className="mb-2 d-flex">
           <DatePicker
             className={`me-2`}
@@ -67,9 +49,6 @@ const SideBar = ({ currentUser }) => {
             }}
           />
           <Button className={`align-self-start ${styles.DatePickerBtn}`} onClick={handleDateSelection}>Go</Button>
-        </li>
-        <li className="mb-2">
-          {/* <Link><i className="fa-solid fa-plus"></i> Add Task</Link> */}
         </li>
         <li className="mb-2">
           <Link to="/"><i className="fa-solid fa-calendar-week"></i> Today</Link>

@@ -1,28 +1,27 @@
 import React, { useEffect, useState } from 'react';
-import { Button, Card, Col, Form } from 'react-bootstrap';
+import { Button, Col, Form } from 'react-bootstrap';
 import ErrorDisplay from '../../components/ErrorDisplay';
 import TasksList from './TasksList';
 import AddTask from './AddTask';
 import styles from '../../styles/TasksByCategoryPage.module.css';
-import { useParams } from 'react-router-dom';
+import { useHistory, useParams } from 'react-router-dom';
 import { getCategory } from '../../api/categoryMethods';
 import { getFilteredTasks } from '../../api/taskMethods';
 import TasksFilter from '../../components/TasksFilter';
-import { axiosReq } from '../../api/axiosDefaults';
+import { axiosReq, axiosRes } from '../../api/axiosDefaults';
 import LoadingIcon from '../../components/LoadingIcon';
 
-function TasksByCategoryPage({ categories }) {
+function TasksByCategoryPage({ categories, setCategories }) {
 
   const { id } = useParams();
+  const history = useHistory();
   const [ tasks, setTasks ] = useState({ results: []});
   const [ categoryData, setCategoryData ] = useState({});
   const [ showCompletedTasks, setShowCompletedTasks ] = useState(false);
   const [ filters, setFilters ] = useState({category_name: "", progress: "", order_by: ""});
   const [ error, setError ] = useState({});
   const [ isLoaded , setIsLoaded ] = useState(true);
-
   const [ editCategory, setEditCategory ] = useState(false);
-
   const { category_name, description } = categoryData;
 
   useEffect(() => {
@@ -72,6 +71,20 @@ function TasksByCategoryPage({ categories }) {
     }
   }
 
+  const handleDeleteCategory = async() => {
+    try {
+      setIsLoaded(false);
+      setCategories(prevState => (
+        {results: prevState.results.filter(item => item.id !== categoryData.id)}
+      ))
+      await axiosRes.delete(`categories/${id}`);
+      history.push("/");
+      setIsLoaded(true);
+    } catch (err) {
+      console.log(err.response)
+      setIsLoaded(true);
+    }
+  }
 
   const handleFilterSubmit = async () => {
     getFilteredTasks({filters, setTasks, setError, category: categoryData.id});
@@ -82,8 +95,31 @@ function TasksByCategoryPage({ categories }) {
       <div className={styles.InnerContainer}>
         {error?.data && <ErrorDisplay error={error} />}
 
-        <div className={`d-flex flex-column`}>
+        <div className={`d-flex flex-column position-relative`}>
           <h2 className={`mb-0 ${styles.HeadingOne}`}>My Category</h2>
+
+          {
+            !editCategory && 
+            <div className="position-absolute end-0">
+              <Button 
+                variant="danger" 
+                className="m-0 me-3"
+                size="sm"
+                onClick={handleDeleteCategory}
+              >
+                delete
+              </Button>
+              <Button 
+                variant="primary" 
+                className="m-0 ps-4 pe-4"
+                size="sm"
+                onClick={setEditCategory}
+              >
+                edit
+              </Button>
+            </div>
+          }
+
           <div className="d-flex position-relative">
             {!isLoaded && <LoadingIcon size="5" />}
             {!editCategory &&
@@ -127,18 +163,6 @@ function TasksByCategoryPage({ categories }) {
         </div>
         
         <div className="d-flex justify-content-end">
-          {
-          !editCategory && 
-          <Button 
-            variant="primary" 
-            className="m-0"
-            size="sm"
-            onClick={setEditCategory}
-          >
-            edit
-          </Button>
-          }
-
           {   
             editCategory && 
             <>
