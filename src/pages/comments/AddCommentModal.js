@@ -1,15 +1,17 @@
 import axios from 'axios';
 import React, { useState } from 'react';
-import { Button, Form, Modal } from 'react-bootstrap';
+import { Alert, Button, Form, Modal } from 'react-bootstrap';
 
 function AddCommentModal({ id, taskData }) {
 
-  const [show, setShow] = useState(false);
+  const [ show, setShow ] = useState(false);
   const [ commentContent, setcommentContent ] = useState({});
+  const [ feedback, setFeedback ] = useState("");
   const handleShow = () => setShow(true);
   const handleClose = () => {
     setShow(false);
     setcommentContent({});
+    setFeedback("");
   };
 
   const handleChange = (event) => {
@@ -25,11 +27,15 @@ function AddCommentModal({ id, taskData }) {
     formData.append('reply_to', "")
     formData.append('content', commentContent)
 
-    try {
-      const { data } = await axios.post(`/comments/`, formData);
-      console.log(data)
-    } catch (err) {
-      console.log(err.response)
+    if (Object.keys(commentContent).length !== 0) {
+      try {
+        const { data } = await axios.post(`/comments/`, formData);
+        setFeedback("");
+      } catch (err) {
+        console.log(err.response)
+      }
+    } else {
+      setFeedback("You cannot submit a blank comment.")
     }
   }
 
@@ -57,17 +63,16 @@ function AddCommentModal({ id, taskData }) {
                 aria-label="Add comment"
               />
 
-              {/* {errors?.details?.map((error, idx) => (
-                <Alert className={`mt-1 mb-0 pb-0 pt-0 ${styles.TextCenter}`} key={idx} variant="danger">
-                  {error}
-                </Alert>
-                ))
-              } */}
+              <Alert className={`mt-1 mb-0 pb-0 pt-0`} style={{ textAlign: "center"}} variant="danger">
+                {feedback}
+              </Alert>
+
             </Form.Group>
           </Form>
-          <p className="m-0">Task: <span>Task Name</span></p>
+
+          <p className="m-0">Task: <span>{taskData.task_name}</span></p>
         </Modal.Body>
-        <Modal.Footer>
+        <Modal.Footer className="pb-0 pt-0">
           <Button variant="secondary" onClick={handleClose} size="sm">
             cancel
           </Button>
