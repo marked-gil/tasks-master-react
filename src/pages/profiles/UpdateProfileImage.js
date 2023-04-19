@@ -10,7 +10,7 @@ function UpdateProfileImage(props) {
     profile_id, 
     profileData, 
     setProfileData, 
-    setSuccessFeedback, 
+    setFeedbackMessage, 
     className 
   } = props;
 
@@ -27,7 +27,6 @@ function UpdateProfileImage(props) {
     setImageSource(profileData.image)
     setErrors({})
   };
-
   const handleShow = () => setShow(true);
 
   useEffect(() => {
@@ -50,7 +49,7 @@ function UpdateProfileImage(props) {
           ...prevState,
           "profile_image": data.image
         }));
-        setSuccessFeedback("Profile picture successfully updated.")
+        setFeedbackMessage("Profile picture successfully updated.")
         handleClose();
         URL.revokeObjectURL(imageSource);
         setIsLoaded(true)

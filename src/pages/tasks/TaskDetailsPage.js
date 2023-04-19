@@ -12,6 +12,7 @@ import ProfileAvatar from '../../components/ProfileAvatar';
 import EditTaskAttributes from './EditTaskAttributes';
 import ShareTaskModal from './ShareTaskModal';
 import AddCommentModal from '../comments/AddCommentModal';
+import FeedbackMessage from '../../components/FeedbackMessage';
 
 function TaskDetailsPage({ categories }) {
 
@@ -90,21 +91,22 @@ function TaskDetailsPage({ categories }) {
 
   return (
     <Col className={styles.TaskDetails}>
-      <div className={`${styles.Container} position-relative`}>
-        <h2 className={`${styles.MyTasks}`}>Task Details</h2>
-        
-        <div className="position-absolute top-0 end-0">
-          {/* SHARE BUTTON */}
-          <ShareTaskModal
-            task_name={task_name}
-            task_id={id}
-            set_task_data={setTaskData}
-            taskData={taskData}
-            handleShareTask={handleShareTask}
-          />
-
-          {/* DELETE BUTTON */}
-          <Button onClick={handleDelete} size="sm" variant='danger'>Delete Task</Button>
+      <div className={`${styles.Container}`}>
+        {feedbackMessage && <FeedbackMessage message={feedbackMessage} />}
+        <div className="position-relative">
+          <h2 className={`${styles.MyTasks}`}>Task Details</h2>
+          <div className="position-absolute top-0 end-0">
+            {/* SHARE BUTTON */}
+            <ShareTaskModal
+              task_name={task_name}
+              task_id={id}
+              set_task_data={setTaskData}
+              taskData={taskData}
+              handleShareTask={handleShareTask}
+            />
+            {/* DELETE BUTTON */}
+            <Button onClick={handleDelete} size="sm" variant='danger'>Delete Task</Button>
+          </div>
         </div>
 
         {/* TASK ATTRIBUTES */}

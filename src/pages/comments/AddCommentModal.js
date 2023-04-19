@@ -33,6 +33,7 @@ function AddCommentModal({ id, taskData, setComments, setFeedbackMessage }) {
         setComments(data)
         setFeedbackMessage("Comment is successully posted.")
         setFeedback("");
+        handleClose();
       } catch (err) {
         console.log(err.response)
       }

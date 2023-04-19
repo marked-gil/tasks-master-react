@@ -7,9 +7,9 @@ import { getFilteredTasks } from '../../api/taskMethods';
 import ErrorDisplay from '../../components/ErrorDisplay';
 import TasksFilter from '../../components/TasksFilter';
 import TasksList from './TasksList';
-import SuccessFeedback from '../../components/SuccessFeedback';
 import { axiosReq } from '../../api/axiosDefaults';
 import LoadingIcon from '../../components/LoadingIcon';
+import FeedbackMessage from '../../components/FeedbackMessage';
 
 function TasksTodayPage({ categories }) {
 
@@ -17,7 +17,7 @@ function TasksTodayPage({ categories }) {
 
   const [ showCompletedTasks, setShowCompletedTasks ] = useState(false)
   const [ tasks, setTasks ] = useState({ results: []});
-  const [ successFeedback, setSuccessFeedback ] = useState("");
+  const [ feedbackMessage, setFeedbackMessage ] = useState("");
   const [ error, setError ] = useState({});
   const [ filters, setFilters ] = useState({category_name: "", progress: "", order_by: ""});
   const [ isLoaded, setIsLoaded ] = useState(false);
@@ -49,7 +49,7 @@ function TasksTodayPage({ categories }) {
       <div className={`position-relative ${styles.InnerContainer}`}>
         {!isLoaded && <LoadingIcon size="6" />}
         {error?.data && <ErrorDisplay error={error} />}
-        {successFeedback && <SuccessFeedback message={successFeedback} />}
+        {feedbackMessage && <FeedbackMessage message={feedbackMessage} />}
 
         <div className={`d-flex justify-content-between`}>
           <h2 className={`${styles.MyTasks}`}>My Tasks</h2>
@@ -80,7 +80,7 @@ function TasksTodayPage({ categories }) {
         tasks={tasks}
         setTasks={setTasks}
         categories={categories}
-        setSuccessFeedback={setSuccessFeedback}
+        setSuccessFeedback={setFeedbackMessage}
       />
     </Col>
   )

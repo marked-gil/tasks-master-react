@@ -5,9 +5,9 @@ import Form from 'react-bootstrap/Form';
 import { axiosReq } from '../../api/axiosDefaults';
 
 import styles from '../../styles/ProfilePage.module.css';
-import SuccessFeedback from '../../components/SuccessFeedback';
 import UpdateProfileImage from './UpdateProfileImage';
 import LoadingIcon from '../../components/LoadingIcon';
+import FeedbackMessage from '../../components/FeedbackMessage';
 
 function ProfilePage ({ currentUser }) {
 
@@ -21,7 +21,7 @@ function ProfilePage ({ currentUser }) {
   }
 
   const [ profileData, setProfileData ] = useState(initialData);
-  const [ successFeedback, setSuccessFeedback ] = useState("");
+  const [ feedbackMessage, setFeedbackMessage ] = useState("");
   const [ isLoaded, setIsLoaded ] = useState(false);
   const [ errors, setErrors ] = useState({});
 
@@ -68,7 +68,7 @@ function ProfilePage ({ currentUser }) {
       setIsLoaded(false);
       const { data } = await axiosReq.put(`profiles/${profile_id}/`, formData);
       setProfileData(data);
-      setSuccessFeedback("Your profile information is successfully updated.");
+      setFeedbackMessage("Your profile information is successfully updated.");
       setIsLoaded(true);
     } catch (err) {
       console.log(err.response?.data);
@@ -79,9 +79,8 @@ function ProfilePage ({ currentUser }) {
   return (
     <Col className={styles.ProfilePage}>
       <div className="position-relative">
-
         {!isLoaded && <LoadingIcon size="8" />}
-        {successFeedback && <SuccessFeedback message={successFeedback} />}
+        {feedbackMessage && <FeedbackMessage message={feedbackMessage} />}
 
         <h2 className={styles.PageTitle}>My Profile</h2>
 
@@ -92,7 +91,7 @@ function ProfilePage ({ currentUser }) {
                 profile_id={profile_id}
                 profileData={profileData}
                 setProfileData={setProfileData}
-                setSuccessFeedback={setSuccessFeedback}
+                setFeedbackMessage={setFeedbackMessage}
                 className={styles.uploadIcon}
               />
 
