@@ -9,6 +9,7 @@ import { getCategory } from '../../api/categoryMethods';
 import { getFilteredTasks } from '../../api/taskMethods';
 import TasksFilter from '../../components/TasksFilter';
 import { axiosReq } from '../../api/axiosDefaults';
+import LoadingIcon from '../../components/LoadingIcon';
 
 function TasksByCategoryPage({ categories }) {
 
@@ -82,8 +83,9 @@ function TasksByCategoryPage({ categories }) {
         {error?.data && <ErrorDisplay error={error} />}
 
         <div className={`d-flex flex-column`}>
-          <h2 className={`mb-0 ${styles.HeadingOne}`}>My Tasks</h2>
+          <h2 className={`mb-0 ${styles.HeadingOne}`}>My Category</h2>
           <div className="d-flex position-relative">
+            {!isLoaded && <LoadingIcon size="5" />}
             {!editCategory &&
               <h2 className={`mb-0 ${styles.HeadingTwo}`}>{categoryData.category_name}</h2>
             }
@@ -124,8 +126,6 @@ function TasksByCategoryPage({ categories }) {
           }
         </div>
         
-       
-
         <div className="d-flex justify-content-end">
           {
           !editCategory && 
@@ -163,8 +163,6 @@ function TasksByCategoryPage({ categories }) {
           }
         </div>
 
-       
-        
         <hr />
 
         <TasksFilter
