@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import Alert from 'react-bootstrap/Alert';
 
-function SuccessFeedback({ message }) {
+function FeedbackMessage({ message }) {
   const [show, setShow] = useState(true);
 
   if (show) {
@@ -18,4 +18,4 @@ function SuccessFeedback({ message }) {
   }
 }
 
-export default SuccessFeedback;
+export default FeedbackMessage;

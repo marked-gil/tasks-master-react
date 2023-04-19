@@ -21,6 +21,8 @@ function TaskDetailsPage({ categories }) {
   const [ editTaskName, setEditTaskName ] = useState(false);
   const [ editTaskDescription, setEditTaskDescription ] = useState(false);
   const [ closeAllEdits, setCloseAllEdits ] = useState(false);
+  const [ feedbackMessage, setFeedbackMessage ] = useState("");
+  const [ comments, setComments ] = useState({});
 
   const {
     owner,
@@ -217,11 +219,16 @@ function TaskDetailsPage({ categories }) {
 
         {/* COMMENT SECTION */}
         <div>
-          <AddCommentModal id={id} taskData={taskData}/>
+          <AddCommentModal 
+            id={id} 
+            taskData={taskData} 
+            setComments={setComments} 
+            setFeedbackMessage={setFeedbackMessage}
+          />
 
-          <div>
-            <h2>Comments</h2>
-          </div>
+          <h2>Comments</h2>
+
+
 
         </div>
       </div>
