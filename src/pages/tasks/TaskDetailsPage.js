@@ -5,12 +5,13 @@ import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import Avatar from '../../assets/profile-avatar.jpg';
 import { axiosReq } from '../../api/axiosDefaults';
-import { Link, useHistory, useParams } from 'react-router-dom';
+import { useHistory, useParams } from 'react-router-dom';
 import { FloatingLabel } from 'react-bootstrap';
 import { deleteTask } from '../../api/taskMethods';
 import ProfileAvatar from '../../components/ProfileAvatar';
 import EditTaskAttributes from './EditTaskAttributes';
 import ShareTaskModal from './ShareTaskModal';
+import AddCommentModal from '../comments/AddCommentModal';
 
 function TaskDetailsPage({ categories }) {
 
@@ -216,7 +217,8 @@ function TaskDetailsPage({ categories }) {
 
         {/* COMMENT SECTION */}
         <div>
-          <Link>Add comment</Link>
+          <AddCommentModal />
+
           <div>
             <h2>Comments</h2>
           </div>
