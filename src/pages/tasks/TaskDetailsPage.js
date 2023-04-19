@@ -217,7 +217,7 @@ function TaskDetailsPage({ categories }) {
 
         {/* COMMENT SECTION */}
         <div>
-          <AddCommentModal />
+          <AddCommentModal id={id} taskData={taskData}/>
 
           <div>
             <h2>Comments</h2>

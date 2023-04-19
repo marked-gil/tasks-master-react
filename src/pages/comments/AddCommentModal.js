@@ -1,11 +1,37 @@
+import axios from 'axios';
 import React, { useState } from 'react';
 import { Button, Form, Modal } from 'react-bootstrap';
 
-function AddCommentModal() {
-  const [show, setShow] = useState(false);
+function AddCommentModal({ id, taskData }) {
 
-  const handleClose = () => setShow(false);
+  const [show, setShow] = useState(false);
+  const [ commentContent, setcommentContent ] = useState({});
   const handleShow = () => setShow(true);
+  const handleClose = () => {
+    setShow(false);
+    setcommentContent({});
+  };
+
+  const handleChange = (event) => {
+    setcommentContent(prevState => ({
+      ...prevState,
+      [event.target.name]: event.target.value
+    }))
+  }
+
+  const handleCommentPost = async() => {
+    const formData = new FormData();
+    formData.append("task", taskData.task_name)
+    formData.append('reply_to', "")
+    formData.append('content', commentContent)
+
+    try {
+      const { data } = await axios.post(`/comments/`, formData);
+      console.log(data)
+    } catch (err) {
+      console.log(err.response)
+    }
+  }
 
   return (
     <>
@@ -25,10 +51,9 @@ function AddCommentModal() {
                 as="textarea" 
                 rows={3} 
                 name="content"
-                // value={details}
                 placeholder="Comment"
                 maxLength={250}
-                // onChange={handleChange}
+                onChange={handleChange}
                 aria-label="Add comment"
               />
 
@@ -46,7 +71,7 @@ function AddCommentModal() {
           <Button variant="secondary" onClick={handleClose} size="sm">
             cancel
           </Button>
-          <Button variant="primary" onClick={handleClose}>
+          <Button variant="primary" onClick={handleCommentPost}>
             Post
           </Button>
         </Modal.Footer>
