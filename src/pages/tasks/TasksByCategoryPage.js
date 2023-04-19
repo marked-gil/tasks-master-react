@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Button, Card, Col } from 'react-bootstrap';
+import { Button, Card, Col, Form } from 'react-bootstrap';
 import ErrorDisplay from '../../components/ErrorDisplay';
 import TasksList from './TasksList';
 import AddTask from './AddTask';
@@ -9,7 +9,6 @@ import { getCategory } from '../../api/categoryMethods';
 import { getFilteredTasks } from '../../api/taskMethods';
 import TasksFilter from '../../components/TasksFilter';
 import { axiosReq } from '../../api/axiosDefaults';
-import EditCategory from '../categories/EditCategory';
 
 function TasksByCategoryPage({ categories }) {
 
@@ -19,10 +18,15 @@ function TasksByCategoryPage({ categories }) {
   const [ showCompletedTasks, setShowCompletedTasks ] = useState(false);
   const [ filters, setFilters ] = useState({category_name: "", progress: "", order_by: ""});
   const [ error, setError ] = useState({});
+  const [ isLoaded , setIsLoaded ] = useState(true);
+
+  const [ editCategory, setEditCategory ] = useState(false);
+
+  const { category_name, description } = categoryData;
 
   useEffect(() => {
     getCategory(id, setCategoryData, setError);
-  }, [id]);
+  }, [id, editCategory]);
 
   useEffect(() => {
     const getTasksByCategory = async () => {
@@ -37,6 +41,37 @@ function TasksByCategoryPage({ categories }) {
     getTasksByCategory(id, setTasks, setError);
   }, [id])
   
+  const cancelEditCategory = () => {
+    setEditCategory(!editCategory);
+  };
+
+  const handleDataChange = (event) => {
+    setCategoryData(prevState => (
+      {
+        ...prevState,
+        [event.target.name]: event.target.value
+      }
+    ))
+  }
+
+  const handleUpdateCategory = async() => {
+    const formData = new FormData();
+    formData.append('category_name', categoryData.category_name);
+    formData.append('description', categoryData.description);
+
+    try {
+      setIsLoaded(false);
+      const { data } = await axiosReq.patch(`categories/${id}`, formData);
+      setCategoryData(data);
+      setEditCategory(false);
+      setIsLoaded(true);
+    } catch (err) {
+      console.log(err.response);
+      setIsLoaded(true);
+    }
+  }
+
+
   const handleFilterSubmit = async () => {
     getFilteredTasks({filters, setTasks, setError, category: categoryData.id});
   };
@@ -46,37 +81,90 @@ function TasksByCategoryPage({ categories }) {
       <div className={styles.InnerContainer}>
         {error?.data && <ErrorDisplay error={error} />}
 
-        <div className={`d-flex justify-content-between`}>
-          <h2 className={`${styles.Heading}`}>My Tasks</h2>
-          <span className={styles.LineIcon}><i className="fa-solid fa-ellipsis-vertical"></i></span> 
-          <h2 className={`${styles.Heading}`}>{categoryData.category_name}</h2>
-        </div>
+        <div className={`d-flex flex-column`}>
+          <h2 className={`mb-0 ${styles.HeadingOne}`}>My Tasks</h2>
+          <div className="d-flex position-relative">
+            {!editCategory &&
+              <h2 className={`mb-0 ${styles.HeadingTwo}`}>{categoryData.category_name}</h2>
+            }
 
-        <div className="d-flex justify-content-between mb-3">
-          <Card className="mt-2" style={{width:"80%"}}>
-            <Card.Body className="pt-0">
-              <Card.Title className="">Description:</Card.Title>
-              <Card.Text className="ps-4 pe-4">{categoryData.description}</Card.Text>
-            </Card.Body>
-          </Card>
-          <div className="d-flex flex-column justify-content-center">
-            <EditCategory 
-              id={id}
-              categoryData={categoryData}
-              setCategoryData={setCategoryData}
-              className="mb-2" 
-            />
-            <Button 
-              variant="danger" 
-              size="sm" 
-              style={{ width:"4rem" }}
-              className="align-self-end"
-            >
-              Delete
-            </Button>
+            { 
+              editCategory && 
+              <>
+                <p className="mb-0 me-2">Category:</p>
+                <Form.Control 
+                  type="text" 
+                  maxLength="30" 
+                  name="category_name"
+                  defaultValue={category_name}
+                  className="mb-1"
+                  onChange={handleDataChange}
+                />
+              </>
+            }
           </div>
         </div>
+        
+        <div className="d-flex mb-1 position-relative">
+          <p className="mb-0 me-2">Description:</p>
+          {!editCategory && 
+            <p className="mb-0">{categoryData.description}</p>
+          }
 
+          {editCategory &&
+            <Form.Control 
+              as="textarea" 
+              row="2"
+              style={{maxHeight:"100px"}}
+              maxLength="100" 
+              name="description"
+              defaultValue={description}
+              onChange={handleDataChange}
+            />
+          }
+        </div>
+        
+       
+
+        <div className="d-flex justify-content-end">
+          {
+          !editCategory && 
+          <Button 
+            variant="primary" 
+            className="m-0"
+            size="sm"
+            onClick={setEditCategory}
+          >
+            edit
+          </Button>
+          }
+
+          {   
+            editCategory && 
+            <>
+              <Button
+                variant="link" 
+                className="m-0 me-2"
+                size="sm"
+                onClick={cancelEditCategory}
+              >
+                cancel
+              </Button>
+            
+              <Button 
+                variant="primary" 
+                className="m-0"
+                size="sm"
+                onClick={handleUpdateCategory}
+              >
+                SAVE
+              </Button>
+            </>
+          }
+        </div>
+
+       
+        
         <hr />
 
         <TasksFilter

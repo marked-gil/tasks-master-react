@@ -31,7 +31,7 @@ function MainPageContainer(props) {
     isLoggedIn,
   } = props;
 
-  const currentUser = useCurrentUser();
+  const currentUser = useCurrentUser()
   const [ newCategoryAdded, setNewCategoryAdded ] = useState(false);
   const [ categories, setCategories ] = useState({ results: []});
 

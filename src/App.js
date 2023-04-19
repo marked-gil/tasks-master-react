@@ -20,7 +20,7 @@ function App() {
         />
         <Route exact path="/signup" render={() => <SignUpPage /> } />
 
-        <ProtectedRoute 
+        {/* <ProtectedRoute 
           exact 
           path="/" 
           isLoggedIn={isLoggedIn} 
@@ -72,6 +72,55 @@ function App() {
           exact 
           path="/tasks/:due_date" 
           isLoggedIn={isLoggedIn} 
+          render={() => <MainPageContainer tasksPerDatePage />} 
+        /> */}
+
+        <Route 
+          exact 
+          path="/" 
+          render={() => <MainPageContainer tasksTodayPage />} 
+        />
+        <Route 
+          exact 
+          path="/profile/:id" 
+          isLoggedIn={isLoggedIn} 
+          render={() => <MainPageContainer profile /> } 
+        />
+        <ProtectedRoute 
+          exact 
+          path="/all-todos" 
+          isLoggedIn={isLoggedIn} 
+          render={() => <MainPageContainer allTodoTasksPage />} 
+        />
+        <ProtectedRoute 
+          exact 
+          path="/overdue-tasks" 
+          isLoggedIn={isLoggedIn} 
+          render={() => <MainPageContainer overdueTasksPage />}
+        />
+        <Route 
+          exact 
+          path="/categories/:id" 
+          render={() => <MainPageContainer tasksByCategoryPage />} 
+        />
+        <Route 
+          exact 
+          path="/shared-tasks"
+          render={() => <MainPageContainer sharedTasksPage /> } 
+        />
+        <Route 
+          exact 
+          path="/completed-tasks" 
+          render={() => <MainPageContainer completedTasksPage /> } 
+        />
+        <Route 
+          exact 
+          path="/task/:id" 
+          render={() => <MainPageContainer taskDetailsPage />} 
+        />
+        <Route 
+          exact 
+          path="/tasks/:due_date" 
           render={() => <MainPageContainer tasksPerDatePage />} 
         />
 
