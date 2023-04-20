@@ -3,28 +3,28 @@ import styles from '../../styles/TaskDetailsPage.module.css';
 import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
-import Avatar from '../../assets/profile-avatar.jpg';
 import { axiosReq } from '../../api/axiosDefaults';
 import { useHistory, useParams } from 'react-router-dom';
 import { FloatingLabel } from 'react-bootstrap';
 import { deleteTask } from '../../api/taskMethods';
-import ProfileAvatar from '../../components/ProfileAvatar';
 import EditTaskAttributes from './EditTaskAttributes';
 import ShareTaskModal from './ShareTaskModal';
 import AddCommentModal from '../comments/AddCommentModal';
+import ProfileAvatar from '../../components/ProfileAvatar';
 import FeedbackMessage from '../../components/FeedbackMessage';
 import CommentCard from '../comments/CommentCard';
 
 function TaskDetailsPage({ categories, currentUser }) {
 
   const profile_image = currentUser?.profile_image
+
   const history = useHistory();
   const { id } = useParams();
   const [ taskData, setTaskData ] = useState({});
   const [ editTaskName, setEditTaskName ] = useState(false);
   const [ editTaskDescription, setEditTaskDescription ] = useState(false);
   const [ closeAllEdits, setCloseAllEdits ] = useState(false);
-  const [ feedbackMessage, setFeedbackMessage ] = useState("");
+  // const [ feedbackMessage, setFeedbackMessage ] = useState("");
   const [ Comments, setComments ] = useState({ results: [] });
 
   const {
@@ -106,8 +106,8 @@ function TaskDetailsPage({ categories, currentUser }) {
 
   return (
     <Col className={styles.TaskDetails}>
-      <div className={`${styles.Container}`}>
-        {feedbackMessage && <FeedbackMessage message={feedbackMessage} />}
+      <div className={`${styles.Container} position-relative`}>
+        {/* {feedbackMessage && <FeedbackMessage message={feedbackMessage} />} */}
         <div className="position-relative">
           <h2 className={`${styles.MyTasks}`}>Task Details</h2>
           <div className="position-absolute top-0 end-0">
@@ -200,14 +200,20 @@ function TaskDetailsPage({ categories, currentUser }) {
         </Form.Group>
 
         {/* OWNER AVATAR */}
-        <ProfileAvatar
-          owner={owner}
-          isOwner={true}
-          showName={true}
-          img_src={Avatar}
-          imageWidth={"2rem"}
-          className={styles.OwnerAvatar} 
-        />
+        {profile_image &&
+        <>
+        {console.log(profile_image)}
+          <ProfileAvatar
+            owner={owner}
+            isOwner={true}
+            showName={true}
+            img_src={profile_image}
+            imageWidth={"3rem"}
+            className={styles.OwnerAvatar} 
+          />
+        </>
+          
+        }
 
         <div className={`d-flex flex-column position-absolute ${styles.Avatars}`}>
           {taskData.is_shared &&
@@ -216,19 +222,18 @@ function TaskDetailsPage({ categories, currentUser }) {
             </p>}
           
           {shared_to?.map((user) => (
-            <>
-              <ProfileAvatar
-                owner={user}
-                isOwner={false}
-                showName={true}
-                // image={Avatar}
-                imageWidth={"1.5rem"}
-                isDeletable
-                className={styles.SharedToAvatar}
-                taskData={taskData}
-                setTaskData={setTaskData}
-              />
-            </>
+            <ProfileAvatar
+              key={user}
+              owner={user}
+              isOwner={false}
+              showName={true}
+              img_src={user.image}
+              imageWidth={"1.5rem"}
+              isDeletable
+              className={styles.SharedToAvatar}
+              taskData={taskData}
+              setTaskData={setTaskData}
+            />
             ))
           }
         </div>

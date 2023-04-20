@@ -10,7 +10,7 @@ function ProfileAvatar(props) {
     isOwner, 
     showName, 
     imageWidth, 
-    image,
+    img_src,
     isDeletable,
     taskData,
     setTaskData,
@@ -29,11 +29,19 @@ function ProfileAvatar(props) {
 
   return (
     <div
-      key={owner}
       className={`d-flex flex-column align-items-center ${className}`}
       onMouseEnter={handleMouseHover}
       onMouseLeave={handleMouseLeave}
     > 
+      <img 
+        src={img_src ? img_src : Avatar} 
+        alt="profile avatar" 
+        style={{ width: imageWidth }}
+        className="rounded"
+      />
+      {showName && <span className={styles.bold}>{owner}</span>}
+      {isOwner && <span className={styles.smallFont}>(owner)</span>}
+
       {(showDelete && isDeletable) && 
         <UserSharingPopover
           taskData={taskData}
@@ -44,11 +52,8 @@ function ProfileAvatar(props) {
           style={{ color:"red", top:"10px", left:"10px", cursor:"pointer" }}></i>
         </UserSharingPopover>
       }
-      <img src={image ? image : Avatar} alt="profile avatar" style={{ width: imageWidth }}/>
-      {showName && <span className={styles.bold}>{owner}</span>}
-      {isOwner && <span className={styles.smallFont}>(owner)</span>}
     </div>
   )
 }
 
-export default ProfileAvatar
+export default ProfileAvatar;
