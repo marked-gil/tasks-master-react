@@ -9,6 +9,7 @@ import TasksList from './TasksList';
 import AddTask from './AddTask';
 import { useHistory, useParams } from 'react-router-dom';
 import { axiosReq } from '../../api/axiosDefaults';
+import FeedbackMessage from '../../components/FeedbackMessage';
 
 function TasksPerDatePage({ categories }) {
 
@@ -24,6 +25,7 @@ function TasksPerDatePage({ categories }) {
   const [ tasks, setTasks ] = useState({ results: []});
   const [ error, setError ] = useState({});
   const [ filters, setFilters ] = useState({category_name: "", progress: "", order_by: ""});
+  const [ feedbackMessage, setFeedbackMessage ] = useState("");
 
   useEffect(() => {
     if (due_date === dateToday) {
@@ -53,6 +55,7 @@ function TasksPerDatePage({ categories }) {
   return (
     <Col className={styles.MyTasks}>
       <div className={styles.InnerContainer}>
+        {feedbackMessage && <FeedbackMessage message={feedbackMessage} />}
         {error?.data && <ErrorDisplay error={error} />}
 
         <div className={`d-flex justify-content-between`}>
@@ -86,6 +89,8 @@ function TasksPerDatePage({ categories }) {
         tasks={tasks}
         setTasks={setTasks}
         categories={categories}
+        setFeedbackMessage={setFeedbackMessage}
+        task_date={due_date}
       />
     </Col>
   )

@@ -9,7 +9,7 @@ import CategorySelect from '../../components/CategorySelect';
 import axios from 'axios';
 import LoadingIcon from '../../components/LoadingIcon';
 
-function AddTask({ tasks, setTasks, categories, setSuccessFeedback }) {
+function AddTask({ task_date, tasks, setTasks, categories, setFeedbackMessage }) {
 
   const initialTaskData = { 
     task_name: "",
@@ -38,7 +38,10 @@ function AddTask({ tasks, setTasks, categories, setSuccessFeedback }) {
     setPriorityLevel({priority: 1});
     setErrors({});
   };
-  const handleShow = () => setShow(true);
+  const handleShow = () => {
+    setShow(true);
+    setFeedbackMessage("");
+  };
 
   const handleChange = (event) => {
     setTaskData({
@@ -66,15 +69,17 @@ function AddTask({ tasks, setTasks, categories, setSuccessFeedback }) {
   }
 
   const handleSubmit = async () => {
-    const success_message = `Task has been successfully added and it's deadline is ${
+    const success_message = `Task has been successfully for ${
       moment(due_date).format("Do MMMM YYYY")} .`
-
+    console.log(task_date === moment(due_date).format("YYYY-MM-DD"))
     try {
       setIsLoaded(false);
       const { data } = await axios.post("/tasks/", {...taskData, due_date, due_time, priority});
       handleClose();
-      setTasks({results: [...tasks.results, data]});
-      setSuccessFeedback(success_message);
+      setFeedbackMessage(success_message);
+      if (task_date === moment(due_date).format("YYYY-MM-DD")) {
+        setTasks({results: [...tasks.results, data]});
+      }
       setIsLoaded(true);
     } catch (err) {
       setErrors(err.response?.data);

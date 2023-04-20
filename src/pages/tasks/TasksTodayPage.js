@@ -80,7 +80,8 @@ function TasksTodayPage({ categories }) {
         tasks={tasks}
         setTasks={setTasks}
         categories={categories}
-        setSuccessFeedback={setFeedbackMessage}
+        setFeedbackMessage={setFeedbackMessage}
+        task_date={due_date}
       />
     </Col>
   )

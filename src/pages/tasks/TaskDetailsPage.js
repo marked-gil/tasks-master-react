@@ -93,7 +93,6 @@ function TaskDetailsPage({ categories, currentUser }) {
       setCloseAllEdits(true)
       setEditTaskName(false)
       setEditTaskDescription(false)
-      console.log(data)
     } catch (err) {
       console.log(err.response?.data)
     }
@@ -218,19 +217,23 @@ function TaskDetailsPage({ categories, currentUser }) {
               <i className="fa-solid fa-share-nodes"></i> Sharing with:
             </p>}
           
-          {shared_to?.map((user) => (
+          {shared_to?.map((user, idx) => (
+            <>
+                      {console.log(user)}
             <ProfileAvatar
-              key={user}
-              owner={user}
+              key={idx}
+              // owner={user}
               isOwner={false}
               showName={true}
-              img_src={user.image}
+              // img_src={user.image}
               imageWidth={"1.5rem"}
               isDeletable
               className={styles.SharedToAvatar}
               taskData={taskData}
               setTaskData={setTaskData}
-            />
+            />  
+            </>
+
             ))
           }
         </div>
@@ -244,9 +247,9 @@ function TaskDetailsPage({ categories, currentUser }) {
           />
 
           <h2>Comments</h2>
-          {Comments.results.reverse().map(comment => (
+          {Comments.results.reverse().map((comment, idx) => (
             <CommentCard 
-              key={comment.id} 
+              key={idx} 
               comment={comment} 
               setComments={setComments} 
               profile_image={profile_image}
