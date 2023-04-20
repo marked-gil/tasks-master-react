@@ -12,7 +12,7 @@ function FeedbackMessage({ message, danger }) {
         variant={variant}
         onClose={() => setShow(false)} 
         dismissible
-        style={{ marginTop:"-35px"}}
+        style={{ marginTop:"-25px"}}
       >
         {message}
       </Alert>
