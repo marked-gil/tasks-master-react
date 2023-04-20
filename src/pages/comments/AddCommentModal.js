@@ -25,7 +25,7 @@ function AddCommentModal({ id, taskData, setComments, setFeedbackMessage }) {
     const formData = new FormData();
     formData.append("task", taskData.task_name)
     formData.append('reply_to', "")
-    formData.append('content', commentContent)
+    formData.append('content', commentContent.content)
 
     if (Object.keys(commentContent).length !== 0) {
       try {
