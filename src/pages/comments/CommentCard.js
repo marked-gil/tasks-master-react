@@ -5,7 +5,7 @@ import { axiosReq, axiosRes } from '../../api/axiosDefaults';
 function CommentCard({ comment, setComments }) {
 
   const [ commentChanged, setCommentChanged ] = useState(false);
-  const [ editComment, setEditComment ] = useState({});
+  const [ editComment, setEditComment ] = useState(comment);
 
   const handleChange = (event) => {
     setEditComment(() => (
@@ -15,7 +15,7 @@ function CommentCard({ comment, setComments }) {
   }
 
   const handleCancel = async() => {
-    setEditComment({});
+    setEditComment(comment)
     setCommentChanged(false);
   }
 
@@ -25,9 +25,8 @@ function CommentCard({ comment, setComments }) {
     formData.append('task', comment.task)
     formData.append('content', editComment.content)
     try {
-      const { data } = await axiosReq.put(`/comments/${comment.id}`, formData)
-      console.log(data)
-      handleCancel();
+      await axiosReq.put(`/comments/${comment.id}`, formData)
+      setCommentChanged(false);
     } catch (err) {
       console.log(err.response)
     }
@@ -52,7 +51,7 @@ function CommentCard({ comment, setComments }) {
           <Form.Control 
             plaintext 
             readOnly={!commentChanged} 
-            defaultValue={comment.content}
+            value={editComment.content}
             name="content"
             onChange={handleChange}
           />
