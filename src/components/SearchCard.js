@@ -1,17 +1,19 @@
+import moment from 'moment';
 import React from 'react';
 import { Card } from 'react-bootstrap';
 
-function SearchCard({ TitleStyle, TextStyle }) {
+function SearchCard({ task, TitleStyle, TextStyle }) {
   return (
-    <Card>
+    <Card className="mb-2">
       <Card.Body>
-        <Card.Title className={TitleStyle}>Task Name will be here</Card.Title>
-        <Card.Text className={TextStyle}>Description of the task alksjd askjdaksjbdkjasbd alskdjaskld cabjsdnkasjdhak asdas asdasdasd</Card.Text>
+        <Card.Title className={TitleStyle}>{task.task_name}</Card.Title>
+        <Card.Text className={TextStyle}>{task.details}</Card.Text>
       </Card.Body>
       <Card.Footer className="d-flex gap-3">
-          <p className="mb-0">Owner: <span>username</span></p>
-          <p className="mb-0">Shared</p>
-          <p className="mb-0">Created: <span>date</span></p>
+          <p className="mb-0"><i className="fa-solid fa-at fa-sm"></i>{task.owner}</p>
+          <p className="mb-0">category: <span style={{ textTransform:"uppercase" }}>{task.category}</span></p>
+          {!!task.shared_to.length && <p className="mb-0"><i class="fa-solid fa-link fa-sm"></i>Shared</p>}
+          <p className="mb-0 ms-auto">created <span>{moment(task.datetime_created, "DD MMM YYYY | HH:mm").fromNow()}</span></p>
       </Card.Footer>
     </Card>
   )

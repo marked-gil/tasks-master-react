@@ -34,7 +34,8 @@ function MainPageContainer(props) {
 
   const currentUser = useCurrentUser()
   const [ newCategoryAdded, setNewCategoryAdded ] = useState(false);
-  const [ categories, setCategories ] = useState({ results: []});
+  const [ categories, setCategories ] = useState({ results: [] });
+  const [ searchResults, setSearchResults ] = useState({ results: [] });
 
   useEffect(() => {
     getCategories(setCategories);
@@ -43,7 +44,7 @@ function MainPageContainer(props) {
 
   return (
     <>
-      <NavBar currentUser={currentUser} />
+      <NavBar currentUser={currentUser} setSearchResults={setSearchResults} />
       <Container fluid className={styles.MainContent}>
         <Row className={styles.Row}>
           <SideBar 
@@ -63,7 +64,7 @@ function MainPageContainer(props) {
               />
             : completedTasksPage ? <CompletedTasksPage categories={categories} />
             : sharedTasksPage ? <SharedTasksPage categories={categories} />
-            : searchResultsPage ? <SearchResultsPage />
+            : searchResultsPage ? <SearchResultsPage searchResults={searchResults} />
             : <></>
           }
         </Row>

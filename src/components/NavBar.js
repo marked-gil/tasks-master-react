@@ -7,7 +7,7 @@ import { NavLink } from 'react-router-dom';
 import SignOutLink from '../pages/auth/SignOutLink';
 import SearchForm from './SearchForm'
 
-function NavBar({ currentUser }) {
+function NavBar({ currentUser, setSearchResults }) {
 
   return (
     <>
@@ -27,7 +27,7 @@ function NavBar({ currentUser }) {
                 </Offcanvas.Title>
               </Offcanvas.Header>
               <Offcanvas.Body>
-                <SearchForm />
+                <SearchForm setSearchResults={setSearchResults} />
                 <Nav className={`${styles.Nav} justify-content-end align-items-center flex-grow-1 pe-3`}>
                   <NavLink to="/all-todos" className={`p-0 ${styles.ClrWhite}`}>My Tasks</NavLink>
                   <NavLink to={`/profile/${currentUser?.pk}`} className={`p-0 ${styles.ClrWhite}`}>My Profile</NavLink>
