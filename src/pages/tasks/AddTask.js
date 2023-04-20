@@ -69,7 +69,7 @@ function AddTask({ task_date, tasks, setTasks, categories, setFeedbackMessage })
   }
 
   const handleSubmit = async () => {
-    const success_message = `Task has been successfully for ${
+    const success_message = `Task has been successfully added for ${
       moment(due_date).format("Do MMMM YYYY")} .`
     console.log(task_date === moment(due_date).format("YYYY-MM-DD"))
     try {
