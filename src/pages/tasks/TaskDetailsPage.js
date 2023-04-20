@@ -6,13 +6,14 @@ import Button from 'react-bootstrap/Button';
 import Avatar from '../../assets/profile-avatar.jpg';
 import { axiosReq } from '../../api/axiosDefaults';
 import { useHistory, useParams } from 'react-router-dom';
-import { Card, FloatingLabel } from 'react-bootstrap';
+import { FloatingLabel } from 'react-bootstrap';
 import { deleteTask } from '../../api/taskMethods';
 import ProfileAvatar from '../../components/ProfileAvatar';
 import EditTaskAttributes from './EditTaskAttributes';
 import ShareTaskModal from './ShareTaskModal';
 import AddCommentModal from '../comments/AddCommentModal';
 import FeedbackMessage from '../../components/FeedbackMessage';
+import CommentCard from '../comments/CommentCard';
 
 function TaskDetailsPage({ categories }) {
 
@@ -242,19 +243,9 @@ function TaskDetailsPage({ categories }) {
           />
 
           <h2>Comments</h2>
-          {
-            Comments.results.map(comment => (
-              <Card key={comment.id} className="mb-1">
-                <Card.Title>{comment.owner}</Card.Title>
-                <Card.Subtitle>{comment.datetime_updated}</Card.Subtitle>
-                <Card.Body className="pt-1 pb-1">{comment.content}</Card.Body>
-                <div className="d-flex justify-content-end gap-2 mb-1">
-                  <Button size="sm" className="pt-0 pb-0 ps-2 pe-2">Edit</Button>
-                  <Button variant="danger" size="sm" className="pt-0 pb-0 ps-2 pe-2">Delete</Button>
-                </div>
-              </Card>
-            ))
-          }
+          {Comments.results.map(comment => (
+            <CommentCard comment={comment} />
+          ))}
         </div>
       </div>
     </Col>
