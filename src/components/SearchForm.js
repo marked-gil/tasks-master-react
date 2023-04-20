@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import { Button, Form } from 'react-bootstrap';
 import { axiosReq } from '../api/axiosDefaults';
+import { useHistory } from 'react-router-dom';
 
 function SearchForm({ setSearchResults, setKeywordSearched }) {
 
+  const history = useHistory();
   const [ searchKey, setSearchKey ] = useState("");
 
   const handleChange = (event) => {
@@ -11,12 +13,16 @@ function SearchForm({ setSearchResults, setKeywordSearched }) {
   };
 
   const handleSubmit = async() => {
-    try {
-      const { data } = await axiosReq.get(`/tasks/?search=${searchKey}`)
-      setSearchResults(data)
-      setKeywordSearched(searchKey)
-    } catch (err) {
-      console.log(err.response)
+
+    if (searchKey) {
+      try {
+        const { data } = await axiosReq.get(`/tasks/?search=${searchKey}`);
+        setSearchResults(data);
+        setKeywordSearched(searchKey);
+        history.push("/search-results");
+      } catch (err) {
+        console.log(err.response);
+      }
     }
   };
 
