@@ -1,17 +1,55 @@
 .SideBar {
   background-color: #E0E0E2;
   width: 35rem;
-  padding: 5rem 3.5rem 0 2.5rem;
+  padding: 4rem 3.5rem 0 5rem;
   font-size: 1.2rem;
 }
 
-.DatePickerBtn {
-  height: 56px;
+.UserGreeting {
+  font-size: 1.5rem;
+}
+
+.Username {
+  font-weight: 600;
+}
+
+.DatePickerContainer {
+  width: 300px;
+}
+
+.CategoryFormContainer {
+  width: 300px;
+}
+
+.AddTask {
+  width: 300px;
+}
+
+.AddCategory {
+  width: 300px;
 }
 
 @media screen and (max-width: 1455px) {
   .SideBar {
-    width: 25rem;
+    width: 22rem;
+    padding-left: 2.5rem;
+    padding-right: 2.5rem;
+  }
+
+  .DatePickerContainer {
+    width: 260px;
+  }
+
+  .CategoryFormContainer {
+    width: 260px;
+  }
+
+  .AddTask {
+    width: 260px;
+  }
+
+  .AddCategory {
+    width: 260px;
   }
 }
 

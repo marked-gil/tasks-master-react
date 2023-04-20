@@ -4,7 +4,7 @@ import { Alert, Button, Form, Modal } from 'react-bootstrap';
 import styles from '../../styles/AddCategory.module.css';
 import LoadingIcon from '../../components/LoadingIcon';
 
-function AddCategory({ categories, setCategories }) {
+function AddCategory({ categories, setCategories, className }) {
 
   const initialCategoryData = { 
     category_name: "",
@@ -46,8 +46,8 @@ function AddCategory({ categories, setCategories }) {
 
   return (
     <>
-      <Button variant="primary" onClick={setShow} size="sm">
-      <i className="fa-solid fa-plus"></i> Add Category
+      <Button variant="primary" onClick={setShow} className={className}>
+        <i className="fa-solid fa-plus"></i> Add Category
       </Button>
 
       <Modal size="lg" show={show} onHide={handleClose}>

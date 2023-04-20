@@ -32,12 +32,18 @@ const SideBar = ({ currentUser, setCategories, categories }) => {
 
   return (
     <div className={`${styles.SideBar}`}>
+      <p className={styles.UserGreeting}>Hi, <span className={`ms-1 ${styles.Username}`}>{currentUser?.username}</span>!</p>
 
-      <p>Hi, {currentUser?.username}!</p>
-
-      <ul className="ps-0 mb-5 position-relative ">
+      <ul className="d-flex flex-column gap-3 ps-0 mb-5 mt-5 position-relative">
         {/* {!isLoaded && <LoadingIcon size="4" />} */}
-        <li className="mb-2 d-flex">
+        <li>
+          <AddTask 
+            categories={categories}
+            pushToPages
+            className={styles.AddTask}
+          />
+        </li>
+        <li className={`mb-2 d-flex ${styles.DatePickerContainer}`}>
           <DatePicker
             className={`me-2`}
             label="Find Tasks by Date"
@@ -45,67 +51,76 @@ const SideBar = ({ currentUser, setCategories, categories }) => {
             onChange={newValue => setTasksDate(newValue)}
             slotProps={{
               textField: {
-                helperText: 'MM / DD / YYYY',
+                size: 'small',
+                variant: 'filled', 
+                fullWidth: true,
               },
             }}
           />
-          <Button className={`align-self-start ${styles.DatePickerBtn}`} onClick={handleDateSelection}>Go</Button>
+          <Button 
+            onClick={handleDateSelection}
+          >
+            Go
+          </Button>
+        </li>
+        <li className="mb-2">
+          <Link to="/"><i className="fa-solid fa-calendar-week me-3"></i> Today</Link>
+        </li>
+        <li className="mb-2">
+          <Link to={`/tasks/${moment().add(1, 'days').format('YYYY-MM-DD')}`}>
+            <i className="fa-sharp fa-solid fa-forward me-3"></i> Tomorrow
+          </Link>
+        </li>
+        <li className="mb-2">
+          <Link to="/all-todos">
+            <i className="fa-solid fa-list-check me-3"></i> All Todo Tasks
+          </Link>
+        </li>
+        <li className="mb-2">
+          <Link to="/shared-tasks">
+            <i className="fa-sharp fa-solid fa-share me-3"></i> Shared Tasks
+          </Link>
+        </li>
+        <li className="mb-2">
+          <Link to="/overdue-tasks">
+            <i className="fa-sharp fa-solid fa-bell me-3"></i> Overdue Tasks
+          </Link>
         </li>
         <li>
-          <AddTask 
-            categories={categories}
-            pushToPage
-          />
-        </li>
-        <li className="mb-2">
-          <Link to="/"><i className="fa-solid fa-calendar-week"></i> Today</Link>
-        </li>
-        <li className="mb-2">
-          <Link to={`/tasks/${moment().add(1, 'days').format('YYYY-MM-DD')}`}><i className="fa-sharp fa-solid fa-forward"></i> Tomorrow</Link>
-        </li>
-        <li className="mb-2">
-          <Link to="/all-todos"><i className="fa-solid fa-list-check"></i> All Todo Tasks</Link>
-        </li>
-        <li className="mb-2">
-          <Link to="/shared-tasks"><i className="fa-sharp fa-solid fa-share"></i> Shared Tasks</Link>
-        </li>
-        <li className="mb-2">
-          <Link to="/overdue-tasks"><i className="fa-sharp fa-solid fa-bell"></i> Overdue Tasks</Link>
-        </li>
-        <li>
-          <Link to="/completed-tasks"><i className="fa-solid fa-check-double"></i> Completed Tasks</Link>
+          <Link to="/completed-tasks">
+            <i className="fa-solid fa-check-double me-3"></i> Completed Tasks
+          </Link>
         </li>
       </ul>
 
-      <div>
-        <div className="d-flex align-items-center">
-          <h2 className="me-3">Categories</h2>
+      <hr />
 
-          <AddCategory
-            categories={categories}
-            setCategories={setCategories}
-          />
-        </div>
+      <p>Find Tasks by Category</p>
+
+      <AddCategory
+        categories={categories}
+        setCategories={setCategories}
+        className={styles.AddCategory}
+      />
+      
+      <div className={`d-flex justify-content-between mt-2 ${styles.CategoryFormContainer}`}>
+        <Form.Select
+          className={`me-2`}
+          style={{width: "15rem"}}
+          aria-label="Select category"
+          name="category_name"
+          onChange={handleCategoryChange}
+          size="lg"
+        >
+          <option>Select a Category</option>
+          {categories.results.map((cat) => (
+            <option value={cat.id} key={cat.category_name}>
+              {cat.category_name}
+            </option>
+          ))}
+        </Form.Select>
         
-        <div className="d-flex">
-          <Form.Select
-            className={`me-2`}
-            style={{width: "15rem"}}
-            aria-label="Select category"
-            name="category_name"
-            onChange={handleCategoryChange}
-            size="lg"
-          >
-            <option>Select a Category</option>
-            {categories.results.map((cat) => (
-              <option value={cat.id} key={cat.category_name}>
-                {cat.category_name}
-              </option>
-            ))}
-          </Form.Select>
-          
-          <Button onClick={handleSubmitCategory}>Go</Button>
-        </div>
+        <Button onClick={handleSubmitCategory}>Go</Button>
       </div>
     </div>
   )

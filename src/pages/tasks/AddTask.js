@@ -10,7 +10,18 @@ import axios from 'axios';
 import LoadingIcon from '../../components/LoadingIcon';
 import { useHistory } from 'react-router-dom';
 
-function AddTask({ task_date, tasks, setTasks, categories, setFeedbackMessage, allTodos, pushToPage }) {
+function AddTask(props) {
+
+  const { 
+    className, 
+    task_date, 
+    tasks, 
+    setTasks, 
+    categories, 
+    setFeedbackMessage, 
+    allTodos, 
+    pushToPage 
+  } = props;
 
   const initialTaskData = { 
     task_name: "",
@@ -92,7 +103,7 @@ function AddTask({ task_date, tasks, setTasks, categories, setFeedbackMessage, a
 
   return (
     <>
-      <Button variant="primary" onClick={handleShow}>
+      <Button variant="primary" onClick={handleShow} className={className}>
       <i className="fa-solid fa-plus"></i> Add Task
       </Button>
 
@@ -216,7 +227,7 @@ function AddTask({ task_date, tasks, setTasks, categories, setFeedbackMessage, a
         </Modal.Body>
 
         <Modal.Footer>
-          <Button variant="secondary" onClick={handleClose}>
+          <Button variant="secondary" onClick={handleClose} className={className}>
             cancel
           </Button>
           <Button variant="primary" onClick={handleSubmit}>
