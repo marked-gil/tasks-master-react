@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import styles from '../../styles/TaskDetailsPage.module.css';
 import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
@@ -6,7 +6,7 @@ import Button from 'react-bootstrap/Button';
 import Avatar from '../../assets/profile-avatar.jpg';
 import { axiosReq } from '../../api/axiosDefaults';
 import { useHistory, useParams } from 'react-router-dom';
-import { FloatingLabel } from 'react-bootstrap';
+import { Card, FloatingLabel } from 'react-bootstrap';
 import { deleteTask } from '../../api/taskMethods';
 import ProfileAvatar from '../../components/ProfileAvatar';
 import EditTaskAttributes from './EditTaskAttributes';
@@ -23,7 +23,7 @@ function TaskDetailsPage({ categories }) {
   const [ editTaskDescription, setEditTaskDescription ] = useState(false);
   const [ closeAllEdits, setCloseAllEdits ] = useState(false);
   const [ feedbackMessage, setFeedbackMessage ] = useState("");
-  const [ comments, setComments ] = useState({});
+  const [ Comments, setComments ] = useState({ results: [] });
 
   const {
     owner,
@@ -48,6 +48,19 @@ function TaskDetailsPage({ categories }) {
         };
     
         handleMount();
+  }, [id])
+
+  useEffect(() => {
+    const getComments = async() => {
+      try {
+        const { data } = await axiosReq.get(`/comments/?task=${id}`)
+        setComments(data)
+        console.log('comments', data)
+      } catch (err) {
+        console.log(err.response)
+      }
+    }
+    getComments();
   }, [id])
 
   const cancelEditTaskName = () => {
@@ -229,9 +242,15 @@ function TaskDetailsPage({ categories }) {
           />
 
           <h2>Comments</h2>
-
-
-
+          {
+            Comments.results.map(comment => (
+              <Card key={comment.id} className="mb-1">
+                <Card.Title>{comment.owner}</Card.Title>
+                <Card.Subtitle>{comment.datetime_updated}</Card.Subtitle>
+                <Card.Body>{comment.content}</Card.Body>
+              </Card>
+            ))
+          }
         </div>
       </div>
     </Col>

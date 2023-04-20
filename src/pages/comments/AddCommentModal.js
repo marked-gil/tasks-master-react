@@ -30,7 +30,7 @@ function AddCommentModal({ id, taskData, setComments, setFeedbackMessage }) {
     if (Object.keys(commentContent).length !== 0) {
       try {
         const { data } = await axios.post(`/comments/`, formData);
-        setComments(data)
+        setComments(prevState => ({ results: [...prevState.results, data] }))
         setFeedbackMessage("Comment is successully posted.")
         setFeedback("");
         handleClose();
