@@ -244,7 +244,7 @@ function TaskDetailsPage({ categories }) {
 
           <h2>Comments</h2>
           {Comments.results.map(comment => (
-            <CommentCard comment={comment} />
+            <CommentCard comment={comment} setComments={setComments} />
           ))}
         </div>
       </div>
