@@ -1,12 +1,11 @@
-import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container';
-import Form from 'react-bootstrap/Form';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import Offcanvas from 'react-bootstrap/Offcanvas';
 import styles from '../styles/NavBar.module.css'
 import { NavLink } from 'react-router-dom';
 import SignOutLink from '../pages/auth/SignOutLink';
+import SearchForm from './SearchForm'
 
 function NavBar({ currentUser }) {
 
@@ -28,16 +27,7 @@ function NavBar({ currentUser }) {
                 </Offcanvas.Title>
               </Offcanvas.Header>
               <Offcanvas.Body>
-                <Form className="d-flex">
-                  <Form.Control
-                    type="search"
-                    placeholder="Search"
-                    className="me-2"
-                    aria-label="Search"
-                    name="search"
-                  />
-                  <Button variant="outline-success" className={styles.ClrWhite}>Search</Button>
-                </Form>
+                <SearchForm />
                 <Nav className={`${styles.Nav} justify-content-end align-items-center flex-grow-1 pe-3`}>
                   <NavLink to="/all-todos" className={`p-0 ${styles.ClrWhite}`}>My Tasks</NavLink>
                   <NavLink to={`/profile/${currentUser?.pk}`} className={`p-0 ${styles.ClrWhite}`}>My Profile</NavLink>
