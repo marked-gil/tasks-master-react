@@ -12,7 +12,8 @@ function SearchForm({ setSearchResults, setKeywordSearched }) {
     setSearchKey(event.target.value)
   };
 
-  const handleSubmit = async() => {
+  const handleSubmit = async(event) => {
+    event.preventDefault();
 
     if (searchKey) {
       try {
@@ -27,7 +28,7 @@ function SearchForm({ setSearchResults, setKeywordSearched }) {
   };
 
   return (
-    <Form className="d-flex">
+    <Form onSubmit={handleSubmit} className="d-flex">
       <Form.Control
         type="search"
         placeholder="Task or Category"
@@ -37,9 +38,9 @@ function SearchForm({ setSearchResults, setKeywordSearched }) {
         onChange={handleChange}
       />
       <Button 
+        type="submit"
         variant="outline-success" 
         style={{ color:"white" }}
-        onClick={handleSubmit}
       >
         Search
       </Button>
