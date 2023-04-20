@@ -196,23 +196,20 @@ function TaskDetailsPage({ categories, currentUser }) {
             <Button variant="link" size="sm" onClick={setEditTaskDescription} className={`position-absolute bottom-0 end-0`}>
               edit
             </Button>}
-
         </Form.Group>
 
         {/* OWNER AVATAR */}
         {profile_image &&
-        <>
-        {console.log(profile_image)}
-          <ProfileAvatar
-            owner={owner}
-            isOwner={true}
-            showName={true}
-            img_src={profile_image}
-            imageWidth={"3rem"}
-            className={styles.OwnerAvatar} 
-          />
-        </>
-          
+          <>
+            <ProfileAvatar
+              owner={owner}
+              isOwner={true}
+              showName={true}
+              img_src={profile_image}
+              imageWidth={"3rem"}
+              className={styles.OwnerAvatar} 
+            />
+          </>
         }
 
         <div className={`d-flex flex-column position-absolute ${styles.Avatars}`}>
@@ -238,7 +235,6 @@ function TaskDetailsPage({ categories, currentUser }) {
           }
         </div>
         
-
         {/* COMMENT SECTION */}
         <div>
           <AddCommentModal 

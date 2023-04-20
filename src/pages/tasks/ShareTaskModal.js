@@ -24,6 +24,7 @@ function ShareTaskModal(props) {
   const handleClose = () => {
     setShow(false);
     setUserProfile({});
+    setFeedback("");
   };
 
   const handleChange = (event) => {
@@ -35,12 +36,14 @@ function ShareTaskModal(props) {
       setFeedback("You are already the owner of the task.")
       setUserProfile({});
     } else if (taskData.shared_to.length !== 4) {
-      try {
-        const { data } = await axiosReq.get(`/profiles/?search=${userSearch}`)
-        setUserProfile(data.results[0]);
-        setFeedback("")
-      } catch (err) {
-        console.log(err.response?.data)
+      if (userSearch) {
+        try {
+          const { data } = await axiosReq.get(`/profiles/?search=${userSearch}`)
+          setUserProfile(data.results[0]);
+          setFeedback("")
+        } catch (err) {
+          console.log(err.response?.data)
+        }
       }
     } else {
       setFeedback("You can only share to a maximum of 4 users.");
@@ -58,7 +61,6 @@ function ShareTaskModal(props) {
         handleShareTask(data)
         setUserProfile({})
         setFeedback(`@${userProfile.owner} is added to the task.`)
-        console.log(data)
       } catch (err) {
         console.log(err.response?.data)
       }
