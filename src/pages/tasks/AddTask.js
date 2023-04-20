@@ -9,7 +9,7 @@ import CategorySelect from '../../components/CategorySelect';
 import axios from 'axios';
 import LoadingIcon from '../../components/LoadingIcon';
 
-function AddTask({ task_date, tasks, setTasks, categories, setFeedbackMessage }) {
+function AddTask({ task_date, tasks, setTasks, categories, setFeedbackMessage, allTodos }) {
 
   const initialTaskData = { 
     task_name: "",
@@ -71,13 +71,13 @@ function AddTask({ task_date, tasks, setTasks, categories, setFeedbackMessage })
   const handleSubmit = async () => {
     const success_message = `Task has been successfully added for ${
       moment(due_date).format("Do MMMM YYYY")} .`
-    console.log(task_date === moment(due_date).format("YYYY-MM-DD"))
     try {
       setIsLoaded(false);
       const { data } = await axios.post("/tasks/", {...taskData, due_date, due_time, priority});
       handleClose();
       setFeedbackMessage(success_message);
-      if (task_date === moment(due_date).format("YYYY-MM-DD")) {
+      if (task_date === moment(due_date).format("YYYY-MM-DD") || 
+          (allTodos && moment(due_date).format("YYYY-MM-DD") >= moment().format("YYYY-MM-DD"))) {
         setTasks({results: [...tasks.results, data]});
       }
       setIsLoaded(true);
