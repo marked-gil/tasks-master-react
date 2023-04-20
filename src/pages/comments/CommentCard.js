@@ -49,7 +49,7 @@ function CommentCard({ comment, setComments, profile_image }) {
       <div className="ps-1 d-flex align-items-center gap-2">
         <Card.Img src={profile_image} style={{ width:"40px"}}></Card.Img>
         <Card.Title className="mb-0">{comment.owner}</Card.Title>
-        <i class="fa-solid fa-ellipsis-vertical fa-xs"></i>
+        <i className="fa-solid fa-ellipsis-vertical fa-xs"></i>
         <Card.Subtitle className="p-0 m-0">
           {moment(comment.datetime_created, "DD MMM YYYY | HH:mm").fromNow()}
         </Card.Subtitle>
