@@ -73,6 +73,11 @@ function App() {
           path="/tasks/:due_date" 
           isLoggedIn={isLoggedIn} 
           render={() => <MainPageContainer tasksPerDatePage />} 
+        />
+        <ProtectedRoute 
+          exact
+          path="/search-results"
+          render={() => <MainPageContainer SearchResultsPage /> }
         /> */}
 
         <Route 
@@ -116,12 +121,17 @@ function App() {
         <Route 
           exact 
           path="/task/:id" 
-          render={() => <MainPageContainer taskDetailsPage />} 
+          render={() => <MainPageContainer taskDetailsPage /> } 
         />
         <Route 
           exact 
           path="/tasks/:due_date" 
-          render={() => <MainPageContainer tasksPerDatePage />} 
+          render={() => <MainPageContainer tasksPerDatePage /> } 
+        />
+        <Route 
+          exact
+          path="/search-results"
+          render={() => <MainPageContainer searchResultsPage /> }
         />
 
         <Route render={() => <h1>Page Not Found</h1>}/>

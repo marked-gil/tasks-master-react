@@ -15,6 +15,7 @@ import TasksByCategoryPage from './tasks/TasksByCategoryPage'
 import CompletedTasksPage from './tasks/CompletedTasksPage'
 import SharedTasksPage from './tasks/SharedTasksPage'
 import { useCurrentUser } from '../contexts/CurrentUserContext'
+import SearchResultsPage from './tasks/SearchResultsPage'
 
 function MainPageContainer(props) {
 
@@ -28,6 +29,7 @@ function MainPageContainer(props) {
     tasksByCategoryPage,
     completedTasksPage,
     sharedTasksPage,
+    searchResultsPage
   } = props;
 
   const currentUser = useCurrentUser()
@@ -61,6 +63,7 @@ function MainPageContainer(props) {
               />
             : completedTasksPage ? <CompletedTasksPage categories={categories} />
             : sharedTasksPage ? <SharedTasksPage categories={categories} />
+            : searchResultsPage ? <SearchResultsPage />
             : <></>
           }
         </Row>
