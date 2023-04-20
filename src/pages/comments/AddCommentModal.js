@@ -2,7 +2,7 @@ import axios from 'axios';
 import React, { useState } from 'react';
 import { Alert, Button, Form, Modal } from 'react-bootstrap';
 
-function AddCommentModal({ id, taskData, setComments, setFeedbackMessage }) {
+function AddCommentModal({ id, taskData, setComments }) {
 
   const [ show, setShow ] = useState(false);
   const [ commentContent, setcommentContent ] = useState({});
@@ -31,7 +31,6 @@ function AddCommentModal({ id, taskData, setComments, setFeedbackMessage }) {
       try {
         const { data } = await axios.post(`/comments/`, formData);
         setComments(prevState => ({ results: [...prevState.results, data] }))
-        setFeedbackMessage("Comment is successully posted.")
         setFeedback("");
         handleClose();
       } catch (err) {

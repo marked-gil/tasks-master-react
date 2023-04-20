@@ -239,7 +239,6 @@ function TaskDetailsPage({ categories }) {
             id={id} 
             taskData={taskData} 
             setComments={setComments} 
-            setFeedbackMessage={setFeedbackMessage}
           />
 
           <h2>Comments</h2>
