@@ -6,6 +6,7 @@ import { DatePicker } from '@mui/x-date-pickers';
 import { Button, Form } from 'react-bootstrap';
 import AddCategory from '../pages/categories/AddCategory';
 import LoadingIcon from './LoadingIcon';
+import AddTask from '../pages/tasks/AddTask';
 
 const SideBar = ({ currentUser, setCategories, categories }) => {
 
@@ -49,6 +50,12 @@ const SideBar = ({ currentUser, setCategories, categories }) => {
             }}
           />
           <Button className={`align-self-start ${styles.DatePickerBtn}`} onClick={handleDateSelection}>Go</Button>
+        </li>
+        <li>
+          <AddTask 
+            categories={categories}
+            pushToPage
+          />
         </li>
         <li className="mb-2">
           <Link to="/"><i className="fa-solid fa-calendar-week"></i> Today</Link>

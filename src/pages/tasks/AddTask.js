@@ -8,8 +8,9 @@ import { Alert } from 'react-bootstrap';
 import CategorySelect from '../../components/CategorySelect';
 import axios from 'axios';
 import LoadingIcon from '../../components/LoadingIcon';
+import { useHistory } from 'react-router-dom';
 
-function AddTask({ task_date, tasks, setTasks, categories, setFeedbackMessage, allTodos }) {
+function AddTask({ task_date, tasks, setTasks, categories, setFeedbackMessage, allTodos, pushToPage }) {
 
   const initialTaskData = { 
     task_name: "",
@@ -17,6 +18,7 @@ function AddTask({ task_date, tasks, setTasks, categories, setFeedbackMessage, a
     category: "",
   };
 
+  const history = useHistory();
   const [ taskData, setTaskData ] = useState(initialTaskData);
   const [ dueDate, setDueDate ] = useState({due_date: "" });
   const [ dueTime, setDueTime ] = useState({due_time: ""});
@@ -40,7 +42,7 @@ function AddTask({ task_date, tasks, setTasks, categories, setFeedbackMessage, a
   };
   const handleShow = () => {
     setShow(true);
-    setFeedbackMessage("");
+    setFeedbackMessage && setFeedbackMessage("");
   };
 
   const handleChange = (event) => {
@@ -75,12 +77,13 @@ function AddTask({ task_date, tasks, setTasks, categories, setFeedbackMessage, a
       setIsLoaded(false);
       const { data } = await axios.post("/tasks/", {...taskData, due_date, due_time, priority});
       handleClose();
-      setFeedbackMessage(success_message);
+      setFeedbackMessage && setFeedbackMessage(success_message)
       if (task_date === moment(due_date).format("YYYY-MM-DD") || 
           (allTodos && moment(due_date).format("YYYY-MM-DD") >= moment().format("YYYY-MM-DD"))) {
         setTasks({results: [...tasks.results, data]});
       }
       setIsLoaded(true);
+      pushToPage && history.push(`/tasks/${moment(due_date).format("YYYY-MM-DD")}`)
     } catch (err) {
       setErrors(err.response?.data);
       setIsLoaded(true);
