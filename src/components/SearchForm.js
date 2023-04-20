@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Button, Form } from 'react-bootstrap';
 import { axiosReq } from '../api/axiosDefaults';
 
-function SearchForm({ setSearchResults }) {
+function SearchForm({ setSearchResults, setKeywordSearched }) {
 
   const [ searchKey, setSearchKey ] = useState("");
 
@@ -14,6 +14,7 @@ function SearchForm({ setSearchResults }) {
     try {
       const { data } = await axiosReq.get(`/tasks/?search=${searchKey}`)
       setSearchResults(data)
+      setKeywordSearched(searchKey)
     } catch (err) {
       console.log(err.response)
     }

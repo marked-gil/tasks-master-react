@@ -36,6 +36,7 @@ function MainPageContainer(props) {
   const [ newCategoryAdded, setNewCategoryAdded ] = useState(false);
   const [ categories, setCategories ] = useState({ results: [] });
   const [ searchResults, setSearchResults ] = useState({ results: [] });
+  const [ keywordSearched, setKeywordSearched ] = useState("");
 
   useEffect(() => {
     getCategories(setCategories);
@@ -44,7 +45,7 @@ function MainPageContainer(props) {
 
   return (
     <>
-      <NavBar currentUser={currentUser} setSearchResults={setSearchResults} />
+      <NavBar currentUser={currentUser} setSearchResults={setSearchResults} setKeywordSearched={setKeywordSearched} />
       <Container fluid className={styles.MainContent}>
         <Row className={styles.Row}>
           <SideBar 
@@ -64,7 +65,7 @@ function MainPageContainer(props) {
               />
             : completedTasksPage ? <CompletedTasksPage categories={categories} />
             : sharedTasksPage ? <SharedTasksPage categories={categories} />
-            : searchResultsPage ? <SearchResultsPage searchResults={searchResults} />
+            : searchResultsPage ? <SearchResultsPage searchResults={searchResults} keywordSearched={keywordSearched} />
             : <></>
           }
         </Row>
