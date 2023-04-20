@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import { Button, Card, Form } from 'react-bootstrap';
 import { axiosReq, axiosRes } from '../../api/axiosDefaults';
+import moment from 'moment';
 
-function CommentCard({ comment, setComments }) {
+function CommentCard({ comment, setComments, profile_image }) {
 
   const [ commentChanged, setCommentChanged ] = useState(false);
   const [ editComment, setEditComment ] = useState(comment);
@@ -44,9 +45,15 @@ function CommentCard({ comment, setComments }) {
   }
 
   return (
-    <Card className="mb-1">
-      <Card.Title>{comment.owner}</Card.Title>
-      <Card.Subtitle>{comment.datetime_created}</Card.Subtitle>
+    <Card className="mb-1 pt-1">
+      <div className="ps-1 d-flex align-items-center gap-2">
+        <Card.Img src={profile_image} style={{ width:"40px"}}></Card.Img>
+        <Card.Title className="mb-0">{comment.owner}</Card.Title>
+        <i class="fa-solid fa-ellipsis-vertical fa-xs"></i>
+        <Card.Subtitle className="p-0 m-0">
+          {moment(comment.datetime_created, "DD MMM YYYY | HH:mm").fromNow()}
+        </Card.Subtitle>
+      </div>
         <Card.Body className="pt-1 pb-1">
           <Form.Control 
             plaintext 

@@ -15,8 +15,9 @@ import AddCommentModal from '../comments/AddCommentModal';
 import FeedbackMessage from '../../components/FeedbackMessage';
 import CommentCard from '../comments/CommentCard';
 
-function TaskDetailsPage({ categories }) {
+function TaskDetailsPage({ categories, currentUser }) {
 
+  const profile_image = currentUser?.profile_image
   const history = useHistory();
   const { id } = useParams();
   const [ taskData, setTaskData ] = useState({});
@@ -243,7 +244,12 @@ function TaskDetailsPage({ categories }) {
 
           <h2>Comments</h2>
           {Comments.results.reverse().map(comment => (
-            <CommentCard key={comment.id} comment={comment} setComments={setComments} />
+            <CommentCard 
+              key={comment.id} 
+              comment={comment} 
+              setComments={setComments} 
+              profile_image={profile_image}
+            />
           ))}
         </div>
       </div>
