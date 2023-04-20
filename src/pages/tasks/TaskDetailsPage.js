@@ -244,7 +244,7 @@ function TaskDetailsPage({ categories }) {
 
           <h2>Comments</h2>
           {Comments.results.reverse().map(comment => (
-            <CommentCard comment={comment} setComments={setComments} />
+            <CommentCard key={comment.id} comment={comment} setComments={setComments} />
           ))}
         </div>
       </div>
