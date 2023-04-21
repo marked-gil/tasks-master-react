@@ -1,3 +1,11 @@
+.ListGroup {
+  max-height: 50rem;
+  overflow: auto;
+  border-bottom: 4px solid #405e9f;
+  padding-bottom: 20px ;
+  margin-bottom: 1.5rem;
+}
+
 .TaskContainer {
   display: flex;
   align-items: center;
