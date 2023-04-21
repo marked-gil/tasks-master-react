@@ -32,22 +32,44 @@
 
     .DatePickerContainer {
         width: 260px;
-      }
+    }
     
-      .CategoryFormContainer {
+    .CategoryFormContainer {
         width: 260px;
-      }
+    }
     
-      .AddTask {
+    .AddTask {
         width: 260px;
-      }
+    }
     
-      .AddCategory {
+    .AddCategory {
         width: 260px;
-      }
+    }
 
 }
 
-@media screen and (max-width: 500px) {
+@media screen and (max-width: 768px) {
+    .NavBar {
+        padding-left: 2rem;
+        padding-right: 2rem;
+    }
+}
 
+@media screen and (max-width: 576px) {
+    .NavBar {
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
+}
+
+@media screen and (max-width: 356px) {
+    .NavBar {
+        padding-left: .3rem;
+        padding-right: .3rem;
+    }
+
+    .OffCanvasBody {
+        padding-left: 1rem;
+        padding-right: .8rem;
+    }
 }
