@@ -29,13 +29,17 @@ function TasksList(props) {
   }
 
   const TasksListItem = (task, completed) => (
-    <div className="d-flex align-items-center mb-2 position-relative" key={task.id}>
+    <div className={styles.TaskContainer} key={task.id}>
       <i className={`fa-solid fa-grip-vertical fa-xl ${styles.GripIcon}`}></i>
 
       <ListGroup.Item
-        className={`${styles.ListGroupItem} ${completed ? styles.Completed : ""}`} 
+        className={`
+          ${styles.ListGroupItem} 
+          ${completed ? styles.Completed : ""}
+          ${task.progress === "overdue" ? styles.OverdueTask : ""}
+        `} 
         action 
-        variant="light"
+        // variant="light"
       >
         {task.task_name}
       </ListGroup.Item>
@@ -50,14 +54,38 @@ function TasksList(props) {
       </TaskPopover>
 
       {/* DUE DATE OR TIME */}
-      <p className={`ms-auto mb-0 ${styles.DateTime}`}>
+      <p className={
+          `ms-auto mb-0 
+          ${styles.DateTime} 
+          ${styles.DateTimeContainer}`
+        }
+      >
         {!!showTime && task.due_time}
-        {!!showTime && !task.due_time && <i className="me-3 fa-solid fa-minus"></i>}
-        {!!showDate && moment(task.due_date).format("DD MMM `YY")}
+        {!!showTime && !task.due_time && <i className="fa-solid fa-minus"></i>}
+        {!!showDate && moment(task.due_date).format("DD MMM YYYY")}
       </p>
       {/* LEGEND */}
-      <p className={`position-absolute mb-0 ps-1 pe-1 ${styles.Legend}`}>
-        {task.category} | {task.progress} | {taskPriority(task)}
+      <p className={
+          `mb-0
+          ${styles.Legend}
+          ${!!showTime && styles.LegendForTime}`
+        }
+      >
+        <span className={styles.LegendCategory}>{task.category}</span> 
+        <span className={styles.FirstSeparator}>|</span> 
+        <span className={`
+          ${styles.LegendProgress}
+          ${task.progress === "overdue" ? styles.OverdueLegend : ""}
+        `}>
+          {task.progress}
+        </span> | 
+        <span className={`
+          ${styles.LegendPriority}
+          ${taskPriority(task) === "High" ? styles.High : 
+            taskPriority(task) === "Medium" ? styles.Medium : ""
+          }
+        `}>{taskPriority(task)}
+        </span>
       </p>
     </div>
 )

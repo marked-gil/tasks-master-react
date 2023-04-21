@@ -120,7 +120,7 @@ function AddTask(props) {
                 type="text"
                 placeholder="Task Name"
                 autoFocus
-                maxLength={50}
+                maxLength={250}
                 className={styles.TaskName}
                 name="task_name"
                 value={task_name}
@@ -146,7 +146,7 @@ function AddTask(props) {
                 name="details"
                 value={details}
                 placeholder="Description" 
-                maxLength={250}
+                maxLength={1000}
                 onChange={handleChange}
                 aria-label="Add the task's description or details"
               />

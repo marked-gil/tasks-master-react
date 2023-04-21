@@ -132,7 +132,7 @@ function TasksByCategoryPage({ categories, setCategories }) {
                 <p className="mb-0 me-2">Category:</p>
                 <Form.Control 
                   type="text" 
-                  maxLength="30" 
+                  maxLength="50" 
                   name="category_name"
                   defaultValue={category_name}
                   className="mb-1"
