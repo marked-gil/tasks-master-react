@@ -39,7 +39,6 @@ function TasksList(props) {
           ${task.progress === "overdue" ? styles.OverdueTask : ""}
         `} 
         action 
-        // variant="light"
       >
         {task.task_name}
       </ListGroup.Item>
