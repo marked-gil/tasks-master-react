@@ -61,8 +61,9 @@ function TasksPerDatePage({ categories }) {
         <div className={`d-flex justify-content-between`}>
           <h2 className={`${styles.Heading}`}>My Tasks</h2>
           <span className={styles.LineIcon}><i className="fa-solid fa-ellipsis-vertical"></i></span> 
-          <h2>{`${is_DueDateTomorrow ? "TOMORROW" : is_DueDatePrevious ? "PREVIOUS" : "UPCOMING" }`}
-            <span className={`d-block ${styles.Date}`}>{moment(due_date).format("D MMMM YYYY, dddd")}</span>
+          <h2 className={styles.PageTitle}>{`${is_DueDateTomorrow ? "TOMORROW" : is_DueDatePrevious ? "PREVIOUS" : "UPCOMING" }`}
+            <span className={`${styles.Date} ${styles.LargeScreen}`}>{moment(due_date).format("D MMMM YYYY, dddd")}</span>
+            <span className={`${styles.Date} ${styles.SmallScreen}`}>{moment(due_date).format("D MMM YYYY, ddd")}</span>
           </h2>
         </div>
 

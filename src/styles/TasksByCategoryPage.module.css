@@ -21,3 +21,47 @@
   font-size: 2.8rem;
   font-weight: 600;
 }
+
+.DeleteButton {
+  margin: 0 16px 0 0;
+}
+
+@media screen and (max-width: 650px) {
+  .TasksByCategory {
+    padding-top: 1.5rem;
+  }
+
+  .InnerContainer {
+    width: 26rem;
+  }
+
+  .HeadingTwo {
+    font-size: 2.2rem;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .InnerContainer {
+    width: 22rem;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .InnerContainer {
+    width: 17rem;
+  }
+
+  .HeadingTwo {
+    font-size: 1.8rem;
+  }
+
+  .DeleteButton {
+    margin: 0;
+  }
+
+  .EditDeleteButtons {
+    display: flex;
+    flex-direction: column;
+    row-gap: 10px;
+  }
+}

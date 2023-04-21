@@ -14,10 +14,78 @@
   font-size: 2.8rem;
 }
 
+.PageTitle { 
+  font-weight: 600;
+}
+
 .LineIcon {
   font-size: 2.5rem;
 }
 
 .Date {
+  display: block;
   font-size: 1.2rem;
+}
+
+.LargeScreen {
+  display: block;
+}
+
+.SmallScreen {
+  display: none;
+}
+
+
+@media screen and (max-width: 650px) {
+  .MyTasks {
+    padding-top: 1.5rem;
+  }
+
+  .InnerContainer {
+    width: 26rem;
+  }
+
+  .Heading {
+    font-size: 2.2rem;
+  }
+
+  .LineIcon {
+    font-size: 1.9rem;
+  }
+
+  .PageTitle { 
+    font-size: 1.5rem;
+  }
+
+  .Date {
+    font-size: 1rem;
+  }
+}
+
+@media screen and (max-width: 450px) {
+  .InnerContainer {
+    width: 22rem;
+  }
+}
+
+@media screen and (max-width: 386px) {
+  .InnerContainer {
+    width: 18rem;
+  }
+
+  .Heading {
+    font-size: 1.8rem;
+  }
+
+  .PageTitle { 
+    font-size: 1.3rem;
+  }
+
+  .LargeScreen {
+    display: none;
+  }
+
+  .SmallScreen {
+    display: block;
+  }
 }

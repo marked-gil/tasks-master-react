@@ -40,7 +40,7 @@ function CompletedTasksPage({ categories }) {
         <div className={`d-flex justify-content-between`}>
           <h2 className={`${styles.Heading}`}>My Tasks</h2>
           <span className={styles.LineIcon}><i className="fa-solid fa-ellipsis-vertical"></i></span> 
-          <h2 className={`${styles.Heading}`}>COMPLETED</h2>
+          <h2 className={`${styles.PageTitle}`}>COMPLETED</h2>
         </div>
 
         <TasksFilter 

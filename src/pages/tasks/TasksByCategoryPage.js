@@ -100,10 +100,10 @@ function TasksByCategoryPage({ categories, setCategories }) {
 
           {
             !editCategory && 
-            <div className="position-absolute end-0">
+            <div className={`position-absolute end-0 ${styles.EditDeleteButtons}`}>
               <Button 
                 variant="danger" 
-                className="m-0 me-3"
+                className={styles.DeleteButton}
                 size="sm"
                 onClick={handleDeleteCategory}
               >

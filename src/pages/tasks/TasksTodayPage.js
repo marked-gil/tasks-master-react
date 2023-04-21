@@ -54,7 +54,10 @@ function TasksTodayPage({ categories }) {
         <div className={`d-flex justify-content-between`}>
           <h2 className={`${styles.MyTasks}`}>My Tasks</h2>
             <span className={styles.LineIcon}><i className="fa-solid fa-ellipsis-vertical"></i></span> 
-          <h2 className={styles.PageTitle}>TODAY <span className={`${styles.DateToday}`}>{moment().format("D MMMM YYYY, dddd")}</span></h2>
+          <h2 className={styles.PageTitle}>TODAY 
+            <span className={`${styles.DateToday} ${styles.LargeScreen}`}>{moment().format("D MMMM YYYY, dddd")}</span>
+            <span className={`${styles.DateToday} ${styles.SmallScreen}`}>{moment().format("D MMM YYYY, ddd")}</span>
+          </h2>
         </div>
 
         <TasksFilter

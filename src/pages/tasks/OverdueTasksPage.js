@@ -41,7 +41,7 @@ function OverdueTasksPage({ categories }) {
       <div className={`d-flex justify-content-between`}>
         <h2 className={`${styles.Heading}`}>My Tasks</h2>
         <span className={styles.LineIcon}><i className="fa-solid fa-ellipsis-vertical"></i></span> 
-        <h2 className={`${styles.Heading}`}>OVERDUE</h2>
+        <h2 className={`${styles.PageTitle}`}>OVERDUE</h2>
       </div>
 
       <TasksFilter 
