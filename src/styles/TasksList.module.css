@@ -2,6 +2,8 @@
   width: 28rem;
   padding-top: 5px;
   padding-bottom: 14px;
+  margin-left: 8px;
+  margin-right: 4px;
 }
 
 .Completed {
@@ -22,4 +24,14 @@
 
 .DateTime {
   font-size: 15px;
+}
+
+@media screen and (max-width: 650px) {
+  .GripIcon {
+    display: none;
+  }
+
+  .ListGroupItem {
+    margin-left: 0;
+  }
 }

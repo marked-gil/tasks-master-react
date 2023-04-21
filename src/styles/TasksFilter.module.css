@@ -2,9 +2,17 @@
   font-weight: 600;
 }
 
+.Form {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 5px;
+}
+
 .FormSelect {
   width: 10rem;
   height: 2rem;
+  margin-right: 16px;
 }
 
 .OrderByField {
@@ -13,5 +21,61 @@
 }
 
 .FilterButton {
-  width: 17rem;
+  width: 16.8rem;
+}
+
+@media screen and (max-width: 650px) {
+  .Form {
+    flex-direction: column;
+  }
+
+  .FormSelect {
+    width: 18rem;
+    margin-right: 0;
+    justify-self: end;
+  }
+
+  .OrderByField {
+    width: 18rem;
+    height: 2rem;
+    justify-self: end;
+  }
+
+  .FilterButton {
+    margin-top: 10px;
+    width: 20rem;
+    align-self: center;
+  }
+}
+
+@media screen and (max-width: 452px) {
+  .FormSelect {
+    width: 12rem;
+  }
+
+  .OrderByField {
+    width: 12rem;
+  }
+
+  .FilterButton {
+    margin-top: 10px;
+    width: 12rem;
+    align-self: center;
+  }
+}
+
+@media screen and (max-width: 388px) {
+  .FormSelect {
+    width: 10rem;
+  }
+
+  .OrderByField {
+    width: 10rem;
+  }
+
+  .FilterButton {
+    margin-top: 10px;
+    width: 12rem;
+    align-self: center;
+  }
 }

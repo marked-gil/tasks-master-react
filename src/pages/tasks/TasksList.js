@@ -30,10 +30,10 @@ function TasksList(props) {
 
   const TasksListItem = (task, completed) => (
     <div className="d-flex align-items-center mb-2 position-relative" key={task.id}>
-      <i className="fa-solid fa-grip-vertical fa-xl"></i>
+      <i className={`fa-solid fa-grip-vertical fa-xl ${styles.GripIcon}`}></i>
 
       <ListGroup.Item
-        className={`ms-2 me-1 ${styles.ListGroupItem} ${completed ? styles.Completed : ""}`} 
+        className={`${styles.ListGroupItem} ${completed ? styles.Completed : ""}`} 
         action 
         variant="light"
       >

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, Form } from 'react-bootstrap';
+import { Accordion, Button, Form } from 'react-bootstrap';
 import styles from '../styles/TasksFilter.module.css';
 
 function TasksFilter(props) {
@@ -31,91 +31,95 @@ function TasksFilter(props) {
   }
 
   return (
-    <>
-      <Form className="d-flex flex-wrap justify-content-between">
-        {/* PROGRESS */}
-        {
-          !removeProgressField && 
-          <div className="d-flex">
-            <p className={`me-3 mb-0 ${styles.bold}`}>Progress: </p>
-            <Form.Select
-              size="sm"
-              className={`me-3 ${styles.FormSelect}`}
-              aria-label="Select progress status"
-              name="progress"
-              onChange={handleFilterChange}
-            >
-              <option value="">All Statuses</option>
-              <option value="to-do">To-do</option>
-              <option value="overdue">Overdue</option>
-            </Form.Select>
-          </div>
-        }
-          
-        {/* ORDER BY */}
-        <div className="d-flex">
-          <p className={`me-3 ${styles.bold}`}>Order by: </p>
-          <Form.Select 
-            name="order_by" 
-            className={styles.OrderByField}
-            onChange={handleFilterChange}
-            aria-label="Order today's tasks" 
-            size="sm"
-          >
-            {!removeOrderByTime && <option value="due_time">Due Time - Ascending</option>}
-            {!removeOrderByTime && <option value="-due_time">Due Time - Descending</option>}
-            {!removeOrderByDate && <option value="due_date">Due Date - Ascending</option>}
-            {!removeOrderByDate && <option value="-due_date">Due Date - Descending</option>}
-            <option value="priority">Priority - Ascending</option>
-            <option value="-priority">Priority - Descending</option>
-          </Form.Select>
-        </div>
-
-        {/* CATEGORIES */}
-        { !removeCategoryField && <div className="d-flex">
-          <p className={`me-3 mb-0 ${styles.bold}`}>Category: </p>
-          <Form.Select
-            className={`me-3 ${styles.FormSelect}`}
-            aria-label="Select category"
-            name="category_name"
-            onChange={handleFilterChange}
-            size="sm"
-          >
-            <option value="">All Categories</option>
-            {categories.results.map((cat) => (
-              <option
-                value={cat.id}
-                key={cat.category_name}
+    <Accordion>
+      <Accordion.Item eventKey="0">
+        <Accordion.Header>Filter Your Tasks</Accordion.Header>
+        <Accordion.Body>
+          <Form className={styles.Form}>
+            {/* PROGRESS */}
+            {!removeProgressField && 
+              <div className="d-flex gap-2">
+                <p className={`mb-0 ${styles.bold}`}>Progress: </p>
+                <Form.Select
+                  size="sm"
+                  className={`${styles.FormSelect}`}
+                  aria-label="Select progress status"
+                  name="progress"
+                  onChange={handleFilterChange}
+                >
+                  <option value="">All Statuses</option>
+                  <option value="to-do">To-do</option>
+                  <option value="overdue">Overdue</option>
+                </Form.Select>
+              </div>
+            }
+              
+            {/* ORDER BY */}
+            <div className="d-flex gap-2">
+              <p className={`mb-0 ${styles.bold}`}>Order by: </p>
+              <Form.Select 
+                name="order_by" 
+                className={styles.OrderByField}
+                onChange={handleFilterChange}
+                aria-label="Order today's tasks" 
+                size="sm"
               >
-                {cat.category_name}
-              </option>
-            ))}
-          </Form.Select>
-        </div>}
-        
-        <Button
-          className={`${styles.FilterButton} ${(removeCategoryField || removeProgressField) && "flex-fill"}`}
-          variant="primary"
-          size="sm"
-          onClick={handleFilterSubmit}
-        >
-          Filter
-        </Button>
-      </Form>
+                {!removeOrderByTime && <option value="due_time">Due Time - Ascending</option>}
+                {!removeOrderByTime && <option value="-due_time">Due Time - Descending</option>}
+                {!removeOrderByDate && <option value="due_date">Due Date - Ascending</option>}
+                {!removeOrderByDate && <option value="-due_date">Due Date - Descending</option>}
+                <option value="priority">Priority - Ascending</option>
+                <option value="-priority">Priority - Descending</option>
+              </Form.Select>
+            </div>
 
-      {/* SHOW COMPLETED TASKS TOGGLE */}
-      {setShowCompletedTasks &&
-        <Form.Check 
-          type="checkbox"
-          id="show_completed_tasks"
-          label="Show Completed Tasks"
-          name="show_completed_tasks"
-          value={showCompletedTasks}
-          onClick={handleCompletedTasks}
-          className="mt-4"
-        />
-      }
-  </>
+            {/* CATEGORIES */}
+            {!removeCategoryField && <div className="d-flex gap-2">
+              <p className={`mb-0 ${styles.bold}`}>Category: </p>
+              <Form.Select
+                className={`${styles.FormSelect}`}
+                aria-label="Select category"
+                name="category_name"
+                onChange={handleFilterChange}
+                size="sm"
+              >
+                <option value="">All Categories</option>
+                {categories.results.map((cat) => (
+                  <option
+                    value={cat.id}
+                    key={cat.category_name}
+                  >
+                    {cat.category_name}
+                  </option>
+                ))}
+              </Form.Select>
+            </div>}
+            
+            <Button
+              className={`${styles.FilterButton} ${(removeCategoryField || removeProgressField) && "flex-fill"}`}
+              variant="primary"
+              size="sm"
+              onClick={handleFilterSubmit}
+            >
+              Filter
+            </Button>
+          </Form>
+
+          {/* SHOW COMPLETED TASKS TOGGLE */}
+          {setShowCompletedTasks &&
+            <Form.Check 
+              type="checkbox"
+              id="show_completed_tasks"
+              label="Show Completed Tasks"
+              name="show_completed_tasks"
+              value={showCompletedTasks}
+              onClick={handleCompletedTasks}
+              className="mt-4"
+            />
+          }
+        </Accordion.Body>
+      </Accordion.Item>
+    </Accordion>
   )
 };
 

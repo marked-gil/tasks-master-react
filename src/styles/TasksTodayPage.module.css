@@ -14,7 +14,12 @@
   font-size: 2.8rem;
 }
 
+.PageTitle { 
+  font-weight: 600;
+}
+
 .DateToday {
+  display: block;
   font-size: 1.2rem;
 }
 
@@ -30,4 +35,54 @@
 
 .ListIcon {
   font: 2.5rem;
+}
+
+@media screen and (max-width: 650px) {
+  .MyTasksToday {
+    padding-top: 1.5rem;
+  }
+
+  .InnerContainer {
+    width: 26rem;
+  }
+
+  .MyTasks {
+    font-size: 2.2rem;
+  }
+
+  .LineIcon {
+    font-size: 1.9rem;
+  }
+
+  .PageTitle { 
+    font-size: 1.5rem;
+  }
+
+  .DateToday {
+    font-size: 1rem;
+  }
+
+  .GripIcon {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 450px) {
+  .InnerContainer {
+    width: 22rem;
+  }
+}
+
+@media screen and (max-width: 386px) {
+  .InnerContainer {
+    width: 18rem;
+  }
+
+  .MyTasks {
+    font-size: 2rem;
+  }
+
+  .PageTitle { 
+    font-size: 1.3rem;
+  }
 }
