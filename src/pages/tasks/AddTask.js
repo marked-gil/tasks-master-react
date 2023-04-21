@@ -115,6 +115,7 @@ function AddTask(props) {
         <Modal.Body className="position-relative">
           {!isLoaded && <LoadingIcon size="6" />}
           <Form>
+            {/* TASK NAME */}
             <Form.Group className="mb-3" controlId="taskName">
               <Form.Control
                 type="text"
@@ -127,7 +128,7 @@ function AddTask(props) {
                 onChange={handleChange}
                 aria-label="Add the task's name"
               />
-
+              {/* Error Feedback */}
               {errors?.task_name?.map((error, idx) => (
                 <Alert className={`mt-1 mb-0 pb-0 pt-0 ${styles.TextCenter}`} key={idx} variant="danger">
                   {error === 'This field must be unique for the "due_date" date.'
@@ -139,6 +140,7 @@ function AddTask(props) {
               }
             </Form.Group>
 
+            {/* TASK DETAILS */}
             <Form.Group className="mb-3" controlId="taskDescription">
               <Form.Control
                 as="textarea" 
@@ -150,7 +152,7 @@ function AddTask(props) {
                 onChange={handleChange}
                 aria-label="Add the task's description or details"
               />
-
+              {/* Error Feedback */}
               {errors?.details?.map((error, idx) => (
                 <Alert className={`mt-1 mb-0 pb-0 pt-0 ${styles.TextCenter}`} key={idx} variant="danger">
                   {error}
@@ -159,16 +161,18 @@ function AddTask(props) {
               }
             </Form.Group>
 
-            <div className="d-flex justify-content-between">
+            <div className={`${styles.AttributesContainer}`}>
+              {/* CATEGORY SELECTION */}
               <CategorySelect
+                className={styles.CategorySelect}
                 category={category}
                 handleChange={handleChange}
                 categories={categories}
                 errors={errors}
               />
-
-              <div className="d-flex">
-                <Form.Group className="me-1">
+              <div className={`${styles.InnerContainer}`}>
+                {/* DUE DATE */}
+                <Form.Group className={`${styles.DueDateFormGroup}`}>
                   <Form.Label htmlFor="due_date">Due Date</Form.Label>
                   <Form.Control
                     type="date"
@@ -178,6 +182,7 @@ function AddTask(props) {
                     size="sm"
                     aria-label="Add tasks due date"
                   />
+                  {/* Error Feedback */}
                   {errors?.due_date?.map((error, idx) => (
                     <Alert className={`mt-1 mb-0 pb-0 pt-0 ${styles.TextCenter}`} key={idx} variant="danger">
                       {
@@ -189,8 +194,9 @@ function AddTask(props) {
                     ))
                   }
                 </Form.Group>
-
-                <Form.Group className="me-1">
+                
+                {/* DUE TIME */}
+                <Form.Group className={`${styles.DueTimeFormGroup}`}>
                   <Form.Label htmlFor="due_time">Due Time</Form.Label>
                   <Form.Control
                     type="time"
@@ -202,8 +208,9 @@ function AddTask(props) {
                     aria-label="Add task's due time"
                   />
                 </Form.Group>
-
-                <Form.Group>
+                
+                {/* PRIORITY */}
+                <Form.Group className={styles.PriorityFormGroup}>
                   <Form.Label htmlFor="priority">Priority</Form.Label>
                   <Form.Select
                     id="priority"
@@ -227,10 +234,10 @@ function AddTask(props) {
         </Modal.Body>
 
         <Modal.Footer>
-          <Button variant="secondary" onClick={handleClose} className={className}>
+          <Button variant="secondary" onClick={handleClose} size="sm">
             cancel
           </Button>
-          <Button variant="primary" onClick={handleSubmit}>
+          <Button variant="primary" onClick={handleSubmit} className={styles.AddButton}>
             ADD
           </Button>
         </Modal.Footer>

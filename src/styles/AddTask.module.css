@@ -7,6 +7,82 @@
   width: 35rem;
 }
 
+.AttributesContainer {
+  display: flex;
+  justify-content: space-between;
+  column-gap: 4px;
+}
+
+.CategorySelect {
+  margin-right: 8rem;
+}
+
+.InnerContainer {
+  display: flex;
+  gap: 1;
+  width: 450px;
+}
+
 .TextCenter {
   text-align: center;
+}
+
+.AddButton {
+  width: 8rem;
+}
+
+@media screen and (max-width: 991px) {
+  .CategorySelect {
+    margin-right: 0;
+  }
+
+  .DueDateFormGroup {
+    width: 120px;
+  }
+
+  .PriorityFormGroup {
+    width: 86px;
+  }
+}
+
+@media screen and (max-width: 575px) {
+  .AttributesContainer {
+    flex-direction: column;
+    row-gap: 8px
+  }
+
+  .InnerContainer {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .DueDateFormGroup {
+    width: 100%;
+  }
+
+  .DueTimeFormGroup {
+    width: 100%;
+  }
+
+  .PriorityFormGroup {
+    width: 100%;
+  }
+}
+
+@media screen and (max-width: 390px) {
+  .InnerContainer {
+    flex-wrap: wrap;
+  }
+
+  .DueDateFormGroup {
+    width: 50%;
+  }
+
+  .DueTimeFormGroup {
+    width: 50%;
+  }
+
+  .PriorityFormGroup {
+    width: 100%;
+  }
 }

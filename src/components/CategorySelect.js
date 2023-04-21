@@ -4,9 +4,9 @@ import Form from 'react-bootstrap/Form';
 import styles from '../styles/CategorySelect.module.css'
 
 
-function CategorySelect({ category, handleChange, categories, errors }) {
+function CategorySelect({ className, category, handleChange, categories, errors }) {
   return (
-    <Form.Group>
+    <Form.Group className={className}>
       <Form.Label htmlFor="category">Category</Form.Label>
       <Form.Select
         id="category"
@@ -16,7 +16,7 @@ function CategorySelect({ category, handleChange, categories, errors }) {
         size="sm" 
         aria-label="Select task category"
       >
-        <option value="">Choose your category</option>
+        <option value="">Choose a category</option>
         {categories?.results.map((cat) => (
           <option value={cat.category_name} key={cat.category_name}>
             {cat.category_name}
