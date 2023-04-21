@@ -4,6 +4,10 @@
     padding-right: 5rem;
 }
 
+.NavBarOffCanvas {
+    background-color: #E0E0E2;
+}
+
 .Nav {
     gap: 1.5rem;
 }
@@ -16,16 +20,34 @@
     color: white;
 }
 
-@media screen and (max-width: 850px) {
-    .NavBar {
-        padding-left: 2rem;
-        padding-right: 2rem;
+@media screen and (max-width: 992px) {
+    .OffCanvasBody {
+        padding-left: 2.5rem;
+        padding-right: 2.5rem;
     }
+
+    .Nav {
+        gap: 1rem;
+    }
+
+    .DatePickerContainer {
+        width: 260px;
+      }
+    
+      .CategoryFormContainer {
+        width: 260px;
+      }
+    
+      .AddTask {
+        width: 260px;
+      }
+    
+      .AddCategory {
+        width: 260px;
+      }
+
 }
 
 @media screen and (max-width: 500px) {
-    .NavBar {
-        padding-left: .5rem;
-        padding-right: .5rem;
-    }
+
 }

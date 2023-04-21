@@ -45,7 +45,13 @@ function MainPageContainer(props) {
 
   return (
     <>
-      <NavBar currentUser={currentUser} setSearchResults={setSearchResults} setKeywordSearched={setKeywordSearched} />
+      <NavBar 
+        currentUser={currentUser} 
+        setSearchResults={setSearchResults} 
+        setKeywordSearched={setKeywordSearched}
+        setCategories={setCategories}
+        categories={categories}
+      />
       <Container fluid className={styles.MainContent}>
         <Row className={styles.Row}>
           <SideBar 

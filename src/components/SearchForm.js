@@ -3,7 +3,7 @@ import { Button, Form } from 'react-bootstrap';
 import { axiosReq } from '../api/axiosDefaults';
 import { useHistory } from 'react-router-dom';
 
-function SearchForm({ setSearchResults, setKeywordSearched }) {
+function SearchForm({ setSearchResults, setKeywordSearched, className }) {
 
   const history = useHistory();
   const [ searchKey, setSearchKey ] = useState("");
@@ -28,7 +28,7 @@ function SearchForm({ setSearchResults, setKeywordSearched }) {
   };
 
   return (
-    <Form onSubmit={handleSubmit} className="d-flex">
+    <Form onSubmit={handleSubmit} className={className}>
       <Form.Control
         type="search"
         placeholder="Task or Category"
