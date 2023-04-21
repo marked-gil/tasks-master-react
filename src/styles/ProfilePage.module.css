@@ -5,9 +5,14 @@
   align-items: center;
 }
 
+.PageTitle {
+  text-align: center;
+  font-weight: 700;
+}
+
 .profileImage {
   width: 8rem;
-  border: 1px solid firebrick;
+  border: 1px solid #a31313;
 }
 
 .Form {
@@ -15,9 +20,43 @@
   padding: 2rem 0;
 }
 
-.PageTitle {
-  text-align: center;
-  font-weight: 700;
+.ImageUsernameDiv {
+  display: flex;
+  margin-bottom: 48px;
+}
+
+.UsernameFormGroup {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: 0 0 16px 16px;
+}
+
+.UsernameContainer {
+  display: flex;
+  align-items: center;
+}
+
+.UsernameFormControl {
+  width: 19rem;
+}
+
+.FirstNameGroup {
+  display: flex;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.LastNameGroup {
+  display: flex;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.EmailGroup {
+  display: flex;
+  align-items: center;
+  margin-bottom: 16px;
 }
 
 .bold {
@@ -26,7 +65,6 @@
 
 .DeleteAccount {
   right: 0;
-  /* color: #cb5757; */
 }
 
 .TextCenter {
@@ -46,4 +84,113 @@
 
 .uploadIcon:hover {
   cursor: pointer;
+}
+
+.ButtonsGroup {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 32px;
+  padding: 24px 0 0 48px;
+}
+
+@media screen and (max-width: 650px) {
+  .Form {
+    width: 26rem;
+  }
+
+  .UsernameContainer {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .UsernameFormControl {
+    width: 16rem;
+  }
+
+  .smallInfo {
+    bottom: 16px;
+    left: 146px;
+  }
+}
+
+@media screen and (max-width: 450px) {
+  .ProfilePage {
+    padding-top: 2.2rem;
+  }
+
+  .Form {
+    width: 21rem;
+  }
+
+  .profileImage {
+    width: 6rem;
+    border: 1px solid #a31313;
+  }
+
+  .uploadIcon {
+    left: 70px;
+  }
+
+  .UsernameFormControl {
+    width: 14rem;
+  }
+
+  .smallInfo {
+    bottom: 2px;
+    left: 115px;
+  }
+}
+
+@media screen and (max-width: 386px) {
+  .Form {
+    padding-top: 2rem;
+    width: 18rem;
+  }
+
+  .ImageUsernameDiv {
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 48px;
+  }
+
+  .uploadIcon {
+    left: 166px;
+    bottom: 86px;
+  }
+
+  .UsernameFormGroup {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: 10px 0 0 0;
+  }
+
+  .UsernameFormControl {
+    width: 18rem;
+  }
+
+  .smallInfo {
+    bottom: -22px;
+    left: 0;
+  }
+
+  .FirstNameGroup {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .LastNameGroup {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .EmailGroup {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .ButtonsGroup {
+    padding: 24px 0 0 0;
+  }
 }
