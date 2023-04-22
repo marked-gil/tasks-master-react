@@ -42,8 +42,9 @@ function AllToDoTasksPage({ categories }) {
 
   return (
     <Col className={styles.AllTodoTasks}>
-      <div className={`position-relative ${styles.InnerContainer}`}>
-        {!isLoaded && <LoadingIcon size="6" />}
+      {!isLoaded && <LoadingIcon size="6" />}
+
+      <div className={styles.InnerContainer}>
         {error && <ErrorDisplay error={error} />}
         {feedbackMessage && <FeedbackMessage message={feedbackMessage} />}
 

@@ -58,8 +58,9 @@ function TasksPerDatePage({ categories }) {
 
   return (
     <Col className={styles.MyTasks}>
-      <div className={`position-relative ${styles.InnerContainer}`}>
-        {!isLoaded && <LoadingIcon size="6" />}
+      {!isLoaded && <LoadingIcon size="6" />}
+
+      <div className={styles.InnerContainer}>
         {error && <ErrorDisplay error={error} />}
         {feedbackMessage && <FeedbackMessage message={feedbackMessage} />}
 
