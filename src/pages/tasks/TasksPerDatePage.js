@@ -10,22 +10,22 @@ import AddTask from './AddTask';
 import { useHistory, useParams } from 'react-router-dom';
 import { axiosReq } from '../../api/axiosDefaults';
 import FeedbackMessage from '../../components/FeedbackMessage';
+import LoadingIcon from '../../components/LoadingIcon';
 
 function TasksPerDatePage({ categories }) {
 
-  const { due_date } = useParams();
   const dateToday = moment().format('YYYY-MM-DD')
-
+  const { due_date } = useParams();
   const history = useHistory();
-  
   const is_DueDateTomorrow = moment().add(1, 'days').format('YYYY-MM-DD') === due_date;
   const is_DueDatePrevious = due_date < dateToday
   
   const [ showCompletedTasks, setShowCompletedTasks ] = useState(false)
   const [ tasks, setTasks ] = useState({ results: []});
-  const [ error, setError ] = useState({});
+  const [ error, setError ] = useState("");
   const [ filters, setFilters ] = useState({category_name: "", progress: "", order_by: ""});
   const [ feedbackMessage, setFeedbackMessage ] = useState("");
+  const [ isLoaded, setIsLoaded ] = useState(false);
 
   useEffect(() => {
     if (due_date === dateToday) {
@@ -39,9 +39,11 @@ function TasksPerDatePage({ categories }) {
         const { data } = await axiosReq.get(
           `/tasks/?due_date=${moment(due_date).format("yyyy-MM-DD")}`
         );
-        setTasks(data)
+        setTasks(data);
+        setIsLoaded(true);
       } catch (err) {
-        console.log(err.response?.data)
+        setError("Sorry, an error has occurred. Please try refreshing the page.")
+        setIsLoaded(true);
       }
     }
     getTasks();
@@ -49,14 +51,17 @@ function TasksPerDatePage({ categories }) {
 
   const handleFilterSubmit = async (event) => {
     event.preventDefault();
-    getFilteredTasks({filters, setTasks, setError, due_date});
+    setError("")
+    setFeedbackMessage("")
+    getFilteredTasks({filters, setTasks, setError, due_date, setIsLoaded});
   };
 
   return (
     <Col className={styles.MyTasks}>
-      <div className={styles.InnerContainer}>
+      <div className={`position-relative ${styles.InnerContainer}`}>
+        {!isLoaded && <LoadingIcon size="6" />}
+        {error && <ErrorDisplay error={error} />}
         {feedbackMessage && <FeedbackMessage message={feedbackMessage} />}
-        {error?.data && <ErrorDisplay error={error} />}
 
         <div className={`d-flex justify-content-between`}>
           <h2 className={`${styles.Heading}`}>My Tasks</h2>
@@ -89,6 +94,7 @@ function TasksPerDatePage({ categories }) {
       <AddTask
         tasks={tasks}
         setTasks={setTasks}
+        setError={setError}
         categories={categories}
         setFeedbackMessage={setFeedbackMessage}
         task_date={due_date}

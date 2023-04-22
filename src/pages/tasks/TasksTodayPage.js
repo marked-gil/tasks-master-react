@@ -36,7 +36,6 @@ function TasksTodayPage({ categories }) {
     getTasks();
   }, [due_date]);
   
-
   const handleFilterSubmit = async (event) => {
     event.preventDefault();
     setError("")
@@ -82,6 +81,7 @@ function TasksTodayPage({ categories }) {
       <AddTask
         tasks={tasks}
         setTasks={setTasks}
+        setError={setError}
         categories={categories}
         setFeedbackMessage={setFeedbackMessage}
         task_date={due_date}

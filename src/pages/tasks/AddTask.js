@@ -10,7 +10,6 @@ import CategorySelect from '../../components/CategorySelect';
 import LoadingIcon from '../../components/LoadingIcon';
 import styles from '../../styles/AddTask.module.css';
 
-
 function AddTask(props) {
 
   const { 
@@ -21,7 +20,8 @@ function AddTask(props) {
     categories, 
     setFeedbackMessage, 
     allTodos, 
-    pushToPage 
+    pushToPage,
+    setError
   } = props;
 
   const initialTaskData = { 
@@ -35,7 +35,7 @@ function AddTask(props) {
   const [ dueDate, setDueDate ] = useState({due_date: "" });
   const [ dueTime, setDueTime ] = useState({due_time: ""});
   const [ priorityLevel, setPriorityLevel ] = useState({priority: 1});
-  const [ errors, setErrors ] = useState({});
+  const [ showErrors, setShowErrors ] = useState({});
   const [ show, setShow ] = useState(false);
   const [ isLoaded, setIsLoaded ] = useState(true);
 
@@ -50,12 +50,13 @@ function AddTask(props) {
     setDueDate({due_date: ""});
     setDueTime({due_time: ""});
     setPriorityLevel({priority: 1});
-    setErrors({});
+    setShowErrors({});
   };
 
   const handleShow = () => {
     setShow(true);
     setFeedbackMessage && setFeedbackMessage("");
+    setError("");
   };
 
   const handleChange = (event) => {
@@ -85,7 +86,7 @@ function AddTask(props) {
 
   const handleSubmit = async () => {
     const success_message = `Task has been successfully added for ${
-      moment(due_date).format("Do MMMM YYYY")} .`
+      moment(due_date).format("Do MMMM YYYY")}.`
     try {
       setIsLoaded(false);
       const { data } = await axios.post("/tasks/", {...taskData, due_date, due_time, priority});
@@ -98,7 +99,7 @@ function AddTask(props) {
       setIsLoaded(true);
       pushToPage && history.push(`/tasks/${moment(due_date).format("YYYY-MM-DD")}`)
     } catch (err) {
-      setErrors(err.response?.data);
+      setShowErrors(err.response?.data);
       setIsLoaded(true);
     }
   }
@@ -117,7 +118,7 @@ function AddTask(props) {
         <Modal.Body className="position-relative">
           {!isLoaded && <LoadingIcon size="6" />}
 
-          {errors.length && 
+          {showErrors.length && 
             <Alert variant="danger">Submission Failed! Try again.</Alert> 
           }
 
@@ -136,7 +137,7 @@ function AddTask(props) {
                 aria-label="Add the task's name"
               />
               {/* Error Feedback */}
-              {errors?.task_name?.map((error, idx) => (
+              {showErrors?.task_name?.map((error, idx) => (
                 <Alert className={`mt-1 mb-0 pb-0 pt-0 ${styles.TextCenter}`} key={idx} variant="danger">
                   {error === 'This field must be unique for the "due_date" date.'
                   ? "Task with the same name already exists for this date."
@@ -160,7 +161,7 @@ function AddTask(props) {
                 aria-label="Add the task's description or details"
               />
               {/* Error Feedback */}
-              {errors?.details?.map((error, idx) => (
+              {showErrors?.details?.map((error, idx) => (
                 <Alert className={`mt-1 mb-0 pb-0 pt-0 ${styles.TextCenter}`} key={idx} variant="danger">
                   {error}
                 </Alert>
@@ -175,7 +176,7 @@ function AddTask(props) {
                 category={category}
                 handleChange={handleChange}
                 categories={categories}
-                errors={errors}
+                errors={showErrors}
               />
               <div className={`${styles.InnerContainer}`}>
                 {/* DUE DATE */}
@@ -190,7 +191,7 @@ function AddTask(props) {
                     aria-label="Add tasks due date"
                   />
                   {/* Error Feedback */}
-                  {errors?.due_date?.map((error, idx) => (
+                  {showErrors?.due_date?.map((error, idx) => (
                     <Alert className={`mt-1 mb-0 pb-0 pt-0 ${styles.TextCenter}`} key={idx} variant="danger">
                       {
                         error === "Date has wrong format. Use one of these formats instead: YYYY-MM-DD."
