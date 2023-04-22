@@ -1,0 +1,10 @@
+.CommentCard {
+  border: 2px solid #2ea9ef;
+  background-color: #f0ece3;
+}
+
+.Username { 
+  font-size: 18px;
+  margin-bottom: 0;
+  color: rgb(11, 97, 150);
+}

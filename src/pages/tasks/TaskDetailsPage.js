@@ -24,7 +24,7 @@ function TaskDetailsPage({ categories, currentUser }) {
   const [ editTaskDescription, setEditTaskDescription ] = useState(false);
   const [ closeAllEdits, setCloseAllEdits ] = useState(false);
   // const [ feedbackMessage, setFeedbackMessage ] = useState("");
-  const [ Comments, setComments ] = useState({ results: [] });
+  const [ comments, setComments ] = useState({ results: [] });
 
   const {
     owner,
@@ -274,15 +274,15 @@ function TaskDetailsPage({ categories, currentUser }) {
             setComments={setComments} 
           />
 
-          <h3 className={styles.LabelComments}>Comments</h3>
-          {Comments.results.reverse().map((comment, idx) => (
+          {!!comments.results.length && <h3 className={styles.LabelComments}>Comments</h3>}
+          {!!comments.results.length ? comments.results.reverse().map((comment, idx) => (
             <CommentCard 
               key={idx} 
               comment={comment} 
               setComments={setComments} 
               profile_image={profile_image}
             />
-          ))}
+          )) : <p className={styles.NoCommentYet}>No Comments Yet.</p>}
         </div>
       </div>
     </Col>
