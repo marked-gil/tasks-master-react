@@ -3,12 +3,13 @@ import moment from 'moment';
 import styles from '../styles/SideBar.module.css'
 import { Link, useHistory } from 'react-router-dom';
 import { DatePicker } from '@mui/x-date-pickers';
-import { Button, Form } from 'react-bootstrap';
+import Button from 'react-bootstrap/Button';
+import Form from 'react-bootstrap/Form';
 import AddCategory from '../pages/categories/AddCategory';
 import LoadingIcon from './LoadingIcon';
 import AddTask from '../pages/tasks/AddTask';
 
-const SideBar = ({ currentUser, setCategories, categories }) => {
+const SideBar = ({ currentUser, setCategories, categories, isLoaded }) => {
 
   const [ tasksDate, setTasksDate ] = useState(null);
   const [ categoryID, setCategoryID ] = useState("");
@@ -32,12 +33,13 @@ const SideBar = ({ currentUser, setCategories, categories }) => {
 
   return (
     <div className={`${styles.SideBar}`}>
-      <p className={styles.UserGreeting}>Hi, <span className={`ms-1 ${styles.Username}`}>{currentUser?.username}</span>!</p>
-
+      <p className={styles.UserGreeting}>
+        Hi, <span className={`ms-1 ${styles.Username}`}>{currentUser?.username}</span>!
+      </p>
       <ul className="d-flex flex-column gap-3 ps-0 mb-5 mt-5 position-relative">
-        {/* {!isLoaded && <LoadingIcon size="4" />} */}
+        {!isLoaded && <LoadingIcon size="4" />}
         <li>
-          <AddTask 
+          <AddTask
             categories={categories}
             pushToPages
             className={styles.AddTask}

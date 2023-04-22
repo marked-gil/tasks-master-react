@@ -72,6 +72,10 @@
         padding-right: .3rem;
     }
 
+    .Logo {
+        width: 180px;
+    }
+
     .OffCanvasBody {
         padding-left: 1rem;
         padding-right: .8rem;
