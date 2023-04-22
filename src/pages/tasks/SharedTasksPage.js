@@ -7,6 +7,7 @@ import styles from '../../styles/SharedTasksPage.module.css';
 import { getFilteredTasks } from '../../api/taskMethods';
 import { axiosReq } from '../../api/axiosDefaults';
 import { useCurrentUser } from '../../contexts/CurrentUserContext';
+import LoadingIcon from '../../components/LoadingIcon';
 
 function SharedTasksPage({ categories }) {
   const currentUser = useCurrentUser();
@@ -16,15 +17,18 @@ function SharedTasksPage({ categories }) {
   const [ showCompletedTasks, setShowCompletedTasks ] = useState(false);
   const [ filters, setFilters ] = useState({category_name: "", progress: "", order_by: ""});
   const [ error, setError ] = useState({});
+  const [ isLoaded, setIsLoaded ] = useState(false);
 
   useEffect(() => {
     const getSharedTasks = async () => {
       try {
         const { data } = await axiosReq.get(`/tasks/?is_shared=true`);
         setTasks(data);
+        setIsLoaded(true);
       } catch (err) {
         console.log(err.response?.data);
-        setError(err.response)
+        setError(err.response);
+        setIsLoaded(true);
       }
     }
     if (id) {
@@ -44,9 +48,10 @@ function SharedTasksPage({ categories }) {
 
   return (
     <Col className={styles.SharedTasksPage}>
+      {!isLoaded && <LoadingIcon size="6" />}
+
       <div className={styles.InnerContainer}>
         {error?.data && <ErrorDisplay error={error} />}
-
         <div className={`d-flex justify-content-between`}>
           <h2 className={`${styles.Heading}`}>My Tasks</h2>
           <span className={styles.LineIcon}><i className="fa-solid fa-ellipsis-vertical"></i></span> 

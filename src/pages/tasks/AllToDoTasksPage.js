@@ -42,7 +42,7 @@ function AllToDoTasksPage({ categories }) {
 
   return (
     <Col className={styles.AllTodoTasks}>
-      <div className={styles.InnerContainer}>
+      <div className={`position-relative ${styles.InnerContainer}`}>
         {!isLoaded && <LoadingIcon size="6" />}
         {error && <ErrorDisplay error={error} />}
         {feedbackMessage && <FeedbackMessage message={feedbackMessage} />}
