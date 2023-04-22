@@ -11,7 +11,10 @@ function SearchResultsPage({ searchResults, keywordSearched }) {
     <Col className={styles.SearchResultsPage}>
       <div className={styles.InnerContainer}>
         <h2>Search Results</h2>
-        <p>keyword searched: <span className="ms-2">{keywordSearched}</span></p>
+        <p className="mt-4">keyword searched: <span className="ms-2">{keywordSearched}</span></p>
+
+        <hr />
+
         {searchResults.results.map((task, idx) => (
           <SearchCard
             key={idx}
