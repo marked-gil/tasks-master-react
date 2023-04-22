@@ -51,6 +51,7 @@ function AddTask(props) {
     setPriorityLevel({priority: 1});
     setErrors({});
   };
+
   const handleShow = () => {
     setShow(true);
     setFeedbackMessage && setFeedbackMessage("");
@@ -114,6 +115,11 @@ function AddTask(props) {
 
         <Modal.Body className="position-relative">
           {!isLoaded && <LoadingIcon size="6" />}
+
+          {errors.length && 
+            <Alert variant="danger">Submission Failed! Try again.</Alert> 
+          }
+
           <Form>
             {/* TASK NAME */}
             <Form.Group className="mb-3" controlId="taskName">
