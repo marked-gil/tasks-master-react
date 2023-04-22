@@ -107,12 +107,11 @@ function EditTaskAttributes(props) {
       {/* CATEGORIES */}
       <div className="d-flex">
         <Form.Select
-          className={`me-3 pt-0 pb-0 ${styles.EditFormSelect }`}
+          className={`me-3 mb-3 pt-0 pb-0 ${styles.EditFormSelect }`}
           aria-label="Select category"
           name="category"
           defaultValue={category}
           onChange={handleDataChange}
-          size="sm"
         >
           <option value="" disabled>Choose your category</option>
           {categories.results.map((cat) => (
@@ -131,52 +130,59 @@ function EditTaskAttributes(props) {
   return (
     <>
       <div className="d-flex flex-column mt-3 mb-4">
-          <div className={`d-flex mb-0`}>
-            <span className={`me-4`}>Category:</span>
+          {/* CATEGORY */}
+          <div className={`${styles.CategoryContainer}`}>
+            <span className={`${styles.LabelCategory}`}>Category:</span>
             { editCategory && CategoryForm }
-            { !editCategory && <span className={styles.bold}>{category}</span> }
+            { !editCategory && <span className={styles.CategoryName}>{category}</span> }
 
             { editCategory &&
-              <div>
-                <Button onClick={cancelEditCategory} variant="link" size="sm" className="ms-3 p-0">
+              <div className="d-flex gap-2 ms-auto">
+                <Button onClick={cancelEditCategory} variant="link" className="ms-3 p-0">
                   cancel
                 </Button>
-                <Button variant="link" onClick={handleSave} className="m2-3 p-0" size="sm">
-                  Save
+                <Button variant="link" onClick={handleSave} className={`m2-3 p-0 ${styles.bold}`}>
+                  SAVE
                 </Button> 
               </div>
             }
             { !editCategory && 
-              <Button variant="link" onClick={setEditCategory} className="ms-5 p-0" size="sm">edit</Button> 
+              <Button variant="link" onClick={setEditCategory} className="ms-auto p-0">edit</Button> 
             }
           </div>
 
           {/* DUE DATETIME | PRIORITY | PROGRESS */}
           <div className="d-flex justify-content-between mb-0">
-            <div className="d-flex">
+            <div className="d-flex gap-2">
               { editDuePriority && DueDateForm }
               { editDuePriority && DueTimeForm }
               { editDuePriority && PriorityForm }
 
               { !editDuePriority &&
-                <>
-                  <div>
-                    <span className="me-2"> Due: </span>
-                    <span className={styles.bold}> {moment(due_date).format("DD MMMM YYYY")} {due_time ? `- ${due_time}` : ""} </span>
-                  </div> | 
-                  <span>{priority === 1 ? "Low" : priority === 2 ? "Medium" : "High"}</span> | 
-                  <span>{progress}</span>
-                </>
+                <div className="d-flex gap-3">
+                  <p className="mb-0">
+                    <span className={styles.LabelDue}>Due:</span>
+                    <span className={`${styles.DueDateTime} ${styles.bold}`}>
+                      {moment(due_date).format("DD MMMM YYYY")} {due_time ? `- ${due_time}` : ""}
+                    </span>
+                  </p> | 
+                  <span className={`${styles.Priority} ${priority === 3 ? styles.High : ""}`}>
+                    {priority === 1 ? "Low" : priority === 2 ? "Medium" : "High"}
+                  </span> | 
+                  <span className={`${styles.Progress} ${progress === "overdue" ? styles.Overdue : ""}`}>
+                    {progress}
+                  </span>
+                </div>
               }  
             </div>
 
             { editDuePriority &&
               <div className="align-self-center">
-                <Button onClick={canceEditDuePriority} variant="link" size="sm" className="ms-3 p-0">cancel</Button>
-                <Button onClick={handleSave} variant="link" size="sm" className="ms-2 p-0">Save</Button>
+                <Button onClick={canceEditDuePriority} variant="link" className="ms-3 p-0">cancel</Button>
+                <Button onClick={handleSave} variant="link" className={`ms-2 p-0 ${styles.bold}`}>SAVE</Button>
               </div>}
             { !editDuePriority &&
-              <Button onClick={setEditDuePriority} variant="link" size="sm" className="ms-3 p-0">edit</Button> }
+              <Button onClick={setEditDuePriority} variant="link" className="ms-3 p-0">edit</Button> }
           </div>
       </div>
     </>

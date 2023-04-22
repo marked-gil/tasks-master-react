@@ -1,11 +1,57 @@
+.CategoryContainer {
+  display: flex;
+}
+
+.LabelCategory {
+  font-size: 18px;
+  width: 7rem;
+}
+
+.LabelDue {
+  font-size: 18px;
+  margin-right: 3.8rem;
+}
+
+.CategoryName {
+  font-size: 18px;
+  font-weight: 600;
+  text-transform: capitalize;
+}
+
 .PriorityForm {
   width: 8rem;
 }
 
 .EditFormSelect {
-  width: 12rem;
+  width: 16rem;
+  font-size: 18px;
+}
+
+.DueDateTime {
+  font-size: 18px;
+}
+
+.Priority {
+  font-size: 18px;
+}
+
+.Progress {
+  font-size: 18px;
+  text-transform: capitalize;
 }
 
 .bold {
   font-weight: 600;
+}
+
+.High {
+  color: #991212;
+  font-weight: 600;
+  font-size: 18px;
+}
+
+.Overdue {
+  padding: 0 5px;
+  background-color: #eeef9e;
+  border-radius: 6px;
 }

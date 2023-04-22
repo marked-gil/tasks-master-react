@@ -145,7 +145,6 @@ function TaskDetailsPage({ categories, currentUser }) {
             {!editTaskDescription &&
               <Button 
                 variant="link" 
-                size="sm" 
                 onClick={setEditTaskName}  
                 className={`${styles.EditTaskNameButton}`}
               >
@@ -159,6 +158,7 @@ function TaskDetailsPage({ categories, currentUser }) {
           <Form.Group className={`mb-3 position-relative`} controlId="taskName">
             <Form.Control
               as="textarea"
+              autoFocus
               rows={2}
               plaintext
               maxLength={150}
@@ -171,10 +171,10 @@ function TaskDetailsPage({ categories, currentUser }) {
             <h3 className={styles.HeadingTaskName}>Task Name</h3>
 
             <div className={`${styles.EditTaskNameButtonsGroup}`}>
-              <Button variant="link" size="sm" onClick={cancelEditTaskName}>
+              <Button variant="link" onClick={cancelEditTaskName}>
                 cancel
               </Button>
-              <Button variant="link" size="sm" onClick={handleSave} className={styles.bold}>
+              <Button variant="link" onClick={handleSave} className={styles.bold}>
                 SAVE
               </Button>
             </div>
@@ -190,7 +190,6 @@ function TaskDetailsPage({ categories, currentUser }) {
             {!editTaskDescription &&
               <Button 
                 variant="link" 
-                size="sm" 
                 onClick={setEditTaskDescription} 
                 className={`${styles.EditDetailsButton}`}
               >
@@ -204,6 +203,7 @@ function TaskDetailsPage({ categories, currentUser }) {
             <Form.Control
               as="textarea"
               style={{ height:"150px" }}
+              autoFocus
               plaintext
               name="details"
               defaultValue={details}
@@ -214,10 +214,10 @@ function TaskDetailsPage({ categories, currentUser }) {
             />
             <h3 className={styles.HeadingDetails}>Details</h3>
             <div className={`${styles.EditTaskDetailsButtonsGroup}`}>
-              <Button variant="link" size="sm" onClick={cancelEditTaskDescription}>
+              <Button variant="link" onClick={cancelEditTaskDescription}>
                 cancel
               </Button>
-              <Button variant="link" size="sm" onClick={handleSave} className={styles.bold}>
+              <Button variant="link" onClick={handleSave} className={styles.bold}>
                 SAVE
               </Button>
             </div>
