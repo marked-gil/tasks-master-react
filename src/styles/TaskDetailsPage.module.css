@@ -23,6 +23,12 @@
   border-bottom: 2px solid rgb(10, 131, 237);
 }
 
+.DeleteSharedButtons {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
 .EditTaskNameButton {
   font-size: 1rem;
   font-weight: 600;
@@ -99,9 +105,9 @@
   width: 125px;
 }
 
-.Avatars {
+.AvatarsContainer {
   position: absolute;
-  top: 8rem;
+  top: 9rem;
   right: -170px;
   gap: 1rem;
   width: 125px;
@@ -115,10 +121,89 @@
   position: relative;
 }
 
+.AccordionSharedToAvatar {
+  width: 90px;
+}
+
 .SharedToAvatar:hover {
   box-shadow: 0 0 2px rgb(41, 118, 211);
 }
 
 .bold {
   font-weight: 600;
+}
+
+.SmallScreenAvatars {
+  display: none;
+}
+
+@media screen and (max-width: 1500px) {
+  .OwnerAvatar {
+    top: 1rem;
+    right: -130px;
+  }
+
+  .AvatarsContainer {
+    right: -130px;
+  }
+}
+
+@media screen and (max-width: 1230px) {
+  .Container {
+    position: relative;
+    width: 28rem;
+  }
+}
+
+@media screen and (max-width: 1120px) {
+  .SmallScreenAvatars {
+    display: block;
+    margin-bottom: 18px;
+  }
+
+  .AvatarsOuterContainer {
+    display: none;
+  }
+
+  .SharedToAvatar {
+    font-size: 12px;
+  }
+  
+  .AccordionSharedToAvatar {
+    width: 70px;
+  }
+}
+
+@media screen and (max-width: 991px) {
+  .Container {
+    width: 32rem;
+  }
+}
+
+@media screen and (max-width: 590px) {
+  .TaskDetailsPage {
+    padding: 3rem 0 0;
+  }
+
+  .Container {
+    width: 26rem;
+  }
+}
+
+@media screen and (max-width: 465px) {
+  .Container {
+    width: 22rem;
+  }
+}
+
+@media screen and (max-width: 390px) {
+  .Container {
+    width: 18rem;
+  }
+
+  .DeleteSharedButtons {
+    position: static;
+    display: flex;
+    justify-content: space-between;
+  }
 }

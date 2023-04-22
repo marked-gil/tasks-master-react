@@ -11,7 +11,7 @@ function ShareTaskModal(props) {
     task_name, 
     taskData,
     task_id,
-    handleShareTask
+    handleShareTask,
   } = props;
 
   const [ userSearch, setUserSearch ] = useState("");
@@ -69,7 +69,7 @@ function ShareTaskModal(props) {
 
   return (
     <>
-      <Button onClick={handleShow} className={`me-4 ps-3 pe-3`} size="sm" variant="primary">
+      <Button onClick={handleShow} className={`ms-4 ps-3 pe-3`} size="sm" variant="primary">
         <i className="fa-solid fa-share-nodes me-1"></i> Share
       </Button>
       <Modal show={show} onHide={handleClose} backdrop="static">

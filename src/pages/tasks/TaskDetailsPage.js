@@ -12,6 +12,7 @@ import AddCommentModal from '../comments/AddCommentModal';
 import ProfileAvatar from '../../components/ProfileAvatar';
 import FeedbackMessage from '../../components/FeedbackMessage';
 import CommentCard from '../comments/CommentCard';
+import { Accordion } from 'react-bootstrap';
 
 function TaskDetailsPage({ categories, currentUser }) {
 
@@ -108,7 +109,10 @@ function TaskDetailsPage({ categories, currentUser }) {
         {/* {feedbackMessage && <FeedbackMessage message={feedbackMessage} />} */}
         <div className="position-relative">
           <h2>Task Details</h2>
-          <div className="position-absolute top-0 end-0">
+          <div className={styles.DeleteSharedButtons}>
+            {/* DELETE BUTTON */}
+            <Button onClick={handleDelete} size="sm" variant='danger'>Delete Task</Button>
+
             {/* SHARE BUTTON */}
             <ShareTaskModal
               task_name={task_name}
@@ -117,8 +121,6 @@ function TaskDetailsPage({ categories, currentUser }) {
               taskData={taskData}
               handleShareTask={handleShareTask}
             />
-            {/* DELETE BUTTON */}
-            <Button onClick={handleDelete} size="sm" variant='danger'>Delete Task</Button>
           </div>
         </div>
 
@@ -135,6 +137,41 @@ function TaskDetailsPage({ categories, currentUser }) {
           closeAllEdits={closeAllEdits}
           setCloseAllEdits={setCloseAllEdits}
         />
+
+        <Accordion className={styles.SmallScreenAvatars}>
+          <Accordion.Item eventKey="0">
+            <Accordion.Header>See the owner and users sharing this task.</Accordion.Header>
+            <Accordion.Body className="d-flex align-items-center gap-2">
+              {/* OWNER AVATAR */}
+              {profile_image &&
+                <ProfileAvatar
+                  owner={owner}
+                  isOwner={true}
+                  showName={true}
+                  img_src={profile_image}
+                  imageWidth={"2rem"}
+                />
+              }
+
+              <div className={`d-flex gap-2 justify-content-between`}>
+                {shared_to?.map((user, idx) => (
+                  <ProfileAvatar
+                    key={idx}
+                    owner={user}
+                    isOwner={false}
+                    showName={true}
+                    // img_src={user.image}
+                    imageWidth={"1.5rem"}
+                    isDeletable
+                    taskData={taskData}
+                    setTaskData={setTaskData}
+                    className={`${styles.SharedToAvatar} ${styles.AccordionSharedToAvatar}`}
+                  />))
+                }
+              </div>
+            </Accordion.Body>
+          </Accordion.Item>
+        </Accordion>
 
         {/* TASK NAME */}
         {!editTaskName && 
@@ -225,9 +262,9 @@ function TaskDetailsPage({ categories, currentUser }) {
           </Form.Group>
         }  
 
-        {/* OWNER AVATAR */}
-        {profile_image &&
-          <>
+        <div className={styles.AvatarsOuterContainer}>
+          {/* OWNER AVATAR */}
+          {profile_image &&
             <ProfileAvatar
               owner={owner}
               isOwner={true}
@@ -236,34 +273,30 @@ function TaskDetailsPage({ categories, currentUser }) {
               imageWidth={"3rem"}
               className={styles.OwnerAvatar} 
             />
-          </>
-        }
-
-        <div className={`d-flex flex-column position-absolute ${styles.Avatars}`}>
-          {taskData.is_shared &&
-            <p className={`mb-0 align-self-center ${styles.bold}`}>
-              <i className="fa-solid fa-share-nodes"></i> Sharing with:
-            </p>}
-          
-          {shared_to?.map((user, idx) => (
-            <>
-                      {console.log(user)}
-            <ProfileAvatar
-              key={idx}
-              // owner={user}
-              isOwner={false}
-              showName={true}
-              // img_src={user.image}
-              imageWidth={"1.5rem"}
-              isDeletable
-              className={styles.SharedToAvatar}
-              taskData={taskData}
-              setTaskData={setTaskData}
-            />  
-            </>
-
-            ))
           }
+
+          <div className={`d-flex flex-column position-absolute ${styles.AvatarsContainer}`}>
+            {taskData.is_shared &&
+              <p className={`mb-0 align-self-center ${styles.bold}`}>
+                <i className="fa-solid fa-share-nodes"></i> Sharing with:
+              </p>}
+          
+            {shared_to?.map((user, idx) => (
+              <ProfileAvatar
+                key={idx}
+                owner={user}
+                isOwner={false}
+                showName={true}
+                // img_src={user.image}
+                imageWidth={"1.5rem"}
+                isDeletable
+                className={styles.SharedToAvatar}
+                taskData={taskData}
+                setTaskData={setTaskData}
+              />  
+              ))
+            }
+          </div>
         </div>
         
         {/* COMMENT SECTION */}

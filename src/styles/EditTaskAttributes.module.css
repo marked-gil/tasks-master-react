@@ -1,10 +1,11 @@
 .CategoryContainer {
   display: flex;
+  position: relative;
 }
 
 .LabelCategory {
   font-size: 18px;
-  width: 7rem;
+  margin-right: 1.6rem;
 }
 
 .LabelDue {
@@ -18,13 +19,25 @@
   text-transform: capitalize;
 }
 
+.CategoryButtons {
+  display: flex;
+  column-gap: 8px;
+  margin-left: auto;
+}
+
 .PriorityForm {
   width: 8rem;
+}
+
+.DateTimePriorityContainer {
+  display: flex;
 }
 
 .EditFormSelect {
   width: 16rem;
   font-size: 18px;
+  margin: 0 16px 16px 0;
+  padding: 0 24px 0 16px ;
 }
 
 .DueDateTime {
@@ -54,4 +67,126 @@
   padding: 0 5px;
   background-color: #eeef9e;
   border-radius: 6px;
+}
+
+.EditButtonsTwo {
+  align-self: center;
+}
+
+@media screen and (max-width: 590px) {
+  .CategoryContainer {
+    margin-bottom: .8rem;
+  }
+
+  .LabelCategory {
+    font-size: 16px;
+    margin-right: 1rem;
+  }
+
+  .CategoryName {
+    font-size: 16px;
+  }
+
+  .EditFormSelect {
+    width: 9rem;
+    font-size: 16px;
+    margin: 0;
+    padding: 0 24px 0 12px ;
+  }
+
+  .LabelDue {
+    font-size: 16px;
+    margin-right: 2.9rem;
+  }
+
+  .DueDateTime {
+    font-size: 16px;
+  }
+
+  .Priority {
+    font-size: 16px;
+  }
+
+  .Progress {
+    font-size: 16px;
+  }
+
+  .PriorityForm {
+    width: 6rem;
+  }
+
+  .High {
+    font-size: 16px;
+  }
+
+  .EditButtonsTwo {
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+@media screen and (max-width: 465px) {
+  .LabelDue {
+    margin-right: 1.6rem;
+  }
+
+  .DueDateForm {
+    width: 100px;
+  }
+}
+
+@media screen and (max-width: 390px) {
+  .CategoryContainer {
+    flex-direction: column;
+  }
+
+  .DateTimePriorityContainer {
+    flex-direction: column;
+  }
+
+  .LabelDue {
+    font-size: 15px;
+    margin-right: 1rem;
+  }
+
+  .DueDateTime {
+    font-size: 15px;
+  }
+
+  .Priority {
+    font-size: 15px;
+  }
+
+  .Progress {
+    font-size: 15px;
+  }
+
+  .EditFormSelect {
+    width: 12rem;
+    font-size: 16px;
+    padding: 0 24px 0 12px ;
+  }
+
+  .PriorityForm {
+    width: 6rem;
+  }
+
+  .High {
+    font-size: 15px;
+  }
+
+  .CategoryButtons {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+  }
+
+  .AttributesEditButton {
+    align-self: flex-end;
+  }
+
+  .EditButtonsTwo {
+    flex-direction: row;
+    margin-left: auto;
+  }
 }

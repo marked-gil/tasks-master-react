@@ -40,7 +40,7 @@ function EditTaskAttributes(props) {
 
   const DueDateForm = <>
       {/* DUE DATE */}
-      <Form.Group>
+      <Form.Group className={styles.DueDateForm}>
         <Form.Label htmlFor="due_date" className="mb-0">Due Date</Form.Label>
         <Form.Control
           type="date"
@@ -107,7 +107,7 @@ function EditTaskAttributes(props) {
       {/* CATEGORIES */}
       <div className="d-flex">
         <Form.Select
-          className={`me-3 mb-3 pt-0 pb-0 ${styles.EditFormSelect }`}
+          className={`${styles.EditFormSelect}`}
           aria-label="Select category"
           name="category"
           defaultValue={category}
@@ -137,7 +137,7 @@ function EditTaskAttributes(props) {
             { !editCategory && <span className={styles.CategoryName}>{category}</span> }
 
             { editCategory &&
-              <div className="d-flex gap-2 ms-auto">
+              <div className={`${styles.CategoryButtons}`}>
                 <Button onClick={cancelEditCategory} variant="link" className="ms-3 p-0">
                   cancel
                 </Button>
@@ -152,14 +152,14 @@ function EditTaskAttributes(props) {
           </div>
 
           {/* DUE DATETIME | PRIORITY | PROGRESS */}
-          <div className="d-flex justify-content-between mb-0">
-            <div className="d-flex gap-2">
+          <div className={`d-flex justify-content-between mb-0 ${styles.DateTimePriorityContainer}`}>
+            <div className={`d-flex`}>
               { editDuePriority && DueDateForm }
               { editDuePriority && DueTimeForm }
               { editDuePriority && PriorityForm }
 
               { !editDuePriority &&
-                <div className="d-flex gap-3">
+                <div className="d-flex gap-1">
                   <p className="mb-0">
                     <span className={styles.LabelDue}>Due:</span>
                     <span className={`${styles.DueDateTime} ${styles.bold}`}>
@@ -177,12 +177,12 @@ function EditTaskAttributes(props) {
             </div>
 
             { editDuePriority &&
-              <div className="align-self-center">
+              <div className={`${styles.EditButtonsTwo}`}>
                 <Button onClick={canceEditDuePriority} variant="link" className="ms-3 p-0">cancel</Button>
                 <Button onClick={handleSave} variant="link" className={`ms-2 p-0 ${styles.bold}`}>SAVE</Button>
               </div>}
             { !editDuePriority &&
-              <Button onClick={setEditDuePriority} variant="link" className="ms-3 p-0">edit</Button> }
+              <Button onClick={setEditDuePriority} variant="link" className={`ms-3 p-0 ${styles.AttributesEditButton}`}>edit</Button> }
           </div>
       </div>
     </>
