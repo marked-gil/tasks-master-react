@@ -1,0 +1,35 @@
+.CardBody {
+  padding-bottom: 10px;
+}
+
+.TaskOwner {
+  font-size: .9rem;
+  margin-bottom: 0;
+}
+
+.Category {
+  font-size: .9rem;
+  margin-bottom: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  max-width: 500px;
+}
+
+.Shared {
+  font-size: .9rem;
+  margin-bottom: 0;
+  color: rgb(27, 96, 194);
+}
+
+.DateTime {
+  font-size: .9rem;
+  margin-bottom: 0;
+  margin-left: auto;
+}
+
+@media screen and (max-width: 400px) {
+  .SharedWord {
+    display: none;
+  }
+}

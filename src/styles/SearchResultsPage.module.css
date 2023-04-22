@@ -18,9 +18,42 @@
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
+  margin-bottom: 10px;
 }
 
 .NoResults {
   font-size: 1.2rem;
   text-align: center;
+}
+
+@media screen and (max-width: 630px) {
+  .InnerContainer {
+    width: 30rem;
+  }
+}
+
+@media screen and (max-width: 530px) {
+  .InnerContainer {
+    width: 26rem;
+  }
+}
+
+@media screen and (max-width: 470px) {
+  .InnerContainer {
+    width: 22rem;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .InnerContainer {
+    width: 17.5rem;
+  }
+
+  .TaskTitle {
+    font-size: 16px;
+  }
+
+  .TaskDescription {
+    font-size: 15px;
+  }
 }
