@@ -36,8 +36,7 @@ function TasksTodayPage({ categories }) {
     getTasks();
   }, [due_date]);
   
-  const handleFilterSubmit = async (event) => {
-    event.preventDefault();
+  const handleFilterSubmit = async () => {
     setError("")
     setFeedbackMessage("")
     getFilteredTasks({filters, setTasks, setError, due_date, setIsLoaded});

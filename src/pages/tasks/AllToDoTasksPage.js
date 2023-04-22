@@ -1,20 +1,22 @@
 import React, { useEffect, useState } from 'react';
-import { Col } from 'react-bootstrap';
+import { axiosReq } from '../../api/axiosDefaults';
+import Col from 'react-bootstrap/Col';
 import ErrorDisplay from '../../components/ErrorDisplay';
 import styles from '../../styles/AllToDoTasksPage.module.css';
 import TasksList from './TasksList';
 import { getFilteredTasks } from '../../api/taskMethods';
 import AddTask from './AddTask';
 import TasksFilter from '../../components/TasksFilter';
-import { axiosReq } from '../../api/axiosDefaults';
 import FeedbackMessage from '../../components/FeedbackMessage';
+import LoadingIcon from '../../components/LoadingIcon';
 
 function AllToDoTasksPage({ categories }) {
 
   const [ tasks, setTasks ] = useState({ results: []});
   const [ filters, setFilters ] = useState({category_name: "", progress: "", order_by: ""});
   const [ feedbackMessage, setFeedbackMessage ] = useState("");
-  const [ error, setError ] = useState({});
+  const [ error, setError ] = useState("");
+  const [ isLoaded, setIsLoaded ] = useState(false);
 
   useEffect(() => {
     const getTodoTasks = async () => {
@@ -23,22 +25,26 @@ function AllToDoTasksPage({ categories }) {
           `/tasks/?progress=to-do`
         );
         setTasks(data);
+        setIsLoaded(true);
       } catch (err) {
-        console.log(err.response)
-        setError(err.response);
+        setError("Sorry, an error has occurred. Please try refreshing the page.");
+        setIsLoaded(true);
       }
     }
     getTodoTasks()
   }, []);
 
   const handleFilterSubmit = async () => {
-    getFilteredTasks({filters, setTasks, setError, todoTasksOnly:true});
+    setError("")
+    setFeedbackMessage("")
+    getFilteredTasks({filters, setTasks, setError, todoTasksOnly:true, setIsLoaded});
   };
 
   return (
     <Col className={styles.AllTodoTasks}>
       <div className={styles.InnerContainer}>
-        {error?.data && <ErrorDisplay error={error} />}
+        {!isLoaded && <LoadingIcon size="6" />}
+        {error && <ErrorDisplay error={error} />}
         {feedbackMessage && <FeedbackMessage message={feedbackMessage} />}
 
         <div className={`d-flex justify-content-between`}>
@@ -66,6 +72,7 @@ function AllToDoTasksPage({ categories }) {
       <AddTask
         tasks={tasks}
         setTasks={setTasks}
+        setError={setError}
         categories={categories}
         setFeedbackMessage={setFeedbackMessage}
         allTodos

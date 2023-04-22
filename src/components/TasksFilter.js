@@ -16,7 +16,6 @@ function TasksFilter(props) {
     removeOrderByDate,
   } = props;
 
-
   const handleFilterChange = (event) => {
     setFilters(prevState => (
       {
