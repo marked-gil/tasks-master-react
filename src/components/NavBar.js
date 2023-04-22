@@ -12,6 +12,7 @@ import AddTask from '../pages/tasks/AddTask';
 import moment from 'moment';
 import AddCategory from '../pages/categories/AddCategory';
 import { useState } from 'react';
+import logo from '../assets/tasks-master-logo-small.png';
 
 function NavBar(props) {
 
@@ -48,7 +49,9 @@ function NavBar(props) {
       {['lg'].map((expand) => (
         <Navbar key={expand} expand={expand} className={`${styles.NavBar}`}>
           <Container fluid>
-            <Navbar.Brand href="#" className={`p-2 flex-grow-1 ${styles.ClrWhite}`}>LOGO Tasks Master</Navbar.Brand>
+            <Navbar.Brand href="#" className={`p-2 flex-grow-1 ${styles.ClrWhite}`}>
+              <img src={logo} alt="tasks master logo" className={styles.Logo}/>
+            </Navbar.Brand>
             <Navbar.Toggle aria-controls={`offcanvasNavbar-expand-${expand}`} />
             <Navbar.Offcanvas
               id={`offcanvasNavbar-expand-${expand}`}
