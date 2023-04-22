@@ -5,7 +5,6 @@ import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import { axiosReq } from '../../api/axiosDefaults';
 import { useHistory, useParams } from 'react-router-dom';
-import { FloatingLabel } from 'react-bootstrap';
 import { deleteTask } from '../../api/taskMethods';
 import EditTaskAttributes from './EditTaskAttributes';
 import ShareTaskModal from './ShareTaskModal';
@@ -104,11 +103,11 @@ function TaskDetailsPage({ categories, currentUser }) {
   };
 
   return (
-    <Col className={styles.TaskDetails}>
-      <div className={`${styles.Container} position-relative`}>
+    <Col className={styles.TaskDetailsPage}>
+      <div className={styles.Container}>
         {/* {feedbackMessage && <FeedbackMessage message={feedbackMessage} />} */}
         <div className="position-relative">
-          <h2 className={`${styles.MyTasks}`}>Task Details</h2>
+          <h2>Task Details</h2>
           <div className="position-absolute top-0 end-0">
             {/* SHARE BUTTON */}
             <ShareTaskModal
@@ -138,64 +137,92 @@ function TaskDetailsPage({ categories, currentUser }) {
         />
 
         {/* TASK NAME */}
-        <Form.Group className="mb-3 position-relative" controlId="taskName">
-          <FloatingLabel controlId="floatingTaskNameArea" label="Task Name">
+        {!editTaskName && 
+          <div className="position-relative">
+            <p className={styles.TaskName}>{task_name}</p>
+            <h3 className={styles.HeadingTaskName}>Task Name</h3>
+
+            {!editTaskDescription &&
+              <Button 
+                variant="link" 
+                size="sm" 
+                onClick={setEditTaskName}  
+                className={`${styles.EditTaskNameButton}`}
+              >
+                edit
+              </Button>
+            }
+          </div>
+        }
+
+        {editTaskName && 
+          <Form.Group className={`mb-3 position-relative`} controlId="taskName">
             <Form.Control
-              type="text"
-              readOnly={!editTaskName}
-              maxLength={50}
-              className={styles.TaskName}
+              as="textarea"
+              rows={2}
+              plaintext
+              maxLength={150}
               name="task_name"
               defaultValue={task_name}
               onChange={handleDataChange}
+              className={styles.TaskName}
               aria-label="Edit the task name"
             />
-          </FloatingLabel>
+            <h3 className={styles.HeadingTaskName}>Task Name</h3>
 
-          {editTaskName && 
-            <div className={`position-absolute bottom-0 end-0`}>
+            <div className={`${styles.EditTaskNameButtonsGroup}`}>
               <Button variant="link" size="sm" onClick={cancelEditTaskName}>
                 cancel
               </Button>
               <Button variant="link" size="sm" onClick={handleSave} className={styles.bold}>
                 SAVE
               </Button>
-            </div>}
-          {!editTaskName &&
-            <Button variant="link" size="sm" onClick={setEditTaskName} className={`position-absolute bottom-0 end-0`}>
-              edit
-            </Button>}
-        </Form.Group>
+            </div>
+          </Form.Group>
+        }
         
-        {/* TASK DESCRIPTION */}
-        <Form.Group className="mb-3 position-relative" controlId="taskDescription">
-          <FloatingLabel controlId="floatingTextarea" label="Description">
+        {/* TASK DETAILS/DESCRIPTION */}
+        {!editTaskDescription && 
+          <div className={`${styles.TaskDetailsContainer}`}>
+            <p className={styles.TaskDetails}>{details}</p>
+            <h3 className={styles.HeadingDetails}>Details</h3>
+
+            {!editTaskDescription &&
+              <Button 
+                variant="link" 
+                size="sm" 
+                onClick={setEditTaskDescription} 
+                className={`${styles.EditDetailsButton}`}
+              >
+                edit
+              </Button>
+            }
+          </div>
+        }
+        {editTaskDescription && 
+          <Form.Group className="mt-5 position-relative" controlId="taskDescription">
             <Form.Control
-              as="textarea" 
-              style={{height: '150px'}}
+              as="textarea"
+              style={{ height:"150px" }}
+              plaintext
               name="details"
-              readOnly={!editTaskDescription}
               defaultValue={details}
-              maxLength={250}
+              maxLength={1000}
               onChange={handleDataChange}
+              className={styles.TaskDetails}
               aria-label="Edit task description"
             />
-          </FloatingLabel>
-          
-          {editTaskDescription && 
-            <div className={`position-absolute bottom-0 end-0`}>
+            <h3 className={styles.HeadingDetails}>Details</h3>
+            <div className={`${styles.EditTaskDetailsButtonsGroup}`}>
               <Button variant="link" size="sm" onClick={cancelEditTaskDescription}>
                 cancel
               </Button>
               <Button variant="link" size="sm" onClick={handleSave} className={styles.bold}>
                 SAVE
               </Button>
-            </div>}  
-          {!editTaskDescription &&
-            <Button variant="link" size="sm" onClick={setEditTaskDescription} className={`position-absolute bottom-0 end-0`}>
-              edit
-            </Button>}
-        </Form.Group>
+            </div>
+          </Form.Group>
+        }  
 
         {/* OWNER AVATAR */}
         {profile_image &&

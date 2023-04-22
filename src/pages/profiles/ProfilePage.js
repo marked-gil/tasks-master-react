@@ -124,6 +124,7 @@ function ProfilePage ({ currentUser }) {
               <Form.Control
                 type="text"
                 placeholder="Enter your first name"
+                maxLength={50}
                 name="first_name"
                 value={first_name}
                 onChange={handleChange}
@@ -142,6 +143,7 @@ function ProfilePage ({ currentUser }) {
               <Form.Label className={`ps-0 ${styles.bold}`} style={{ width:"8rem" }}>Last Name:</Form.Label>
               <Form.Control
                 type="text"
+                maxLength={50}
                 placeholder="Enter your last name"
                 name="last_name"
                 value={last_name}

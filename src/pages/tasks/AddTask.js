@@ -121,7 +121,7 @@ function AddTask(props) {
                 type="text"
                 placeholder="Task Name"
                 autoFocus
-                maxLength={250}
+                maxLength={150}
                 className={styles.TaskName}
                 name="task_name"
                 value={task_name}

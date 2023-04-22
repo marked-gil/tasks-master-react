@@ -1,4 +1,4 @@
-.TaskDetails {
+.TaskDetailsPage {
   padding: 4rem 0 0;
   display: flex;
   flex-direction: column;
@@ -6,11 +6,75 @@
 }
 
 .Container {
-  /* border: 1px solid black */
+  position: relative;
+  width: 30rem;
+}
+
+.HeadingTaskName {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin: .4rem 0 0;
 }
 
 .TaskName {
-  width: 30rem;
+  font-size: 1.2rem;
+  font-weight: 700;
+  margin-bottom: 0;
+  border-bottom: 2px solid rgb(10, 131, 237);
+}
+
+.EditTaskNameButton {
+  font-size: 1rem;
+  font-weight: 600;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  padding-right: 0;
+}
+
+.EditTaskNameButtonsGroup {
+  position: absolute;
+  font-size: 1rem;
+  font-weight: 600;
+  bottom: -5px;
+  right: 0;
+  padding-right: 0;
+}
+
+.TaskDetailsContainer {
+  position: relative;
+  margin-top: 25px;
+}
+
+.HeadingDetails {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin: .4rem 0 0;
+}
+
+.TaskDetails {
+  font-size: 1.1rem;
+  padding-top: 0;
+  margin: 0;
+  border-bottom: 2px solid rgb(10, 131, 237);
+}
+
+.EditDetailsButton {
+  font-size: 1rem;
+  font-weight: 600;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  padding-right: 0;
+}
+
+.EditTaskDetailsButtonsGroup {
+  position: absolute;
+  font-size: 1rem;
+  font-weight: 600;
+  bottom: -6px;
+  right: 0;
+  padding-right: 0;
 }
 
 .bold {
