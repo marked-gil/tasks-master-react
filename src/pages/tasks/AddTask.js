@@ -1,14 +1,15 @@
 import React, { useState } from 'react';
+import axios from 'axios';
+import { useHistory } from 'react-router-dom';
 import moment from 'moment';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Modal from 'react-bootstrap/Modal';
-import styles from '../../styles/AddTask.module.css';
-import { Alert } from 'react-bootstrap';
+import Alert from 'react-bootstrap/Alert';
 import CategorySelect from '../../components/CategorySelect';
-import axios from 'axios';
 import LoadingIcon from '../../components/LoadingIcon';
-import { useHistory } from 'react-router-dom';
+import styles from '../../styles/AddTask.module.css';
+
 
 function AddTask(props) {
 
