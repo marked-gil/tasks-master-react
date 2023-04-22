@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { axiosReq } from '../../api/axiosDefaults';
 import moment from 'moment';
 import styles from '../../styles/TasksTodayPage.module.css';
 import Col from 'react-bootstrap/Col';
@@ -7,18 +8,15 @@ import { getFilteredTasks } from '../../api/taskMethods';
 import ErrorDisplay from '../../components/ErrorDisplay';
 import TasksFilter from '../../components/TasksFilter';
 import TasksList from './TasksList';
-import { axiosReq } from '../../api/axiosDefaults';
 import LoadingIcon from '../../components/LoadingIcon';
 import FeedbackMessage from '../../components/FeedbackMessage';
 
 function TasksTodayPage({ categories }) {
-
   const due_date = moment().format("YYYY-MM-DD")
-
   const [ showCompletedTasks, setShowCompletedTasks ] = useState(false)
   const [ tasks, setTasks ] = useState({ results: []});
   const [ feedbackMessage, setFeedbackMessage ] = useState("");
-  const [ error, setError ] = useState({});
+  const [ error, setError ] = useState("");
   const [ filters, setFilters ] = useState({category_name: "", progress: "", order_by: ""});
   const [ isLoaded, setIsLoaded ] = useState(false);
 
@@ -31,7 +29,7 @@ function TasksTodayPage({ categories }) {
         setTasks(data);
         setIsLoaded(true);
       } catch (err) {
-        console.log(err.response?.data)
+        setError("Sorry, an error has occurred. Please try refreshing the page.")
         setIsLoaded(true);
       }
     }
@@ -41,14 +39,15 @@ function TasksTodayPage({ categories }) {
 
   const handleFilterSubmit = async (event) => {
     event.preventDefault();
-    getFilteredTasks({filters, setTasks, setError, due_date});
+    setError("")
+    getFilteredTasks({filters, setTasks, setError, due_date, setIsLoaded});
   };
 
   return (
     <Col className={styles.MyTasksToday}>
       <div className={`position-relative ${styles.InnerContainer}`}>
         {!isLoaded && <LoadingIcon size="6" />}
-        {error?.data && <ErrorDisplay error={error} />}
+        {error && <ErrorDisplay error={error} />}
         {feedbackMessage && <FeedbackMessage message={feedbackMessage} />}
 
         <div className={`d-flex justify-content-between`}>

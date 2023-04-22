@@ -128,4 +128,4 @@ const SideBar = ({ currentUser, setCategories, categories, isLoaded }) => {
   )
 }
 
-export default SideBar
+export default SideBar;

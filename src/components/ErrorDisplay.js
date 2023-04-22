@@ -7,11 +7,12 @@ function ErrorDisplay({error}) {
 
   if (show) {
     return (
-      <Alert className={styles.ErrorDisplay} variant="danger" onClose={() => setShow(false)} dismissible>
-        <p className="m-0">
-          Error will be displayed here.
-          {error?.data?.detail}
-        </p>
+      <Alert 
+        className={styles.ErrorDisplay} 
+        variant="danger" onClose={() => setShow(false)} 
+        dismissible
+      >
+        <p className="m-0">{error}</p>
       </Alert>
     );
   }
