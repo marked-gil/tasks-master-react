@@ -208,6 +208,7 @@ function TaskDetailsPage({ categories, currentUser }) {
               name="details"
               defaultValue={details}
               maxLength={1000}
+              placeholder="Write your details here."
               onChange={handleDataChange}
               className={styles.TaskDetails}
               aria-label="Edit task description"
@@ -273,7 +274,7 @@ function TaskDetailsPage({ categories, currentUser }) {
             setComments={setComments} 
           />
 
-          <h2>Comments</h2>
+          <h3 className={styles.LabelComments}>Comments</h3>
           {Comments.results.reverse().map((comment, idx) => (
             <CommentCard 
               key={idx} 

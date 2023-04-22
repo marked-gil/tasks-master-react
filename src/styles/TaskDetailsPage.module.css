@@ -77,12 +77,13 @@
   padding-right: 0;
 }
 
-.bold {
-  font-weight: 600;
-}
-
 .DateTimePicker {
   width: 14rem;
+}
+
+.LabelComments {
+  font-size: 1.3rem;
+  font-weight: 700;
 }
 
 .OwnerAvatar {
@@ -111,4 +112,8 @@
 
 .SharedToAvatar:hover {
   box-shadow: 0 0 2px rgb(41, 118, 211);
+}
+
+.bold {
+  font-weight: 600;
 }

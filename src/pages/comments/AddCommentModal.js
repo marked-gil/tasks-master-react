@@ -1,5 +1,7 @@
-import axios from 'axios';
 import React, { useState } from 'react';
+import axios from 'axios';
+
+import styles from '../../styles/AddCommentModal.module.css';
 import { Alert, Button, Form, Modal } from 'react-bootstrap';
 
 function AddCommentModal({ id, taskData, setComments }) {
@@ -43,7 +45,7 @@ function AddCommentModal({ id, taskData, setComments }) {
 
   return (
     <>
-      <Button variant="link" onClick={handleShow}>
+      <Button variant="link" onClick={handleShow} className={styles.AddCommentButton}>
         Add comment
       </Button>
 
@@ -52,27 +54,26 @@ function AddCommentModal({ id, taskData, setComments }) {
           <Modal.Title>Add Comment</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-
           <Form>
             <Form.Group className="mb-3" controlId="comment">
               <Form.Control
                 as="textarea" 
                 rows={3} 
                 name="content"
-                placeholder="Comment"
+                placeholder="Write your comment here."
                 maxLength={250}
                 onChange={handleChange}
                 aria-label="Add comment"
               />
 
-              <Alert className={`mt-1 mb-0 pb-0 pt-0`} style={{ textAlign: "center"}} variant="danger">
-                {feedback}
-              </Alert>
-
+              {feedback && 
+                <Alert className={`mt-1 mb-0 pb-0 pt-0`} style={{textAlign: "center"}} variant="danger">
+                  {feedback}
+                </Alert>
+              }
             </Form.Group>
           </Form>
-
-          <p className="m-0">Task: <span>{taskData.task_name}</span></p>
+          <p className="m-0"><span className={styles.LabelTask}>Task: </span><span className={styles.bold}>{taskData.task_name}</span></p>
         </Modal.Body>
         <Modal.Footer className="pb-0 pt-0">
           <Button variant="secondary" onClick={handleClose} size="sm">
