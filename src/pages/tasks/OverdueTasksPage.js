@@ -11,7 +11,7 @@ function OverdueTasksPage({ categories }) {
 
   const [ tasks, setTasks ] = useState({ results: []});
   const [ filters, setFilters ] = useState({category_name: "", progress: "", order_by: ""});
-  const [ error, setError ] = useState({});
+  const [ error, setError ] = useState("");
 
   useEffect(() => {
     const getOverdueTasks = async () => {
@@ -21,8 +21,7 @@ function OverdueTasksPage({ categories }) {
         );
         setTasks(data);
       } catch (err) {
-        console.log(err.response?.data)
-        setError(err.response?.data)
+        setError("Sorry, an error has occurred. Please try refreshing the page.")
       }
     } 
     getOverdueTasks();
@@ -36,7 +35,7 @@ function OverdueTasksPage({ categories }) {
   return (
     <Col className={styles.OverdueTasks}>
     <div className={styles.InnerContainer}>
-      {error?.data && <ErrorDisplay error={error} />}
+      {error && <ErrorDisplay error={error} />}
 
       <div className={`d-flex justify-content-between`}>
         <h2 className={`${styles.Heading}`}>My Tasks</h2>
