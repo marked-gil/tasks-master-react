@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
+import { axiosReq } from '../../api/axiosDefaults';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
+import Form from 'react-bootstrap/Form';
+import InputGroup from 'react-bootstrap/InputGroup';
 import styles from '../../styles/ShareTaskModal.module.css'
-import { Form, InputGroup } from 'react-bootstrap';
-import { axiosReq } from '../../api/axiosDefaults';
 
 function ShareTaskModal(props) {
 
@@ -49,7 +50,7 @@ function ShareTaskModal(props) {
           setUserProfile(data.results[0]);
           setFeedback("")
         } catch (err) {
-          console.log(err.response?.data)
+          setFeedback("Sorry, an ERROR has occurred during database search.")
         }
       }
     } else {
@@ -71,7 +72,7 @@ function ShareTaskModal(props) {
         setFeedback(`@${userProfile.owner} is added to the task.`)
         setSuccessFeedback(true);
       } catch (err) {
-        console.log(err.response?.data)
+        setFeedback("Sorry, an ERROR has occurred while attempting to add the user.")
       }
     }
   }
