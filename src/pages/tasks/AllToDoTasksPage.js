@@ -21,6 +21,7 @@ function AllToDoTasksPage({ categories }) {
   useEffect(() => {
     const getTodoTasks = async () => {
       try {
+        setIsLoaded(false);
         const { data } = await axiosReq.get(
           `/tasks/?progress=to-do`
         );

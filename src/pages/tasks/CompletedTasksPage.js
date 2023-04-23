@@ -18,6 +18,7 @@ function CompletedTasksPage({ categories }) {
   useEffect(() => {
     const getCompletedTasks = async () => {
       try {
+        setIsLoaded(false);
         const { data } = await axiosReq.get(
           `/tasks/?progress=completed&ordering=-due_date`
         )

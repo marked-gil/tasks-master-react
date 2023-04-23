@@ -22,6 +22,7 @@ function SharedTasksPage({ categories }) {
   useEffect(() => {
     const getSharedTasks = async () => {
       try {
+        setIsLoaded(false);
         const { data } = await axiosReq.get(`/tasks/?is_shared=true`);
         setTasks(data);
         setIsLoaded(true);

@@ -36,6 +36,7 @@ function TasksPerDatePage({ categories }) {
   useEffect(() => {
     const getTasks = async () => {
       try {
+        setIsLoaded(false);
         const { data } = await axiosReq.get(
           `/tasks/?due_date=${moment(due_date).format("yyyy-MM-DD")}`
         );

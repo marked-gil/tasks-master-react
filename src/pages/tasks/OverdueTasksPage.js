@@ -18,6 +18,7 @@ function OverdueTasksPage({ categories }) {
   useEffect(() => {
     const getOverdueTasks = async () => {
       try {
+        setIsLoaded(false);
         const { data } = await axiosReq.get(
           `/tasks/?progress=overdue`
         );
