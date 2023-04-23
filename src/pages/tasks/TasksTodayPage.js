@@ -37,8 +37,8 @@ function TasksTodayPage({ categories }) {
   }, [due_date]);
   
   const handleFilterSubmit = async () => {
-    setError("")
-    setFeedbackMessage("")
+    setError("");
+    setFeedbackMessage("");
     getFilteredTasks({filters, setTasks, setError, due_date, setIsLoaded});
   };
 

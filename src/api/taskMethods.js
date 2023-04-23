@@ -45,7 +45,7 @@ export const getFilteredTasks = async (
       setTasks(data);
     } else if (sharedTasksOnly) {
       const { data } = await axiosReq.get(
-        `/tasks/?shared_to=${user_id}&progress=${progress}&category=${category}&ordering=${
+        `/tasks/?shared_to=${user_id}&progress=${progress}&category=${category_name}&ordering=${
           order_by ? order_by : ""}`
       ); 
       setTasks(data);
@@ -58,6 +58,7 @@ export const getFilteredTasks = async (
     }
     setIsLoaded(true)
   } catch (err) {
+    console.log(err.response)
     setError(
       "Sorry, an error has occured while filtering data. Please try refreshing the page and filter again."
     );
