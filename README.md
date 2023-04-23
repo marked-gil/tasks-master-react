@@ -423,6 +423,11 @@ This project uses the following tools:
 
 ### References
 * Main References:
-    * [Code Institute](https://codeinstitute.net/ie/)
+    * [**Code Institute**](https://codeinstitute.net/ie/)
+    * [**Create React App** documentation](https://create-react-app.dev/docs/getting-started)
+    * [**React-Bootstrap** documentation](https://react-bootstrap.github.io/getting-started/introduction/)
+    * [**Bootstrap** documentation](https://getbootstrap.com/docs/5.3/getting-started/introduction/)
+    * [**React Router** documentation](https://v5.reactrouter.com/web/guides/quick-start)
+    * [**MDN** web docs](https://developer.mozilla.org/en-US/)
 
 ## Acknowledgment
