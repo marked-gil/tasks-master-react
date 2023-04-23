@@ -69,8 +69,13 @@ function TasksByCategoryPage({ categories, setCategories }) {
       setIsLoaded(false);
       const { data } = await axiosReq.patch(`categories/${id}`, formData);
       setCategoryData(data);
+      console.log(data)
       setCategories(prevState => (
-        {results: prevState.results.filter(item => item.id !== categoryData.id)}
+        { 
+          results: prevState.results.map(item => 
+            item.id === data.id ? data : item
+          )
+        }
       ))
       setEditCategory(false);
       setIsLoaded(true);
