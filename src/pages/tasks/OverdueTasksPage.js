@@ -1,17 +1,19 @@
 import React, { useEffect, useState } from 'react';
-import { Col } from 'react-bootstrap';
+import { axiosReq } from '../../api/axiosDefaults';
+import Col from 'react-bootstrap/Col';
 import ErrorDisplay from '../../components/ErrorDisplay';
 import TasksList from './TasksList';
 import styles from '../../styles/OverdueTasksPage.module.css';
 import { getFilteredTasks } from '../../api/taskMethods';
 import TasksFilter from '../../components/TasksFilter';
-import { axiosReq } from '../../api/axiosDefaults';
+import LoadingIcon from '../../components/LoadingIcon';
 
 function OverdueTasksPage({ categories }) {
 
   const [ tasks, setTasks ] = useState({ results: []});
   const [ filters, setFilters ] = useState({category_name: "", progress: "", order_by: ""});
   const [ error, setError ] = useState("");
+  const [ isLoaded, setIsLoaded ] = useState(false);
 
   useEffect(() => {
     const getOverdueTasks = async () => {
@@ -20,46 +22,49 @@ function OverdueTasksPage({ categories }) {
           `/tasks/?progress=overdue`
         );
         setTasks(data);
+        setIsLoaded(true);
       } catch (err) {
         setError("Sorry, an error has occurred. Please try refreshing the page.")
+        setIsLoaded(true);
       }
     } 
     getOverdueTasks();
   }, []);
 
   const handleFilterSubmit = async () => {
-    console.log(filters)
     getFilteredTasks({filters, setTasks, setError, overdueTasksOnly: true});
   };
 
   return (
     <Col className={styles.OverdueTasks}>
-    <div className={styles.InnerContainer}>
-      {error && <ErrorDisplay error={error} />}
+      {!isLoaded && <LoadingIcon size="6" />}
 
-      <div className={`d-flex justify-content-between`}>
-        <h2 className={`${styles.Heading}`}>My Tasks</h2>
-        <span className={styles.LineIcon}><i className="fa-solid fa-ellipsis-vertical"></i></span> 
-        <h2 className={`${styles.PageTitle}`}>OVERDUE</h2>
-      </div>
+      <div className={styles.InnerContainer}>
+        {error && <ErrorDisplay error={error} />}
 
-      <TasksFilter 
-          setFilters={setFilters}
-          categories={categories}
-          handleFilterSubmit={handleFilterSubmit}
-          removeProgressField
-          removeOrderByTime
+        <div className={`d-flex justify-content-between`}>
+          <h2 className={`${styles.Heading}`}>My Tasks</h2>
+          <span className={styles.LineIcon}><i className="fa-solid fa-ellipsis-vertical"></i></span> 
+          <h2 className={`${styles.PageTitle}`}>OVERDUE</h2>
+        </div>
+
+        <TasksFilter 
+            setFilters={setFilters}
+            categories={categories}
+            handleFilterSubmit={handleFilterSubmit}
+            removeProgressField
+            removeOrderByTime
+          />
+
+        <hr />
+        
+        <TasksList
+          tasks={tasks}
+          showDate
         />
-
-      <hr />
-      
-      <TasksList
-        tasks={tasks}
-        showDate
-      />
-    </div>
-
-  </Col>  )
+      </div>
+    </Col>  
+  )
 };
 
 export default OverdueTasksPage;
