@@ -4,14 +4,16 @@ import axios from 'axios';
 import styles from '../../styles/AddCommentModal.module.css';
 import { Alert, Button, Form, Modal } from 'react-bootstrap';
 
-function AddCommentModal({ id, taskData, setComments, setError }) {
+function AddCommentModal({ id, taskData, setComments, setError, setFeedbackMessage}) {
 
   const [ show, setShow ] = useState(false);
   const [ commentContent, setcommentContent ] = useState({});
   const [ feedback, setFeedback ] = useState("");
+  
   const handleShow = () => {
     setShow(true);
     setError("");
+    setFeedbackMessage("");
   };
 
   const handleClose = () => {

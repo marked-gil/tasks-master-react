@@ -26,7 +26,7 @@ function TaskDetailsPage({ categories, currentUser }) {
   const [ editTaskName, setEditTaskName ] = useState(false);
   const [ editTaskDescription, setEditTaskDescription ] = useState(false);
   const [ closeAllEdits, setCloseAllEdits ] = useState(false);
-  // const [ feedbackMessage, setFeedbackMessage ] = useState("");
+  const [ feedbackMessage, setFeedbackMessage ] = useState("");
   const [ error, setError ] = useState("");
   const [ comments, setComments ] = useState({ results: [] });
   const [ isLoaded, setIsLoaded ] = useState(false);
@@ -92,6 +92,7 @@ function TaskDetailsPage({ categories, currentUser }) {
       setError("");
       const { data } = await axiosReq.put(`/tasks/${id}`, {...taskData})
       setTaskData(data)
+      setFeedbackMessage("Task is successfully updated.")
       setCloseAllEdits(true)
       setEditTaskName(false)
       setEditTaskDescription(false)
@@ -104,6 +105,7 @@ function TaskDetailsPage({ categories, currentUser }) {
 
   const handleDelete = () => {
     setError("");
+    setFeedbackMessage("");
     deleteTask(id)
     history.push("/")
   };
@@ -115,7 +117,7 @@ function TaskDetailsPage({ categories, currentUser }) {
       <div className={styles.Container}>
       {error && <ErrorDisplay error={error} />}
 
-        {/* {feedbackMessage && <FeedbackMessage message={feedbackMessage} />} */}
+        {feedbackMessage && <FeedbackMessage message={feedbackMessage} />}
         <div className="position-relative">
           <h2>Task Details</h2>
           <div className={styles.DeleteSharedButtons}>
@@ -130,6 +132,7 @@ function TaskDetailsPage({ categories, currentUser }) {
               taskData={taskData}
               handleShareTask={handleShareTask}
               setError={setError}
+              setFeedbackMessage={setFeedbackMessage}
             />
           </div>
         </div>
@@ -146,6 +149,7 @@ function TaskDetailsPage({ categories, currentUser }) {
           progress={progress}
           closeAllEdits={closeAllEdits}
           setCloseAllEdits={setCloseAllEdits}
+          setFeedbackMessage={setFeedbackMessage}
         />
 
         <Accordion className={styles.SmallScreenAvatars}>
@@ -316,6 +320,7 @@ function TaskDetailsPage({ categories, currentUser }) {
             taskData={taskData} 
             setComments={setComments}
             setError={setError}
+            setFeedbackMessage={setFeedbackMessage}
           />
 
           {!!comments.results.length && <h3 className={styles.LabelComments}>Comments</h3>}
