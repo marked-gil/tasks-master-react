@@ -12,6 +12,7 @@ function ShareTaskModal(props) {
     taskData,
     task_id,
     handleShareTask,
+    setError
   } = props;
 
   const [ userSearch, setUserSearch ] = useState("");
@@ -19,7 +20,10 @@ function ShareTaskModal(props) {
   const [ feedback, setFeedback ] = useState("");
   const [ show, setShow] = useState(false);
 
-  const handleShow = () => setShow(true);
+  const handleShow = () => {
+    setShow(true);
+    setError("");
+  };
 
   const handleClose = () => {
     setShow(false);

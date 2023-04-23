@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from '../../styles/TaskDetailsPage.module.css';
 import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
@@ -14,6 +14,7 @@ import FeedbackMessage from '../../components/FeedbackMessage';
 import CommentCard from '../comments/CommentCard';
 import { Accordion } from 'react-bootstrap';
 import LoadingIcon from '../../components/LoadingIcon';
+import ErrorDisplay from '../../components/ErrorDisplay';
 
 function TaskDetailsPage({ categories, currentUser }) {
 
@@ -26,6 +27,7 @@ function TaskDetailsPage({ categories, currentUser }) {
   const [ editTaskDescription, setEditTaskDescription ] = useState(false);
   const [ closeAllEdits, setCloseAllEdits ] = useState(false);
   // const [ feedbackMessage, setFeedbackMessage ] = useState("");
+  const [ error, setError ] = useState("");
   const [ comments, setComments ] = useState({ results: [] });
   const [ isLoaded, setIsLoaded ] = useState(false);
 
@@ -54,6 +56,7 @@ function TaskDetailsPage({ categories, currentUser }) {
         setIsLoaded(true);
       } catch (err) {
         console.log(err.response)
+        setError("Sorry, an error has occurred while fetching data. Please try refreshing the page.")
         setIsLoaded(true);
       }
     }
@@ -62,9 +65,11 @@ function TaskDetailsPage({ categories, currentUser }) {
 
   const cancelEditTaskName = () => {
     setEditTaskName(!editTaskName);
+    setError("");
   };
 
   const cancelEditTaskDescription = () => {
+    setError("");
     setEditTaskDescription(!editTaskDescription);
   };
 
@@ -83,17 +88,22 @@ function TaskDetailsPage({ categories, currentUser }) {
 
   const handleSave = async (event) => {
     try {
+      setIsLoaded(false);
+      setError("");
       const { data } = await axiosReq.put(`/tasks/${id}`, {...taskData})
       setTaskData(data)
       setCloseAllEdits(true)
       setEditTaskName(false)
       setEditTaskDescription(false)
+      setIsLoaded(true);
     } catch (err) {
-      console.log(err.response?.data)
+      setError("Sorry, an error has occurred while updating data. Refresh the page and try again.")
+      setIsLoaded(true);
     }
   };
 
   const handleDelete = () => {
+    setError("");
     deleteTask(id)
     history.push("/")
   };
@@ -103,6 +113,8 @@ function TaskDetailsPage({ categories, currentUser }) {
       {!isLoaded && <LoadingIcon size="6" />}
 
       <div className={styles.Container}>
+      {error && <ErrorDisplay error={error} />}
+
         {/* {feedbackMessage && <FeedbackMessage message={feedbackMessage} />} */}
         <div className="position-relative">
           <h2>Task Details</h2>
@@ -117,6 +129,7 @@ function TaskDetailsPage({ categories, currentUser }) {
               set_task_data={setTaskData}
               taskData={taskData}
               handleShareTask={handleShareTask}
+              setError={setError}
             />
           </div>
         </div>
@@ -301,7 +314,8 @@ function TaskDetailsPage({ categories, currentUser }) {
           <AddCommentModal 
             id={id} 
             taskData={taskData} 
-            setComments={setComments} 
+            setComments={setComments}
+            setError={setError}
           />
 
           {!!comments.results.length && <h3 className={styles.LabelComments}>Comments</h3>}
