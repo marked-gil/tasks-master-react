@@ -11,7 +11,7 @@ function CompletedTasksPage({ categories }) {
 
   const [ tasks, setTasks ] = useState({ results: []});
   const [ filters, setFilters ] = useState({category_name: "", progress: "", order_by: ""});
-  const [ error, setError ] = useState({});
+  const [ error, setError ] = useState("");
 
   useEffect(() => {
     const getCompletedTasks = async () => {
@@ -19,23 +19,23 @@ function CompletedTasksPage({ categories }) {
         const { data } = await axiosReq.get(
           `/tasks/?progress=completed&ordering=-due_date`
         )
-        setTasks(data)
+        setTasks(data);
       } catch (err) {
-        console.log(err.response)
-        setError(err.response)
+        setError("Sorry, an error has occurred. Please try refreshing the page.");
       }
     }
     getCompletedTasks();
   }, [])
 
   const handleFilterSubmit = async () => {
+    setError("");
     getFilteredTasks({filters, setTasks, setError, completedTasksOnly: true });
   };
 
   return (
     <Col className={styles.CompletedTasksPage}>
       <div className={styles.InnerContainer}>
-        {error?.data && <ErrorDisplay error={error} />}
+        {error && <ErrorDisplay error={error} />}
 
         <div className={`d-flex justify-content-between`}>
           <h2 className={`${styles.Heading}`}>My Tasks</h2>

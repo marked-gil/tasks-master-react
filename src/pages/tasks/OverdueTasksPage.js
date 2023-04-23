@@ -32,7 +32,8 @@ function OverdueTasksPage({ categories }) {
   }, []);
 
   const handleFilterSubmit = async () => {
-    getFilteredTasks({filters, setTasks, setError, overdueTasksOnly: true});
+    setError("");
+    getFilteredTasks({filters, setTasks, setError, overdueTasksOnly: true, setIsLoaded});
   };
 
   return (
