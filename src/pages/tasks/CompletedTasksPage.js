@@ -6,12 +6,14 @@ import TasksList from './TasksList';
 import styles from '../../styles/CompletedTasksPage.module.css';
 import { axiosReq } from '../../api/axiosDefaults';
 import { getFilteredTasks } from '../../api/taskMethods';
+import LoadingIcon from '../../components/LoadingIcon';
 
 function CompletedTasksPage({ categories }) {
 
   const [ tasks, setTasks ] = useState({ results: []});
   const [ filters, setFilters ] = useState({category_name: "", progress: "", order_by: ""});
   const [ error, setError ] = useState("");
+  const [ isLoaded, setIsLoaded ] = useState(false);
 
   useEffect(() => {
     const getCompletedTasks = async () => {
@@ -20,8 +22,10 @@ function CompletedTasksPage({ categories }) {
           `/tasks/?progress=completed&ordering=-due_date`
         )
         setTasks(data);
+        setIsLoaded(true);
       } catch (err) {
         setError("Sorry, an error has occurred. Please try refreshing the page.");
+        setIsLoaded(true);
       }
     }
     getCompletedTasks();
@@ -29,14 +33,15 @@ function CompletedTasksPage({ categories }) {
 
   const handleFilterSubmit = async () => {
     setError("");
-    getFilteredTasks({filters, setTasks, setError, completedTasksOnly: true });
+    getFilteredTasks({filters, setTasks, setError, completedTasksOnly: true, setIsLoaded });
   };
 
   return (
     <Col className={styles.CompletedTasksPage}>
+      {!isLoaded && <LoadingIcon size="6" />}
+
       <div className={styles.InnerContainer}>
         {error && <ErrorDisplay error={error} />}
-
         <div className={`d-flex justify-content-between`}>
           <h2 className={`${styles.Heading}`}>My Tasks</h2>
           <span className={styles.LineIcon}><i className="fa-solid fa-ellipsis-vertical"></i></span> 
