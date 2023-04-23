@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { Button, Col, Form } from 'react-bootstrap';
+import Button from 'react-bootstrap/Button';
+import Col from 'react-bootstrap/Col';
+import Form from 'react-bootstrap/Form';
 import ErrorDisplay from '../../components/ErrorDisplay';
 import TasksList from './TasksList';
 import AddTask from './AddTask';
@@ -19,8 +21,8 @@ function TasksByCategoryPage({ categories, setCategories }) {
   const [ categoryData, setCategoryData ] = useState({});
   const [ showCompletedTasks, setShowCompletedTasks ] = useState(false);
   const [ filters, setFilters ] = useState({category_name: "", progress: "", order_by: ""});
-  const [ error, setError ] = useState({});
-  const [ isLoaded , setIsLoaded ] = useState(true);
+  const [ error, setError ] = useState("");
+  const [ isLoaded , setIsLoaded ] = useState(false);
   const [ editCategory, setEditCategory ] = useState(false);
   const { category_name, description } = categoryData;
 
@@ -34,14 +36,14 @@ function TasksByCategoryPage({ categories, setCategories }) {
         const { data } = await axiosReq.get(`/tasks/?category=${id}`)
         setTasks(data)
       } catch (err) {
-        console.log(err.response?.data)
-        setError(err.response?.data)
+        setError("Sorry, an error has occurred in fetching data. Please try refreshing the page.")
       }
     }
     getTasksByCategory(id, setTasks, setError);
   }, [id])
   
   const cancelEditCategory = () => {
+    setError("");
     setEditCategory(!editCategory);
   };
 
@@ -60,19 +62,20 @@ function TasksByCategoryPage({ categories, setCategories }) {
     formData.append('description', categoryData.description);
 
     try {
-      setIsLoaded(false);
+      setError("");
       const { data } = await axiosReq.patch(`categories/${id}`, formData);
       setCategoryData(data);
       setEditCategory(false);
       setIsLoaded(true);
     } catch (err) {
-      console.log(err.response);
+      setError("Sorry, an error occurred when updating the category. Refresh page and try again.")
       setIsLoaded(true);
     }
   }
 
   const handleDeleteCategory = async() => {
     try {
+      setError("");
       setIsLoaded(false);
       setCategories(prevState => (
         {results: prevState.results.filter(item => item.id !== categoryData.id)}
@@ -81,19 +84,20 @@ function TasksByCategoryPage({ categories, setCategories }) {
       history.push("/");
       setIsLoaded(true);
     } catch (err) {
-      console.log(err.response)
+      setError("Sorry, an error has occurred when deleting the category. Refresh the page and try again.")
       setIsLoaded(true);
     }
   }
 
   const handleFilterSubmit = async () => {
+    setError("");
     getFilteredTasks({filters, setTasks, setError, category: categoryData.id});
   };
 
   return (
     <Col className={styles.TasksByCategory}>
       <div className={styles.InnerContainer}>
-        {error?.data && <ErrorDisplay error={error} />}
+        {error && <ErrorDisplay error={error} />}
 
         <div className={`d-flex flex-column position-relative`}>
           <h2 className={`mb-0 ${styles.HeadingOne}`}>My Category</h2>
@@ -121,7 +125,7 @@ function TasksByCategoryPage({ categories, setCategories }) {
           }
 
           <div className="d-flex position-relative">
-            {!isLoaded && <LoadingIcon size="5" />}
+            {/* {!isLoaded && <LoadingIcon size="5" />} */}
             {!editCategory &&
               <h2 className={`mb-0 ${styles.HeadingTwo}`}>{categoryData.category_name}</h2>
             }
@@ -211,6 +215,7 @@ function TasksByCategoryPage({ categories, setCategories }) {
       <AddTask
         tasks={tasks}
         setTasks={setTasks}
+        setError={setError}
         categories={categories}
       />
     </Col>
