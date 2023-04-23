@@ -13,6 +13,7 @@ import ProfileAvatar from '../../components/ProfileAvatar';
 import FeedbackMessage from '../../components/FeedbackMessage';
 import CommentCard from '../comments/CommentCard';
 import { Accordion } from 'react-bootstrap';
+import LoadingIcon from '../../components/LoadingIcon';
 
 function TaskDetailsPage({ categories, currentUser }) {
 
@@ -26,6 +27,7 @@ function TaskDetailsPage({ categories, currentUser }) {
   const [ closeAllEdits, setCloseAllEdits ] = useState(false);
   // const [ feedbackMessage, setFeedbackMessage ] = useState("");
   const [ comments, setComments ] = useState({ results: [] });
+  const [ isLoaded, setIsLoaded ] = useState(false);
 
   const {
     owner,
@@ -39,31 +41,24 @@ function TaskDetailsPage({ categories, currentUser }) {
     shared_to,
   } = taskData;
 
-  useMemo(() => {
-    const handleMount = async () => {
-          try {
-            const { data } = await axiosReq.get(`/tasks/${id}`);
-            setTaskData(data)
-          } catch (err) {
-            console.log(err.response?.data)
-          }
-        };
-    
-        handleMount();
-  }, [id])
-
   useEffect(() => {
-    const getComments = async() => {
+    const fetchData = async () => {
       try {
-        const { data } = await axiosReq.get(`/comments/?task=${id}`)
-        setComments(data)
-        console.log('comments', data)
+        setIsLoaded(false);
+        const [{data: taskData }, {data: commentData}] = await Promise.all([
+          axiosReq.get(`/tasks/${id}`),
+          axiosReq.get(`/comments/?task=${id}`)
+        ]);
+        setTaskData(taskData);
+        setComments(commentData);
+        setIsLoaded(true);
       } catch (err) {
         console.log(err.response)
+        setIsLoaded(true);
       }
     }
-    getComments();
-  }, [id])
+    fetchData();
+  }, [id]);
 
   const cancelEditTaskName = () => {
     setEditTaskName(!editTaskName);
@@ -105,6 +100,8 @@ function TaskDetailsPage({ categories, currentUser }) {
 
   return (
     <Col className={styles.TaskDetailsPage}>
+      {!isLoaded && <LoadingIcon size="6" />}
+
       <div className={styles.Container}>
         {/* {feedbackMessage && <FeedbackMessage message={feedbackMessage} />} */}
         <div className="position-relative">
