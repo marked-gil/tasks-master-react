@@ -33,10 +33,13 @@ function TasksByCategoryPage({ categories, setCategories }) {
   useEffect(() => {
     const getTasksByCategory = async () => {
       try {
+        setIsLoaded(false);
         const { data } = await axiosReq.get(`/tasks/?category=${id}`)
-        setTasks(data)
+        setTasks(data);
+        setIsLoaded(true);
       } catch (err) {
         setError("Sorry, an error has occurred in fetching data. Please try refreshing the page.")
+        setIsLoaded(true);
       }
     }
     getTasksByCategory(id, setTasks, setError);
@@ -63,6 +66,7 @@ function TasksByCategoryPage({ categories, setCategories }) {
 
     try {
       setError("");
+      setIsLoaded(false);
       const { data } = await axiosReq.patch(`categories/${id}`, formData);
       setCategoryData(data);
       setEditCategory(false);
@@ -91,11 +95,13 @@ function TasksByCategoryPage({ categories, setCategories }) {
 
   const handleFilterSubmit = async () => {
     setError("");
-    getFilteredTasks({filters, setTasks, setError, category: categoryData.id});
+    getFilteredTasks({filters, setTasks, setError, category: categoryData.id, setIsLoaded});
   };
 
   return (
     <Col className={styles.TasksByCategory}>
+      {!isLoaded && <LoadingIcon size="6" />}
+
       <div className={styles.InnerContainer}>
         {error && <ErrorDisplay error={error} />}
 
@@ -125,13 +131,11 @@ function TasksByCategoryPage({ categories, setCategories }) {
           }
 
           <div className="d-flex position-relative">
-            {/* {!isLoaded && <LoadingIcon size="5" />} */}
             {!editCategory &&
               <h2 className={`mb-0 ${styles.HeadingTwo}`}>{categoryData.category_name}</h2>
             }
 
-            { 
-              editCategory && 
+            {editCategory && 
               <>
                 <p className="mb-0 me-2">Category:</p>
                 <Form.Control 
