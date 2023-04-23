@@ -404,6 +404,8 @@ This project uses the following tools:
 * `GitHub` - stores the source code repository for this website
 * [Diffchecker](https://www.diffchecker.com/#) - used when comparing codes tested in another IDE to the codes in gitpod     
 * [Grammarly](https://www.grammarly.com/) - used to check the grammar of the contents in this project   
+* [Looka](https://looka.com/) - used to create the logo
+* [removebg](https://www.remove.bg/) - used to remove the logo's background
 * Web browsers (Google Chrome, Firefox, Safari, Microsoft Edge) 
 
 [<ins>Back to Table of Contents</ins>](#table-of-contents)
