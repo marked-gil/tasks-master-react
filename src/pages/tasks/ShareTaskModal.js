@@ -19,6 +19,7 @@ function ShareTaskModal(props) {
   const [ userSearch, setUserSearch ] = useState("");
   const [ userProfile, setUserProfile ] = useState({});
   const [ feedback, setFeedback ] = useState("");
+  const [ successFeedback, setSuccessFeedback ] = useState(false);
   const [ show, setShow] = useState(false);
 
   const handleShow = () => {
@@ -54,6 +55,7 @@ function ShareTaskModal(props) {
     } else {
       setFeedback("You can only share to a maximum of 4 users.");
     }
+    setSuccessFeedback(false);
   }
 
   const AddNewUserToTask = async () => {
@@ -67,6 +69,7 @@ function ShareTaskModal(props) {
         handleShareTask(data)
         setUserProfile({})
         setFeedback(`@${userProfile.owner} is added to the task.`)
+        setSuccessFeedback(true);
       } catch (err) {
         console.log(err.response?.data)
       }
@@ -111,8 +114,11 @@ function ShareTaskModal(props) {
 
           {
             feedback && 
-            <p className={`mt-3 mb-0 d-flex justify-content-center ${styles.smallFont}`} style={{ color:"red" }}>
-              <span>{feedback}</span>
+            <p className={`mt-3 mb-0 text-center
+              ${styles.smallFont}`} 
+              style={successFeedback ? { color:"blue", fontWeight:"600" } : { color: "red" }}
+            >
+              {feedback}
             </p>
           }
 
