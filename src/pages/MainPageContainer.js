@@ -81,7 +81,7 @@ function MainPageContainer(props) {
             : allTodoTasksPage ? <AllToDoTasksPage /> 
             : overdueTasksPage ? <OverdueTasksPage />
             : tasksByCategoryPage ? <TasksByCategoryPage setNewCategoryAdded={setNewCategoryAdded}/>
-            : completedTasksPage ? <CompletedTasksPage categories={categories} />
+            : completedTasksPage ? <CompletedTasksPage />
             : sharedTasksPage ? <SharedTasksPage categories={categories} />
             : searchResultsPage ? 
               <SearchResultsPage 

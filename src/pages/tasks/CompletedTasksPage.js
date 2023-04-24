@@ -8,28 +8,31 @@ import { axiosReq } from '../../api/axiosDefaults';
 import { getFilteredTasks } from '../../api/taskMethods';
 import LoadingIcon from '../../components/LoadingIcon';
 
-function CompletedTasksPage({ categories }) {
+function CompletedTasksPage() {
 
   const [ tasks, setTasks ] = useState({ results: []});
+  const [ categories, setCategories ] = useState({ results: [] });
   const [ filters, setFilters ] = useState({category_name: "", progress: "", order_by: ""});
   const [ error, setError ] = useState("");
   const [ isLoaded, setIsLoaded ] = useState(false);
 
   useEffect(() => {
-    const getCompletedTasks = async () => {
+    const fetchedData = async () => {
       try {
         setIsLoaded(false);
-        const { data } = await axiosReq.get(
-          `/tasks/?progress=completed&ordering=-due_date`
-        )
-        setTasks(data);
+        const [{ data: fetchedTasks }, { data: fetchedCategories }] = await Promise.all([
+          axiosReq.get(`/tasks/?progress=completed&ordering=-due_date`),
+          axiosReq.get(`/categories/`)
+        ]) 
+        setTasks(fetchedTasks);
+        setCategories(fetchedCategories);
         setIsLoaded(true);
       } catch (err) {
-        setError("Sorry, an error has occurred. Please try refreshing the page.");
+        setError("An error has occurred while fetching data. Please try refreshing the page.");
         setIsLoaded(true);
       }
     }
-    getCompletedTasks();
+    fetchedData();
   }, [])
 
   const handleFilterSubmit = async () => {
