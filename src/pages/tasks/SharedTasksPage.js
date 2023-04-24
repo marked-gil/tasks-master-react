@@ -9,30 +9,35 @@ import { axiosReq } from '../../api/axiosDefaults';
 import { useCurrentUser } from '../../contexts/CurrentUserContext';
 import LoadingIcon from '../../components/LoadingIcon';
 
-function SharedTasksPage({ categories }) {
+function SharedTasksPage() {
   const currentUser = useCurrentUser();
   const id = currentUser?.pk
 
   const [ tasks, setTasks ] = useState({ results: []});
+  const [ categories, setCategories ] = useState({ results: [] });
   const [ showCompletedTasks, setShowCompletedTasks ] = useState(false);
   const [ filters, setFilters ] = useState({category_name: "", progress: "", order_by: ""});
   const [ error, setError ] = useState("");
   const [ isLoaded, setIsLoaded ] = useState(false);
 
   useEffect(() => {
-    const getSharedTasks = async () => {
+    const fetchedData = async () => {
       try {
         setIsLoaded(false);
-        const { data } = await axiosReq.get(`/tasks/?is_shared=true`);
-        setTasks(data);
+        const [{ data: fetchedTasks }, { data: fetchedCategories }] = await Promise.all([
+          axiosReq.get(`/tasks/?is_shared=true`),
+          axiosReq.get(`/categories/`)
+        ]);
+        setTasks(fetchedTasks);
+        setCategories(fetchedCategories);
         setIsLoaded(true);
       } catch (err) {
-        setError("Sorry, an error has occurred. Please try refreshing the page.");
+        setError("An ERROR has occurred. Please try refreshing the page.");
         setIsLoaded(true);
       }
     }
     if (id) {
-      getSharedTasks();
+      fetchedData();
     }
   }, [id]);
 

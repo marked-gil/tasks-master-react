@@ -82,7 +82,7 @@ function MainPageContainer(props) {
             : overdueTasksPage ? <OverdueTasksPage />
             : tasksByCategoryPage ? <TasksByCategoryPage setNewCategoryAdded={setNewCategoryAdded}/>
             : completedTasksPage ? <CompletedTasksPage />
-            : sharedTasksPage ? <SharedTasksPage categories={categories} />
+            : sharedTasksPage ? <SharedTasksPage />
             : searchResultsPage ? 
               <SearchResultsPage 
                 searchResults={searchResults} 
