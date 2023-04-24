@@ -3,6 +3,7 @@ import styles from '../../styles/TaskDetailsPage.module.css';
 import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
+import Accordion from 'react-bootstrap/Accordion';
 import { axiosReq } from '../../api/axiosDefaults';
 import { useHistory, useParams } from 'react-router-dom';
 import { deleteTask } from '../../api/taskMethods';
@@ -12,7 +13,6 @@ import AddCommentModal from '../comments/AddCommentModal';
 import ProfileAvatar from '../../components/ProfileAvatar';
 import FeedbackMessage from '../../components/FeedbackMessage';
 import CommentCard from '../comments/CommentCard';
-import { Accordion } from 'react-bootstrap';
 import LoadingIcon from '../../components/LoadingIcon';
 import ErrorDisplay from '../../components/ErrorDisplay';
 
@@ -109,8 +109,8 @@ function TaskDetailsPage({ currentUser, newCategoryAdded }) {
   const handleDelete = () => {
     setError("");
     setFeedbackMessage("");
-    deleteTask(id)
-    history.push("/")
+    deleteTask(id);
+    history.goBack();
   };
 
   return (
