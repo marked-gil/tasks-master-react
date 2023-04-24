@@ -15,7 +15,8 @@ const SideBar = (props) => {
     currentUser, 
     setCategories, 
     categories, 
-    isLoaded
+    isLoaded,
+    setNewCategoryAdded
   } = props;
 
   const history = useHistory();
@@ -107,6 +108,7 @@ const SideBar = (props) => {
         categories={categories}
         setCategories={setCategories}
         className={styles.AddCategory}
+        setNewCategoryAdded={setNewCategoryAdded}
       />
       
       <div className={`d-flex justify-content-between mt-2 ${styles.CategoryFormContainer}`}>

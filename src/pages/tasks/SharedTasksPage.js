@@ -9,7 +9,7 @@ import { axiosReq } from '../../api/axiosDefaults';
 import { useCurrentUser } from '../../contexts/CurrentUserContext';
 import LoadingIcon from '../../components/LoadingIcon';
 
-function SharedTasksPage() {
+function SharedTasksPage({ newCategoryAdded }) {
   const currentUser = useCurrentUser();
   const id = currentUser?.pk
 
@@ -39,7 +39,7 @@ function SharedTasksPage() {
     if (id) {
       fetchedData();
     }
-  }, [id]);
+  }, [id, newCategoryAdded]);
 
   const handleFilterSubmit = async () => {
     setError("");

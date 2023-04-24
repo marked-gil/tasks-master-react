@@ -4,7 +4,7 @@ import { Alert, Button, Form, Modal } from 'react-bootstrap';
 import styles from '../../styles/AddCategory.module.css';
 import LoadingIcon from '../../components/LoadingIcon';
 
-function AddCategory({ categories, setCategories, className }) {
+function AddCategory({ categories, setCategories, setNewCategoryAdded, className }) {
 
   const initialCategoryData = { 
     category_name: "",
@@ -35,6 +35,7 @@ function AddCategory({ categories, setCategories, className }) {
       setIsLoaded(false);
       const { data } = await axios.post("/categories/", {...categoryData});
       setCategories({results: [...categories.results, data]})
+      setNewCategoryAdded(true);
       handleClose();
       setIsLoaded(true);
     } catch (err) {

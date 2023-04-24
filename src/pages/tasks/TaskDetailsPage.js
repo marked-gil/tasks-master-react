@@ -16,7 +16,7 @@ import { Accordion } from 'react-bootstrap';
 import LoadingIcon from '../../components/LoadingIcon';
 import ErrorDisplay from '../../components/ErrorDisplay';
 
-function TaskDetailsPage({ currentUser }) {
+function TaskDetailsPage({ currentUser, newCategoryAdded }) {
 
   const profile_image = currentUser?.profile_image
 
@@ -63,7 +63,7 @@ function TaskDetailsPage({ currentUser }) {
       }
     }
     fetchData();
-  }, [id]);
+  }, [id, newCategoryAdded]);
 
   const cancelEditTaskName = () => {
     setEditTaskName(!editTaskName);

@@ -8,7 +8,7 @@ import { getFilteredTasks } from '../../api/taskMethods';
 import TasksFilter from '../../components/TasksFilter';
 import LoadingIcon from '../../components/LoadingIcon';
 
-function OverdueTasksPage() {
+function OverdueTasksPage({ newCategoryAdded }) {
 
   const [ tasks, setTasks ] = useState({ results: []});
   const [ categories, setCategories ] = useState({ results: [] });
@@ -17,7 +17,7 @@ function OverdueTasksPage() {
   const [ isLoaded, setIsLoaded ] = useState(false);
 
   useEffect(() => {
-    const getOverdueTasks = async () => {
+    const fetchedData = async () => {
       try {
         setIsLoaded(false);
         const [{ data: fetchedTasks }, { data: fetchedCategories }] = await Promise.all([
@@ -28,12 +28,12 @@ function OverdueTasksPage() {
         setCategories(fetchedCategories);
         setIsLoaded(true);
       } catch (err) {
-        setError("Sorry, an error has occurred. Please try refreshing the page.")
+        setError("An ERROR has occurred while fetching data. Please try refreshing the page.")
         setIsLoaded(true);
       }
     } 
-    getOverdueTasks();
-  }, []);
+    fetchedData();
+  }, [newCategoryAdded]);
 
   const handleFilterSubmit = async () => {
     setError("");

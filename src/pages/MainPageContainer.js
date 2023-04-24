@@ -49,11 +49,10 @@ function MainPageContainer(props) {
         setNewCategoryAdded(false);
         setIsLoaded(true);
       } catch (err) {
-        console.log(err)
+        // console.log(err)
         setIsLoaded(true);
       }
     };
-  
     getCategories();
   }, [setCategories, newCategoryAdded]);
 
@@ -73,16 +72,20 @@ function MainPageContainer(props) {
             categories={categories} 
             setCategories={setCategories}
             isLoaded={isLoaded}
+            setNewCategoryAdded={setNewCategoryAdded}
           />
           {profile ? <ProfilePage currentUser={currentUser} /> 
-            : tasksTodayPage ? <TasksTodayPage />
-            : taskDetailsPage ? <TaskDetailsPage currentUser={currentUser} />
-            : tasksPerDatePage ? <TasksPerDatePage /> 
-            : allTodoTasksPage ? <AllToDoTasksPage /> 
-            : overdueTasksPage ? <OverdueTasksPage />
-            : tasksByCategoryPage ? <TasksByCategoryPage setNewCategoryAdded={setNewCategoryAdded}/>
-            : completedTasksPage ? <CompletedTasksPage />
-            : sharedTasksPage ? <SharedTasksPage />
+            : tasksTodayPage ? <TasksTodayPage newCategoryAdded={newCategoryAdded} />
+            : taskDetailsPage ? <TaskDetailsPage 
+                currentUser={currentUser} 
+                newCategoryAdded={newCategoryAdded}
+              />
+            : tasksPerDatePage ? <TasksPerDatePage newCategoryAdded={newCategoryAdded} /> 
+            : allTodoTasksPage ? <AllToDoTasksPage newCategoryAdded={newCategoryAdded} /> 
+            : overdueTasksPage ? <OverdueTasksPage newCategoryAdded={newCategoryAdded} />
+            : tasksByCategoryPage ? <TasksByCategoryPage setNewCategoryAdded={setNewCategoryAdded} />
+            : completedTasksPage ? <CompletedTasksPage newCategoryAdded={newCategoryAdded} />
+            : sharedTasksPage ? <SharedTasksPage newCategoryAdded={newCategoryAdded} />
             : searchResultsPage ? 
               <SearchResultsPage 
                 searchResults={searchResults} 

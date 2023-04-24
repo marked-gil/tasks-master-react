@@ -8,7 +8,7 @@ import { axiosReq } from '../../api/axiosDefaults';
 import { getFilteredTasks } from '../../api/taskMethods';
 import LoadingIcon from '../../components/LoadingIcon';
 
-function CompletedTasksPage() {
+function CompletedTasksPage({ newCategoryAdded }) {
 
   const [ tasks, setTasks ] = useState({ results: []});
   const [ categories, setCategories ] = useState({ results: [] });
@@ -33,7 +33,7 @@ function CompletedTasksPage() {
       }
     }
     fetchedData();
-  }, [])
+  }, [newCategoryAdded]);
 
   const handleFilterSubmit = async () => {
     setError("");

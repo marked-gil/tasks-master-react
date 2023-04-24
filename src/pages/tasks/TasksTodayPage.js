@@ -11,7 +11,7 @@ import TasksList from './TasksList';
 import LoadingIcon from '../../components/LoadingIcon';
 import FeedbackMessage from '../../components/FeedbackMessage';
 
-function TasksTodayPage() {
+function TasksTodayPage({ newCategoryAdded }) {
 
   const due_date = moment().format("YYYY-MM-DD")
   const [ showCompletedTasks, setShowCompletedTasks ] = useState(false)
@@ -39,7 +39,7 @@ function TasksTodayPage() {
       }
     }
     fetchedData();
-  }, [due_date]);
+  }, [due_date, newCategoryAdded]);
   
   const handleFilterSubmit = async () => {
     setError("");
