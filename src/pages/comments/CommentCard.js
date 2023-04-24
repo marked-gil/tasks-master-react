@@ -103,7 +103,7 @@ function CommentCard(props) {
             </Button>
           </>
         }
-        {!commentChanged &&
+        {comment.is_owner && !commentChanged &&
           <>
             <Button 
               size="sm" 

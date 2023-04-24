@@ -83,8 +83,8 @@ function TaskPopover(props) {
       <Popover.Body className="p-0">
         {task.is_owner && <Button onClick={handleDelete} className="me-1" variant="danger" size="sm">Delete</Button>}
         <Button onClick={handleView} className="me-1" size="sm">View</Button>
-        {!task.is_completed && <Button onClick={handleComplete} size="sm">Done</Button>}
-        {task.is_completed && <Button onClick={handleUndo} size="sm">Undo</Button>}
+        {task.is_owner && !task.is_completed && <Button onClick={handleComplete} size="sm">Done</Button>}
+        {task.is_owner && task.is_completed && <Button onClick={handleUndo} size="sm">Undo</Button>}
       </Popover.Body>
     </Popover>
   );
