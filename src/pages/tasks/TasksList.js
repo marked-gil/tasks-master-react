@@ -3,6 +3,7 @@ import moment from 'moment';
 import TaskPopover from '../../components/TaskPopover';
 import { ListGroup } from 'react-bootstrap';
 import styles from '../../styles/TasksList.module.css';
+import { axiosReq } from '../../api/axiosDefaults';
 
 function TasksList(props) {
 
@@ -14,11 +15,33 @@ function TasksList(props) {
     showTime,
   } = props;
 
+  const dateToday = moment().format("YYYY-MM-DD");
   const [ tasksList, setTasksList ] = useState({results: []});
 
   useEffect(() => {
-    setTasksList(tasks)
-  },[tasks])
+    const updateOverdueTasks = async () => {
+      for (let task of tasks.results) {
+        if (task.progress !== 'completed' && task.progress !== 'overdue')
+          if (task.due_date === dateToday) {
+            if (task.due_time < moment().format("HH:MM")) {
+              try {
+                await axiosReq.put(`tasks/${task.id}`, {...task, 'progress': 'overdue'})
+              } catch (err) {
+                console.log(err)
+              }
+            }
+          } else if (task.due_date < dateToday) {
+            try {
+              await axiosReq.put(`tasks/${task.id}`, {...task, 'progress': 'overdue'})
+            } catch (err) {
+              console.log(err.response)
+            }
+          }
+      }
+    }
+    updateOverdueTasks();
+    setTasksList(tasks);
+  },[tasks, dateToday])
 
   const taskPriority = (task) => {
     return (

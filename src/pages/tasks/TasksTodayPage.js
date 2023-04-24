@@ -13,8 +13,8 @@ import FeedbackMessage from '../../components/FeedbackMessage';
 
 function TasksTodayPage({ newCategoryAdded }) {
 
-  const due_date = moment().format("YYYY-MM-DD")
-  const [ showCompletedTasks, setShowCompletedTasks ] = useState(false)
+  const dateToday = moment().format("YYYY-MM-DD");
+  const [ showCompletedTasks, setShowCompletedTasks ] = useState(false);
   const [ tasks, setTasks ] = useState({ results: []});
   const [ categories, setCategories ] = useState({ results: [] });
   const [ feedbackMessage, setFeedbackMessage ] = useState("");
@@ -27,9 +27,10 @@ function TasksTodayPage({ newCategoryAdded }) {
       try {
         setIsLoaded(false);
         const [{ data: fetchedTasks }, { data: fetchedCategories }] = await Promise.all([
-          axiosReq.get(`/tasks/?due_date=${moment(due_date).format("yyyy-MM-DD")}`),
+          axiosReq.get(`/tasks/?due_date=${moment(dateToday).format("yyyy-MM-DD")}`),
           axiosReq.get(`/categories/`)
         ]);
+
         setTasks(fetchedTasks);
         setCategories(fetchedCategories);
         setIsLoaded(true);
@@ -39,12 +40,12 @@ function TasksTodayPage({ newCategoryAdded }) {
       }
     }
     fetchedData();
-  }, [due_date, newCategoryAdded]);
+  }, [dateToday, newCategoryAdded]);
   
   const handleFilterSubmit = async () => {
     setError("");
     setFeedbackMessage("");
-    getFilteredTasks({filters, setTasks, setError, due_date, setIsLoaded});
+    getFilteredTasks({filters, setTasks, setError, dateToday, setIsLoaded});
   };
 
   return (
@@ -89,7 +90,7 @@ function TasksTodayPage({ newCategoryAdded }) {
         setError={setError}
         categories={categories}
         setFeedbackMessage={setFeedbackMessage}
-        task_date={due_date}
+        task_date={dateToday}
       />
     </Col>
   )

@@ -79,7 +79,6 @@ export const deleteTask = async (task, setTasks) => {
 
   try {
     await axiosRes.delete(`/tasks/${task_id}`)
-
     if (setTasks) {
       setTasks(prevState => (
         {results: prevState.results.filter(item => item.id !== task.id)}
