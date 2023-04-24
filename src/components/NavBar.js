@@ -1,17 +1,18 @@
+import React, { useState } from 'react';
+import { Link, NavLink, useHistory } from 'react-router-dom';
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import Offcanvas from 'react-bootstrap/Offcanvas';
 import styles from '../styles/NavBar.module.css'
-import { Link, NavLink, useHistory } from 'react-router-dom';
 import SignOutLink from '../pages/auth/SignOutLink';
 import SearchForm from './SearchForm'
-import { Button, Form } from 'react-bootstrap';
+import Button from 'react-bootstrap/Button';
+import Form from 'react-bootstrap/Form';
 import { DatePicker } from '@mui/x-date-pickers';
 import AddTask from '../pages/tasks/AddTask';
 import moment from 'moment';
 import AddCategory from '../pages/categories/AddCategory';
-import { useState } from 'react';
 import logo from '../assets/tasks-master-logo-small.png';
 
 function NavBar(props) {

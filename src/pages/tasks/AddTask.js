@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import axios from 'axios';
+import { axiosReq } from '../../api/axiosDefaults';
 import { useHistory } from 'react-router-dom';
 import moment from 'moment';
 import Button from 'react-bootstrap/Button';
@@ -56,7 +56,7 @@ function AddTask(props) {
   const handleShow = () => {
     setShow(true);
     setFeedbackMessage && setFeedbackMessage("");
-    setError("");
+    setError && setError("");
   };
 
   const handleChange = (event) => {
@@ -89,7 +89,7 @@ function AddTask(props) {
       moment(due_date).format("Do MMMM YYYY")}.`
     try {
       setIsLoaded(false);
-      const { data } = await axios.post("/tasks/", {...taskData, due_date, due_time, priority});
+      const { data } = await axiosReq.post("/tasks/", {...taskData, due_date, due_time, priority});
       handleClose();
       setFeedbackMessage && setFeedbackMessage(success_message)
       if (task_date === moment(due_date).format("YYYY-MM-DD") || 

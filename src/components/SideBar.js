@@ -9,11 +9,18 @@ import AddCategory from '../pages/categories/AddCategory';
 import LoadingIcon from './LoadingIcon';
 import AddTask from '../pages/tasks/AddTask';
 
-const SideBar = ({ currentUser, setCategories, categories, isLoaded }) => {
+const SideBar = (props) => {
 
+  const { 
+    currentUser, 
+    setCategories, 
+    categories, 
+    isLoaded
+  } = props;
+
+  const history = useHistory();
   const [ tasksDate, setTasksDate ] = useState(null);
   const [ categoryID, setCategoryID ] = useState("");
-  const history = useHistory();
 
   const handleDateSelection = (event) => {
     if (tasksDate) {
@@ -43,6 +50,7 @@ const SideBar = ({ currentUser, setCategories, categories, isLoaded }) => {
             categories={categories}
             pushToPages
             className={styles.AddTask}
+            pushToPage
           />
         </li>
         <li className={`mb-2 d-flex ${styles.DatePickerContainer}`}>
@@ -59,11 +67,7 @@ const SideBar = ({ currentUser, setCategories, categories, isLoaded }) => {
               },
             }}
           />
-          <Button 
-            onClick={handleDateSelection}
-          >
-            Go
-          </Button>
+          <Button onClick={handleDateSelection}>Go</Button>
         </li>
         <li className="mb-2">
           <Link to="/"><i className="fa-solid fa-calendar-week me-3"></i> Today</Link>

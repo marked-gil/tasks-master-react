@@ -3,6 +3,7 @@
   width: 35rem;
   padding: 4rem 3.5rem 0 5rem;
   font-size: 1.2rem;
+  position: relative;
 }
 
 .UserGreeting {
