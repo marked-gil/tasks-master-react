@@ -16,13 +16,14 @@ import { Accordion } from 'react-bootstrap';
 import LoadingIcon from '../../components/LoadingIcon';
 import ErrorDisplay from '../../components/ErrorDisplay';
 
-function TaskDetailsPage({ categories, currentUser }) {
+function TaskDetailsPage({ currentUser }) {
 
   const profile_image = currentUser?.profile_image
 
   const history = useHistory();
   const { id } = useParams();
   const [ taskData, setTaskData ] = useState({});
+  const [ categories, setCategories ] = useState({ results: [] });
   const [ editTaskName, setEditTaskName ] = useState(false);
   const [ editTaskDescription, setEditTaskDescription ] = useState(false);
   const [ closeAllEdits, setCloseAllEdits ] = useState(false);
@@ -47,16 +48,17 @@ function TaskDetailsPage({ categories, currentUser }) {
     const fetchData = async () => {
       try {
         setIsLoaded(false);
-        const [{data: taskData }, {data: commentData}] = await Promise.all([
+        const [{data: taskData }, {data: commentData}, {data: fetchedCategories}] = await Promise.all([
           axiosReq.get(`/tasks/${id}`),
-          axiosReq.get(`/comments/?task=${id}`)
+          axiosReq.get(`/comments/?task=${id}`),
+          axiosReq.get(`/categories/`)
         ]);
         setTaskData(taskData);
         setComments(commentData);
+        setCategories(fetchedCategories);
         setIsLoaded(true);
       } catch (err) {
-        console.log(err.response)
-        setError("Sorry, an error has occurred while fetching data. Please try refreshing the page.")
+        setError("An ERROR has occurred while fetching data. Please try refreshing the page.")
         setIsLoaded(true);
       }
     }
