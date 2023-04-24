@@ -13,11 +13,12 @@ import TasksFilter from '../../components/TasksFilter';
 import { axiosReq, axiosRes } from '../../api/axiosDefaults';
 import LoadingIcon from '../../components/LoadingIcon';
 
-function TasksByCategoryPage({ categories, setCategories }) {
+function TasksByCategoryPage({ setNewCategoryAdded }) {
 
   const { id } = useParams();
   const history = useHistory();
   const [ tasks, setTasks ] = useState({ results: []});
+  const [ categories, setCategories ] = useState({ results: [] });
   const [ categoryData, setCategoryData ] = useState({});
   const [ showCompletedTasks, setShowCompletedTasks ] = useState(false);
   const [ filters, setFilters ] = useState({category_name: "", progress: "", order_by: ""});
@@ -31,19 +32,23 @@ function TasksByCategoryPage({ categories, setCategories }) {
   }, [id, editCategory]);
 
   useEffect(() => {
-    const getTasksByCategory = async () => {
+    const fetchedData = async () => {
       try {
         setIsLoaded(false);
-        const { data } = await axiosReq.get(`/tasks/?category=${id}`)
-        setTasks(data);
+        const [{ data: fetchedTasks }, { data: fetchedCategories }] = await Promise.all([
+          axiosReq.get(`/tasks/?category=${id}`),
+          axiosReq.get(`/categories/`)
+        ]) 
+        setTasks(fetchedTasks);
+        setCategories(fetchedCategories);
         setIsLoaded(true);
       } catch (err) {
-        setError("Sorry, an error has occurred in fetching data. Please try refreshing the page.")
+        setError("An error has occurred while fetching data. Please try refreshing the page.")
         setIsLoaded(true);
       }
     }
-    getTasksByCategory(id, setTasks, setError);
-  }, [id])
+    fetchedData();
+  }, [id, setNewCategoryAdded]);
   
   const cancelEditCategory = () => {
     setError("");
@@ -69,7 +74,6 @@ function TasksByCategoryPage({ categories, setCategories }) {
       setIsLoaded(false);
       const { data } = await axiosReq.patch(`categories/${id}`, formData);
       setCategoryData(data);
-      console.log(data)
       setCategories(prevState => (
         { 
           results: prevState.results.map(item => 
@@ -78,6 +82,7 @@ function TasksByCategoryPage({ categories, setCategories }) {
         }
       ))
       setEditCategory(false);
+      setNewCategoryAdded(true);
       setIsLoaded(true);
     } catch (err) {
       setError("Sorry, an error occurred when updating the category. Refresh page and try again.")
@@ -94,6 +99,7 @@ function TasksByCategoryPage({ categories, setCategories }) {
       ))
       await axiosRes.delete(`categories/${id}`);
       history.push("/");
+      setNewCategoryAdded(true);
       setIsLoaded(true);
     } catch (err) {
       setError("Sorry, an error has occurred when deleting the category. Refresh the page and try again.")

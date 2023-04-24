@@ -80,13 +80,14 @@ function MainPageContainer(props) {
             : tasksPerDatePage ? <TasksPerDatePage /> 
             : allTodoTasksPage ? <AllToDoTasksPage /> 
             : overdueTasksPage ? <OverdueTasksPage />
-            : tasksByCategoryPage ? <TasksByCategoryPage 
-                categories={categories} 
-                setCategories={setCategories} 
-              />
+            : tasksByCategoryPage ? <TasksByCategoryPage setNewCategoryAdded={setNewCategoryAdded}/>
             : completedTasksPage ? <CompletedTasksPage categories={categories} />
             : sharedTasksPage ? <SharedTasksPage categories={categories} />
-            : searchResultsPage ? <SearchResultsPage searchResults={searchResults} keywordSearched={keywordSearched} />
+            : searchResultsPage ? 
+              <SearchResultsPage 
+                searchResults={searchResults} 
+                keywordSearched={keywordSearched} 
+              />
             : <></>
           }
         </Row>
