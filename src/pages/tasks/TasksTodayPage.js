@@ -11,30 +11,34 @@ import TasksList from './TasksList';
 import LoadingIcon from '../../components/LoadingIcon';
 import FeedbackMessage from '../../components/FeedbackMessage';
 
-function TasksTodayPage({ categories }) {
+function TasksTodayPage() {
+
   const due_date = moment().format("YYYY-MM-DD")
   const [ showCompletedTasks, setShowCompletedTasks ] = useState(false)
   const [ tasks, setTasks ] = useState({ results: []});
+  const [ categories, setCategories ] = useState({ results: [] });
   const [ feedbackMessage, setFeedbackMessage ] = useState("");
   const [ error, setError ] = useState("");
   const [ filters, setFilters ] = useState({category_name: "", progress: "", order_by: ""});
   const [ isLoaded, setIsLoaded ] = useState(false);
 
   useEffect(() => {
-    const getTasks = async () => {
+    const fetchData = async () => {
       try {
         setIsLoaded(false);
-        const { data } = await axiosReq.get(
-          `/tasks/?due_date=${moment(due_date).format("yyyy-MM-DD")}`
-        );
-        setTasks(data);
+        const [{ data: tasksToday }, { data: categoriesData }] = await Promise.all([
+          axiosReq.get(`/tasks/?due_date=${moment(due_date).format("yyyy-MM-DD")}`),
+          await axiosReq.get(`/categories/`)
+        ]);
+        setTasks(tasksToday);
+        setCategories(categoriesData);
         setIsLoaded(true);
       } catch (err) {
-        setError("Sorry, an error has occurred. Please try refreshing the page.")
+        setError("An ERROR has occurred. Please try refreshing the page.")
         setIsLoaded(true);
       }
     }
-    getTasks();
+    fetchData();
   }, [due_date]);
   
   const handleFilterSubmit = async () => {

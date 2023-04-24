@@ -33,7 +33,7 @@ function MainPageContainer(props) {
     searchResultsPage
   } = props;
 
-  const currentUser = useCurrentUser()
+  const currentUser = useCurrentUser();
   const [ newCategoryAdded, setNewCategoryAdded ] = useState(false);
   const [ categories, setCategories ] = useState({ results: [] });
   const [ searchResults, setSearchResults ] = useState({ results: [] });
@@ -49,7 +49,7 @@ function MainPageContainer(props) {
         setNewCategoryAdded(false);
         setIsLoaded(true);
       } catch (err) {
-        console.log(err);
+        console.log(err)
         setIsLoaded(true);
       }
     };
