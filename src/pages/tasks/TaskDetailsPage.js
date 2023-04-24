@@ -316,7 +316,6 @@ function TaskDetailsPage({ categories, currentUser }) {
         {/* COMMENT SECTION */}
         <div>
           <AddCommentModal 
-            id={id} 
             taskData={taskData} 
             setComments={setComments}
             setError={setError}
@@ -324,12 +323,14 @@ function TaskDetailsPage({ categories, currentUser }) {
           />
 
           {!!comments.results.length && <h3 className={styles.LabelComments}>Comments</h3>}
-          {!!comments.results.length ? comments.results.reverse().map((comment, idx) => (
+          {console.log("COMMENTS",comments.results)}
+          {!!comments.results.length ? comments.results.map((comment) => (
             <CommentCard 
-              key={idx} 
+              key={comment.id} 
               comment={comment} 
               setComments={setComments} 
               profile_image={profile_image}
+              setError={setError}
             />
           )) : <p className={styles.NoCommentYet}>No Comments Yet.</p>}
         </div>

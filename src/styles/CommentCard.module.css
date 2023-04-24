@@ -8,3 +8,11 @@
   margin-bottom: 0;
   color: rgb(11, 97, 150);
 }
+
+.Feedback {
+  font-size: 14px;
+  color: #bf0d0d;
+  margin-right: auto;
+  margin-bottom: 0;
+  padding-left: 8px;
+}

@@ -1,10 +1,16 @@
 import React, { useState } from 'react';
-import axios from 'axios';
-
 import styles from '../../styles/AddCommentModal.module.css';
 import { Alert, Button, Form, Modal } from 'react-bootstrap';
+import { axiosRes } from '../../api/axiosDefaults';
 
-function AddCommentModal({ id, taskData, setComments, setError, setFeedbackMessage}) {
+function AddCommentModal(props) {
+
+  const { 
+    taskData, 
+    setComments, 
+    setError, 
+    setFeedbackMessage
+  } = props;
 
   const [ show, setShow ] = useState(false);
   const [ commentContent, setcommentContent ] = useState({});
@@ -37,12 +43,15 @@ function AddCommentModal({ id, taskData, setComments, setError, setFeedbackMessa
 
     if (Object.keys(commentContent).length !== 0) {
       try {
-        const { data } = await axios.post(`/comments/`, formData);
-        setComments(prevState => ({ results: [...prevState.results, data] }))
+        const { data } = await axiosRes.post(`/comments/`, formData);
+        setComments(prevState => ({ 
+          results: [data, ...prevState.results]
+        }))
         setFeedback("");
         handleClose();
       } catch (err) {
-        console.log(err.response)
+        setError("Sorry, an ERROR has occurred when posting your comment.");
+        handleClose();
       }
     } else {
       setFeedback("You cannot submit a blank comment.")

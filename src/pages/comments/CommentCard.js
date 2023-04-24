@@ -4,46 +4,54 @@ import { axiosReq, axiosRes } from '../../api/axiosDefaults';
 import styles from '../../styles/CommentCard.module.css';
 import moment from 'moment';
 
-function CommentCard({ comment, setComments, profile_image }) {
+function CommentCard({ comment, setComments, profile_image, setError }) {
 
   const [ commentChanged, setCommentChanged ] = useState(false);
   const [ editComment, setEditComment ] = useState(comment);
+  const [ feedback, setFeedback ] = useState("");
 
   const handleChange = (event) => {
-    setEditComment(() => (
-      {[event.target.name]: event.target.value}
-      )
+    setEditComment(() => ({[event.target.name]: event.target.value})
     )
-  }
+  };
 
   const handleCancel = async() => {
-    setEditComment(comment)
+    setEditComment(comment);
     setCommentChanged(false);
-  }
+    setError("");
+    setFeedback("");
+  };
 
   const handleSaveEdit = async() => {
+    setError("");
     const formData = new FormData();
     formData.append('reply_to', "")
     formData.append('task', comment.task)
     formData.append('content', editComment.content)
-    try {
-      await axiosReq.put(`/comments/${comment.id}`, formData)
-      setCommentChanged(false);
-    } catch (err) {
-      console.log(err.response)
+  
+    if (editComment.content) {
+      try {
+        await axiosReq.put(`/comments/${comment.id}`, formData);
+        setCommentChanged(false);
+      } catch (err) {
+        setError("Sorry, an ERROR occured when posting the comment.");
+      }
+    } else {
+      setFeedback("Empty comment is not allowed.");
     }
-  }
+  };
 
   const handleDelete = async() => {
+    setError("");
     try {
-      await axiosRes.delete(`/comments/${comment.id}`)
+      await axiosRes.delete(`/comments/${comment.id}`);
       setComments(prevState => (
         {results: prevState.results.filter(item => item.id !== comment.id)}
-      ))
+      ));
     } catch (err) {
-      console.log(err.response)
+      setError("Sorry, an ERROR occurred when deleting the comment.")
     }
-  }
+  };
 
   return (
     <Card className={`mb-1 pt-1 ${styles.CommentCard}`}>
@@ -64,7 +72,8 @@ function CommentCard({ comment, setComments, profile_image }) {
             onChange={handleChange}
           />
         </Card.Body>
-      <div className="d-flex justify-content-end gap-2 mb-1">
+      <div className="d-flex justify-content-end gap-2 mb-1 pe-1">
+        <p className={styles.Feedback}>{feedback}</p>
         {commentChanged &&
           <>
             <Button 
