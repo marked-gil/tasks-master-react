@@ -8,9 +8,10 @@ import { getFilteredTasks } from '../../api/taskMethods';
 import TasksFilter from '../../components/TasksFilter';
 import LoadingIcon from '../../components/LoadingIcon';
 
-function OverdueTasksPage({ categories }) {
+function OverdueTasksPage() {
 
   const [ tasks, setTasks ] = useState({ results: []});
+  const [ categories, setCategories ] = useState({ results: [] });
   const [ filters, setFilters ] = useState({category_name: "", progress: "", order_by: ""});
   const [ error, setError ] = useState("");
   const [ isLoaded, setIsLoaded ] = useState(false);
@@ -19,10 +20,12 @@ function OverdueTasksPage({ categories }) {
     const getOverdueTasks = async () => {
       try {
         setIsLoaded(false);
-        const { data } = await axiosReq.get(
-          `/tasks/?progress=overdue`
-        );
-        setTasks(data);
+        const [{ data: fetchedTasks }, { data: fetchedCategories }] = await Promise.all([
+          axiosReq.get(`/tasks/?progress=overdue`),
+          axiosReq.get(`/categories/`)
+        ]);
+        setTasks(fetchedTasks);
+        setCategories(fetchedCategories);
         setIsLoaded(true);
       } catch (err) {
         setError("Sorry, an error has occurred. Please try refreshing the page.")
