@@ -5,10 +5,11 @@ import SignUpPage from './pages/auth/SignUpPage';
 import MainPageContainer from './pages/MainPageContainer';
 import styles from './App.module.css';
 import { ProtectedRoute } from './pages/auth/ProtectedRoute';
-import { useState } from 'react';
+import { shouldRefreshToken } from '../src/utils/utils';
 
 function App() {
-  const [ isLoggedIn, setIsLoggedIn ] = useState(false);
+  
+  const isLoggedIn = shouldRefreshToken();
 
   return (
     <div className={styles.App}>
@@ -16,11 +17,11 @@ function App() {
         <Route 
           exact 
           path="/signin" 
-          render={() => <SignInPage setIsLoggedIn={setIsLoggedIn} /> } 
+          render={() => <SignInPage /> } 
         />
         <Route exact path="/signup" render={() => <SignUpPage /> } />
 
-        {/* <ProtectedRoute 
+        <ProtectedRoute 
           exact 
           path="/" 
           isLoggedIn={isLoggedIn} 
@@ -78,63 +79,8 @@ function App() {
           exact
           path="/search-results"
           render={() => <MainPageContainer SearchResultsPage /> }
-        /> */}
-
-        <Route 
-          exact 
-          path="/" 
-          render={() => <MainPageContainer tasksTodayPage />} 
         />
-        <Route 
-          exact 
-          path="/profile/:id" 
-          isLoggedIn={isLoggedIn} 
-          render={() => <MainPageContainer profile /> } 
-        />
-        <Route 
-          exact 
-          path="/all-todos" 
-          isLoggedIn={isLoggedIn} 
-          render={() => <MainPageContainer allTodoTasksPage />} 
-        />
-        <Route 
-          exact 
-          path="/overdue-tasks" 
-          isLoggedIn={isLoggedIn} 
-          render={() => <MainPageContainer overdueTasksPage />}
-        />
-        <Route 
-          exact 
-          path="/categories/:id" 
-          render={() => <MainPageContainer tasksByCategoryPage />} 
-        />
-        <Route 
-          exact 
-          path="/shared-tasks"
-          render={() => <MainPageContainer sharedTasksPage /> } 
-        />
-        <Route 
-          exact 
-          path="/completed-tasks" 
-          render={() => <MainPageContainer completedTasksPage /> } 
-        />
-        <Route 
-          exact 
-          path="/task/:id" 
-          render={() => <MainPageContainer taskDetailsPage /> } 
-        />
-        <Route 
-          exact 
-          path="/tasks/:due_date" 
-          render={() => <MainPageContainer tasksPerDatePage /> } 
-        />
-        <Route 
-          exact
-          path="/search-results"
-          render={() => <MainPageContainer searchResultsPage /> }
-        />
-
-        <Route render={() => <h1>Page Not Found</h1>}/>
+        <Route render={() => <h1>Page Not Found</h1>}/> */
       </Switch>
     </div>
   );

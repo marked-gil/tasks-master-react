@@ -8,7 +8,7 @@ import { Alert } from 'react-bootstrap';
 import { useSetCurrentUser } from '../../contexts/CurrentUserContext';
 import { setTokenTimestamp } from '../../utils/utils';
 
-function SignInPage({ setIsLoggedIn }) {
+function SignInPage() {
   const setCurrentUser = useSetCurrentUser();
 
   const [signInData, setSignInData] = useState({
@@ -28,7 +28,6 @@ function SignInPage({ setIsLoggedIn }) {
       const { data } = await axios.post("/dj-rest-auth/login/", signInData);
       setCurrentUser(data.user);
       setTokenTimestamp(data);
-      setIsLoggedIn(true);
       history.push('/');
     } catch (err) {
       setErrors(err.response?.data);
