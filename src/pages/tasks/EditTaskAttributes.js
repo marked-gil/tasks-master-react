@@ -17,6 +17,7 @@ function EditTaskAttributes(props) {
     progress,
     closeAllEdits,
     setCloseAllEdits,
+    is_owner
   } =props
 
   const [ editCategory, setEditCategory ] = useState(false);
@@ -146,7 +147,7 @@ function EditTaskAttributes(props) {
                 </Button> 
               </div>
             }
-            { !editCategory && 
+            { is_owner && !editCategory && 
               <Button variant="link" onClick={setEditCategory} className="ms-auto p-0">edit</Button> 
             }
           </div>
@@ -181,7 +182,7 @@ function EditTaskAttributes(props) {
                 <Button onClick={canceEditDuePriority} variant="link" className="ms-3 p-0">cancel</Button>
                 <Button onClick={handleSave} variant="link" className={`ms-2 p-0 ${styles.bold}`}>SAVE</Button>
               </div>}
-            { !editDuePriority &&
+            { is_owner && !editDuePriority &&
               <Button onClick={setEditDuePriority} variant="link" className={`ms-3 p-0 ${styles.AttributesEditButton}`}>edit</Button> }
           </div>
       </div>

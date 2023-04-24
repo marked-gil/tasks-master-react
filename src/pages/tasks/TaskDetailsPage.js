@@ -34,6 +34,7 @@ function TaskDetailsPage({ currentUser, newCategoryAdded }) {
 
   const {
     owner,
+    is_owner,
     task_name, 
     details, 
     category, 
@@ -122,25 +123,29 @@ function TaskDetailsPage({ currentUser, newCategoryAdded }) {
         {feedbackMessage && <FeedbackMessage message={feedbackMessage} />}
         <div className="position-relative">
           <h2>Task Details</h2>
-          <div className={styles.DeleteSharedButtons}>
-            {/* DELETE BUTTON */}
-            <Button onClick={handleDelete} size="sm" variant='danger'>Delete Task</Button>
 
-            {/* SHARE BUTTON */}
-            <ShareTaskModal
-              task_name={task_name}
-              task_id={id}
-              set_task_data={setTaskData}
-              taskData={taskData}
-              handleShareTask={handleShareTask}
-              setError={setError}
-              setFeedbackMessage={setFeedbackMessage}
-            />
-          </div>
+          {is_owner && 
+            <div className={styles.DeleteSharedButtons}>
+              {/* DELETE BUTTON */}
+              <Button onClick={handleDelete} size="sm" variant='danger'>Delete Task</Button>
+
+              {/* SHARE BUTTON */}
+              <ShareTaskModal
+                task_name={task_name}
+                task_id={id}
+                set_task_data={setTaskData}
+                taskData={taskData}
+                handleShareTask={handleShareTask}
+                setError={setError}
+                setFeedbackMessage={setFeedbackMessage}
+              />
+            </div>
+          }
         </div>
 
         {/* TASK ATTRIBUTES */}
-        <EditTaskAttributes 
+       <EditTaskAttributes
+          is_owner={is_owner}
           handleDataChange={handleDataChange}
           category={category}
           categories={categories}
@@ -195,7 +200,7 @@ function TaskDetailsPage({ currentUser, newCategoryAdded }) {
             <p className={styles.TaskName}>{task_name}</p>
             <h3 className={styles.HeadingTaskName}>Task Name</h3>
 
-            {!editTaskDescription &&
+            {is_owner && !editTaskDescription &&
               <Button 
                 variant="link" 
                 onClick={setEditTaskName}  
@@ -240,7 +245,7 @@ function TaskDetailsPage({ currentUser, newCategoryAdded }) {
             <p className={styles.TaskDetails}>{details}</p>
             <h3 className={styles.HeadingDetails}>Details</h3>
 
-            {!editTaskDescription &&
+            {is_owner && !editTaskDescription &&
               <Button 
                 variant="link" 
                 onClick={setEditTaskDescription} 
@@ -327,7 +332,7 @@ function TaskDetailsPage({ currentUser, newCategoryAdded }) {
           {!!comments.results.length && <h3 className={styles.LabelComments}>Comments</h3>}
           {console.log("COMMENTS",comments.results)}
           {!!comments.results.length ? comments.results.map((comment) => (
-            <CommentCard 
+            <CommentCard
               key={comment.id} 
               comment={comment} 
               setComments={setComments} 

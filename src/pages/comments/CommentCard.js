@@ -4,7 +4,15 @@ import { axiosReq, axiosRes } from '../../api/axiosDefaults';
 import styles from '../../styles/CommentCard.module.css';
 import moment from 'moment';
 
-function CommentCard({ comment, setComments, profile_image, setError }) {
+function CommentCard(props) {
+
+  const { 
+    comment, 
+    setComments, 
+    profile_image, 
+    setError, 
+  } = props;
+
 
   const [ commentChanged, setCommentChanged ] = useState(false);
   const [ editComment, setEditComment ] = useState(comment);
