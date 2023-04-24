@@ -1,27 +1,28 @@
 import React, { useState, useEffect } from 'react';
+import { axiosReq } from '../../api/axiosDefaults';
+import { useHistory, useParams } from 'react-router-dom';
 import moment from 'moment';
 import { getFilteredTasks } from '../../api/taskMethods';
-import { Col } from 'react-bootstrap';
+import Col from 'react-bootstrap/Col';
 import styles from '../../styles/TasksPerDatePage.module.css';
 import ErrorDisplay from '../../components/ErrorDisplay';
 import TasksFilter from '../../components/TasksFilter';
 import TasksList from './TasksList';
 import AddTask from './AddTask';
-import { useHistory, useParams } from 'react-router-dom';
-import { axiosReq } from '../../api/axiosDefaults';
 import FeedbackMessage from '../../components/FeedbackMessage';
 import LoadingIcon from '../../components/LoadingIcon';
 
-function TasksPerDatePage({ categories }) {
+function TasksPerDatePage() {
 
-  const dateToday = moment().format('YYYY-MM-DD')
+  const dateToday = moment().format('YYYY-MM-DD');
   const { due_date } = useParams();
   const history = useHistory();
   const is_DueDateTomorrow = moment().add(1, 'days').format('YYYY-MM-DD') === due_date;
-  const is_DueDatePrevious = due_date < dateToday
+  const is_DueDatePrevious = due_date < dateToday;
   
-  const [ showCompletedTasks, setShowCompletedTasks ] = useState(false)
+  const [ showCompletedTasks, setShowCompletedTasks ] = useState(false);
   const [ tasks, setTasks ] = useState({ results: []});
+  const [ categories, setCategories ] = useState({ results: [] });
   const [ error, setError ] = useState("");
   const [ filters, setFilters ] = useState({category_name: "", progress: "", order_by: ""});
   const [ feedbackMessage, setFeedbackMessage ] = useState("");
@@ -31,27 +32,28 @@ function TasksPerDatePage({ categories }) {
     if (due_date === dateToday) {
       history.push("/")
     }
-  }, [due_date, history, dateToday])
+  }, [due_date, history, dateToday]);
 
   useEffect(() => {
-    const getTasks = async () => {
+    const fetchedData = async () => {
       try {
         setIsLoaded(false);
-        const { data } = await axiosReq.get(
-          `/tasks/?due_date=${moment(due_date).format("yyyy-MM-DD")}`
-        );
-        setTasks(data);
+        const [{ data: fetchedTasks }, { data: fetchedCategories }] = await Promise.all([
+          axiosReq.get(`/tasks/?due_date=${moment(due_date).format("yyyy-MM-DD")}`),
+          axiosReq.get(`/categories/`)
+        ]);
+        setTasks(fetchedTasks);
+        setCategories(fetchedCategories);
         setIsLoaded(true);
       } catch (err) {
-        setError("Sorry, an error has occurred. Please try refreshing the page.")
+        setError("An ERROR has occurred. Please try refreshing the page.")
         setIsLoaded(true);
       }
     }
-    getTasks();
+    fetchedData();
   }, [due_date]);
 
   const handleFilterSubmit = async (event) => {
-    event.preventDefault();
     setError("")
     setFeedbackMessage("")
     getFilteredTasks({filters, setTasks, setError, due_date, setIsLoaded});

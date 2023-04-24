@@ -23,22 +23,22 @@ function TasksTodayPage() {
   const [ isLoaded, setIsLoaded ] = useState(false);
 
   useEffect(() => {
-    const fetchData = async () => {
+    const fetchedData = async () => {
       try {
         setIsLoaded(false);
-        const [{ data: tasksToday }, { data: categoriesData }] = await Promise.all([
+        const [{ data: fetchedTasks }, { data: fetchedCategories }] = await Promise.all([
           axiosReq.get(`/tasks/?due_date=${moment(due_date).format("yyyy-MM-DD")}`),
-          await axiosReq.get(`/categories/`)
+          axiosReq.get(`/categories/`)
         ]);
-        setTasks(tasksToday);
-        setCategories(categoriesData);
+        setTasks(fetchedTasks);
+        setCategories(fetchedCategories);
         setIsLoaded(true);
       } catch (err) {
         setError("An ERROR has occurred. Please try refreshing the page.")
         setIsLoaded(true);
       }
     }
-    fetchData();
+    fetchedData();
   }, [due_date]);
   
   const handleFilterSubmit = async () => {
