@@ -54,14 +54,14 @@ function TasksList(props) {
   const TasksListItem = (task, completed) => (
     <div className={styles.TaskContainer} key={task.id}>
       <i className={`fa-solid fa-grip-vertical fa-xl ${styles.GripIcon}`}></i>
-
       <ListGroup.Item
         className={`
           ${styles.ListGroupItem} 
           ${completed ? styles.Completed : ""}
           ${task.progress === "overdue" ? styles.OverdueTask : ""}
         `} 
-        action 
+        action
+        href={`/task/${task.id}`}
       >
         {task.task_name}
       </ListGroup.Item>
