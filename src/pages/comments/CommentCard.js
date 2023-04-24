@@ -64,12 +64,13 @@ function CommentCard({ comment, setComments, profile_image, setError }) {
         </Card.Subtitle>
       </div>
         <Card.Body className="pt-1 pb-1">
-          <Form.Control 
-            plaintext 
-            readOnly={!commentChanged} 
+          <Form.Control
+            plaintext
+            readOnly={!commentChanged}
             value={editComment.content}
             name="content"
             onChange={handleChange}
+            className={commentChanged && styles.FormActive}
           />
         </Card.Body>
       <div className="d-flex justify-content-end gap-2 mb-1 pe-1">

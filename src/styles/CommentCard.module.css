@@ -16,3 +16,7 @@
   margin-bottom: 0;
   padding-left: 8px;
 }
+
+.FormActive {
+  border-bottom: 1px solid #9a9c9e;
+}
