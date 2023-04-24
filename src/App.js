@@ -78,6 +78,7 @@ function App() {
         <ProtectedRoute 
           exact
           path="/search-results"
+          isLoggedIn={isLoggedIn}
           render={() => <MainPageContainer SearchResultsPage /> }
         />
         <Route render={() => <h1>Page Not Found</h1>}/> */

@@ -159,6 +159,7 @@ function TaskDetailsPage({ currentUser, newCategoryAdded }) {
           setFeedbackMessage={setFeedbackMessage}
         />
 
+        {/* FOR SMALL SCREEN AVATARS */}
         <Accordion className={styles.SmallScreenAvatars}>
           <Accordion.Item eventKey="0">
             <Accordion.Header>See the owner and users sharing this task.</Accordion.Header>
@@ -175,13 +176,13 @@ function TaskDetailsPage({ currentUser, newCategoryAdded }) {
               }
 
               <div className={`d-flex gap-2 justify-content-between`}>
-                {shared_to?.map((user, idx) => (
+                {shared_to?.map((user) => (
                   <ProfileAvatar
-                    key={idx}
-                    owner={user}
+                    key={user.username}
+                    owner={user.username}
                     isOwner={false}
                     showName={true}
-                    // img_src={user.image}
+                    img_src={user.image}
                     imageWidth={"1.5rem"}
                     isDeletable
                     taskData={taskData}
@@ -302,13 +303,13 @@ function TaskDetailsPage({ currentUser, newCategoryAdded }) {
                 <i className="fa-solid fa-share-nodes"></i> Sharing with:
               </p>}
           
-            {shared_to?.map((user, idx) => (
+            {shared_to?.map((user) => (
               <ProfileAvatar
-                key={idx}
-                owner={user}
+                key={user.username}
+                owner={user.username}
                 isOwner={false}
                 showName={true}
-                // img_src={user.image}
+                img_src={user.image}
                 imageWidth={"1.5rem"}
                 isDeletable
                 className={styles.SharedToAvatar}

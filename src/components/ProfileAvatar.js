@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import Avatar from '../assets/profile-avatar.jpg';
 import styles from '../styles/ProfileAvatar.module.css';
 import UserSharingPopover from './UserSharingPopover';
 
@@ -34,7 +33,7 @@ function ProfileAvatar(props) {
       onMouseLeave={handleMouseLeave}
     > 
       <img 
-        src={img_src ? img_src : Avatar} 
+        src={img_src} 
         alt="profile avatar" 
         style={{ width: imageWidth }}
         className="rounded"
