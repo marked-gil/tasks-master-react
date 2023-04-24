@@ -10,9 +10,10 @@ import TasksFilter from '../../components/TasksFilter';
 import FeedbackMessage from '../../components/FeedbackMessage';
 import LoadingIcon from '../../components/LoadingIcon';
 
-function AllToDoTasksPage({ categories }) {
+function AllToDoTasksPage() {
 
-  const [ tasks, setTasks ] = useState({ results: []});
+  const [ tasks, setTasks ] = useState({ results: [] });
+  const [ categories, setCategories ] = useState({ results: [] });
   const [ filters, setFilters ] = useState({category_name: "", progress: "", order_by: ""});
   const [ feedbackMessage, setFeedbackMessage ] = useState("");
   const [ error, setError ] = useState("");
@@ -22,13 +23,15 @@ function AllToDoTasksPage({ categories }) {
     const getTodoTasks = async () => {
       try {
         setIsLoaded(false);
-        const { data } = await axiosReq.get(
-          `/tasks/?progress=to-do`
-        );
-        setTasks(data);
+        const [{ data: fetchedTasks }, {data: fetchedCategories }] = await Promise.all([
+          axiosReq.get(`/tasks/?progress=to-do`),
+          axiosReq.get(`/categories/`)
+        ]);
+        setTasks(fetchedTasks);
+        setCategories(fetchedCategories);
         setIsLoaded(true);
       } catch (err) {
-        setError("Sorry, an error has occurred. Please try refreshing the page.");
+        setError("An error has occurred while fetching data. Please try refreshing the page.");
         setIsLoaded(true);
       }
     }
@@ -36,8 +39,8 @@ function AllToDoTasksPage({ categories }) {
   }, []);
 
   const handleFilterSubmit = async () => {
-    setError("")
-    setFeedbackMessage("")
+    setError("");
+    setFeedbackMessage("");
     getFilteredTasks({filters, setTasks, setError, todoTasksOnly:true, setIsLoaded});
   };
 
