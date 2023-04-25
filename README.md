@@ -398,7 +398,8 @@ This project uses the following tools:
     * [Moment.js](https://momentjs.com/) - helps to parse, validate, manipulate, and display dates and times in Javascript
     * [MUI X](https://mui.com/x/react-date-pickers/date-picker/) - where the datepicker was taken from.
 * [Google Fonts](https://fonts.google.com/)
-* [Freepik](https://www.freepik.com/)
+* [Freepik](https://www.freepik.com/) - for some icons used in this project.
+* [Flaticon](https://www.flaticon.com/) - for some icones used in this project.
 * `Git` - as a version control system, was used to monitor and record changes made when building the site. This allowed for the restoration of an earlier version of the code when it was necessary
 * `Gitpod` - the cloud-based IDE (Integrated Developer Environment) used to code this site
 * `GitHub` - stores the source code repository for this website
@@ -420,6 +421,7 @@ This project uses the following tools:
 
 ### Media
 * Profile Avatar <a href="https://www.freepik.com/free-vector/people-icon-collection_1157380.htm#query=avatar&position=14&from_view=keyword&track=sph">Image by muammark</a> on Freepik
+* 404 <a href="https://www.flaticon.com/free-icons/web-page" title="web page icons">icon created by prettycons - Flaticon</a>
 
 ### References
 * Main References:
