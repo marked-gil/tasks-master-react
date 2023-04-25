@@ -7,6 +7,7 @@ import styles from '../../styles/SignInPage.module.css'
 import { Alert } from 'react-bootstrap';
 import { useSetCurrentUser } from '../../contexts/CurrentUserContext';
 import { setTokenTimestamp } from '../../utils/utils';
+import logo from '../../assets/tasks-master-logo-small.png';
 
 function SignInPage() {
   const setCurrentUser = useSetCurrentUser();
@@ -44,11 +45,11 @@ function SignInPage() {
   return (
     <div className={styles.SignInPage}>
       <div className={styles.SignInBox}>
-        <p className="mb-5">LOGO - Tasks Master</p>
+        <img src={logo} alt="tasks master logo" className={styles.Logo}/>
 
-        <h1>Sign In</h1>
+        <h1 className={styles.HeadingSignIn}>Sign In</h1>
 
-        <Form onSubmit={handleSubmit} className={`d-flex flex-column mt-5 ${styles.Form}`}>
+        <Form onSubmit={handleSubmit} className={styles.Form}>
           {errors?.non_field_errors?.map((error, idx) => (
             <Alert className={`mt-1 mb-0 pb-0 pt-0 ${styles.TextCenter}`} key={idx} variant="danger">
               {error}
@@ -92,18 +93,17 @@ function SignInPage() {
             }
           </Form.Group>
 
-          <Button variant="primary" type="submit">
+          <Button type="submit" className={styles.LoginButton}>
             Log In
           </Button>
         </Form>
         
-        <div className="d-flex flex-column mt-5">
-          <Link to="/" className="mb-4" href="#">Forgot Password?</Link>
+        <div className="d-flex flex-column mt-5 gap-4">
+          <Link to="/" className={styles.ForgotPassword} href="#">Forgot Password?</Link>
 
-          <div className="d-flex">
-            <p className="me-5">Not registered?</p>
-            <Link to="/signup">SIGN UP</Link>
-          </div>
+          <p className="mb-0">Not registered?
+            <Link to="/signup" className={styles.SignUp}>SIGN UP</Link>
+          </p>
         </div>
       </div>
     </div>
