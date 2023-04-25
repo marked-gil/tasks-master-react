@@ -13,6 +13,7 @@ function TasksList(props) {
     showCompletedTasksOnly,
     showDate,
     showTime,
+    isLoaded
   } = props;
 
   const dateToday = moment().format("YYYY-MM-DD");
@@ -114,15 +115,26 @@ function TasksList(props) {
 
   return (
     <ListGroup className={styles.ListGroup}>
-      {showCompletedTasksOnly && 
-        tasksList.results.map((task) => (
-          task.is_completed ? TasksListItem(task, task.is_completed) : ""
-        ))
-      }
-      {!showCompletedTasksOnly && tasksList.results.map((task) => (
-        showCompletedTasks ? TasksListItem(task, task.is_completed)
-        : !task.is_completed ? TasksListItem(task) : ""
-      ))}
+
+      {isLoaded ? (
+        <>
+          {tasksList.results.length ? 
+            <>
+              {showCompletedTasksOnly && 
+              tasksList.results.map((task) => (
+                task.is_completed ? TasksListItem(task, task.is_completed) : ""
+              ))
+              }
+              {!showCompletedTasksOnly && tasksList.results.map((task) => (
+                showCompletedTasks ? TasksListItem(task, task.is_completed)
+                : !task.is_completed ? TasksListItem(task) : ""
+              ))}
+            </> 
+            : <p className="text-center mt-3">No tasks here.</p>
+          }      
+        </>
+      ) : ""
+    }
     </ListGroup>
   )    
 };

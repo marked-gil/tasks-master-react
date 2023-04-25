@@ -23,7 +23,7 @@ function TasksByCategoryPage({ setNewCategoryAdded }) {
   const [ showCompletedTasks, setShowCompletedTasks ] = useState(false);
   const [ filters, setFilters ] = useState({category_name: "", progress: "", order_by: ""});
   const [ error, setError ] = useState("");
-  const [ isLoaded , setIsLoaded ] = useState(false);
+  const [ isLoaded, setIsLoaded ] = useState(false);
   const [ editCategory, setEditCategory ] = useState(false);
   const { category_name, description } = categoryData;
 
@@ -227,6 +227,7 @@ function TasksByCategoryPage({ setNewCategoryAdded }) {
           tasks={tasks}
           showCompletedTasks={showCompletedTasks}
           showDate
+          isLoaded={isLoaded}
         />
       </div>
 

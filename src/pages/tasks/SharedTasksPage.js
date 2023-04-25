@@ -80,6 +80,7 @@ function SharedTasksPage({ newCategoryAdded }) {
           tasks={tasks}
           showCompletedTasks={showCompletedTasks}
           showDate
+          isLoaded
         />
       </div>
 

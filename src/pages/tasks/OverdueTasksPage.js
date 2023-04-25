@@ -66,6 +66,7 @@ function OverdueTasksPage({ newCategoryAdded }) {
         <TasksList
           tasks={tasks}
           showDate
+          isLoaded={isLoaded}
         />
       </div>
     </Col>  

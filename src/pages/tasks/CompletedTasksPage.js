@@ -66,6 +66,7 @@ function CompletedTasksPage({ newCategoryAdded }) {
           tasks={tasks}
           showCompletedTasksOnly
           showDate
+          isLoaded={isLoaded}
         />
       </div>
     </Col>

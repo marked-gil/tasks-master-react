@@ -71,7 +71,9 @@ function AllToDoTasksPage({ newCategoryAdded }) {
         <TasksList
           tasks={tasks}
           showDate
+          isLoaded={isLoaded}
         />
+
       </div>
 
       <AddTask
