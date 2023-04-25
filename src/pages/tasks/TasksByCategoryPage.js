@@ -59,15 +59,15 @@ function TasksByCategoryPage({ setNewCategoryAdded }) {
     setCategoryData(prevState => (
       {
         ...prevState,
-        [event.target.name]: event.target.value.toLowerCase()
+        [event.target.name]: event.target.value
       }
     ))
   };
 
   const handleUpdateCategory = async() => {
     const formData = new FormData();
-    formData.append('category_name', categoryData.category_name);
-    formData.append('description', categoryData.description);
+    formData.append('category_name', categoryData.category_name.toLowerCase());
+    formData.append('description', categoryData.description.toLowerCase());
   
     try {
       setError("");
@@ -87,6 +87,8 @@ function TasksByCategoryPage({ setNewCategoryAdded }) {
     } catch (err) {
       if (err.response?.data?.non_field_errors) {
         setError(err.response?.data?.non_field_errors[0])
+      } else if (err.response?.data?.category_name) {
+        setError("Category name cannot be blank.")
       } else {
         setError("Sorry, an error occurred when updating the category. Refresh page and try again.")
       }
