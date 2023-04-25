@@ -331,7 +331,6 @@ function TaskDetailsPage({ currentUser, newCategoryAdded }) {
           />
 
           {!!comments.results.length && <h3 className={styles.LabelComments}>Comments</h3>}
-          {console.log("COMMENTS",comments.results)}
           {!!comments.results.length ? comments.results.map((comment) => (
             <CommentCard
               key={comment.id} 

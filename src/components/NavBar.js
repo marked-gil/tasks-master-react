@@ -22,7 +22,8 @@ function NavBar(props) {
     setSearchResults, 
     setKeywordSearched,
     setCategories,
-    categories 
+    categories,
+    setIsLoaded
   } = props;
 
   const [ tasksDate, setTasksDate ] = useState(null);
@@ -66,12 +67,14 @@ function NavBar(props) {
                   {currentUser?.username}
                 </Offcanvas.Title>
               </Offcanvas.Header>
+
               {/* FOR LARGE SCREEN */}
               <Offcanvas.Body className={`d-none d-lg-flex`}>
                 <SearchForm 
                   setSearchResults={setSearchResults} 
                   setKeywordSearched={setKeywordSearched}
                   className="d-flex"
+                  setIsLoaded={setIsLoaded}
                 />
                 <Nav className={`${styles.Nav} justify-content-end align-items-center flex-grow-1 pe-3`}>
                   <NavLink to="/all-todos" className={`p-0 ${styles.ClrWhite}`}>My Tasks</NavLink>
@@ -80,12 +83,14 @@ function NavBar(props) {
                   <NavLink to="" className="p-0"><img src={currentUser?.profile_image} alt="profile avatar" className={styles.Avatar}/></NavLink>
                 </Nav>
               </Offcanvas.Body>
+
               {/* FOR SMALL SCREEN */}
               <Offcanvas.Body className={`d-flex flex-column d-lg-none mb-5 ${styles.OffCanvasBody}`}>
                 <SearchForm 
                   setSearchResults={setSearchResults} 
                   setKeywordSearched={setKeywordSearched}
                   className="d-flex"
+                  setIsLoaded={setIsLoaded}
                 />
                 <Nav className={`${styles.Nav} mt-4`}>
                   <NavLink to="/all-todos" className={`p-0 `}>My Tasks</NavLink>

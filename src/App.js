@@ -79,7 +79,7 @@ function App() {
           exact
           path="/search-results"
           isLoggedIn={isLoggedIn}
-          render={() => <MainPageContainer SearchResultsPage /> }
+          render={() => <MainPageContainer searchResultsPage /> }
         />
         <Route render={() => <h1>Page Not Found</h1>}/> */
       </Switch>

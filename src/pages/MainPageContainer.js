@@ -14,8 +14,8 @@ import OverdueTasksPage from './tasks/OverdueTasksPage';
 import TasksByCategoryPage from './tasks/TasksByCategoryPage';
 import CompletedTasksPage from './tasks/CompletedTasksPage';
 import SharedTasksPage from './tasks/SharedTasksPage';
-import { useCurrentUser } from '../contexts/CurrentUserContext';
 import SearchResultsPage from './tasks/SearchResultsPage';
+import { useCurrentUser } from '../contexts/CurrentUserContext';
 import { axiosReq } from '../api/axiosDefaults';
 
 function MainPageContainer(props) {
@@ -64,6 +64,7 @@ function MainPageContainer(props) {
         setKeywordSearched={setKeywordSearched}
         setCategories={setCategories}
         categories={categories}
+        setIsLoaded={setIsLoaded}
       />
       <Container fluid className={styles.MainContent}>
         <Row className={styles.Row}>
@@ -86,10 +87,10 @@ function MainPageContainer(props) {
             : tasksByCategoryPage ? <TasksByCategoryPage setNewCategoryAdded={setNewCategoryAdded} />
             : completedTasksPage ? <CompletedTasksPage newCategoryAdded={newCategoryAdded} />
             : sharedTasksPage ? <SharedTasksPage newCategoryAdded={newCategoryAdded} />
-            : searchResultsPage ? 
-              <SearchResultsPage 
+            : searchResultsPage ? <SearchResultsPage 
                 searchResults={searchResults} 
-                keywordSearched={keywordSearched} 
+                keywordSearched={keywordSearched}
+                isLoaded={isLoaded}
               />
             : <></>
           }
