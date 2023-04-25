@@ -1,42 +1,112 @@
 .Footer {
+    position: relative;
     color: white;
-    padding: 0 5rem;
+    padding: 2.5rem 5rem;
     background-color: #2B4162;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    gap: 5rem;
     height: 5rem;
     width: 100%;
     font-size: 1.2rem;
-    font-size: 1.2rem;
 }
-      
-ul {
-    width: 22rem;
-    gap: 1.2rem;
+
+.ForEducPurposes {
+    margin-bottom: 0;
+}
+
+.CopyRight {
+    margin-bottom: 0;
+}
+
+.ListOfIcons {
+    display: flex;
+    align-items: center;
+    column-gap: 2rem;
+    margin: 0;
+    padding: 0;
 }
 
 li {
     list-style-type: none;
 }
 
-.icons {
+.icon {
     color: white;
     font-size: 2rem;
 }
 
-@media screen and (max-width: 992px) {
+.icon:hover {
+    color: #FFD700;
+}
+
+@media screen and (max-width: 991px) {
     .Footer {
         font-size: 1rem;
-        flex-direction: column;
-        justify-content: center;
-        gap: 0;
+    }
+
+    .icon {
+        font-size: 1.8rem;
     }
 }
 
-@media screen and (max-width: 1400px) {
-    ul {
-        width: 12rem;
+@media screen and (max-width: 900px) {
+    .ListOfIcons {
+        column-gap: 1.2rem;
     }
+}
+
+@media screen and (max-width: 800px) {
+    .ForEducPurposes {
+        margin-bottom: 15px;
+    }
+    
+    .CopyRight {
+        position: absolute;
+        bottom: 12px;
+    }    
+
+    .ListOfIcons {
+        column-gap: 1.2rem;
+    }
+}
+
+@media screen and (max-width: 635px) {
+    .Footer {
+        padding: 2.5rem;
+    }
+}
+
+@media screen and (max-width: 540px) {
+    .Footer {
+        padding: 2.5rem 1.8rem;
+        font-size: .9rem;
+        gap: 16px;
+    }
+
+    .icon {
+        font-size: 1.6rem;
+    }
+
+    .ListOfIcons {
+        justify-content: end;
+    }
+}
+
+@media screen and (max-width: 470px) {
+    .Footer {
+        flex-direction: column;
+        justify-content: center;
+        height: 7rem;
+        padding: 1rem;
+        gap: 0;
+    }
+
+    .ForEducPurposes {
+        margin-bottom: 0;
+    }
+
+    .CopyRight {
+        position: static;
+    }    
 }
