@@ -103,6 +103,7 @@ function TasksPerDatePage({ newCategoryAdded }) {
         categories={categories}
         setFeedbackMessage={setFeedbackMessage}
         task_date={due_date}
+        className="mb-5"
       />
     </Col>
   )

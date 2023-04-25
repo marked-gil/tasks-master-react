@@ -83,6 +83,7 @@ function AllToDoTasksPage({ newCategoryAdded }) {
         categories={categories}
         setFeedbackMessage={setFeedbackMessage}
         allTodos
+        className="mb-5"
       />
     </Col>
   )

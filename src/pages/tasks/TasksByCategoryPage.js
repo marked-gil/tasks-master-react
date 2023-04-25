@@ -236,6 +236,7 @@ function TasksByCategoryPage({ setNewCategoryAdded }) {
         setTasks={setTasks}
         setError={setError}
         categories={categories}
+        className="mb-5"
       />
     </Col>
   )

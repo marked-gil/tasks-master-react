@@ -92,6 +92,7 @@ function TasksTodayPage({ newCategoryAdded }) {
         categories={categories}
         setFeedbackMessage={setFeedbackMessage}
         task_date={dateToday}
+        className="mb-5"
       />
     </Col>
   )
