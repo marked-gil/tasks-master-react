@@ -81,7 +81,7 @@ function App() {
           isLoggedIn={isLoggedIn}
           render={() => <MainPageContainer searchResultsPage /> }
         />
-        <Route render={() => <h1>Page Not Found</h1>}/> */
+        <Route render={() => <MainPageContainer pageNotFoundPage /> } />
       </Switch>
     </div>
   );

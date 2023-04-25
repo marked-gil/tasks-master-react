@@ -17,6 +17,7 @@ import SharedTasksPage from './tasks/SharedTasksPage';
 import SearchResultsPage from './tasks/SearchResultsPage';
 import { useCurrentUser } from '../contexts/CurrentUserContext';
 import { axiosReq } from '../api/axiosDefaults';
+import PageNotFoundPage from './PageNotFound/PageNotFoundPage';
 
 function MainPageContainer(props) {
 
@@ -30,7 +31,8 @@ function MainPageContainer(props) {
     tasksByCategoryPage,
     completedTasksPage,
     sharedTasksPage,
-    searchResultsPage
+    searchResultsPage,
+    pageNotFoundPage
   } = props;
 
   const currentUser = useCurrentUser();
@@ -92,6 +94,7 @@ function MainPageContainer(props) {
                 keywordSearched={keywordSearched}
                 isLoaded={isLoaded}
               />
+            : pageNotFoundPage ? <PageNotFoundPage /> 
             : <></>
           }
         </Row>
