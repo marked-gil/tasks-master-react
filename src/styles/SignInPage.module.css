@@ -23,6 +23,7 @@
 .HeadingSignIn {
   margin: 2.7rem 0;
   font-size: 40px;
+  text-align: center;
 }
 
 .Form {
@@ -50,20 +51,13 @@
 }
 
 .SignUp {
+  font-weight: 600;
   color: #c9c8c8;
   margin-left: 12px;
 }
 
 .SignUp:hover {
   color: white;
-}
-
-.bold {
-  font-weight: 600;
-}
-
-.TextCenter {
-  text-align: center;
 }
 
 @media screen and (max-width: 600px) {
@@ -85,7 +79,7 @@
 @media screen and (max-width: 400px) {
   .SignInBox {
     width: 310px;
-    padding: 1.2rem;
+    padding: 1.2rem 1.2rem 2rem;
   }
 
   .Logo {

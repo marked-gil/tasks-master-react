@@ -5,6 +5,8 @@ import Form from 'react-bootstrap/Form';
 import Alert from 'react-bootstrap/Alert';
 import styles from '../../styles/SignUpPage.module.css'
 import { Link, useHistory } from 'react-router-dom';
+import logo from '../../assets/tasks-master-logo-small.png';
+
 
 function SignUpPage() {
   const [signUpData, setSignUpData] = useState({
@@ -37,11 +39,13 @@ function SignUpPage() {
   }
 
   return (
-    <div className={styles.SignUp}>
+    <div className={styles.SignUpPage}>
       <div className={styles.SignUpBox}>
-        <p className="mb-5">LOGO - Tasks Master</p>
-        <h1>Sign Up</h1>
-        <Form onSubmit={handleSubmit} className={`d-flex flex-column mt-5 ${styles.Form}`}>
+        <img src={logo} alt="tasks master logo" className={styles.Logo}/>
+      
+        <h1 className={styles.HeadingSignUp}>Sign Up</h1>
+    
+        <Form onSubmit={handleSubmit} className={styles.Form}>
           <Form.Group className="mb-3" controlId="username">
             <Form.Label>Username:</Form.Label>
             <Form.Control
@@ -53,7 +57,7 @@ function SignUpPage() {
             />
 
             {errors.username?.map((error, idx) => (
-              <Alert className={`mt-1 mb-0 pb-0 pt-0 ${styles.TextCenter}`} key={idx} variant="danger">
+              <Alert className={`mt-1 mb-0 pb-0 pt-0 text-center`} key={idx} variant="danger">
                 {error}
               </Alert>
               ))
@@ -71,7 +75,7 @@ function SignUpPage() {
             />
 
             {errors.password1?.map((error, idx) => (
-              <Alert className={`mt-1 mb-0 pb-0 pt-0 ${styles.TextCenter}`} key={idx} variant="danger">
+              <Alert className={`mt-1 mb-0 pb-0 pt-0 text-center`} key={idx} variant="danger">
                 {error}
               </Alert>
               ))
@@ -88,23 +92,19 @@ function SignUpPage() {
               onChange={handleChange}
             />
             {errors.password2?.map((error, idx) => (
-              <Alert className={`mt-1 mb-0 pb-0 pt-0 ${styles.TextCenter}`} key={idx} variant="danger">
+              <Alert className={`mt-1 mb-0 pb-0 pt-0 text-center`} key={idx} variant="danger">
                 {error}
               </Alert>
               ))
             }
           </Form.Group>
 
-          <Button variant="primary" type="submit">
+          <Button type="submit" className={styles.RegisterButton}>
             Register
           </Button>
-
         </Form>
 
-        <div className="d-flex mt-5">
-          <p className="me-5">Already registered?</p>
-          <Link to="/signin">SIGN IN</Link>
-        </div>
+        <p className="mt-5">Already registered? <Link to="/signin" className={styles.SignIn}>SIGN IN</Link></p>
 
       </div>
     </div>

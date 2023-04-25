@@ -1,26 +1,88 @@
-.SignUp {
+.SignUpPage {
   width: 100%;
   height: 100vh;
-  background-color: rgb(171, 171, 219);
+  background-color: #517da3;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
 }
 
-.Form {
-  width: 25rem;
-}
-
 .SignUpBox {
-  border: 1px solid black;
+  color: #c9c8c8;
+  background-color: #721817;
   padding: 1.5rem 3rem 3rem;
+  box-shadow: 0 0 4px 4px #aaa8a8;
+  width: 496px;
 }
 
-h1 {
+.Logo {
+  width: 14rem;
+}
+
+.HeadingSignUp {
+  margin: 2.7rem 0;
+  font-size: 40px;
   text-align: center;
 }
 
-.TextCenter {
-  text-align: center;
+.Form {
+  display: flex;
+  flex-direction: column;
+}
+
+.RegisterButton {
+  background-color: #1f5e5f;
+  border: none;
+  box-shadow: 0 0 2px 2px #aaa8a8;
+}
+
+.RegisterButton:hover {
+  background-color: #1f5e5f;
+  opacity: .8;
+}
+
+.SignIn {
+  font-weight: 600;
+  color: #c9c8c8;
+  margin-left: 12px;
+}
+
+.SignIn:hover {
+  color: white;
+}
+
+@media screen and (max-width: 600px) {
+  .SignUpBox {
+    padding: 1.5rem 1.5rem 2.5rem;
+    width: 350px;
+  }
+
+  .Logo {
+    width: 10rem;
+  }
+
+  .HeadingSignUp {
+    font-size: 34px;
+    margin: 1.8rem 0;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .SignUpBox {
+    width: 310px;
+    padding: 1.2rem 1.2rem 2rem;
+  }
+
+  .Logo {
+    width: 10rem;
+  }
+
+  .HeadingSignUp {
+    font-size: 30px;
+  }
+
+  .Form {
+    margin-top: 32px;
+  }
 }
