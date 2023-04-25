@@ -1,0 +1,33 @@
+.PageNotFoundPage {
+  position: relative;
+  padding: 8rem 0 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #7ec1ce
+}
+
+.HeadingPageNotFound {
+  font-weight: 700;
+  font-size: 3rem;
+}
+
+.Icon {
+  width: 15rem;
+  margin-top: 4rem;
+}
+
+@media screen and (max-width: 600px) {
+  .PageNotFoundPage {
+    padding: 3rem 0 0;
+  }
+
+  .HeadingPageNotFound {
+    font-size: 2.3rem;
+  }
+  
+  .Icon {
+    width: 12rem;
+    margin-top: 2rem;
+  }
+}
