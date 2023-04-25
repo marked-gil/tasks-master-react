@@ -125,6 +125,7 @@ const SideBar = (props) => {
       </div>
 
       <AddCategory
+        currentUser={currentUser}
         categories={categories}
         setCategories={setCategories}
         className={styles.AddCategory}

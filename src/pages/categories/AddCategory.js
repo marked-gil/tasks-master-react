@@ -4,9 +4,9 @@ import { Alert, Button, Form, Modal } from 'react-bootstrap';
 import styles from '../../styles/AddCategory.module.css';
 import LoadingIcon from '../../components/LoadingIcon';
 
-function AddCategory({ categories, setCategories, setNewCategoryAdded, className }) {
+function AddCategory({ currentUser, categories, setCategories, setNewCategoryAdded, className }) {
 
-  const initialCategoryData = { 
+  const initialCategoryData = {
     category_name: "",
     description: "",
   };
@@ -18,7 +18,7 @@ function AddCategory({ categories, setCategories, setNewCategoryAdded, className
   const [ errors, setErrors ] = useState({});
 
   const handleClose = () => {
-    setShow(false);
+    setShow(false); 
     setCategoryData(initialCategoryData);
     setErrors({});
   }
@@ -31,9 +31,16 @@ function AddCategory({ categories, setCategories, setNewCategoryAdded, className
   };
 
   const handleSubmit = async () => {
+
+    const newData = {
+      owner: currentUser?.pk,
+      category_name: categoryData.category_name.toLocaleLowerCase(),
+      description: categoryData.description
+    }
+
     try {
       setIsLoaded(false);
-      const { data } = await axios.post("/categories/", {...categoryData});
+      const { data } = await axios.post("/categories/", {...newData});
       setCategories({results: [...categories.results, data]})
       setNewCategoryAdded(true);
       handleClose();
@@ -71,7 +78,7 @@ function AddCategory({ categories, setCategories, setNewCategoryAdded, className
                 onChange={handleChange}
                 aria-label="Add the category name"
               />
-              {errors.category_name?.map((error, idx) => (
+              {errors?.category_name?.map((error, idx) => (
                 <Alert className={`mt-1 mb-0 pb-0 pt-0 ${styles.TextCenter}`} key={idx} variant="danger">
                   {error === "This field may not be blank."
                     ? "Category Name is required."
@@ -80,7 +87,7 @@ function AddCategory({ categories, setCategories, setNewCategoryAdded, className
                 </Alert>
                 ))
               }
-              {errors.non_field_errors?.map((error, idx) => (
+              {errors?.non_field_errors?.map((error, idx) => (
                 <Alert className={`mt-1 mb-0 pb-0 pt-0 ${styles.TextCenter}`} key={idx} variant="danger">
                   { error }
                 </Alert>

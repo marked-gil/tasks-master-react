@@ -59,7 +59,7 @@ function TasksByCategoryPage({ setNewCategoryAdded }) {
     setCategoryData(prevState => (
       {
         ...prevState,
-        [event.target.name]: event.target.value
+        [event.target.name]: event.target.value.toLowerCase()
       }
     ))
   };
@@ -85,7 +85,11 @@ function TasksByCategoryPage({ setNewCategoryAdded }) {
       setNewCategoryAdded(true);
       setIsLoaded(true);
     } catch (err) {
-      setError("Sorry, an error occurred when updating the category. Refresh page and try again.")
+      if (err.response?.data?.non_field_errors) {
+        setError(err.response?.data?.non_field_errors[0])
+      } else {
+        setError("Sorry, an error occurred when updating the category. Refresh page and try again.")
+      }
       setIsLoaded(true);
     }
   };
