@@ -395,6 +395,7 @@ This project uses the following tools:
     * [React Router DOM](https://v5.reactrouter.com/)
     * [Axios](https://axios-http.com/docs/intro)
     * [jwt-decode](https://github.com/auth0/jwt-decode) - helps to decode JWTs token
+    * [react-infinite-scroll-component](https://www.npmjs.com/package/react-infinite-scroll-component) - allows infinite scrolling of returned datas, e.g. tasks and comments
     * [Moment.js](https://momentjs.com/) - helps to parse, validate, manipulate, and display dates and times in Javascript
     * [MUI X](https://mui.com/x/react-date-pickers/date-picker/) - where the datepicker was taken from.
 * [Google Fonts](https://fonts.google.com/)
