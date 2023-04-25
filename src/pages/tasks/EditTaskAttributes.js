@@ -108,7 +108,7 @@ function EditTaskAttributes(props) {
       {/* CATEGORIES */}
       <div className="d-flex">
         <Form.Select
-          className={`${styles.EditFormSelect}`}
+          className={`text-capitalize ${styles.EditFormSelect}`}
           aria-label="Select category"
           name="category"
           defaultValue={category}

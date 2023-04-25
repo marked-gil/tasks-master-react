@@ -15,6 +15,7 @@ function CategorySelect({ className, category, handleChange, categories, errors 
         onChange={handleChange}
         size="sm" 
         aria-label="Select task category"
+        className="text-capitalize"
       >
         <option value="">Choose a category</option>
         {categories?.results.map((cat) => (

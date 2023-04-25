@@ -62,13 +62,13 @@ function TasksByCategoryPage({ setNewCategoryAdded }) {
         [event.target.name]: event.target.value
       }
     ))
-  }
+  };
 
   const handleUpdateCategory = async() => {
     const formData = new FormData();
     formData.append('category_name', categoryData.category_name);
     formData.append('description', categoryData.description);
-
+  
     try {
       setError("");
       setIsLoaded(false);
@@ -88,7 +88,7 @@ function TasksByCategoryPage({ setNewCategoryAdded }) {
       setError("Sorry, an error occurred when updating the category. Refresh page and try again.")
       setIsLoaded(true);
     }
-  }
+  };
 
   const handleDeleteCategory = async() => {
     try {
@@ -105,7 +105,7 @@ function TasksByCategoryPage({ setNewCategoryAdded }) {
       setError("Sorry, an error has occurred when deleting the category. Refresh the page and try again.")
       setIsLoaded(true);
     }
-  }
+  };
 
   const handleFilterSubmit = async () => {
     setError("");

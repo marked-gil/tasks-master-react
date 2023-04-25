@@ -76,7 +76,7 @@ function TasksFilter(props) {
             {!removeCategoryField && <div className="d-flex gap-2">
               <p className={`mb-0 ${styles.bold}`}>Category: </p>
               <Form.Select
-                className={`${styles.FormSelect}`}
+                className={`text-capitalize ${styles.FormSelect}`}
                 aria-label="Select category"
                 name="category_name"
                 onChange={handleFilterChange}
