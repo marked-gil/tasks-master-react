@@ -82,7 +82,13 @@ function ProfilePage ({ currentUser }) {
       <div className={`position-relative`}>
         {!isLoaded && <LoadingIcon size="8" />}
         {feedbackMessage && <FeedbackMessage message={feedbackMessage} />}
-        <ChangePasswordModal show={changePassModalShow} onHide={() => setChangePassModalShow(false)} />
+        <ChangePasswordModal 
+          setIsLoaded={setIsLoaded}
+          setFeedbackMessage={setFeedbackMessage}
+          setChangePassModalShow={setChangePassModalShow}
+          show={changePassModalShow} 
+          onHide={() => setChangePassModalShow(false)}
+        />
 
         <h2 className={styles.PageTitle}>My Profile</h2>
 
