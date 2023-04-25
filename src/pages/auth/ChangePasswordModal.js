@@ -53,12 +53,12 @@ function ChangePasswordModal(props) {
       <Modal.Body>
         <p>Provide your new password on the form below.</p>
         <Form className="d-flex flex-column ps-lg-4 pe-lg-4 ps-0 pe-0">
-          <Form.Group className="mb-3" controlId="formBasicPassword">
+          <Form.Group className="mb-3" controlId="formNewPassword1">
             <Form.Label className="mb-1">New Password</Form.Label>
             <Form.Control type="password" placeholder="New Password" name="new_password1" onChange={handleChange} />
             {fieldErrors?.new_password1?.map((error, idx) => <Alert key={idx} variant="danger" className="pt-1 pb-1 text-center">{error}</Alert>) }
           </Form.Group>
-          <Form.Group className="mb-3" controlId="formBasicPassword">
+          <Form.Group className="mb-3" controlId="formNewPassword2">
             <Form.Label className="mb-1">Repeat New Password</Form.Label>
             <Form.Control type="password" placeholder="Repeat (New Password)" name="new_password2" onChange={handleChange} />
             {fieldErrors?.new_password2?.map((error, idx) => <Alert key={idx} variant="danger" className="pt-1 pb-1 text-center">{error}</Alert>) }
