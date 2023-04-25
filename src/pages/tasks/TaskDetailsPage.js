@@ -179,8 +179,8 @@ function TaskDetailsPage({ currentUser, newCategoryAdded }) {
               <div className={`d-flex gap-2 justify-content-between`}>
                 {shared_to?.map((user) => (
                   <ProfileAvatar
-                    key={user.username}
-                    owner={user.username}
+                    key={user}
+                    owner={user}
                     isOwner={false}
                     showName={true}
                     // img_src={user.image}
@@ -306,11 +306,11 @@ function TaskDetailsPage({ currentUser, newCategoryAdded }) {
           
             {shared_to?.map((user) => (
               <ProfileAvatar
-                key={user.username}
-                owner={user.username}
+                key={user}
+                owner={user}
                 isOwner={false}
                 showName={true}
-                img_src={user.image}
+                // img_src={user}
                 imageWidth={"1.5rem"}
                 isDeletable
                 className={styles.SharedToAvatar}
