@@ -7,6 +7,7 @@ import styles from '../../styles/ProfilePage.module.css';
 import UpdateProfileImage from './UpdateProfileImage';
 import LoadingIcon from '../../components/LoadingIcon';
 import FeedbackMessage from '../../components/FeedbackMessage';
+import ChangePasswordModal from '../auth/ChangePasswordModal';
 
 function ProfilePage ({ currentUser }) {
 
@@ -23,6 +24,7 @@ function ProfilePage ({ currentUser }) {
   const [ feedbackMessage, setFeedbackMessage ] = useState("");
   const [ isLoaded, setIsLoaded ] = useState(false);
   const [ errors, setErrors ] = useState({});
+  const [ changePassModalShow, setChangePassModalShow ] = useState(false);
 
   const {
     owner,
@@ -80,6 +82,7 @@ function ProfilePage ({ currentUser }) {
       <div className={`position-relative`}>
         {!isLoaded && <LoadingIcon size="8" />}
         {feedbackMessage && <FeedbackMessage message={feedbackMessage} />}
+        <ChangePasswordModal show={changePassModalShow} onHide={() => setChangePassModalShow(false)} />
 
         <h2 className={styles.PageTitle}>My Profile</h2>
 
@@ -186,6 +189,7 @@ function ProfilePage ({ currentUser }) {
             variant="secondary" 
             size="sm" 
             className="mt-5 align-self-start"
+            onClick={() => setChangePassModalShow(true)}
           >
             Change Password
           </Button>
