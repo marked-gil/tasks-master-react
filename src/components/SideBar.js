@@ -102,16 +102,9 @@ const SideBar = (props) => {
 
       <hr />
 
-      <p>Find Tasks by Category</p>
+      <p className="mb-1">Find Tasks by Category</p>
 
-      <AddCategory
-        categories={categories}
-        setCategories={setCategories}
-        className={styles.AddCategory}
-        setNewCategoryAdded={setNewCategoryAdded}
-      />
-      
-      <div className={`d-flex justify-content-between mt-2 ${styles.CategoryFormContainer}`}>
+      <div className={styles.CategoryFormContainer}>
         <Form.Select
           className={`me-2`}
           style={{width: "15rem"}}
@@ -130,6 +123,13 @@ const SideBar = (props) => {
         
         <Button onClick={handleSubmitCategory}>Go</Button>
       </div>
+
+      <AddCategory
+        categories={categories}
+        setCategories={setCategories}
+        className={styles.AddCategory}
+        setNewCategoryAdded={setNewCategoryAdded}
+      />
     </div>
   )
 }
