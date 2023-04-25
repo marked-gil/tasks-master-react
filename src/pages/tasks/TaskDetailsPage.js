@@ -55,6 +55,7 @@ function TaskDetailsPage({ currentUser, newCategoryAdded }) {
           axiosReq.get(`/categories/`)
         ]);
         setTaskData(taskData);
+        console.log(taskData)
         setComments(commentData);
         setCategories(fetchedCategories);
         setIsLoaded(true);
@@ -182,7 +183,7 @@ function TaskDetailsPage({ currentUser, newCategoryAdded }) {
                     owner={user.username}
                     isOwner={false}
                     showName={true}
-                    img_src={user.image}
+                    // img_src={user.image}
                     imageWidth={"1.5rem"}
                     isDeletable
                     taskData={taskData}

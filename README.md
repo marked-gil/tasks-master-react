@@ -401,6 +401,7 @@ This project uses the following tools:
 * [Google Fonts](https://fonts.google.com/)
 * [Freepik](https://www.freepik.com/) - for some icons used in this project.
 * [Flaticon](https://www.flaticon.com/) - for some icones used in this project.
+* [Favicon.io](https://favicon.io/) - Favicon generator
 * `Git` - as a version control system, was used to monitor and record changes made when building the site. This allowed for the restoration of an earlier version of the code when it was necessary
 * `Gitpod` - the cloud-based IDE (Integrated Developer Environment) used to code this site
 * `GitHub` - stores the source code repository for this website
