@@ -67,6 +67,7 @@ function ProfilePage ({ currentUser }) {
 
     try {
       setIsLoaded(false);
+      setFeedbackMessage("");
       const { data } = await axiosReq.put(`profiles/${profile_id}/`, formData);
       setProfileData(data);
       setFeedbackMessage("Your profile information is successfully updated.");
@@ -195,7 +196,10 @@ function ProfilePage ({ currentUser }) {
             variant="secondary" 
             size="sm" 
             className="mt-5 align-self-start"
-            onClick={() => setChangePassModalShow(true)}
+            onClick={() => {
+              setChangePassModalShow(true)
+              setFeedbackMessage("")
+            }}
           >
             Change Password
           </Button>

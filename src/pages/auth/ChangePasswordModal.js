@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Button, Form, Modal } from 'react-bootstrap';
+import { Alert, Button, Form, Modal } from 'react-bootstrap';
 import { axiosReq } from '../../api/axiosDefaults';
 
 function ChangePasswordModal(props) {
@@ -12,6 +12,7 @@ function ChangePasswordModal(props) {
     setIsLoaded
   } = props;
 
+  const [ fieldErrors, setFieldErrors ] = useState({});
   const [ newPassword, setNewPassword ] = useState({new_password1: "", new_password2: ""});
 
   const handleChange = (event) => {
@@ -21,21 +22,19 @@ function ChangePasswordModal(props) {
     }))
   }
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    setIsLoaded(false);
-    setChangePassModalShow(false);
 
-    setTimeout(async() => {
-      try {
-        const { data  }= await axiosReq.post('dj-rest-auth/password/change/', newPassword);
-        setFeedbackMessage(data.detail);
-        setIsLoaded(true);
-      } catch (err) {
-        console.log(err.response);
-        setIsLoaded(true);
-      }
-    }, 3000);
+    try {
+      setIsLoaded(false);
+      const { data  }= await axiosReq.post('dj-rest-auth/password/change/', newPassword);
+      setFeedbackMessage(data.detail);
+      setChangePassModalShow(false);
+      setIsLoaded(true);
+    } catch (err) {
+      setFieldErrors(err.response?.data)
+      setIsLoaded(true);
+    }
   }
 
   return (
@@ -57,10 +56,12 @@ function ChangePasswordModal(props) {
           <Form.Group className="mb-3" controlId="formBasicPassword">
             <Form.Label className="mb-1">New Password</Form.Label>
             <Form.Control type="password" placeholder="New Password" name="new_password1" onChange={handleChange} />
+            {fieldErrors?.new_password1?.map((error, idx) => <Alert key={idx} variant="danger" className="pt-1 pb-1 text-center">{error}</Alert>) }
           </Form.Group>
           <Form.Group className="mb-3" controlId="formBasicPassword">
             <Form.Label className="mb-1">Repeat New Password</Form.Label>
             <Form.Control type="password" placeholder="Repeat (New Password)" name="new_password2" onChange={handleChange} />
+            {fieldErrors?.new_password2?.map((error, idx) => <Alert key={idx} variant="danger" className="pt-1 pb-1 text-center">{error}</Alert>) }
           </Form.Group>
 
           <Button className="align-self-center" onClick={handleSubmit}>Submit</Button>
