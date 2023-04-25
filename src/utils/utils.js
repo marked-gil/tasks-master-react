@@ -1,4 +1,5 @@
 import jwtDecode from 'jwt-decode';
+import { axiosReq } from '../api/axiosDefaults';
 
 // Store the logged in user’s refresh token timestamp in the browser’s localStorage
 export const setTokenTimestamp = (data) => {
@@ -14,4 +15,19 @@ export const shouldRefreshToken = () => {
 // to remove the timestamp
 export const removeTokenTimestamp = () => {
   localStorage.removeItem("refreshTokenTimestamp");
+};
+
+export const fetchMoreData = async (resource, setResource) => {
+  try {
+    const { data } = await axiosReq.get(resource.next);
+    setResource((prevResource) => ({
+      ...prevResource,
+      next: data.next,
+      results: data.results.reduce((acc, cur) => {
+        return acc.some((accResult) => accResult.id === cur.id)
+          ? acc
+          : [...acc, cur];
+      }, prevResource.results),
+    }));
+  } catch (err) {}
 };

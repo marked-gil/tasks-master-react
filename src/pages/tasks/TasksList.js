@@ -4,6 +4,9 @@ import TaskPopover from '../../components/TaskPopover';
 import { ListGroup } from 'react-bootstrap';
 import styles from '../../styles/TasksList.module.css';
 import { axiosReq } from '../../api/axiosDefaults';
+import InfiniteScroll from 'react-infinite-scroll-component';
+import LoadingIcon from '../../components/LoadingIcon';
+import { fetchMoreData } from '../../utils/utils';
 
 function TasksList(props) {
 
@@ -114,21 +117,36 @@ function TasksList(props) {
 )
 
   return (
-    <ListGroup className={styles.ListGroup}>
-
+    <ListGroup className={styles.ListGroup} id="scrollableContainer">
       {isLoaded ? (
         <>
           {tasksList.results.length ? 
             <>
               {showCompletedTasksOnly && 
-              tasksList.results.map((task) => (
-                task.is_completed ? TasksListItem(task, task.is_completed) : ""
-              ))
+                <InfiniteScroll 
+                  scrollableTarget="scrollableContainer"
+                  children={tasksList.results.map((task) => (
+                      task.is_completed ? TasksListItem(task, task.is_completed) : ""
+                  ))}
+                  dataLength={tasksList.results.length}
+                  loader={<LoadingIcon />}
+                  hasMore={!!tasksList.next}
+                  next={() => fetchMoreData(tasksList, setTasksList)}
+                />
               }
-              {!showCompletedTasksOnly && tasksList.results.map((task) => (
-                showCompletedTasks ? TasksListItem(task, task.is_completed)
-                : !task.is_completed ? TasksListItem(task) : ""
-              ))}
+              {!showCompletedTasksOnly && 
+                <InfiniteScroll 
+                  scrollableTarget="scrollableContainer"
+                  children={tasksList.results.map((task) => (
+                    showCompletedTasks ? TasksListItem(task, task.is_completed)
+                    : !task.is_completed ? TasksListItem(task) : ""
+                  ))}
+                  dataLength={tasksList.results.length}
+                  loader={<LoadingIcon />}
+                  hasMore={!!tasksList.next}
+                  next={() => fetchMoreData(tasksList, setTasksList)}
+                />
+              }
             </> 
             : <p className="text-center mt-3">No tasks here.</p>
           }      
@@ -136,7 +154,7 @@ function TasksList(props) {
       ) : ""
     }
     </ListGroup>
-  )    
+  )
 };
 
 export default TasksList;
