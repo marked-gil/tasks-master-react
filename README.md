@@ -338,7 +338,43 @@ The following are the User Stories that guided the creation of this React app:
 [<ins>Back to Table of Contents</ins>](#table-of-contents)
 
 ### **SKELETON**
-#### **Database Schema**
+
+#### **Wireframes**
+
+* 'Sign In' Page    
+![Sign In page](readme/wireframes/signin.png)
+* 'Sign Up' Page    
+![Sign Up page](readme/wireframes/signup.png)
+* 'My Tasks Today' Page 
+![My Tasks Today page](readme/wireframes/tasks-today.png)
+* 'My Tasks Tomorrow' Page  
+![My Tasks Tomorrow page](readme/wireframes/tasks-tomorrow.png)
+* 'My Tasks on a Specific Date' Page    
+![My Tasks on a Specific Date page](readme/wireframes/upcomingtasks.png)
+* 'My Tasks per Category' Page  
+![My Tasks per Category page](readme/wireframes/tasks-by-category.png)
+* 'My Overdue Tasks' Page   
+![My Overdue Tasks Page](readme/wireframes/overdue_tasks.png)
+* 'Shared Tasks' Page   
+![Shared Tasks page](readme/wireframes/sharedtasks.png)
+* 'My Completed Tasks' Page 
+![My Complated Tasks page](readme/wireframes/completed-tasks.png)
+* 'My Profile' Page 
+![My Profile Page](readme/wireframes/profile_page.png)
+* 'All To-dos' Page     
+![All Todos page](readme/wireframes/all-todo-tasks.png)
+* 'Task Details' Page   
+![Task Details page](readme/wireframes/tasks-details.png)
+* 'Search Results' Page 
+![Search Results page](readme/wireframes/search-results.png)
+* 'Add Task' Modal  
+![Add Task modal](readme/wireframes/add-task-modal.png)
+* 'Add Category' Modal  
+![Add Category Modal](readme/wireframes/add-category-modal.png)
+* 'Share Task' Modal    
+![Share Task Modal](readme/wireframes/share-task-modal.png)
+* 'Navbar Offcanvas' on small screens   
+![Navbar Offcanvas](readme/wireframes/navbar_offcanvas.png)
 
 ## Features
 
