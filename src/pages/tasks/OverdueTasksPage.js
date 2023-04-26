@@ -67,6 +67,7 @@ function OverdueTasksPage({ newCategoryAdded }) {
           tasks={tasks}
           showDate
           isLoaded={isLoaded}
+          showOverdueTasksOnly
         />
       </div>
     </Col>  

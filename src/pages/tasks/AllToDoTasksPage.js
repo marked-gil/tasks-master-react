@@ -72,6 +72,7 @@ function AllToDoTasksPage({ newCategoryAdded }) {
           tasks={tasks}
           showDate
           isLoaded={isLoaded}
+          showAllTodosOnly
         />
 
       </div>

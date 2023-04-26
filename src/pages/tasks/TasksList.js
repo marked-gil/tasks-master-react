@@ -16,7 +16,9 @@ function TasksList(props) {
     showCompletedTasksOnly,
     showDate,
     showTime,
-    isLoaded
+    isLoaded,
+    showOverdueTasksOnly,
+    showAllTodosOnly
   } = props;
 
   const dateToday = moment().format("YYYY-MM-DD");
@@ -147,6 +149,9 @@ function TasksList(props) {
                   next={() => fetchMoreData(tasksList, setTasksList)}
                 />
               }
+              {!showCompletedTasksOnly && !showCompletedTasks && 
+                !showOverdueTasksOnly && !showAllTodosOnly &&
+                <p className="text-center mb-0">Use filter to show completed tasks.</p>}
             </> 
             : <p className="text-center mt-3">No tasks here.</p>
           }      
