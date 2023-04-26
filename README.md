@@ -418,6 +418,7 @@ This project uses the following tools:
 * [Stackoverflow](https://stackoverflow.com/questions/65908861/how-to-automatically-create-new-profile-once-a-new-user-is-created-in-django) - How to automatically create a profile for registered users using @receiver decorator and Django signal
 * [Stackoverflow](https://stackoverflow.com/questions/29642390/how-to-filter-serializers-slugrelatedfield-queryset-using-model-field) - Modifying SlugRelatedField to return a filtered queryset
 * [Code Institute's drf-api repo](https://github.com/Code-Institute-Solutions/drf-api/blob/c637122d1a559139cabf1d39b0a3281814091d79/posts/serializers.py) - Code for the image validation
+* [Stackoverflow](https://stackoverflow.com/questions/71211745/im-trying-to-close-the-offcanvas-menu-in-react-bootstrap-when-i-click-a-link#:~:text=To%20change%20this%2C%20you%20can,Toggle%20.) - How to automatically close the React-Bootstrap's NavBar Offcanvas when a link inside is clicked
 
 ### Content
 

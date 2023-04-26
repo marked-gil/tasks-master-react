@@ -30,9 +30,14 @@ function NavBar(props) {
   const [ categoryID, setCategoryID ] = useState("");
   const history = useHistory();
 
+  const [menuOpen, setMenuOpen] = useState(false);
+  const toggleMenu = () => setMenuOpen(!menuOpen);
+  const handleClose = () => setMenuOpen(false);
+
   const handleDateSelection = (event) => {
     if (tasksDate) {
-          history.push(`/tasks/${moment(tasksDate).format('YYYY-MM-DD')}`)
+          history.push(`/tasks/${moment(tasksDate).format('YYYY-MM-DD')}`);
+          toggleMenu();
         }
   };
   
@@ -42,9 +47,10 @@ function NavBar(props) {
 
   const handleSubmitCategory = () => {
     if (categoryID) {
-      history.push(`/categories/${categoryID}`)
+      history.push(`/categories/${categoryID}`);
+      toggleMenu();
     }
-  }
+  };
 
   return (
     <>
@@ -53,12 +59,14 @@ function NavBar(props) {
           <Navbar.Brand href="#" className={`p-2 flex-grow-1 ${styles.ClrWhite}`}>
             <img src={logo} alt="tasks master logo" className={styles.Logo}/>
           </Navbar.Brand>
-          <Navbar.Toggle aria-controls={`offcanvasNavbar-expand-lg`} />
+          <Navbar.Toggle aria-controls={`offcanvasNavbar-expand-lg`} onClick={toggleMenu}/>
           <Navbar.Offcanvas
             id={`offcanvasNavbar-expand-lg`}
             aria-labelledby={`offcanvasNavbarLabel-expand-lg`}
             placement="end"
             className={styles.NavBarOffCanvas}
+            show={menuOpen}
+            onHide={handleClose}
           >
             <Offcanvas.Header closeButton>
               <Offcanvas.Title id={`offcanvasNavbarLabel-expand-lg`}>
@@ -76,8 +84,8 @@ function NavBar(props) {
                 setIsLoaded={setIsLoaded}
               />
               <Nav className={`${styles.Nav} justify-content-end align-items-center flex-grow-1 pe-3`}>
-                <NavLink to="/all-todos" className={`p-0 ${styles.ClrWhite}`}>My Tasks</NavLink>
-                <NavLink to={`/profile/${currentUser?.pk}`} className={`p-0 ${styles.ClrWhite}`}>My Profile</NavLink>
+                <NavLink to="/all-todos" className={`p-0 ${styles.ClrWhite}`} >My Tasks</NavLink>
+                <NavLink to={`/profile/${currentUser?.pk}`} className={`p-0 ${styles.ClrWhite}`} >My Profile</NavLink>
                 <SignOutLink className={`p-0 ${styles.ClrWhite}`} />
                 <NavLink to="" className="p-0"><img src={currentUser?.profile_image} alt="profile avatar" className={styles.Avatar}/></NavLink>
               </Nav>
@@ -92,8 +100,8 @@ function NavBar(props) {
                 setIsLoaded={setIsLoaded}
               />
               <Nav className={`${styles.Nav} mt-4`}>
-                <NavLink to="/all-todos" className={`p-0 `}>My Tasks</NavLink>
-                <NavLink to={`/profile/${currentUser?.pk}`} className={`p-0`}>My Profile</NavLink>
+                <NavLink to="/all-todos" className={`p-0 `} onClick={toggleMenu}>My Tasks</NavLink>
+                <NavLink to={`/profile/${currentUser?.pk}`} className={`p-0`} onClick={toggleMenu}>My Profile</NavLink>
                 <SignOutLink className={`p-0`} />
               </Nav>
 
@@ -101,10 +109,11 @@ function NavBar(props) {
 
               <ul className="d-flex flex-column gap-2 ps-0 position-relative">
                 <li>
-                  <AddTask 
+                  <AddTask
                     categories={categories}
                     pushToPages
                     className={styles.AddTask}
+                    toggleMenu={toggleMenu}
                   />
                 </li>
                 <li className={`mb-2 d-flex ${styles.DatePickerContainer}`}>
@@ -128,30 +137,30 @@ function NavBar(props) {
                   </Button>
                 </li>
                 <li className="mb-2">
-                  <Link to="/"><i className="fa-solid fa-calendar-week me-3"></i> Today</Link>
+                  <Link to="/" ><i className="fa-solid fa-calendar-week me-3" onClick={toggleMenu}></i> Today</Link>
                 </li>
                 <li className="mb-2">
-                  <Link to={`/tasks/${moment().add(1, 'days').format('YYYY-MM-DD')}`}>
+                  <Link to={`/tasks/${moment().add(1, 'days').format('YYYY-MM-DD')}`} onClick={toggleMenu}>
                     <i className="fa-sharp fa-solid fa-forward me-3"></i> Tomorrow
                   </Link>
                 </li>
                 <li className="mb-2">
-                  <Link to="/all-todos">
+                  <Link to="/all-todos" onClick={toggleMenu}>
                     <i className="fa-solid fa-list-check me-3"></i> All Todo Tasks
                   </Link>
                 </li>
                 <li className="mb-2">
-                  <Link to="/shared-tasks">
+                  <Link to="/shared-tasks" onClick={toggleMenu}>
                     <i className="fa-sharp fa-solid fa-share me-3"></i> Shared Tasks
                   </Link>
                 </li>
                 <li className="mb-2">
-                  <Link to="/overdue-tasks">
+                  <Link to="/overdue-tasks" onClick={toggleMenu}>
                     <i className="fa-sharp fa-solid fa-bell me-3"></i> Overdue Tasks
                   </Link>
                 </li>
                 <li>
-                  <Link to="/completed-tasks">
+                  <Link to="/completed-tasks" onClick={toggleMenu}>
                     <i className="fa-solid fa-check-double me-3"></i> Completed Tasks
                   </Link>
                 </li>

@@ -21,7 +21,8 @@ function AddTask(props) {
     setFeedbackMessage, 
     allTodos, 
     pushToPage,
-    setError
+    setError,
+    toggleMenu
   } = props;
 
   const initialTaskData = { 
@@ -91,6 +92,7 @@ function AddTask(props) {
       setIsLoaded(false);
       const { data } = await axiosReq.post("/tasks/", {...taskData, due_date, due_time, priority});
       handleClose();
+      toggleMenu && toggleMenu();
       setFeedbackMessage && setFeedbackMessage(success_message)
       if (task_date === moment(due_date).format("YYYY-MM-DD") || 
           (allTodos && moment(due_date).format("YYYY-MM-DD") >= moment().format("YYYY-MM-DD"))) {
