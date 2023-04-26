@@ -5,11 +5,11 @@ import SignUpPage from './pages/auth/SignUpPage';
 import MainPageContainer from './pages/MainPageContainer';
 import styles from './App.module.css';
 import { ProtectedRoute } from './pages/auth/ProtectedRoute';
-import { shouldRefreshToken } from '../src/utils/utils';
+import { useCurrentUser } from './contexts/CurrentUserContext';
 
 function App() {
   
-  const isLoggedIn = shouldRefreshToken();
+  const isLoggedIn = useCurrentUser();
 
   return (
     <div className={styles.App}>
