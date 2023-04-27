@@ -56,7 +56,7 @@ function NavBar(props) {
     <>
       <Navbar expand="lg" className={`${styles.NavBar}`}>
         <Container fluid>
-          <Navbar.Brand href="#" className={`p-2 flex-grow-1 ${styles.ClrWhite}`}>
+          <Navbar.Brand className="p-2 flex-grow-1">
             <img src={logo} alt="tasks master logo" className={styles.Logo}/>
           </Navbar.Brand>
           <Navbar.Toggle aria-controls={`offcanvasNavbar-expand-lg`} onClick={toggleMenu}/>
@@ -87,7 +87,7 @@ function NavBar(props) {
                 <NavLink to="/all-todos" className={`p-0 ${styles.ClrWhite}`} >My Tasks</NavLink>
                 <NavLink to={`/profile/${currentUser?.pk}`} className={`p-0 ${styles.ClrWhite}`} >My Profile</NavLink>
                 <SignOutLink className={`p-0 ${styles.ClrWhite}`} />
-                <NavLink to="" className="p-0"><img src={currentUser?.profile_image} alt="profile avatar" className={styles.Avatar}/></NavLink>
+                <img src={currentUser?.profile_image} alt="profile avatar" className={styles.Avatar}/>
               </Nav>
             </Offcanvas.Body>
 
