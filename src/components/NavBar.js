@@ -23,13 +23,13 @@ function NavBar(props) {
     setKeywordSearched,
     setCategories,
     categories,
-    setIsLoaded
+    setIsLoaded,
+    setError
   } = props;
 
+  const history = useHistory();
   const [ tasksDate, setTasksDate ] = useState(null);
   const [ categoryID, setCategoryID ] = useState("");
-  const history = useHistory();
-
   const [menuOpen, setMenuOpen] = useState(false);
   const toggleMenu = () => setMenuOpen(!menuOpen);
   const handleClose = () => setMenuOpen(false);
@@ -82,6 +82,7 @@ function NavBar(props) {
                 setKeywordSearched={setKeywordSearched}
                 className="d-flex"
                 setIsLoaded={setIsLoaded}
+                setError={setError}
               />
               <Nav className={`${styles.Nav} justify-content-end align-items-center flex-grow-1 pe-3`}>
                 <NavLink to="/all-todos" className={`p-0 ${styles.ClrWhite}`} >My Tasks</NavLink>
@@ -98,6 +99,8 @@ function NavBar(props) {
                 setKeywordSearched={setKeywordSearched}
                 className="d-flex"
                 setIsLoaded={setIsLoaded}
+                setError={setError}
+                toggleMenu={toggleMenu}
               />
               <Nav className={`${styles.Nav} mt-4`}>
                 <NavLink to="/all-todos" className={`p-0 `} onClick={toggleMenu}>My Tasks</NavLink>

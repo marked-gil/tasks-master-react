@@ -40,6 +40,7 @@ function MainPageContainer(props) {
   const [ categories, setCategories ] = useState({ results: [] });
   const [ searchResults, setSearchResults ] = useState({ results: [] });
   const [ keywordSearched, setKeywordSearched ] = useState("");
+  const [ error, setError ] = useState("")
   const [ isLoaded, setIsLoaded ] = useState(false);
 
   useEffect(() => {
@@ -67,6 +68,7 @@ function MainPageContainer(props) {
         setCategories={setCategories}
         categories={categories}
         setIsLoaded={setIsLoaded}
+        setError={setError}
       />
       <Container fluid className={styles.MainContent}>
         <Row className={styles.Row}>
@@ -93,6 +95,7 @@ function MainPageContainer(props) {
                 searchResults={searchResults} 
                 keywordSearched={keywordSearched}
                 isLoaded={isLoaded}
+                error={error}
               />
             : pageNotFoundPage ? <PageNotFoundPage /> 
             : <></>

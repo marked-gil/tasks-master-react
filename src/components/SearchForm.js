@@ -9,7 +9,9 @@ function SearchForm(props) {
     setSearchResults, 
     setKeywordSearched, 
     className, 
-    setIsLoaded 
+    setIsLoaded,
+    toggleMenu,
+    setError
   } = props;
 
   const history = useHistory();
@@ -23,6 +25,7 @@ function SearchForm(props) {
     event.preventDefault();
     
     if (searchKey) {
+      toggleMenu && toggleMenu();
       try {
         const { data } = await axiosReq.get(`/tasks/?search=${searchKey}`);
         setSearchResults(data);
@@ -31,7 +34,7 @@ function SearchForm(props) {
         setSearchKey("");
         history.push("/search-results");
       } catch (err) {
-        console.log(err.response);
+        setError("An Error has occurred while searching. Try again later.")
       }
     }
   };
