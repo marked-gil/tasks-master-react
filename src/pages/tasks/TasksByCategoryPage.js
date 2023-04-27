@@ -35,6 +35,7 @@ function TasksByCategoryPage({ setNewCategoryAdded }) {
     const fetchedData = async () => {
       try {
         setIsLoaded(false);
+        setEditCategory(false);
         const [{ data: fetchedTasks }, { data: fetchedCategories }] = await Promise.all([
           axiosReq.get(`/tasks/?category=${id}`),
           axiosReq.get(`/categories/`)
@@ -104,9 +105,11 @@ function TasksByCategoryPage({ setNewCategoryAdded }) {
         {results: prevState.results.filter(item => item.id !== categoryData.id)}
       ))
       await axiosRes.delete(`categories/${id}`);
-      history.push("/");
-      setNewCategoryAdded(true);
-      setIsLoaded(true);
+      setTimeout(() => {
+        setNewCategoryAdded(true);
+        setIsLoaded(true);
+        history.push("/");
+      }, 1500)
     } catch (err) {
       setError("Sorry, an error has occurred when deleting the category. Refresh the page and try again.")
       setIsLoaded(true);
@@ -115,6 +118,7 @@ function TasksByCategoryPage({ setNewCategoryAdded }) {
 
   const handleFilterSubmit = async () => {
     setError("");
+    setEditCategory(false);
     getFilteredTasks({filters, setTasks, setError, category: categoryData.id, setIsLoaded});
   };
 
@@ -242,6 +246,7 @@ function TasksByCategoryPage({ setNewCategoryAdded }) {
         setTasks={setTasks}
         setError={setError}
         categories={categories}
+        setEditCategory={setEditCategory}
         className="mb-5"
       />
     </Col>

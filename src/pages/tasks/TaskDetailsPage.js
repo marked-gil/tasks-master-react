@@ -4,9 +4,8 @@ import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import Accordion from 'react-bootstrap/Accordion';
-import { axiosReq } from '../../api/axiosDefaults';
+import { axiosReq, axiosRes } from '../../api/axiosDefaults';
 import { useHistory, useParams } from 'react-router-dom';
-import { deleteTask } from '../../api/taskMethods';
 import EditTaskAttributes from './EditTaskAttributes';
 import ShareTaskModal from './ShareTaskModal';
 import AddCommentModal from '../comments/AddCommentModal';
@@ -16,7 +15,7 @@ import CommentCard from '../comments/CommentCard';
 import LoadingIcon from '../../components/LoadingIcon';
 import ErrorDisplay from '../../components/ErrorDisplay';
 
-function TaskDetailsPage({ currentUser, newCategoryAdded }) {
+function TaskDetailsPage({ currentUser, newCategoryAdded, setTaskChanged }) {
 
   const profile_image = currentUser?.profile_image
 
@@ -55,7 +54,6 @@ function TaskDetailsPage({ currentUser, newCategoryAdded }) {
           axiosReq.get(`/categories/`)
         ]);
         setTaskData(taskData);
-        console.log(taskData)
         setComments(commentData);
         setCategories(fetchedCategories);
         setIsLoaded(true);
@@ -91,27 +89,37 @@ function TaskDetailsPage({ currentUser, newCategoryAdded }) {
   }
 
   const handleSave = async (event) => {
+    setIsLoaded(false);
+    setError("");
     try {
-      setIsLoaded(false);
-      setError("");
-      const { data } = await axiosReq.put(`/tasks/${id}`, {...taskData})
-      setTaskData(data)
-      setFeedbackMessage("Task is successfully updated.")
-      setCloseAllEdits(true)
-      setEditTaskName(false)
-      setEditTaskDescription(false)
+      const { data } = await axiosReq.put(`/tasks/${id}`, {...taskData});
+      setTaskData(data);
+      setFeedbackMessage("Task is successfully updated.");
+      setCloseAllEdits(true);
+      setEditTaskName(false);
+      setEditTaskDescription(false);
       setIsLoaded(true);
     } catch (err) {
-      setError("Sorry, an error has occurred while updating data. Refresh the page and try again.")
+      setError("Sorry, an error has occurred while updating data. Refresh the page and try again.");
       setIsLoaded(true);
     }
   };
 
-  const handleDelete = () => {
+  const handleDelete = async() => {
     setError("");
     setFeedbackMessage("");
-    deleteTask(id);
-    history.goBack();
+    setIsLoaded(false);
+    try {
+      await axiosRes.delete(`/tasks/${id}`)
+      setTimeout(() => {
+        setIsLoaded(true);
+        setTaskChanged(true);
+        history.goBack();
+      }, 1000)
+    } catch (err) {
+      setError("An error occurred when attempting to delete the task.");
+      setIsLoaded(true);
+    }
   };
 
   return (

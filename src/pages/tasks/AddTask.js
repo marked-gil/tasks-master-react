@@ -22,7 +22,8 @@ function AddTask(props) {
     allTodos, 
     pushToPage,
     setError,
-    toggleMenu
+    toggleMenu,
+    setEditCategory
   } = props;
 
   const initialTaskData = { 
@@ -58,6 +59,7 @@ function AddTask(props) {
     setShow(true);
     setFeedbackMessage && setFeedbackMessage("");
     setError && setError("");
+    setEditCategory && setEditCategory(false);
   };
 
   const handleChange = (event) => {

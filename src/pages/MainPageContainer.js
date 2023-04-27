@@ -42,6 +42,7 @@ function MainPageContainer(props) {
   const [ keywordSearched, setKeywordSearched ] = useState("");
   const [ error, setError ] = useState("")
   const [ isLoaded, setIsLoaded ] = useState(false);
+  const [ taskChanged, setTaskChanged ] = useState(false);
 
   useEffect(() => {
     const getCategories = async () => {
@@ -80,10 +81,14 @@ function MainPageContainer(props) {
             setNewCategoryAdded={setNewCategoryAdded}
           />
           {profile ? <ProfilePage currentUser={currentUser} /> 
-            : tasksTodayPage ? <TasksTodayPage newCategoryAdded={newCategoryAdded} />
+            : tasksTodayPage ? <TasksTodayPage 
+                newCategoryAdded={newCategoryAdded}
+                taskChanged={taskChanged}
+              />
             : taskDetailsPage ? <TaskDetailsPage 
                 currentUser={currentUser} 
                 newCategoryAdded={newCategoryAdded}
+                setTaskChanged={setTaskChanged}
               />
             : tasksPerDatePage ? <TasksPerDatePage newCategoryAdded={newCategoryAdded} /> 
             : allTodoTasksPage ? <AllToDoTasksPage newCategoryAdded={newCategoryAdded} /> 
