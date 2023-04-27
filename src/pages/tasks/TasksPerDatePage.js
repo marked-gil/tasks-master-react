@@ -93,6 +93,7 @@ function TasksPerDatePage({ newCategoryAdded }) {
           showCompletedTasks={showCompletedTasks}
           showTime
           isLoaded={isLoaded}
+          setError={setError}
         />
       </div>
 

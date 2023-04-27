@@ -81,6 +81,7 @@ function SharedTasksPage({ newCategoryAdded }) {
           showCompletedTasks={showCompletedTasks}
           showDate
           isLoaded={isLoaded}
+          setError={setError}
         />
       </div>
 

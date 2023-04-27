@@ -73,6 +73,7 @@ function AllToDoTasksPage({ newCategoryAdded }) {
           showDate
           isLoaded={isLoaded}
           showAllTodosOnly
+          setError={setError}
         />
 
       </div>

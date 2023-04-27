@@ -67,6 +67,7 @@ function CompletedTasksPage({ newCategoryAdded }) {
           showCompletedTasksOnly
           showDate
           isLoaded={isLoaded}
+          setError={setError}
         />
       </div>
     </Col>
