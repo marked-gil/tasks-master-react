@@ -22,7 +22,7 @@ function NavBar(props) {
     setSearchResults, 
     setKeywordSearched,
     setCategories,
-    setNewCategoryAdded,
+    handleChangeInCategory,
     categories,
     setIsLoaded,
     setError
@@ -196,7 +196,7 @@ function NavBar(props) {
                 currentUser={currentUser}
                 categories={categories}
                 setCategories={setCategories}
-                setNewCategoryAdded={setNewCategoryAdded}
+                handleChangeInCategory={handleChangeInCategory}
                 className={styles.AddCategory}
               />
               

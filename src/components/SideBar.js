@@ -16,7 +16,7 @@ const SideBar = (props) => {
     setCategories, 
     categories, 
     isLoaded,
-    setNewCategoryAdded
+    handleChangeInCategory
   } = props;
 
   const history = useHistory();
@@ -129,7 +129,7 @@ const SideBar = (props) => {
         categories={categories}
         setCategories={setCategories}
         className={styles.AddCategory}
-        setNewCategoryAdded={setNewCategoryAdded}
+        handleChangeInCategory={handleChangeInCategory}
       />
     </div>
   )

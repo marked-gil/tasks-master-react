@@ -25,7 +25,7 @@ function MainPageContainer(props) {
     profile, 
     tasksTodayPage, 
     taskDetailsPage, 
-    tasksPerDatePage, 
+    tasksPerDatePage,
     allTodoTasksPage,
     overdueTasksPage,
     tasksByCategoryPage,
@@ -50,14 +50,17 @@ function MainPageContainer(props) {
         setIsLoaded(false);
         const { data } = await axiosReq.get(`/categories/`);
         setCategories(data);
-        setNewCategoryAdded(false);
         setIsLoaded(true);
       } catch (err) {
         setIsLoaded(true);
       }
     };
     getCategories();
-  }, [setCategories, newCategoryAdded]);
+  }, [newCategoryAdded]);
+
+  const handleChangeInCategory = () => {
+    setNewCategoryAdded(!newCategoryAdded);
+  }
 
   return (
     <>
@@ -66,7 +69,7 @@ function MainPageContainer(props) {
         setSearchResults={setSearchResults} 
         setKeywordSearched={setKeywordSearched}
         setCategories={setCategories}
-        setNewCategoryAdded={setNewCategoryAdded}
+        handleChangeInCategory={handleChangeInCategory}
         categories={categories}
         setIsLoaded={setIsLoaded}
         setError={setError}
@@ -78,7 +81,7 @@ function MainPageContainer(props) {
             categories={categories} 
             setCategories={setCategories}
             isLoaded={isLoaded}
-            setNewCategoryAdded={setNewCategoryAdded}
+            handleChangeInCategory={handleChangeInCategory}
           />
           {profile ? <ProfilePage currentUser={currentUser} /> 
             : tasksTodayPage ? <TasksTodayPage 
@@ -93,7 +96,7 @@ function MainPageContainer(props) {
             : tasksPerDatePage ? <TasksPerDatePage newCategoryAdded={newCategoryAdded} /> 
             : allTodoTasksPage ? <AllToDoTasksPage newCategoryAdded={newCategoryAdded} /> 
             : overdueTasksPage ? <OverdueTasksPage newCategoryAdded={newCategoryAdded} />
-            : tasksByCategoryPage ? <TasksByCategoryPage setNewCategoryAdded={setNewCategoryAdded} />
+            : tasksByCategoryPage ? <TasksByCategoryPage handleChangeInCategory={handleChangeInCategory} />
             : completedTasksPage ? <CompletedTasksPage newCategoryAdded={newCategoryAdded} />
             : sharedTasksPage ? <SharedTasksPage newCategoryAdded={newCategoryAdded} />
             : searchResultsPage ? <SearchResultsPage 

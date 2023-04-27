@@ -13,7 +13,7 @@ import TasksFilter from '../../components/TasksFilter';
 import { axiosReq, axiosRes } from '../../api/axiosDefaults';
 import LoadingIcon from '../../components/LoadingIcon';
 
-function TasksByCategoryPage({ setNewCategoryAdded }) {
+function TasksByCategoryPage({ handleChangeInCategory }) {
 
   const { id } = useParams();
   const history = useHistory();
@@ -49,7 +49,7 @@ function TasksByCategoryPage({ setNewCategoryAdded }) {
       }
     }
     fetchedData();
-  }, [id, setNewCategoryAdded]);
+  }, [id]);
   
   const cancelEditCategory = () => {
     setError("");
@@ -83,7 +83,7 @@ function TasksByCategoryPage({ setNewCategoryAdded }) {
         }
       ))
       setEditCategory(false);
-      setNewCategoryAdded(true);
+      handleChangeInCategory();
       setIsLoaded(true);
     } catch (err) {
       if (err.response?.data?.non_field_errors) {
@@ -106,7 +106,7 @@ function TasksByCategoryPage({ setNewCategoryAdded }) {
       ))
       await axiosRes.delete(`categories/${id}`);
       setTimeout(() => {
-        setNewCategoryAdded(true);
+        handleChangeInCategory();
         setIsLoaded(true);
         history.push("/");
       }, 1500)

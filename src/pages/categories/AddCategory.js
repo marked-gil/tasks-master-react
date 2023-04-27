@@ -9,7 +9,7 @@ function AddCategory(props) {
     currentUser, 
     categories, 
     setCategories, 
-    setNewCategoryAdded, 
+    handleChangeInCategory,
     className 
   } = props;
 
@@ -50,7 +50,7 @@ function AddCategory(props) {
       setIsLoaded(false);
       const { data } = await axios.post("/categories/", {...newData});
       setCategories({results: [...categories.results, data]})
-      setNewCategoryAdded(true);
+      handleChangeInCategory();
       handleClose();
       setIsLoaded(true);
     } catch (err) {
