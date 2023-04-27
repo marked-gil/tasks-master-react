@@ -208,14 +208,6 @@ function ProfilePage ({ currentUser }) {
           >
             Change Password
           </Button>
-
-          <Button 
-            variant="danger" 
-            className={`align-self-end mt-4 mb-4 ${styles.DeleteAccount}`}
-            size="sm"
-          >
-            Delete Account
-          </Button>
         </div>
       </div>
     </Col>
