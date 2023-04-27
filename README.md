@@ -1,24 +1,41 @@
 # Tasks Master
+
 ![Am I Responsive Screenshot]()     
-**Tasks Master**
-[View Live Website.]
+
+Tasks Master is a React application website that is designed and developed to help users in the management of their tasks - be it professional, domestic, or others. Its functionalities are also designed to enhance the efficiency of collaboration with other users as it allows the sharing of tasks with other users. [View Live Website.](http://tasks-master.herokuapp.com/)
 
 ## TABLE OF CONTENTS
 
 ## User Experience Design (UXD)
 
 ### **STRATEGY**
+
 #### **Main Goal:**
+The main goal of this site is to aid users in managing and organizing their day-to-day tasks and foster efficient collaboration with other users. Overall, this is a productivity application that seeks to help users manage their everyday life.
 
 #### **Target Audience:**
+* People (young and old) who can use computers or mobile phones
+* People who want to manage their time, and their daily tasks
+* People who would like to collaborate with their tasks
+* People who love to set goals and plan ahead
 
 #### **The Use of Agile Methodology**
+Using the Agile Methodology, the development of the project began with the creation of seven (7) EPICS to provide a framework for the website's design and structure. Each EPIC comprised multiple User Stories that detailed the project's features. A total of 35 User Stories were formulated for the Front-End, out of which 33 were successfully implemented, while the remaining 2 were deferred for future implementation. The 33 User Stories were distributed among four iterations, each with a distinct timeline due to the creator's other work commitments.
+
+Github’s Kanban board is a very useful tool that this project used. Here is the link for the project’s Kanban board: [**Tasks Master Kanban**](https://github.com/users/marked-gil/projects/17)
+
+![GitHub Kanban Board](readme/others/GitHub-Kanban.png)
 
 [<ins>Back to Table of Contents</ins>](#table-of-contents)
 
 #### **EPICS:**
-
-#### **User Stories:**
+* [Initial Project Setup](https://github.com/marked-gil/tasks-master-react/issues/1)
+* [Profiles](https://github.com/marked-gil/tasks-master-react/issues/2)
+* [Tasks](https://github.com/marked-gil/tasks-master-react/issues/3)
+* [Categories](https://github.com/marked-gil/tasks-master-react/issues/4)
+* [Comments](https://github.com/marked-gil/tasks-master-react/issues/5)
+* [Authentication and Authorization](https://github.com/marked-gil/tasks-master-react/issues/6)
+* [Navigation](https://github.com/marked-gil/tasks-master-react/issues/7)
 
 [<ins>Back to Table of Contents</ins>](#table-of-contents)
 
@@ -334,6 +351,20 @@ The following are the User Stories that guided the creation of this React app:
     * Display the password modal when the user clicks on ‘Delete Account’ on the ‘My Profile’ page
     * Validate the entered password on the modal after the user clicks ‘delete account’, and delete the account when the password is valid.
     * Redirect the user to the ‘Sign In’ page when the profile is successfully deleted, and show a feedback message.
+
+* **User Story:** [Allow Reply to Comments](https://github.com/marked-gil/tasks-master-react/issues/35)
+    > As a user, I can add comments as a response to another comment so that the flow of effective communication is fostered.
+
+    Implementation: 
+    * Add ‘reply’ links to each comment
+    * Display ‘reply’ textarea when ‘reply link’ is clicked
+    * Add 'submit' button to textarea
+    * Add character counter to text area
+    * Save the ‘reply comment’ to the database when the submit button is clicked.
+    * Prevent submission of empty comments.
+    * Display the ‘reply comment’ under the replied-to comment
+
+
 
 [<ins>Back to Table of Contents</ins>](#table-of-contents)
 
