@@ -58,7 +58,7 @@ function SignUpPage() {
               onChange={handleChange}
             />
 
-            {errors.username?.map((error, idx) => (
+            {errors?.username?.map((error, idx) => (
               <Alert className={`mt-1 mb-0 pb-0 pt-0 text-center`} key={idx} variant="danger">
                 {error}
               </Alert>
@@ -76,7 +76,7 @@ function SignUpPage() {
               onChange={handleChange}
             />
 
-            {errors.password1?.map((error, idx) => (
+            {errors?.password1?.map((error, idx) => (
               <Alert className={`mt-1 mb-0 pb-0 pt-0 text-center`} key={idx} variant="danger">
                 {error}
               </Alert>
@@ -93,14 +93,14 @@ function SignUpPage() {
               value={password2}
               onChange={handleChange}
             />
-            {errors.password2?.map((error, idx) => (
+            {errors?.password2?.map((error, idx) => (
               <Alert className={`mt-1 mb-0 pb-0 pt-0 text-center`} key={idx} variant="danger">
                 {error}
               </Alert>
               ))
             }
 
-            {errors.non_field_errors?.map((error, idx) => (
+            {errors?.non_field_errors?.map((error, idx) => (
               <Alert className={`mt-1 mb-0 pb-0 pt-0 text-center`} key={idx} variant="danger">
                 {error}
               </Alert>
