@@ -86,6 +86,7 @@
 
 .uploadIcon:hover {
   cursor: pointer;
+  color: white;
 }
 
 .ButtonsGroup {

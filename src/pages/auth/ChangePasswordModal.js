@@ -12,8 +12,10 @@ function ChangePasswordModal(props) {
     setIsLoaded
   } = props;
 
+  const initialData = {new_password1: "", new_password2: ""}
+
   const [ fieldErrors, setFieldErrors ] = useState({});
-  const [ newPassword, setNewPassword ] = useState({new_password1: "", new_password2: ""});
+  const [ newPassword, setNewPassword ] = useState(initialData);
 
   const handleChange = (event) => {
     setNewPassword(prevState => ({
@@ -30,6 +32,8 @@ function ChangePasswordModal(props) {
       const { data  }= await axiosReq.post('dj-rest-auth/password/change/', newPassword);
       setFeedbackMessage(data.detail);
       setChangePassModalShow(false);
+      setFieldErrors({})
+      setNewPassword(initialData)
       setIsLoaded(true);
     } catch (err) {
       setFieldErrors(err.response?.data)
@@ -68,7 +72,12 @@ function ChangePasswordModal(props) {
         </Form>
       </Modal.Body>
       <Modal.Footer>
-        <Button onClick={onHide}>Close</Button>
+        <Button onClick={()=> {
+          onHide()
+          setFieldErrors({})
+          setNewPassword(initialData)
+          }}
+        >Close</Button>
       </Modal.Footer>
     </Modal>
   );

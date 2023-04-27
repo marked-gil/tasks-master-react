@@ -86,7 +86,7 @@ The following are the User Stories that guided the creation of this React app:
     > As a user, I can update my profile details, so that I can make corrections or provide updated profile information.
 
     Implementation:
-    *  Create a Profile page template
+    * Create a Profile page template
     * Add a form that includes username, first name, last name, and email.
     * Make the username input field read-only.
     * Add ‘cancel’ and ‘update’ button
