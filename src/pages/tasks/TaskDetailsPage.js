@@ -55,7 +55,6 @@ function TaskDetailsPage({ currentUser, newCategoryAdded, setTaskChanged }) {
           axiosReq.get(`/comments/?task=${id}`),
           axiosReq.get(`/categories/`)
         ]);
-        console.log(taskData)
         setTaskData(taskData);
         setComments(commentData);
         setCategories(fetchedCategories);

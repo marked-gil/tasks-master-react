@@ -71,13 +71,14 @@ function CommentCard(props) {
         </Card.Subtitle>
       </div>
         <Card.Body className={`pt-1 pb-1`}>
-          {!commentChanged && comment.content}
+          {!commentChanged && editComment.content}
           {commentChanged && 
             <Form.Control
               as="textarea"
               rows={4}
               disabled={!commentChanged}
               plaintext
+              maxLength={250}
               readOnly={!commentChanged}
               value={editComment.content}
               name="content"
