@@ -95,35 +95,55 @@ The following are the User Stories that guided the creation of this React app:
     * Validate any change in the last name, and display feedback message as appropriate
     * Validate any change in Email, and display a feedback message as appropriate
 
-* **User Story:** [Task Details Page](https://github.com/marked-gil/tasks-master-react/issues/25)
-    > As a user, I can view the details of a task, so that I can see its description and other details.
+* **User Story:** [My Tasks TODAY (Home) Page](https://github.com/marked-gil/tasks-master-react/issues/11)
+    > As a user, I can view my tasks for today, so that I can work on each task, make updates, mark them as complete, delete them if necessary, and add more tasks for the day.
 
     Implementation:
-    * Create the Task Details template
-    * Display the task’s category, due date and time, priority, and progress, task name, and description
-    * Display the owner of the task
-    * Add 'edit' button/link to the task name and description area
-    * Allow toggle between 'edit' and 'save' button on each editable field.
-    * Make the following editable: category, due date and time, and priority.
+    * Create 'My Tasks Today' template
+    * List all tasks for the current date
+    * Add delete and view buttons
+    * Allow the setting of a task as ‘complete’ by the user
 
-* **User Story:** [Add Category](https://github.com/marked-gil/tasks-master-react/issues/31)
-    > As a user, I can add new categories, so that the tasks can be organized or grouped effectively by the user as they see fit.
+* **User Story:** [Filtering of My Tasks Today](https://github.com/marked-gil/tasks-master-react/issues/12)
+    > As a user, I can filter my tasks for the current day, so that it is easy to organize and find tasks.
 
     Implementation:
-    * Create a modal (lightbox) that contains input fields for category name and description
-    * Add cancel and save buttons
-    * Prevent submission of form when category name is empty
-    * Submit the form when the ‘save’ button is clicked
-    * Remove or hide modal when ‘cancel’ is clicked
+    * Allow re-ordering of the list by ‘priority’, ‘due time’
+    * Allow filtering of the list by 'progress', and 'category'
+    * By default, only show ‘to-do’, ‘overdue’, and ‘shared’ tasks and order by due_time
 
-* **User Story:** [My OVERDUE Tasks Page](https://github.com/marked-gil/tasks-master-react/issues/19)
-    > As a user, I can view my overdue tasks, so that I can work on each task, make updates, mark them as complete, and delete them if necessary.
+* **User Story:** [My Tasks TOMORROW Page](https://github.com/marked-gil/tasks-master-react/issues/13)
+    > As a user, I can view my tasks for tomorrow, so that I can work on each task, make updates, mark as complete, delete if necessary, and add more tasks for tomorrow.
 
     Implementation:
-    *  Create ‘My Overdue Tasks’ template
-    * List my overdue tasks
-    * Add 'delete', 'view' and 'done' button
+    * Create My Tasks Tomorrow template
+    * List all tasks for tomorrow
+    * Add 'delete' and 'view' button
     * Allow setting of the task as ‘complete’ by the user
+
+* **User Story:** [Filtering of My Tasks Tomorrow](https://github.com/marked-gil/tasks-master-react/issues/14)
+    > As a user, I can filter my tasks for tomorrow, so that it is easy to organize and find tasks.
+
+    Implementation:
+    * Allow re-ordering of the list by ‘priority’, and ‘due time’
+    * Allow filtering of the list by 'progress', and 'category'
+    * By default, only show 'to-do’ tasks and order by due_time
+
+* **User Story:** [My ALL TODO Tasks Page](https://github.com/marked-gil/tasks-master-react/issues/21)
+    > As a user, I can view the todo tasks, so that I can see all my upcoming tasks, and have a link to each tasks page that I want to view.
+
+    Implementation:
+    * Create ‘My All Tasks’ template
+    * Have a link that will redirect to the 'My Task on a Specific Date' page
+    * Add ‘add task’ button on each date
+
+* **User Story:** [Filtering of Tasks in ‘My All TO-DO Tasks’ Page](https://github.com/marked-gil/tasks-master-react/issues/22)
+    > As a user, I can filter all my tasks, so that it is easy to organize and find tasks.
+
+    Implementation:
+    * Allow re-ordering of the list of to-do tasks and priority
+    * Allow filtering of the list by category
+    * By default, show all todo tasks in ascending order based on due dates
 
 * **User Story:** [My Tasks on SPECIFIC DATE Page](https://github.com/marked-gil/tasks-master-react/issues/15)
     > As a user, I can view my tasks for a specific date, so that I can work on each task, make updates, mark them as complete, delete them if necessary, and add more tasks.
@@ -142,30 +162,22 @@ The following are the User Stories that guided the creation of this React app:
     * Allow filtering of the list by ‘progress’ and 'category'
     * By default, only show ‘to-do’ and ‘shared’ tasks and order by due_time
 
-* **User Story:** [My Tasks By Category Page](https://github.com/marked-gil/tasks-master-react/issues/23)
-    > As a user, I can view my tasks that belong to a specific category, so that I can work on each task, make updates, mark them as complete, and delete them if necessary.
+* **User Story:** [My SHARED Tasks Page](https://github.com/marked-gil/tasks-master-react/issues/17)
+    > As a user, I can view my shared tasks (tasks I shared and tasks shared with me), so that I can work on each task, make updates, mark them as complete, and delete them if necessary.
 
     Implementation:
-    * Create ‘My Tasks by Category’ template
-    * Display a list of the category’s tasks
-    * Add 'delete', 'view', and 'done' button on each task
+    * Create ‘My Shared Tasks’ template
+    * List my shared tasks
+    * Add 'delete', 'view', and 'done' button
     * Allow setting of the task as ‘complete’ by the user
 
-* **User Story:** [Filtering of My Overdue Tasks](https://github.com/marked-gil/tasks-master-react/issues/20)
-    > As a user, I can filter my overdue tasks, so that it is easy to organize and find tasks.
+* **User Story:** [Filtering of My Shared Tasks](https://github.com/marked-gil/tasks-master-react/issues/18)
+    > As a user, I can filter my shared tasks, so that it is easy to organize and find tasks.
 
     Implementation:
-    *  Allow re-ordering of the list by ‘priority’, ‘due date/time’
-    * Allow filtering of the list
-    * By default, show all overdue tasks belonging to any category and including 'shared' tasks; and order by due date/time in ascending order.
-
-* **User Story:** [Filtering of Tasks in a Category](https://github.com/marked-gil/tasks-master-react/issues/24)
-    > As a user, I can filter all the tasks in the ‘My Tasks by Category’ page, so that it is easy to organize and find tasks.
-
-    Implementation:
-    *  Allow re-ordering of the list by ‘priority’, ‘due date’
-    * Allow filtering of the list by ‘progress’
-    * By default, only show ‘to-do’, ‘overdue’, and 'shared' tasks and order by due date/time
+    * Allow re-ordering of the list by ‘priority’, ‘due time’
+    * Allow filtering of the list by ‘progress’, and ‘category’
+    * By default, only show ‘to-do’ and ‘overdue’ tasks and order by due_time
 
 * **User Story:** [Task Sharing](https://github.com/marked-gil/tasks-master-react/issues/29)
     > As a user, I can add or remove users from a task, so that I can control task participants.
@@ -177,30 +189,39 @@ The following are the User Stories that guided the creation of this React app:
     * Allow removal of user/participant
     * Add the found user to the list of task participants by clicking on the ‘add’ link/button
 
-* **User Story:** [My SHARED Tasks Page](https://github.com/marked-gil/tasks-master-react/issues/17)
-    > As a user, I can view my shared tasks (tasks I shared and tasks shared with me), so that I can work on each task, make updates, mark them as complete, and delete them if necessary.
+* **User Story:** [My OVERDUE Tasks Page](https://github.com/marked-gil/tasks-master-react/issues/19)
+    > As a user, I can view my overdue tasks, so that I can work on each task, make updates, mark them as complete, and delete them if necessary.
 
     Implementation:
-    * Create ‘My Shared Tasks’ template
-    * List my shared tasks
-    * Add 'delete', 'view', and 'done' button
+    *  Create ‘My Overdue Tasks’ template
+    * List my overdue tasks
+    * Add 'delete', 'view' and 'done' button
     * Allow setting of the task as ‘complete’ by the user
 
-* **User Story:** [Filtering of Tasks in ‘My All TO-DO Tasks’ Page](https://github.com/marked-gil/tasks-master-react/issues/22)
-    > As a user, I can filter all my tasks, so that it is easy to organize and find tasks.
+* **User Story:** [Filtering of My Overdue Tasks](https://github.com/marked-gil/tasks-master-react/issues/20)
+    > As a user, I can filter my overdue tasks, so that it is easy to organize and find tasks.
 
     Implementation:
-    * Allow re-ordering of the list of to-do tasks and priority
-    * Allow filtering of the list by category
-    * By default, show all todo tasks in ascending order based on due dates
+    *  Allow re-ordering of the list by ‘priority’, ‘due date/time’
+    * Allow filtering of the list
+    * By default, show all overdue tasks belonging to any category and including 'shared' tasks; and order by due date/time in ascending order.
 
-* **User Story:** [Filtering of My Shared Tasks](https://github.com/marked-gil/tasks-master-react/issues/18)
-    > As a user, I can filter my shared tasks, so that it is easy to organize and find tasks.
+* **User Story:** [My Tasks By Category Page](https://github.com/marked-gil/tasks-master-react/issues/23)
+    > As a user, I can view my tasks that belong to a specific category, so that I can work on each task, make updates, mark them as complete, and delete them if necessary.
 
     Implementation:
-    * Allow re-ordering of the list by ‘priority’, ‘due time’
-    * Allow filtering of the list by ‘progress’, and ‘category’
-    * By default, only show ‘to-do’ and ‘overdue’ tasks and order by due_time
+    * Create ‘My Tasks by Category’ template
+    * Display a list of the category’s tasks
+    * Add 'delete', 'view', and 'done' button on each task
+    * Allow setting of the task as ‘complete’ by the user
+
+* **User Story:** [Filtering of Tasks in a Category](https://github.com/marked-gil/tasks-master-react/issues/24)
+    > As a user, I can filter all the tasks in the ‘My Tasks by Category’ page, so that it is easy to organize and find tasks.
+
+    Implementation:
+    *  Allow re-ordering of the list by ‘priority’, ‘due date’
+    * Allow filtering of the list by ‘progress’
+    * By default, only show ‘to-do’, ‘overdue’, and 'shared' tasks and order by due date/time
 
 * **User Story:** [Edit Category](https://github.com/marked-gil/tasks-master-react/issues/32)
     > As a user, I can edit the name and description of the category, so that mistakes can be amended or information can be improved.
@@ -217,22 +238,33 @@ The following are the User Stories that guided the creation of this React app:
     * Allow removal of the category and its associated tasks from the database when ‘delete’ is clicked
     * Redirect the user to the ‘My Tasks Today’ page after deleting the category.
 
-* **User Story:** [Sign Out](https://github.com/marked-gil/tasks-master-react/issues/42)
-    > As a user, I can sign out from the site, so that I can keep my account secured after using the application.
+* **User Story:** [Task Details Page](https://github.com/marked-gil/tasks-master-react/issues/25)
+    > As a user, I can view the details of a task, so that I can see its description and other details.
 
     Implementation:
-    * Create a ‘Sign Out’ button on the Nav bar and make it visible when the user is logged-in
-    * Redirect the user to the ‘Sign In’ page when they click on ‘Sign On’.
-    * Prevent access to the rest of the pages when the user is signed out.
+    * Create the Task Details template
+    * Display the task’s category, due date and time, priority, and progress, task name, and description
+    * Display the owner of the task
+    * Add 'edit' button/link to the task name and description area
+    * Allow toggle between 'edit' and 'save' button on each editable field.
+    * Make the following editable: category, due date and time, and priority.
 
-* **User Story:** [Search Results Page](https://github.com/marked-gil/tasks-master-react/issues/30)
-    > As a user, I can search for tasks using the search bar, so that I have the convenience in finding tasks with their title.
+* **User Story:** [Edit Task](https://github.com/marked-gil/tasks-master-react/issues/28)
+    > As a user, I can update the task I created, so that mistakes can be amended or information can be improved.
 
     Implementation:
-    *  Create a search bar for finding tasks with the task names
-    * List the tasks found by showing their task name, a snippet of their description, due date and time, and priority level.
-    * Make the task name a link that redirects to the task’s details page
-    * By default, arrange the results by due dates in ascending order
+    * Add an ‘edit’ button or link to each task owned by the current user
+    * Add 'view' button to each task that redirects the user to the Task Details page when clicked
+    * Allow the owner of the task to update the corresponding field when ‘edit’ is clicked.
+
+* **User Story:** [Delete Task](https://github.com/marked-gil/tasks-master-react/issues/27)
+    > As a user, I can delete tasks, so that I can freely organize my tasks and remove unwanted tasks.
+
+    Implementation:
+    * Add a ‘delete’ button in the ‘Task Details’ page when the current user is the owner
+    * Add a ‘delete’ button for each task in a list when the current user is the owner
+    * Allow removal of task from the database when ‘delete’ is clicked
+    * Remove the deleted task from the displayed list when 'delete' is clicked
 
 * **User Story:** [Add Task Comments](https://github.com/marked-gil/tasks-master-react/issues/34)
     > As a user, I can write comments on a task or reply to another comment, so that I am able to add more details to the task if necessary or communicate with other users the task is shared with.
@@ -253,56 +285,32 @@ The following are the User Stories that guided the creation of this React app:
     * Allow editing of comments when ‘edit’ is clicked by the current user.
     * Allow removal of comment when ‘delete’ is clicked by the current user.
 
-* **User Story:** [My ALL TODO Tasks Page](https://github.com/marked-gil/tasks-master-react/issues/21)
-    > As a user, I can view the todo tasks, so that I can see all my upcoming tasks, and have a link to each tasks page that I want to view.
+* **User Story:** [Add Category](https://github.com/marked-gil/tasks-master-react/issues/31)
+    > As a user, I can add new categories, so that the tasks can be organized or grouped effectively by the user as they see fit.
 
     Implementation:
-    * Create ‘My All Tasks’ template
-    * Have a link that will redirect to the 'My Task on a Specific Date' page
-    * Add ‘add task’ button on each date
+    * Create a modal (lightbox) that contains input fields for category name and description
+    * Add cancel and save buttons
+    * Prevent submission of form when category name is empty
+    * Submit the form when the ‘save’ button is clicked
+    * Remove or hide modal when ‘cancel’ is clicked
 
-* **User Story:** [Edit Task](https://github.com/marked-gil/tasks-master-react/issues/28)
-    > As a user, I can update the task I created, so that mistakes can be amended or information can be improved.
-
-    Implementation:
-    * Add an ‘edit’ button or link to each task owned by the current user
-    * Add 'view' button to each task that redirects the user to the Task Details page when clicked
-    * Allow the owner of the task to update the corresponding field when ‘edit’ is clicked.
-
-* **User Story:** [Delete Task](https://github.com/marked-gil/tasks-master-react/issues/27)
-    > As a user, I can delete tasks, so that I can freely organize my tasks and remove unwanted tasks.
+* **User Story:** [Sign Out](https://github.com/marked-gil/tasks-master-react/issues/42)
+    > As a user, I can sign out from the site, so that I can keep my account secured after using the application.
 
     Implementation:
-    * Add a ‘delete’ button in the ‘Task Details’ page when the current user is the owner
-    * Add a ‘delete’ button for each task in a list when the current user is the owner
-    * Allow removal of task from the database when ‘delete’ is clicked
-    * Remove the deleted task from the displayed list when 'delete' is clicked
+    * Create a ‘Sign Out’ button on the Nav bar and make it visible when the user is logged-in
+    * Redirect the user to the ‘Sign In’ page when they click on ‘Sign On’.
+    * Prevent access to the rest of the pages when the user is signed out.
 
-* **User Story:** [My Tasks TOMORROW Page](https://github.com/marked-gil/tasks-master-react/issues/13)
-    > As a user, I can view my tasks for tomorrow, so that I can work on each task, make updates, mark as complete, delete if necessary, and add more tasks for tomorrow.
-
-    Implementation:
-    * Create My Tasks Tomorrow template
-    * List all tasks for tomorrow
-    * Add 'delete' and 'view' button
-    * Allow setting of the task as ‘complete’ by the user
-
-* **User Story:** [My Tasks TODAY (Home) Page](https://github.com/marked-gil/tasks-master-react/issues/11)
-    > As a user, I can view my tasks for today, so that I can work on each task, make updates, mark them as complete, delete them if necessary, and add more tasks for the day.
+* **User Story:** [Search Results Page](https://github.com/marked-gil/tasks-master-react/issues/30)
+    > As a user, I can search for tasks using the search bar, so that I have the convenience in finding tasks with their title.
 
     Implementation:
-    * Create 'My Tasks Today' template
-    * List all tasks for the current date
-    * Add delete and view buttons
-    * Allow the setting of a task as ‘complete’ by the user
-
-* **User Story:** [Filtering of My Tasks Tomorrow](https://github.com/marked-gil/tasks-master-react/issues/14)
-    > As a user, I can filter my tasks for tomorrow, so that it is easy to organize and find tasks.
-
-    Implementation:
-    * Allow re-ordering of the list by ‘priority’, and ‘due time’
-    * Allow filtering of the list by 'progress', and 'category'
-    * By default, only show 'to-do’ tasks and order by due_time
+    *  Create a search bar for finding tasks with the task names
+    * List the tasks found by showing their task name, a snippet of their description, due date and time, and priority level.
+    * Make the task name a link that redirects to the task’s details page
+    * By default, arrange the results by due dates in ascending order
 
 * **User Story:** [Add Task](https://github.com/marked-gil/tasks-master-react/issues/26)
     > As a user, I can add new tasks, so that the application works as intended.
@@ -316,14 +324,6 @@ The following are the User Stories that guided the creation of this React app:
     * Prevent submission of form when task name is empty
     * Submit the form when the ‘add’ button is clicked
     * Remove or hide modal when ‘cancel’ is clicked
-
-* **User Story:** [Filtering of My Tasks Today](https://github.com/marked-gil/tasks-master-react/issues/12)
-    > As a user, I can filter my tasks for the current day, so that it is easy to organize and find tasks.
-
-    Implementation:
-    * Allow re-ordering of the list by ‘priority’, ‘due time’
-    * Allow filtering of the list by 'progress', and 'category'
-    * By default, only show ‘to-do’, ‘overdue’, and ‘shared’ tasks and order by due_time
 
 * **User Story:** [Delete Account/Profile](https://github.com/marked-gil/tasks-master-react/issues/43)
     > As a user, I can delete my account or profile, so that I will have full control of reclaiming my privacy when I feel the need.
