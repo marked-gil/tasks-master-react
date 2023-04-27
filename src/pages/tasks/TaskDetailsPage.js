@@ -42,6 +42,7 @@ function TaskDetailsPage({ currentUser, newCategoryAdded, setTaskChanged }) {
     priority, 
     progress,
     shared_to,
+    is_completed
   } = taskData;
 
   useEffect(() => {
@@ -53,6 +54,7 @@ function TaskDetailsPage({ currentUser, newCategoryAdded, setTaskChanged }) {
           axiosReq.get(`/comments/?task=${id}`),
           axiosReq.get(`/categories/`)
         ]);
+        console.log(taskData)
         setTaskData(taskData);
         setComments(commentData);
         setCategories(fetchedCategories);
@@ -139,7 +141,7 @@ function TaskDetailsPage({ currentUser, newCategoryAdded, setTaskChanged }) {
               <Button onClick={handleDelete} size="sm" variant='danger'>Delete Task</Button>
 
               {/* SHARE BUTTON */}
-              <ShareTaskModal
+              {!is_completed && <ShareTaskModal
                 task_name={task_name}
                 task_id={id}
                 set_task_data={setTaskData}
@@ -147,7 +149,7 @@ function TaskDetailsPage({ currentUser, newCategoryAdded, setTaskChanged }) {
                 handleShareTask={handleShareTask}
                 setError={setError}
                 setFeedbackMessage={setFeedbackMessage}
-              />
+              />}
             </div>
           }
         </div>
