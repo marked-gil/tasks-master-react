@@ -66,8 +66,8 @@ function TasksByCategoryPage({ setNewCategoryAdded }) {
 
   const handleUpdateCategory = async() => {
     const formData = new FormData();
-    formData.append('category_name', categoryData.category_name.toLowerCase());
-    formData.append('description', categoryData.description.toLowerCase());
+    formData.append('category_name', categoryData.category_name);
+    formData.append('description', categoryData.description);
   
     try {
       setError("");

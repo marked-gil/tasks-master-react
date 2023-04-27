@@ -179,16 +179,6 @@ The following are the User Stories that guided the creation of this React app:
     * Allow filtering of the list by ‘progress’, and ‘category’
     * By default, only show ‘to-do’ and ‘overdue’ tasks and order by due_time
 
-* **User Story:** [Task Sharing](https://github.com/marked-gil/tasks-master-react/issues/29)
-    > As a user, I can add or remove users from a task, so that I can control task participants.
-
-    Implementation:
-    *  Create a modal for managing task sharing
-    * Add Task name and list of participants to the task
-    * Add a search bar for the username of users to be added as new participants to the task
-    * Allow removal of user/participant
-    * Add the found user to the list of task participants by clicking on the ‘add’ link/button
-
 * **User Story:** [My OVERDUE Tasks Page](https://github.com/marked-gil/tasks-master-react/issues/19)
     > As a user, I can view my overdue tasks, so that I can work on each task, make updates, mark them as complete, and delete them if necessary.
 
@@ -265,6 +255,16 @@ The following are the User Stories that guided the creation of this React app:
     * Add a ‘delete’ button for each task in a list when the current user is the owner
     * Allow removal of task from the database when ‘delete’ is clicked
     * Remove the deleted task from the displayed list when 'delete' is clicked
+
+* **User Story:** [Task Sharing](https://github.com/marked-gil/tasks-master-react/issues/29)
+    > As a user, I can add or remove users from a task, so that I can control task participants.
+
+    Implementation:
+    *  Create a modal for managing task sharing
+    * Add Task name and list of participants to the task
+    * Add a search bar for the username of users to be added as new participants to the task
+    * Allow removal of user/participant
+    * Add the found user to the list of task participants by clicking on the ‘add’ link/button
 
 * **User Story:** [Add Task Comments](https://github.com/marked-gil/tasks-master-react/issues/34)
     > As a user, I can write comments on a task or reply to another comment, so that I am able to add more details to the task if necessary or communicate with other users the task is shared with.
