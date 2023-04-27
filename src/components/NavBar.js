@@ -87,7 +87,7 @@ function NavBar(props) {
               />
               <Nav className={`${styles.Nav} justify-content-end align-items-center flex-grow-1 pe-3`}>
                 <NavLink to="/all-todos" className={`p-0 ${styles.ClrWhite}`} >My Tasks</NavLink>
-                <NavLink to={`/profile/${currentUser?.pk}`} className={`p-0 ${styles.ClrWhite}`} >My Profile</NavLink>
+                <NavLink to="/profile" className={`p-0 ${styles.ClrWhite}`} >My Profile</NavLink>
                 <SignOutLink className={`p-0 ${styles.ClrWhite}`} />
                 <img src={currentUser?.profile_image} alt="profile avatar" className={styles.Avatar}/>
               </Nav>
@@ -105,7 +105,7 @@ function NavBar(props) {
               />
               <Nav className={`${styles.Nav} mt-4`}>
                 <NavLink to="/all-todos" className={`p-0 `} onClick={toggleMenu}>My Tasks</NavLink>
-                <NavLink to={`/profile/${currentUser?.pk}`} className={`p-0`} onClick={toggleMenu}>My Profile</NavLink>
+                <NavLink to="/profile" className={`p-0`} onClick={toggleMenu}>My Profile</NavLink>
                 <SignOutLink className={`p-0`} />
               </Nav>
 

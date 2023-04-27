@@ -119,6 +119,7 @@ function ProfilePage ({ currentUser }) {
                     type="text"
                     readOnly
                     value={owner}
+                    disabled
                   />
                 </div>
                 <Form.Text className={`text-muted position-absolute ${styles.smallInfo}`}>
