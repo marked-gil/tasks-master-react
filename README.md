@@ -42,15 +42,6 @@ The following are the User Stories that guided the creation of this React app:
     * Add the React-Bootstrap CSS link on the of index.html
     * In the index.html, add crossorigin attribute with use-credentials value in the manifest import - to remove the console error
 
-* **User Story:** [Nav Bar](https://github.com/marked-gil/tasks-master-react/issues/40)
-    > As a user, I can see a navigation bar, so that I can easily and efficiently navigate through the website.
-
-    Implementation:
-    *  Create a nav bar with the following elements: logo and app name, search bar and button, nav menu, and user avatar.
-    * Create a nav menu with the following elements: My Tasks, My Profile and Sign Out.
-    * Make the nav bar only available when the user is signed in. The Sign-In and Registration page will have no nav bar.
-    * Make the nav bar available on all pages except on the ‘Sign-In’ and Registration pages.
-
 * **User Story:** [Sign Up](https://github.com/marked-gil/tasks-master-react/issues/37)
     > As a user, I can register on the site, so that I can access and utilize its capability.
 
@@ -61,6 +52,27 @@ The following are the User Stories that guided the creation of this React app:
     * Username should be validated
     * Password should be validated
     * Add logo and app name
+
+* **User Story:** [Sign In](https://github.com/marked-gil/tasks-master-react/issues/38)
+    > As a user, I can log in to the site, so that I can access it and utilize its capability.
+
+    Implementation:
+    * Create Sign-In page with a form that requests for username and password
+    * Add a Login button to submit the inputted username and password
+    * Add the ‘Forgot Password’ link which redirects to the ‘Reset Password’ page
+    * Add a ‘Sign Up’ link which redirects to the ‘Sign Up Page’
+    * Username should be validated
+    * Password should be validated
+    * Add logo and app name
+
+* **User Story:** [Nav Bar](https://github.com/marked-gil/tasks-master-react/issues/40)
+    > As a user, I can see a navigation bar, so that I can easily and efficiently navigate through the website.
+
+    Implementation:
+    *  Create a nav bar with the following elements: logo and app name, search bar and button, nav menu, and user avatar.
+    * Create a nav menu with the following elements: My Tasks, My Profile and Sign Out.
+    * Make the nav bar only available when the user is signed in. The Sign-In and Registration page will have no nav bar.
+    * Make the nav bar available on all pages except on the ‘Sign-In’ and Registration pages.
 
 * **User Story:** [Side Bar](https://github.com/marked-gil/tasks-master-react/issues/41)
     > As a user, I can have easy access to the most useful menu items, so that the site can easily be navigated.
@@ -312,18 +324,6 @@ The following are the User Stories that guided the creation of this React app:
     * Allow re-ordering of the list by ‘priority’, ‘due time’
     * Allow filtering of the list by 'progress', and 'category'
     * By default, only show ‘to-do’, ‘overdue’, and ‘shared’ tasks and order by due_time
-
-* **User Story:** [Sign In](https://github.com/marked-gil/tasks-master-react/issues/38)
-    > As a user, I can log in to the site, so that I can access it and utilize its capability.
-
-    Implementation:
-    * Create Sign-In page with a form that requests for username and password
-    * Add a Login button to submit the inputted username and password
-    * Add the ‘Forgot Password’ link which redirects to the ‘Reset Password’ page
-    * Add a ‘Sign Up’ link which redirects to the ‘Sign Up Page’
-    * Username should be validated
-    * Password should be validated
-    * Add logo and app name
 
 * **User Story:** [Delete Account/Profile](https://github.com/marked-gil/tasks-master-react/issues/43)
     > As a user, I can delete my account or profile, so that I will have full control of reclaiming my privacy when I feel the need.

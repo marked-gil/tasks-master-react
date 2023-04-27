@@ -92,15 +92,12 @@ function SignInPage() {
               ))
             }
           </Form.Group>
-
           <Button type="submit" className={styles.LoginButton}>
             Log In
           </Button>
         </Form>
         
         <div className="d-flex flex-column mt-5 gap-4">
-          <Link to="/" className={styles.ForgotPassword} href="#">Forgot Password?</Link>
-
           <p className="mb-0">Not registered?
             <Link to="/signup" className={styles.SignUp}>SIGN UP</Link>
           </p>

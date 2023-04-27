@@ -9,7 +9,8 @@ import { useCurrentUser } from './contexts/CurrentUserContext';
 
 function App() {
   
-  const isLoggedIn = useCurrentUser();
+  const currentUser = useCurrentUser();
+  const isLoggedIn = !!localStorage.getItem("refreshTokenTimestamp") || !!currentUser
 
   return (
     <div className={styles.App}>
