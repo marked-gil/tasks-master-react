@@ -17,6 +17,12 @@
   padding-left: 8px;
 }
 
+.CommentForm {
+  /* height: 100%; */
+  /* overflow: hidden; */
+}
+
 .FormActive {
   border-bottom: 1px solid #9a9c9e;
 }
+

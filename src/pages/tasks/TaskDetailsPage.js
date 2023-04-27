@@ -30,6 +30,7 @@ function TaskDetailsPage({ currentUser, newCategoryAdded, setTaskChanged }) {
   const [ comments, setComments ] = useState({ results: [] });
   const [ isLoaded, setIsLoaded ] = useState(false);
 
+  
   const {
     owner,
     is_owner,
@@ -347,7 +348,6 @@ function TaskDetailsPage({ currentUser, newCategoryAdded, setTaskChanged }) {
               key={comment.id} 
               comment={comment} 
               setComments={setComments} 
-              profile_image={profile_image}
               setError={setError}
             />
           )) : <p className={styles.NoCommentYet}>No Comments Yet.</p>}

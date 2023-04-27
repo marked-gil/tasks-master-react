@@ -9,7 +9,6 @@ function CommentCard(props) {
   const { 
     comment, 
     setComments, 
-    profile_image, 
     setError, 
   } = props;
 
@@ -64,22 +63,28 @@ function CommentCard(props) {
   return (
     <Card className={`mb-1 pt-1 ${styles.CommentCard}`}>
       <div className="ps-1 d-flex align-items-center gap-2">
-        <Card.Img src={profile_image} style={{ width:"40px"}}></Card.Img>
+        <Card.Img src={comment.profile_image} style={{ width:"40px"}}></Card.Img>
         <Card.Title className={styles.Username}>{comment.owner}</Card.Title>
         <i className="fa-solid fa-ellipsis-vertical fa-xs"></i>
         <Card.Subtitle className="p-0 m-0">
           {moment(comment.datetime_created, "DD MMM YYYY | HH:mm").fromNow()}
         </Card.Subtitle>
       </div>
-        <Card.Body className="pt-1 pb-1">
-          <Form.Control
-            plaintext
-            readOnly={!commentChanged}
-            value={editComment.content}
-            name="content"
-            onChange={handleChange}
-            className={commentChanged && styles.FormActive}
-          />
+        <Card.Body className={`pt-1 pb-1`}>
+          {!commentChanged && comment.content}
+          {commentChanged && 
+            <Form.Control
+              as="textarea"
+              rows={4}
+              disabled={!commentChanged}
+              plaintext
+              readOnly={!commentChanged}
+              value={editComment.content}
+              name="content"
+              onChange={handleChange}
+              className={`${styles.CommentForm} ${commentChanged && styles.FormActive}`}
+            />
+          }
         </Card.Body>
       <div className="d-flex justify-content-end gap-2 mb-1 pe-1">
         <p className={styles.Feedback}>{feedback}</p>
