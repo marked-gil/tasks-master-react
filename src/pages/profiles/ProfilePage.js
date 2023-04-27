@@ -1,5 +1,6 @@
 import React, { useMemo, useState } from 'react';
-import { Col, Alert } from 'react-bootstrap';
+import Col from 'react-bootstrap/Col';
+import Alert from 'react-bootstrap/Alert';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import { axiosReq } from '../../api/axiosDefaults';
@@ -34,12 +35,6 @@ function ProfilePage ({ currentUser }) {
     image,
   } = profileData;
 
-  const handleChange = (event) => {
-    setProfileData(prevState => ({
-      ...prevState,
-      [event.target.name]: event.target.value
-    }))
-  }
 
   useMemo(() => {
     if (profile_id) {
@@ -56,6 +51,13 @@ function ProfilePage ({ currentUser }) {
       handleMount();
     }
   },[profile_id]);
+
+  const handleChange = (event) => {
+    setProfileData(prevState => ({
+      ...prevState,
+      [event.target.name]: event.target.value
+    }))
+  };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -75,7 +77,7 @@ function ProfilePage ({ currentUser }) {
     } catch (err) {
       setErrors(err.response?.data);
     }
-  }
+  };
 
   return (
     <Col className={styles.ProfilePage}>
@@ -216,4 +218,4 @@ function ProfilePage ({ currentUser }) {
   )
 }
 
-export default ProfilePage
+export default ProfilePage;
