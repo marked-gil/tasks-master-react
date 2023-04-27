@@ -1,9 +1,9 @@
 import React, { useMemo, useState } from 'react';
+import { axiosReq } from '../../api/axiosDefaults';
 import Col from 'react-bootstrap/Col';
 import Alert from 'react-bootstrap/Alert';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
-import { axiosReq } from '../../api/axiosDefaults';
 import styles from '../../styles/ProfilePage.module.css';
 import UpdateProfileImage from './UpdateProfileImage';
 import LoadingIcon from '../../components/LoadingIcon';
@@ -35,7 +35,6 @@ function ProfilePage ({ currentUser }) {
     image,
   } = profileData;
 
-
   useMemo(() => {
     if (profile_id) {
       const handleMount = async () => {
@@ -51,6 +50,10 @@ function ProfilePage ({ currentUser }) {
       handleMount();
     }
   },[profile_id]);
+
+  
+  const handleCancel = () => window.location.reload(false);
+
 
   const handleChange = (event) => {
     setProfileData(prevState => ({
@@ -189,7 +192,7 @@ function ProfilePage ({ currentUser }) {
             </Form.Group>
 
             <div className={`${styles.ButtonsGroup}`}>
-              <Button variant="secondary" size="sm">cancel</Button>
+              <Button variant="secondary" size="sm" onClick={handleCancel}>cancel</Button>
               <Button variant="primary" type="submit">Update</Button>
             </div>
           </Form>
