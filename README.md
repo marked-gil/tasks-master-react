@@ -340,6 +340,7 @@ The following are the User Stories that guided the creation of this React app:
 ### **SKELETON**
 
 #### **Wireframes**
+The following are the wireframes used to provide a visual illustration of some of the site's interface:
 
 * 'Sign In' Page    
 ![Sign In page](readme/wireframes/signin.png)
@@ -402,6 +403,14 @@ The following are the User Stories that guided the creation of this React app:
 [<ins>Back to Table of Contents</ins>](#table-of-contents)
 
 ## Testing
+This project has been manual testing, and below are the results:
+
+![Front-end-testing-1](readme/manual-testing/front-end-testing-1.png)   
+![Front-end-testing-2](readme/manual-testing/front-end-testing-2.png)   
+![Front-end-testing-3](readme/manual-testing/front-end-testing-3.png)   
+![Front-end-testing-4](readme/manual-testing/front-end-testing-4.png)   
+![Front-end-testing-5](readme/manual-testing/front-end-testing-5.png)   
+![Front-end-testing-6](readme/manual-testing/front-end-testing-6.png)   
 
 ## Deployment
 
