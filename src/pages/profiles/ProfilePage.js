@@ -49,7 +49,7 @@ function ProfilePage ({ currentUser }) {
           setProfileData(data);
           setIsLoaded(true);
         } catch (err) {
-          console.log(err.response?.data);
+          setIsLoaded(true);
         }
       }
 
@@ -73,7 +73,6 @@ function ProfilePage ({ currentUser }) {
       setFeedbackMessage("Your profile information is successfully updated.");
       setIsLoaded(true);
     } catch (err) {
-      console.log(err.response?.data);
       setErrors(err.response?.data);
     }
   }
@@ -83,7 +82,7 @@ function ProfilePage ({ currentUser }) {
       <div className={`position-relative`}>
         {!isLoaded && <LoadingIcon size="8" />}
         {feedbackMessage && <FeedbackMessage message={feedbackMessage} />}
-        <ChangePasswordModal 
+        <ChangePasswordModal
           setIsLoaded={setIsLoaded}
           setFeedbackMessage={setFeedbackMessage}
           setChangePassModalShow={setChangePassModalShow}
