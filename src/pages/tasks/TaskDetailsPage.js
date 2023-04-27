@@ -319,7 +319,7 @@ function TaskDetailsPage({ currentUser, newCategoryAdded, setTaskChanged }) {
                 owner={user}
                 isOwner={false}
                 showName={true}
-                // img_src={user}
+                img_src={userAvatar}
                 imageWidth={"1.5rem"}
                 isDeletable
                 className={styles.SharedToAvatar}
