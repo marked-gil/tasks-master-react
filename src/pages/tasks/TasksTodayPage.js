@@ -81,6 +81,7 @@ function TasksTodayPage({ newCategoryAdded, taskChanged }) {
           showCompletedTasks={showCompletedTasks}
           showTime
           isLoaded={isLoaded}
+          setError={setError}
         />
 
       </div>

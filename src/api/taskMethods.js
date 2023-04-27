@@ -1,4 +1,4 @@
-import { axiosReq, axiosRes } from "./axiosDefaults";
+import { axiosReq } from "./axiosDefaults";
 import moment from 'moment';
 
 export const getFilteredTasks = async (
@@ -58,33 +58,9 @@ export const getFilteredTasks = async (
     }
     setIsLoaded(true)
   } catch (err) {
-    console.log(err.response)
     setError(
       "Sorry, an error has occured while filtering data. Please try refreshing the page and filter again."
     );
     setIsLoaded(true)
-  }
-}
-
-export const deleteTask = async (task, setTasks) => {
-  let task_id = ""
-
-  if (typeof task === 'object') {
-    task_id = task.id
-  } else if (typeof task === 'string') {
-    task_id = task
-  } else {
-    console.log(typeof task)
-  }
-
-  try {
-    await axiosRes.delete(`/tasks/${task_id}`)
-    if (setTasks) {
-      setTasks(prevState => (
-        {results: prevState.results.filter(item => item.id !== task.id)}
-      ))
-    }
-  } catch (err) {
-    console.log(err.response?.data)
   }
 }

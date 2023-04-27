@@ -18,8 +18,6 @@ import userAvatar from '../../assets/user-avatar.png';
 
 function TaskDetailsPage({ currentUser, newCategoryAdded, setTaskChanged }) {
 
-  const profile_image = currentUser?.profile_image
-
   const history = useHistory();
   const { id } = useParams();
   const [ taskData, setTaskData ] = useState({});
@@ -35,6 +33,7 @@ function TaskDetailsPage({ currentUser, newCategoryAdded, setTaskChanged }) {
   const {
     owner,
     is_owner,
+    profile_image,
     task_name, 
     details, 
     category, 

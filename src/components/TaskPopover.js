@@ -1,17 +1,18 @@
 import React from 'react';
-import moment from 'moment';
-import { Button } from 'react-bootstrap';
-import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
-import Popover from 'react-bootstrap/Popover';
 import { axiosReq, axiosRes } from '../api/axiosDefaults';
 import { useHistory } from 'react-router-dom';
+import moment from 'moment';
+import Button from 'react-bootstrap/Button';
+import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
+import Popover from 'react-bootstrap/Popover';
 
 function TaskPopover(props) {
   
   const { 
     children, 
     task, 
-    setTasksList, 
+    setTasksList,
+    setError
   } = props;
 
   const history = useHistory();
@@ -34,7 +35,7 @@ function TaskPopover(props) {
           results: [...prevState.results.filter(item => item.id !== task.id), data]
         }))
       } catch (err) {
-        console.log(err.response?.data)
+        setError("Sorry, an error has occurred while updating the task.")
       }
     }
     updateTasks();
@@ -48,7 +49,7 @@ function TaskPopover(props) {
         results: [...prevState.results.filter(item => item.id !== task.id), data]
       }))
     } catch (err) {
-      console.log(err)
+      setError("Sorry, an error has occurred while updating the task.")
     }
   }
 
@@ -59,19 +60,17 @@ function TaskPopover(props) {
         task_id = task.id
       } else if (typeof task === 'string') {
         task_id = task
-      } else {
-        console.log(typeof task)
       }
     
       try {
-        await axiosRes.delete(`/tasks/${task_id}`)
+        await axiosRes.delete(`/tasks/${task_id}`);
         if (setTasksList) {
           setTasksList(prevState => (
             {results: prevState.results.filter(item => item.id !== task.id)}
           ))
         }
       } catch (err) {
-        console.log(err.response?.data)
+        setError("Sorry, an error has occurred while deleting the task.")
       }
     }
 

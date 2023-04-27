@@ -18,7 +18,8 @@ function TasksList(props) {
     showTime,
     isLoaded,
     showOverdueTasksOnly,
-    showAllTodosOnly
+    showAllTodosOnly,
+    setError
   } = props;
 
   const dateToday = moment().format("YYYY-MM-DD");
@@ -33,14 +34,12 @@ function TasksList(props) {
               try {
                 await axiosReq.put(`tasks/${task.id}`, {...task, 'progress': 'overdue'})
               } catch (err) {
-                console.log(err)
               }
             }
           } else if (task.due_date < dateToday) {
             try {
               await axiosReq.put(`tasks/${task.id}`, {...task, 'progress': 'overdue'})
             } catch (err) {
-              console.log(err.response)
             }
           }
       }
@@ -75,6 +74,7 @@ function TasksList(props) {
       <TaskPopover 
         task={task}
         setTasksList={setTasksList}
+        setError={setError}
       >
         <div className={`p-2 ${styles.VerticalEllipsis}`}>
           <i className={`fa-solid fa-ellipsis-vertical fa-lg`}></i>
