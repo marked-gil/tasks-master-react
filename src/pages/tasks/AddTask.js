@@ -92,7 +92,6 @@ function AddTask(props) {
       setIsLoaded(false);
       const { data } = await axiosReq.post("/tasks/", {...taskData, due_date, due_time, priority});
       handleClose();
-      toggleMenu && toggleMenu();
       setFeedbackMessage && setFeedbackMessage(success_message)
       if (task_date === moment(due_date).format("YYYY-MM-DD") || 
           (allTodos && moment(due_date).format("YYYY-MM-DD") >= moment().format("YYYY-MM-DD"))) {
@@ -100,6 +99,7 @@ function AddTask(props) {
       }
       setIsLoaded(true);
       pushToPage && history.push(`/tasks/${moment(due_date).format("YYYY-MM-DD")}`)
+      toggleMenu && toggleMenu();
     } catch (err) {
       setShowErrors(err.response?.data);
       setIsLoaded(true);

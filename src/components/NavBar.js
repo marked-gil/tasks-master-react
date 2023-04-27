@@ -22,6 +22,7 @@ function NavBar(props) {
     setSearchResults, 
     setKeywordSearched,
     setCategories,
+    setNewCategoryAdded,
     categories,
     setIsLoaded,
     setError
@@ -114,9 +115,9 @@ function NavBar(props) {
                 <li>
                   <AddTask
                     categories={categories}
-                    pushToPages
                     className={styles.AddTask}
                     toggleMenu={toggleMenu}
+                    pushToPage
                   />
                 </li>
                 <li className={`mb-2 d-flex ${styles.DatePickerContainer}`}>
@@ -192,8 +193,10 @@ function NavBar(props) {
               </div>
 
               <AddCategory
+                currentUser={currentUser}
                 categories={categories}
                 setCategories={setCategories}
+                setNewCategoryAdded={setNewCategoryAdded}
                 className={styles.AddCategory}
               />
               

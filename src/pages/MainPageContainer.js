@@ -52,7 +52,6 @@ function MainPageContainer(props) {
         setNewCategoryAdded(false);
         setIsLoaded(true);
       } catch (err) {
-        // console.log(err)
         setIsLoaded(true);
       }
     };
@@ -66,6 +65,7 @@ function MainPageContainer(props) {
         setSearchResults={setSearchResults} 
         setKeywordSearched={setKeywordSearched}
         setCategories={setCategories}
+        setNewCategoryAdded={setNewCategoryAdded}
         categories={categories}
         setIsLoaded={setIsLoaded}
         setError={setError}

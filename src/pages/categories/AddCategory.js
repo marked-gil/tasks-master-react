@@ -4,7 +4,15 @@ import { Alert, Button, Form, Modal } from 'react-bootstrap';
 import styles from '../../styles/AddCategory.module.css';
 import LoadingIcon from '../../components/LoadingIcon';
 
-function AddCategory({ currentUser, categories, setCategories, setNewCategoryAdded, className }) {
+function AddCategory(props) {
+  const { 
+    currentUser, 
+    categories, 
+    setCategories, 
+    setNewCategoryAdded, 
+    className 
+  } = props;
+
 
   const initialCategoryData = {
     category_name: "",
@@ -47,7 +55,7 @@ function AddCategory({ currentUser, categories, setCategories, setNewCategoryAdd
       setIsLoaded(true);
     } catch (err) {
       setErrors(err.response?.data);
-      console.log(err.response?.data)
+      console.log(err.response)
       setIsLoaded(true);
     }
   }
