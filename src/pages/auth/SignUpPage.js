@@ -34,6 +34,7 @@ function SignUpPage() {
       await axios.post("/dj-rest-auth/registration/", signUpData);
       history.push('/signin');
     } catch (err) {
+      console.log(err.response?.data)
       setErrors(err.response?.data)
     }
   }
@@ -51,6 +52,7 @@ function SignUpPage() {
             <Form.Control
               type="text"
               placeholder="Enter a username"
+              maxLength={15}
               name="username"
               value={username}
               onChange={handleChange}
@@ -92,6 +94,13 @@ function SignUpPage() {
               onChange={handleChange}
             />
             {errors.password2?.map((error, idx) => (
+              <Alert className={`mt-1 mb-0 pb-0 pt-0 text-center`} key={idx} variant="danger">
+                {error}
+              </Alert>
+              ))
+            }
+
+            {errors.non_field_errors?.map((error, idx) => (
               <Alert className={`mt-1 mb-0 pb-0 pt-0 text-center`} key={idx} variant="danger">
                 {error}
               </Alert>
