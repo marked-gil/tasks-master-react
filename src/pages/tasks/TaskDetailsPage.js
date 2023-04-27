@@ -14,6 +14,7 @@ import FeedbackMessage from '../../components/FeedbackMessage';
 import CommentCard from '../comments/CommentCard';
 import LoadingIcon from '../../components/LoadingIcon';
 import ErrorDisplay from '../../components/ErrorDisplay';
+import userAvatar from '../../assets/user-avatar.png';
 
 function TaskDetailsPage({ currentUser, newCategoryAdded, setTaskChanged }) {
 
@@ -191,7 +192,7 @@ function TaskDetailsPage({ currentUser, newCategoryAdded, setTaskChanged }) {
                     owner={user}
                     isOwner={false}
                     showName={true}
-                    // img_src={user.image}
+                    img_src={userAvatar}
                     imageWidth={"1.5rem"}
                     isDeletable
                     taskData={taskData}
