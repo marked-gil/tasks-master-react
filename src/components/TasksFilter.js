@@ -29,7 +29,7 @@ function TasksFilter(props) {
   }
 
   return (
-    <Accordion>
+    <Accordion className={styles.Accordion}>
       <Accordion.Item eventKey="0">
         <Accordion.Header>Filter Your Tasks</Accordion.Header>
         <Accordion.Body>

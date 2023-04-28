@@ -4,7 +4,7 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import { Link, useHistory } from 'react-router-dom';
 import styles from '../../styles/SignInPage.module.css'
-import { Alert } from 'react-bootstrap';
+import Alert from 'react-bootstrap/Alert';
 import { useSetCurrentUser } from '../../contexts/CurrentUserContext';
 import { setTokenTimestamp } from '../../utils/utils';
 import logo from '../../assets/tasks-master-logo-small.png';

@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Button, Form } from 'react-bootstrap';
 import { axiosReq } from '../api/axiosDefaults';
 import { useHistory } from 'react-router-dom';
+import styles from '../styles/SearchForm.module.css';
 
 function SearchForm(props) {
 
@@ -53,7 +54,7 @@ function SearchForm(props) {
       <Button 
         type="submit"
         variant="outline-success" 
-        style={{ color:"white" }}
+        className={styles.SearchButton}
       >
         Search
       </Button>
