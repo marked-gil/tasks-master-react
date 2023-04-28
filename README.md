@@ -5,6 +5,27 @@
 Tasks Master is a React application website that is designed and developed to help users in the management of their tasks - be it professional, domestic, or others. Its functionalities are also designed to enhance the efficiency of collaboration with other users as it allows the sharing of tasks with other users. [View Live Website.](http://tasks-master.herokuapp.com/)
 
 ## TABLE OF CONTENTS
+* [**User Experience Design (UXD)**](#user-experience-design-uxd)
+    * [**Strategy**](#strategy)
+        * [Main Goal](#main-goal)
+        * [Target Audience](#target-audience)
+        * [The Use of Agile Methodology](#the-use-of-agile-methodology)
+        * [EPICS](#epics)
+    * [**Scope**](#scope)
+        * [Planned Features / User Stories](#planned-features--user-stories)
+        * [Design Choice](#design-choice)
+    * [**Skeleton**](#skeleton)
+        * [Wireframes](#wireframes)
+    * [Surface]
+        * [Color and Contrast]
+* [Features](#features)
+* [Features for Future Implementation](#features-left-for-future-implementation)
+* [Fixed Bugs](#fixed-bugs)
+* [Testing](#testing)
+* [Deployment](#deployment)
+* [Technologies](#technologies)
+* [Credits](#credits)
+* [Acknowledgment](#acknowledgment)
 
 ## User Experience Design (UXD)
 
@@ -41,7 +62,7 @@ Github’s Kanban board is a very useful tool that this project used. Here is th
 
 ### **SCOPE**
 
-#### **Planned Features**
+#### **Planned Features / User Stories**
 The following are the User Stories that guided the creation of this React app:
 
 * **User Story:** [React App Creation & Initial Heroku Deployment](https://github.com/marked-gil/tasks-master-react/issues/8)
@@ -342,31 +363,14 @@ The following are the User Stories that guided the creation of this React app:
     * Submit the form when the ‘add’ button is clicked
     * Remove or hide modal when ‘cancel’ is clicked
 
-* **User Story:** [Delete Account/Profile](https://github.com/marked-gil/tasks-master-react/issues/43)
-    > As a user, I can delete my account or profile, so that I will have full control of reclaiming my privacy when I feel the need.
-
-    Implementation:
-    * Create a ‘Delete Account’ link/button on the ‘My Profile’ page
-    * Create a modal that contains a password field and a ‘delete account’ button
-    * Display the password modal when the user clicks on ‘Delete Account’ on the ‘My Profile’ page
-    * Validate the entered password on the modal after the user clicks ‘delete account’, and delete the account when the password is valid.
-    * Redirect the user to the ‘Sign In’ page when the profile is successfully deleted, and show a feedback message.
-
-* **User Story:** [Allow Reply to Comments](https://github.com/marked-gil/tasks-master-react/issues/35)
-    > As a user, I can add comments as a response to another comment so that the flow of effective communication is fostered.
-
-    Implementation: 
-    * Add ‘reply’ links to each comment
-    * Display ‘reply’ textarea when ‘reply link’ is clicked
-    * Add 'submit' button to textarea
-    * Add character counter to text area
-    * Save the ‘reply comment’ to the database when the submit button is clicked.
-    * Prevent submission of empty comments.
-    * Display the ‘reply comment’ under the replied-to comment
-
-
-
 [<ins>Back to Table of Contents</ins>](#table-of-contents)
+
+#### Design Choice
+
+* Color Choices:
+
+* Typography:
+    * [Source Sans Pro(https://fonts.google.com/specimen/Source+Sans+Pro?query=source)] - from Google Fonts
 
 ### **SKELETON**
 
@@ -413,6 +417,7 @@ The following are the wireframes used to provide a visual illustration of some o
 [<ins>Back to Table of Contents</ins>](#table-of-contents)
 
 ## Features Left for Future Implementation
+
 * **User Story:** [Allow Reply to Comments](https://github.com/marked-gil/tasks-master-react/issues/35)
     > As a user, I can add comments as a response to another comment so that the flow of effective communication is fostered.
 
@@ -424,6 +429,17 @@ The following are the wireframes used to provide a visual illustration of some o
     * Save the ‘reply comment’ to the database when the submit button is clicked.
     * Prevent submission of empty comments.
     * Display the ‘reply comment’ under the replied-to comment
+
+* **User Story:** [Delete Account/Profile](https://github.com/marked-gil/tasks-master-react/issues/43)
+    > As a user, I can delete my account or profile, so that I will have full control of reclaiming my privacy when I feel the need.
+
+    Implementation:
+    * Create a ‘Delete Account’ link/button on the ‘My Profile’ page
+    * Create a modal that contains a password field and a ‘delete account’ button
+    * Display the password modal when the user clicks on ‘Delete Account’ on the ‘My Profile’ page
+    * Validate the entered password on the modal after the user clicks ‘delete account’, and delete the account when the password is valid.
+    * Redirect the user to the ‘Sign In’ page when the profile is successfully deleted, and show a feedback message.
+
 
 ## Fixed Bugs
 * ISSUE:    
@@ -463,9 +479,25 @@ This project has been manual testing, and below are the results:
 * `git push` — to upload the local repository to the remote repository, such as GitHub
 
 ### **Heroku Deployment**
+This web application is deployed via Heroku. The following steps were taken:
+1. I Logged in to Heroku account
+2. When redirected to the dashboard, I clicked the 'New' button, which was a dropdown menu. Then I clicked on 'Create new app'.
+3. On the 'Create New App' page, I entered my new 'app name' and 'region'. Then I clicked the 'create app' button. This then redirected me to my new app's page in Heroku.
+4. On my new app's page, there is a row of links, which includes: Overview, Resources, Deploy, Metrics, Activity, Access, and Settings. I went to the 'Deploy' link and clicked on Github as the Deployment Method.
+5. Below the Deployment Method section is the 'Connect to Github' section, where I searched for the name of my new app on Github using the search input field provided. When the name of the repository was displayed, I clicked on the 'connect' button.
 
+[View Live Website](http://tasks-master.herokuapp.com/)
 
 ### **Cloning from GitHub**
+
+To clone the repository for this site, do the following steps:
+
+* Go to this URL: https://github.com/marked-gil/tasks-master-re
+* Inside the repository, look for the button labelled as 'Code', which is along the rows with other buttons such as 'Go to file' and 'Add file'.
+* Click on the 'Code' button, and a small popup box will show up with a top heading of 'Clone'.
+* In the popup box, click on the 'HTTPS' link and copy the URL just below it.
+* Then, go to your computer's terminal and type `git clone https://github.com/marked-gil/tasks-master-react.git`
+* A copy of the repository is now saved on your computer.
 
 [<ins>Back to Table of Contents</ins>](#table-of-contents)
 
