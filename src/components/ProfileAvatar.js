@@ -10,7 +10,6 @@ function ProfileAvatar(props) {
     showName, 
     imageWidth, 
     img_src,
-    isDeletable,
     taskData,
     setTaskData,
     className
@@ -41,7 +40,7 @@ function ProfileAvatar(props) {
       {showName && <span className={styles.bold}>{owner}</span>}
       {isOwner && <span className={styles.smallFont}>(owner)</span>}
 
-      {(taskData?.is_owner && showDelete && isDeletable) && 
+      {(taskData?.is_owner && showDelete && !taskData?.is_completed) && 
         <UserSharingPopover
           taskData={taskData}
           setTaskData={setTaskData}

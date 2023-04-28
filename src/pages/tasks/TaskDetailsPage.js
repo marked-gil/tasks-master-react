@@ -189,7 +189,6 @@ function TaskDetailsPage({ newCategoryAdded, setTaskChanged }) {
                     showName={true}
                     img_src={userAvatar}
                     imageWidth={"1.5rem"}
-                    isDeletable
                     taskData={taskData}
                     setTaskData={setTaskData}
                     className={`${styles.SharedToAvatar} ${styles.AccordionSharedToAvatar}`}
@@ -316,7 +315,6 @@ function TaskDetailsPage({ newCategoryAdded, setTaskChanged }) {
                 showName={true}
                 img_src={userAvatar}
                 imageWidth={"1.5rem"}
-                isDeletable
                 className={styles.SharedToAvatar}
                 taskData={taskData}
                 setTaskData={setTaskData}
