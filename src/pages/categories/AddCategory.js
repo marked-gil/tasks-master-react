@@ -1,5 +1,5 @@
 import axios from 'axios';
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Alert, Button, Form, Modal } from 'react-bootstrap';
 import styles from '../../styles/AddCategory.module.css';
 import LoadingIcon from '../../components/LoadingIcon';

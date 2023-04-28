@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { axiosReq } from '../../api/axiosDefaults';
 import { useHistory } from 'react-router-dom';
 import moment from 'moment';
@@ -256,6 +256,6 @@ function AddTask(props) {
       </Modal>
     </>
   );
-};
+}
 
 export default AddTask;

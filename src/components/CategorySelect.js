@@ -1,4 +1,3 @@
-import React from 'react';
 import Alert from 'react-bootstrap/Alert';
 import Form from 'react-bootstrap/Form';
 import styles from '../styles/CategorySelect.module.css'
@@ -39,6 +38,6 @@ function CategorySelect({ className, category, handleChange, categories, errors 
       }
     </Form.Group>
   )
-};
+}
 
 export default CategorySelect;

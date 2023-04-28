@@ -1,5 +1,4 @@
 import moment from 'moment';
-import React from 'react';
 import { Card } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import styles from '../styles/SearchCard.module.css';
@@ -30,6 +29,6 @@ function SearchCard({ task, TitleStyle, TextStyle }) {
       </Card.Footer>
     </Card>
   )
-};
+}
 
 export default SearchCard;

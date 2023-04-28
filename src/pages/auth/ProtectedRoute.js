@@ -1,4 +1,3 @@
-import React from 'react';
 import { Redirect, Route } from 'react-router-dom';
 
 export function ProtectedRoute (props) {
@@ -15,4 +14,4 @@ export function ProtectedRoute (props) {
       {isLoggedIn ? <Route exact={exact} path={path} render={render} /> : <Redirect to="/signin" replace />}
     </>
   )
-};
+}

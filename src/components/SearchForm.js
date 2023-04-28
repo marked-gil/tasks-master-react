@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Button, Form } from 'react-bootstrap';
 import { axiosReq } from '../api/axiosDefaults';
 import { useHistory } from 'react-router-dom';
@@ -59,6 +59,6 @@ function SearchForm(props) {
       </Button>
     </Form>
   )
-};
+}
 
 export default SearchForm;

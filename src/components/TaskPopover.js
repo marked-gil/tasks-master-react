@@ -1,4 +1,3 @@
-import React from 'react';
 import { axiosReq, axiosRes } from '../api/axiosDefaults';
 import { useHistory } from 'react-router-dom';
 import moment from 'moment';

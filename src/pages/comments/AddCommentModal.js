@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import styles from '../../styles/AddCommentModal.module.css';
 import { Alert, Button, Form, Modal } from 'react-bootstrap';
 import { axiosRes } from '../../api/axiosDefaults';
@@ -101,6 +101,6 @@ function AddCommentModal(props) {
       </Modal>
     </>
   );
-};
+}
 
 export default AddCommentModal;

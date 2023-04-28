@@ -1,4 +1,3 @@
-import React from 'react';
 import { Accordion, Button, Form } from 'react-bootstrap';
 import styles from '../styles/TasksFilter.module.css';
 
@@ -120,6 +119,6 @@ function TasksFilter(props) {
       </Accordion.Item>
     </Accordion>
   )
-};
+}
 
 export default TasksFilter;

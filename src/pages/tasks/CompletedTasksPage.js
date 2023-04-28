@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Col } from 'react-bootstrap';
 import ErrorDisplay from '../../components/ErrorDisplay';
 import TasksFilter from '../../components/TasksFilter';
@@ -72,6 +72,6 @@ function CompletedTasksPage({ newCategoryAdded }) {
       </div>
     </Col>
   )
-};
+}
 
 export default CompletedTasksPage;

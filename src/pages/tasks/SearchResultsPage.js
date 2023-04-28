@@ -1,4 +1,3 @@
-import React from 'react';
 import Col from 'react-bootstrap/Col';
 import styles from '../../styles/SearchResultsPage.module.css';
 import SearchCard from '../../components/SearchCard';
@@ -34,6 +33,6 @@ function SearchResultsPage({ searchResults, keywordSearched, isLoaded, error }) 
       </div>
     </Col>
   )
-};
+}
 
 export default SearchResultsPage;

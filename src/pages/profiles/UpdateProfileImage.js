@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Button, Figure, Form, Modal } from 'react-bootstrap';
 import { axiosReq } from '../../api/axiosDefaults';
 import LoadingIcon from '../../components/LoadingIcon';
@@ -105,6 +105,6 @@ function UpdateProfileImage(props) {
       </Modal>
     </>
   );
-};
+}
 
 export default UpdateProfileImage;

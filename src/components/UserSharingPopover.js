@@ -1,4 +1,3 @@
-import React from 'react';
 import { Button, OverlayTrigger, Popover } from 'react-bootstrap';
 import { axiosReq } from '../api/axiosDefaults';
 
@@ -41,6 +40,6 @@ function UserSharingPopover({ children, taskData, setTaskData, sharingUser }) {
     <OverlayTrigger trigger="click" rootClose placement="left" overlay={popover}>
       { children }
     </OverlayTrigger>  )
-};
+}
 
 export default UserSharingPopover;

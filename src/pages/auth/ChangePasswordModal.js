@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Alert, Button, Form, Modal } from 'react-bootstrap';
 import { axiosReq } from '../../api/axiosDefaults';
 
@@ -81,6 +81,6 @@ function ChangePasswordModal(props) {
       </Modal.Footer>
     </Modal>
   );
-};
+}
 
 export default ChangePasswordModal;

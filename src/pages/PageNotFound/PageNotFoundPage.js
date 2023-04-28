@@ -1,4 +1,3 @@
-import React from 'react';
 import Col from 'react-bootstrap/Col';
 import styles from '../../styles/PageNotFoundPage.module.css';
 import icon from '../../assets/404-error.png';
@@ -11,6 +10,6 @@ function PageNotFoundPage() {
       <img src={icon} alt="Page Not Found Icon" className={styles.Icon}/>
     </Col>
   )
-};
+}
 
 export default PageNotFoundPage;

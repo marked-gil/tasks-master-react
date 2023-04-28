@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import styles from '../../styles/TaskDetailsPage.module.css';
 import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
@@ -16,7 +16,7 @@ import LoadingIcon from '../../components/LoadingIcon';
 import ErrorDisplay from '../../components/ErrorDisplay';
 import userAvatar from '../../assets/user-avatar.png';
 
-function TaskDetailsPage({ currentUser, newCategoryAdded, setTaskChanged }) {
+function TaskDetailsPage({ newCategoryAdded, setTaskChanged }) {
 
   const history = useHistory();
   const { id } = useParams();
@@ -90,7 +90,7 @@ function TaskDetailsPage({ currentUser, newCategoryAdded, setTaskChanged }) {
     setTaskData(newTaskData);
   }
 
-  const handleSave = async (event) => {
+  const handleSave = async () => {
     setIsLoaded(false);
     setError("");
     try {
@@ -342,18 +342,19 @@ function TaskDetailsPage({ currentUser, newCategoryAdded, setTaskChanged }) {
           />
 
           {!!comments.results.length && <h3 className={styles.LabelComments}>Comments</h3>}
-          {!!comments.results.length ? comments.results.map((comment) => (
+          {!!comments.results.length && comments.results.map((comment) => (
             <CommentCard
               key={comment.id} 
               comment={comment} 
               setComments={setComments} 
               setError={setError}
             />
-          )) : <p className={styles.NoCommentYet}>No Comments Yet.</p>}
+          ))}
+          {!comments.results.length && <p className={styles.NoCommentYet}>No Comments Yet.</p>}
         </div>
       </div>
     </Col>
   )
-};
+}
 
 export default TaskDetailsPage;

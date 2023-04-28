@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import moment from 'moment';
 import styles from '../styles/SideBar.module.css'
 import { Link, useHistory } from 'react-router-dom';
@@ -23,7 +23,7 @@ const SideBar = (props) => {
   const [ tasksDate, setTasksDate ] = useState(null);
   const [ categoryID, setCategoryID ] = useState("");
 
-  const handleDateSelection = (event) => {
+  const handleDateSelection = () => {
     if (tasksDate) {
           history.push(`/tasks/${moment(tasksDate).format('YYYY-MM-DD')}`)
         }

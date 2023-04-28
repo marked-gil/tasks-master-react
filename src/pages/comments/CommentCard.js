@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Button, Card, Form } from 'react-bootstrap';
 import { axiosReq, axiosRes } from '../../api/axiosDefaults';
 import styles from '../../styles/CommentCard.module.css';
@@ -131,6 +131,6 @@ function CommentCard(props) {
       </div>
     </Card>
   )
-};
+}
 
 export default CommentCard;

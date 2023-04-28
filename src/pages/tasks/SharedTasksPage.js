@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import ErrorDisplay from '../../components/ErrorDisplay';
 import TasksFilter from '../../components/TasksFilter';
 import TasksList from './TasksList';
@@ -87,6 +87,6 @@ function SharedTasksPage({ newCategoryAdded }) {
 
     </Col>
   )
-};
+}
 
 export default SharedTasksPage;

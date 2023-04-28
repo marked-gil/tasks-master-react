@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import Alert from 'react-bootstrap/Alert';
 import styles from '../styles/ErrorDisplay.module.css';
 
@@ -16,6 +16,6 @@ function ErrorDisplay({error}) {
       </Alert>
     );
   }
-};
+}
 
 export default ErrorDisplay;

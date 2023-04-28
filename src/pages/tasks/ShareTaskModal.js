@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { axiosReq } from '../../api/axiosDefaults';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
@@ -133,6 +133,6 @@ function ShareTaskModal(props) {
       </Modal>
     </>
   );
-};
+}
 
 export default ShareTaskModal;

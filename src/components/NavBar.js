@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Link, NavLink, useHistory } from 'react-router-dom';
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
@@ -35,7 +35,7 @@ function NavBar(props) {
   const toggleMenu = () => setMenuOpen(!menuOpen);
   const handleClose = () => setMenuOpen(false);
 
-  const handleDateSelection = (event) => {
+  const handleDateSelection = () => {
     if (tasksDate) {
           history.push(`/tasks/${moment(tasksDate).format('YYYY-MM-DD')}`);
           toggleMenu();

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Button, Form } from 'react-bootstrap';
 import styles from '../../styles/EditTaskAttributes.module.css';
 import moment from 'moment';
@@ -188,6 +188,6 @@ function EditTaskAttributes(props) {
       </div>
     </>
   )
-};
+}
 
 export default EditTaskAttributes;

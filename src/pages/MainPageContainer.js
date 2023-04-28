@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Footer from '../components/Footer';
@@ -89,7 +89,6 @@ function MainPageContainer(props) {
                 taskChanged={taskChanged}
               />
             : taskDetailsPage ? <TaskDetailsPage 
-                currentUser={currentUser} 
                 newCategoryAdded={newCategoryAdded}
                 setTaskChanged={setTaskChanged}
               />
