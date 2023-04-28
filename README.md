@@ -427,7 +427,15 @@ The following are the wireframes used to provide a visual illustration of some o
 
 ## Fixed Bugs
 * ISSUE:    
-    When I deployed this app to Heroku, an error was encountered: Error R14 (Memory quota exceeded).    
+    An error was encountered during deployment to Heroku:   
+    > **FATAL ERROR: Reached heap limit Allocation failed - JavaScript heap out of memory**
+    * SOLUTION: 
+        I got the solution from this stackoverflow [post](https://stackoverflow.com/questions/59205530/heroku-server-crashes-with-javascript-heap-out-of-memory-when-deploying-react). It suggested to add the following in Heroku's Config vars:   
+        > NODE_OPTIONS   =    --max_old_space_size=2560
+
+* ISSUE:    
+    When I deployed this app to Heroku, an error was encountered:   
+    > Error R14 (Memory quota exceeded).    
     * SOLUTION:  
         I found the solution from this [link](https://github.com/facebook/create-react-app/issues/5445). A user suggested to add "postinstall": "react-scripts build" to package.json in scripts.   
 
