@@ -425,11 +425,11 @@ The following are the wireframes used to provide a visual illustration of some o
     * Prevent submission of empty comments.
     * Display the ‘reply comment’ under the replied-to comment
 
-
 ## Fixed Bugs
-
-
-## Bugs Left To Fix
+* ISSUE:    
+    When I deployed this app to Heroku, an error was encountered: Error R14 (Memory quota exceeded).    
+    * SOLUTION:  
+        I found the solution from this [link](https://github.com/facebook/create-react-app/issues/5445). A user suggested to add "postinstall": "react-scripts build" to package.json in scripts.   
 
 [<ins>Back to Table of Contents</ins>](#table-of-contents)
 
@@ -496,9 +496,7 @@ This project uses the following tools:
 * [Code Institute's drf-api repo](https://github.com/Code-Institute-Solutions/drf-api/blob/c637122d1a559139cabf1d39b0a3281814091d79/posts/serializers.py) - Code for the image validation
 * [Stackoverflow](https://stackoverflow.com/questions/71211745/im-trying-to-close-the-offcanvas-menu-in-react-bootstrap-when-i-click-a-link#:~:text=To%20change%20this%2C%20you%20can,Toggle%20.) - How to automatically close the React-Bootstrap's NavBar Offcanvas when a link inside is clicked
 
-### Content
-
-### Media
+### Media Content
 * Profile Avatar <a href="https://www.freepik.com/free-vector/people-icon-collection_1157380.htm#query=avatar&position=14&from_view=keyword&track=sph">Image by muammark</a> on Freepik
 * User Avatar <a href="https://www.flaticon.com/free-icons/user" title="user icons">User icons created by Smashicons - Flaticon</a>
 * 404 <a href="https://www.flaticon.com/free-icons/web-page" title="web page icons">icon created by prettycons - Flaticon</a>
@@ -513,3 +511,6 @@ This project uses the following tools:
     * [**MDN** web docs](https://developer.mozilla.org/en-US/)
 
 ## Acknowledgment
+* **Daisy McGirr** - my Code Institute mentor, for guiding me throughout this course.
+* **Kyle Dacutan** - my wife, who has never failed to show her support
+* My children, **Zsyrish** and **Marko**, who inspire me to do well and be their role model
