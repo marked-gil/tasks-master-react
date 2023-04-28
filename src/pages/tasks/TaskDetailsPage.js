@@ -108,8 +108,11 @@ function TaskDetailsPage({ newCategoryAdded, setTaskChanged }) {
       setEditTaskDescription(false);
       setIsLoaded(true);
     } catch (err) {
-      console.log(err)
-      setError("Sorry, an error has occurred while updating data.");
+      if (err.response?.data?.task_name) {
+        setError("You cannot submit an empty Task Name.")
+      } else {
+        setError("Sorry, an error has occurred while updating data.");
+      }
       setIsLoaded(true);
     }
   };

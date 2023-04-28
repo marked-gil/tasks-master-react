@@ -51,9 +51,7 @@ function ProfilePage ({ currentUser }) {
     }
   },[profile_id]);
 
-  
   const handleCancel = () => window.location.reload(false);
-
 
   const handleChange = (event) => {
     setProfileData(prevState => ({
@@ -79,6 +77,7 @@ function ProfilePage ({ currentUser }) {
       setIsLoaded(true);
     } catch (err) {
       setErrors(err.response?.data);
+      setIsLoaded(true);
     }
   };
 
@@ -141,7 +140,7 @@ function ProfilePage ({ currentUser }) {
                 placeholder="Enter your first name"
                 maxLength={50}
                 name="first_name"
-                value={first_name}
+                value={first_name || ""}
                 onChange={handleChange}
               />
 
@@ -161,7 +160,7 @@ function ProfilePage ({ currentUser }) {
                 maxLength={50}
                 placeholder="Enter your last name"
                 name="last_name"
-                value={last_name}
+                value={last_name || ""}
                 onChange={handleChange}
               />
 
@@ -184,7 +183,7 @@ function ProfilePage ({ currentUser }) {
                 onChange={handleChange}
               />
               {errors.email?.map((error, idx) => (
-                <Alert className={`mt-1 mb-0 pb-0 pt-0 ${styles.TextCenter}`} key={idx} variant="danger">
+                <Alert className={`mt-1 mb-0 pb-0 pt-0 text-center`} key={idx} variant="danger">
                   {error}
                 </Alert>
                 ))
