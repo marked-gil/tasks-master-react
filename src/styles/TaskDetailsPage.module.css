@@ -162,13 +162,20 @@
     position: relative;
   }
 
+  .AvatarsOuterContainer {
+    display: none;
+  }
+
   .SmallScreenAvatars {
     display: block;
     margin-bottom: 18px;
   }
 
-  .AvatarsOuterContainer {
-    display: none;
+  .AccordionBodyAvatar {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    gap: 24px
   }
 
   .SharedToAvatar {
@@ -215,5 +222,10 @@
     position: static;
     display: flex;
     justify-content: space-between;
+  }
+
+  .AccordionBodyAvatar {
+    padding: 14px 12px;
+    gap: 10px
   }
 }

@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import styles from '../styles/ProfileAvatar.module.css';
 import UserSharingPopover from './UserSharingPopover';
 
 function ProfileAvatar(props) {
@@ -8,7 +7,8 @@ function ProfileAvatar(props) {
     owner, 
     isOwner, 
     showName, 
-    imageWidth, 
+    imageWidth,
+    nameFontSize,
     img_src,
     taskData,
     setTaskData,
@@ -37,8 +37,8 @@ function ProfileAvatar(props) {
         style={{ width: imageWidth }}
         className="rounded"
       />
-      {showName && <span className={styles.bold}>{owner}</span>}
-      {isOwner && <span className={styles.smallFont}>(owner)</span>}
+      {showName && <span style={{ fontWeight: "600", fontSize: nameFontSize }}>{owner}</span>}
+      {isOwner && <span style={{ fontSize:"12px" }}>(owner)</span>}
 
       {(taskData?.is_owner && showDelete && !taskData?.is_completed) && 
         <UserSharingPopover

@@ -1,5 +1,8 @@
-import { Button, OverlayTrigger, Popover } from 'react-bootstrap';
 import { axiosReq } from '../api/axiosDefaults';
+import Button from 'react-bootstrap/Button';
+import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
+import Popover from 'react-bootstrap/Popover';
+
 
 function UserSharingPopover({ children, taskData, setTaskData, sharingUser }) {
 

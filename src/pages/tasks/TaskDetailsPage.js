@@ -168,7 +168,7 @@ function TaskDetailsPage({ newCategoryAdded, setTaskChanged }) {
         <Accordion className={styles.SmallScreenAvatars}>
           <Accordion.Item eventKey="0">
             <Accordion.Header>See the owner and users sharing this task.</Accordion.Header>
-            <Accordion.Body className="d-flex align-items-center gap-2">
+            <Accordion.Body className={styles.AccordionBodyAvatar}>
               {/* OWNER AVATAR */}
               {profile_image &&
                 <ProfileAvatar
@@ -176,7 +176,8 @@ function TaskDetailsPage({ newCategoryAdded, setTaskChanged }) {
                   isOwner={true}
                   showName={true}
                   img_src={profile_image}
-                  imageWidth={"2rem"}
+                  imageWidth={"1.5rem"}
+                  nameFontSize={"13px"}
                 />
               }
 
@@ -297,6 +298,7 @@ function TaskDetailsPage({ newCategoryAdded, setTaskChanged }) {
               showName={true}
               img_src={profile_image}
               imageWidth={"3rem"}
+              nameFontSize={"14px"}
               className={styles.OwnerAvatar} 
             />
           }
@@ -315,6 +317,7 @@ function TaskDetailsPage({ newCategoryAdded, setTaskChanged }) {
                 showName={true}
                 img_src={userAvatar}
                 imageWidth={"1.5rem"}
+                nameFontSize={"13px"}
                 className={styles.SharedToAvatar}
                 taskData={taskData}
                 setTaskData={setTaskData}
