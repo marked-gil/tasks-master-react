@@ -52,8 +52,8 @@ function EditTaskAttributes(props) {
           size="sm"
           aria-label="Select a due date"
         />
-
-        {/* {errors.due_date?.map((error, idx) => (
+{/* 
+        {errors.due_date?.map((error, idx) => (
           <Alert className={`mt-1 mb-0 pb-0 pt-0 ${styles.TextCenter}`} key={idx} variant="danger">
             {
               error === "Date has wrong format. Use one of these formats instead: YYYY-MM-DD."
@@ -130,7 +130,7 @@ function EditTaskAttributes(props) {
 
   return (
     <>
-      <div className="d-flex flex-column mt-3 mb-4">
+      <div className={styles.MainContainer}>
           {/* CATEGORY */}
           <div className={`${styles.CategoryContainer}`}>
             <span className={`${styles.LabelCategory}`}>Category:</span>
@@ -153,37 +153,47 @@ function EditTaskAttributes(props) {
           </div>
 
           {/* DUE DATETIME | PRIORITY | PROGRESS */}
-          <div className={`d-flex justify-content-between mb-0 ${styles.DateTimePriorityContainer}`}>
-            <div className={`d-flex`}>
-              { editDuePriority && DueDateForm }
-              { editDuePriority && DueTimeForm }
-              { editDuePriority && PriorityForm }
-
-              { !editDuePriority &&
-                <div className="d-flex gap-1">
-                  <p className="mb-0">
-                    <span className={styles.LabelDue}>Due:</span>
-                    <span className={`${styles.DueDateTime} ${styles.bold}`}>
-                      {moment(due_date).format("DD MMMM YYYY")} {due_time ? `- ${due_time}` : ""}
-                    </span>
-                  </p> | 
+          <div className={styles.DateTimePriorityContainer}>
+            {editDuePriority && 
+              <div className={styles.EditFormsInnerBox}>
+                { DueDateForm }
+                { DueTimeForm }
+                { PriorityForm }
+              </div>
+            }
+            {!editDuePriority && 
+              <div>
+                <p className={`mb-0`}>
+                  <span className={styles.LabelDue}>Due:</span>
+                  <span className={`${styles.DueDateTime} ${styles.bold}`}>
+                    {moment(due_date).format("DD MMMM YYYY")} {due_time ? `- ${due_time}` : ""}
+                  </span>
+                </p> 
+                <p className="d-flex gap-4 justify-content-end mb-0">
                   <span className={`${styles.Priority} ${priority === 3 ? styles.High : ""}`}>
                     {priority === 1 ? "Low" : priority === 2 ? "Medium" : "High"}
-                  </span> | 
+                  </span> 
+                  <span className={styles.VerticalLine}> | </span>
                   <span className={`${styles.Progress} ${progress === "overdue" ? styles.Overdue : ""}`}>
                     {progress}
                   </span>
-                </div>
-              }  
-            </div>
-
+                </p>
+              </div>
+            }
             { editDuePriority &&
               <div className={`${styles.EditButtonsTwo}`}>
                 <Button onClick={canceEditDuePriority} variant="link" className="ms-3 p-0">cancel</Button>
                 <Button onClick={handleSave} variant="link" className={`ms-2 p-0 ${styles.bold}`}>SAVE</Button>
               </div>}
             { is_owner && !editDuePriority &&
-              <Button onClick={setEditDuePriority} variant="link" className={`ms-3 p-0 ${styles.AttributesEditButton}`}>edit</Button> }
+              <Button 
+                onClick={setEditDuePriority} 
+                variant="link" 
+                className={`ms-3 p-0 ${styles.AttributesEditButton}`}
+              >
+                edit
+              </Button>
+            }
           </div>
       </div>
     </>

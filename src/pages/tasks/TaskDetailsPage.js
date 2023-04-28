@@ -188,7 +188,7 @@ function TaskDetailsPage({ newCategoryAdded, setTaskChanged }) {
                 />
               }
 
-              <div className={`d-flex gap-2 justify-content-between`}>
+              <div className={`d-flex gap-1 justify-content-evenly flex-wrap`}>
                 {shared_to?.map((user) => (
                   <ProfileAvatar
                     key={user}
@@ -212,7 +212,7 @@ function TaskDetailsPage({ newCategoryAdded, setTaskChanged }) {
         {!editTaskName && 
           <div className="position-relative">
             <p className={styles.TaskName}>{task_name}</p>
-            <h3 className={styles.HeadingTaskName}>Task Name</h3>
+            <h3 className={`text-muted ${styles.HeadingTaskName}`}>Task Name</h3>
 
             {is_owner && !editTaskDescription &&
               <Button 
@@ -257,7 +257,7 @@ function TaskDetailsPage({ newCategoryAdded, setTaskChanged }) {
         {!editTaskDescription && 
           <div className={`${styles.TaskDetailsContainer}`}>
             <p className={styles.TaskDetails}>{details}</p>
-            <h3 className={styles.HeadingDetails}>Details</h3>
+            <h3 className={`text-muted ${styles.HeadingDetails}`}>Details</h3>
 
             {is_owner && !editTaskDescription &&
               <Button 

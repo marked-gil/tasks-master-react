@@ -12,16 +12,16 @@
 }
 
 .HeadingTaskName {
-  font-size: 1.1rem;
-  font-weight: 600;
-  margin: .4rem 0 0;
+  font-size: .95rem;
+  font-weight: 400;
+  margin: 0;
 }
 
 .TaskName {
-  font-size: 1.2rem;
-  font-weight: 700;
+  font-size: 1.3rem;
+  font-weight: 600;
   margin-bottom: 0;
-  border-bottom: 2px solid rgb(10, 131, 237);
+  border-bottom: 2px solid #0a83ed;
 }
 
 .DeleteSharedButtons {
@@ -34,7 +34,7 @@
   font-size: 1rem;
   font-weight: 600;
   position: absolute;
-  bottom: 0;
+  bottom: -10px;
   right: 0;
   padding-right: 0;
 }
@@ -43,7 +43,7 @@
   position: absolute;
   font-size: 1rem;
   font-weight: 600;
-  bottom: -5px;
+  bottom: -10px;
   right: 0;
   padding-right: 0;
 }
@@ -54,23 +54,23 @@
 }
 
 .HeadingDetails {
-  font-size: 1.1rem;
-  font-weight: 600;
-  margin: .4rem 0 0;
+  font-size: .95rem;
+  font-weight: 400;
+  margin: 0;
 }
 
 .TaskDetails {
   font-size: 1.1rem;
   padding-top: 0;
   margin: 0;
-  border-bottom: 2px solid rgb(10, 131, 237);
+  border-bottom: 2px solid #0a83ed;
 }
 
 .EditDetailsButton {
   font-size: 1rem;
   font-weight: 600;
   position: absolute;
-  bottom: 0;
+  bottom: -10px;
   right: 0;
   padding-right: 0;
 }
@@ -79,7 +79,7 @@
   position: absolute;
   font-size: 1rem;
   font-weight: 600;
-  bottom: -6px;
+  bottom: -10px;
   right: 0;
   padding-right: 0;
 }
@@ -160,11 +160,8 @@
 @media screen and (max-width: 1230px) {
   .Container {
     position: relative;
-    width: 28rem;
   }
-}
 
-@media screen and (max-width: 1120px) {
   .SmallScreenAvatars {
     display: block;
     margin-bottom: 18px;
@@ -206,6 +203,10 @@
 }
 
 @media screen and (max-width: 390px) {
+  .TaskDetailsPage {
+    padding: 1.8rem 0 0;
+  }
+
   .Container {
     width: 18rem;
   }
