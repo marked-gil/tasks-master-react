@@ -14,6 +14,7 @@
 }
 
 .ListGroupItem {
+  position: relative;
   width: 28rem;
   min-height: 78px;
   padding-top: 5px;
@@ -27,6 +28,20 @@
 .ListGroupItem:hover {
   color: #000000;
   background-color: #328aee69;
+}
+
+.IsSharedIcon {
+  position: absolute;
+  top: 5px;
+  right: 8px;
+  color: #d76a10;
+}
+
+.IsCompletedIcon {
+  position: absolute;
+  right: 8px;
+  top: 32px;
+  color: #1969ca;
 }
 
 .Completed {

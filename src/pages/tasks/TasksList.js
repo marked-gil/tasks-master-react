@@ -7,6 +7,7 @@ import styles from '../../styles/TasksList.module.css';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import LoadingIcon from '../../components/LoadingIcon';
 import { fetchMoreData } from '../../utils/utils';
+import { OverlayTrigger, Tooltip } from 'react-bootstrap';
 
 function TasksList(props) {
 
@@ -56,6 +57,18 @@ function TasksList(props) {
     )
   }
 
+  const renderIsSharedToolTip = (props) => (
+    <Tooltip id="button-tooltip" {...props}>
+      Shared
+    </Tooltip>
+  );
+
+  const renderIsCompletedToolTip = (props) => (
+    <Tooltip id="button-tooltip" {...props}>
+      Completed
+    </Tooltip>
+  );
+
   const TasksListItem = (task, completed) => (
     <div className={styles.TaskContainer} key={task.id}>
       <i className={`fa-solid fa-grip-vertical fa-xl ${styles.GripIcon}`}></i>
@@ -67,8 +80,27 @@ function TasksList(props) {
         `} 
         action
         href={`/task/${task.id}`}
-      >
+      > 
         {task.task_name}
+
+        {task.is_shared &&
+          <OverlayTrigger
+            placement="left"
+            delay={{ show: 150, hide: 400 }}
+            overlay={renderIsSharedToolTip}
+          >
+            <i className={`fa-solid fa-share-nodes ${styles.IsSharedIcon}`}></i>
+          </OverlayTrigger>
+        }
+        {task.is_completed &&
+          <OverlayTrigger
+            placement="left"
+            delay={{ show: 150, hide: 400 }}
+            overlay={renderIsCompletedToolTip}
+          > 
+            <i className={`fa-solid fa-check-double ${styles.IsCompletedIcon}`}></i>
+          </OverlayTrigger>
+        }
       </ListGroup.Item>
 
       <TaskPopover 
