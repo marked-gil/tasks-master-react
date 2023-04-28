@@ -5,7 +5,6 @@ export const getCategory = async (categoryID, setCategoryData, setError) => {
     const { data } = await axiosReq.get(`/categories/${categoryID}`);
     setCategoryData(data);
   } catch (err) {
-    console.log(err.response?.data)
     setError(err.response?.data);
   }
 }
