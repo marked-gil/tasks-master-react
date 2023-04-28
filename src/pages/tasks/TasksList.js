@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import moment from 'moment';
 import TaskPopover from '../../components/TaskPopover';
 import { ListGroup } from 'react-bootstrap';
@@ -23,7 +23,7 @@ function TasksList(props) {
   } = props;
 
   const dateToday = moment().format("YYYY-MM-DD");
-  const [ tasksList, setTasksList ] = useState({results: []});
+  const [ tasksList, setTasksList ] = useState({ results: [] });
 
   useEffect(() => {
     const updateOverdueTasks = async () => {
@@ -160,6 +160,6 @@ function TasksList(props) {
     }
     </ListGroup>
   )
-};
+}
 
 export default TasksList;

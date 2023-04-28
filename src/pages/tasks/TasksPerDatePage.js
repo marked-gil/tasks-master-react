@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { axiosReq } from '../../api/axiosDefaults';
 import { useHistory, useParams } from 'react-router-dom';
 import moment from 'moment';
@@ -53,7 +53,7 @@ function TasksPerDatePage({ newCategoryAdded }) {
     fetchedData();
   }, [due_date, newCategoryAdded]);
 
-  const handleFilterSubmit = async (event) => {
+  const handleFilterSubmit = async () => {
     setError("")
     setFeedbackMessage("")
     getFilteredTasks({filters, setTasks, setError, due_date, setIsLoaded});

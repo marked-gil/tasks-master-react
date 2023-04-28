@@ -15,6 +15,8 @@ import CommentCard from '../comments/CommentCard';
 import LoadingIcon from '../../components/LoadingIcon';
 import ErrorDisplay from '../../components/ErrorDisplay';
 import userAvatar from '../../assets/user-avatar.png';
+import InfiniteScroll from 'react-infinite-scroll-component';
+import { fetchMoreData } from '../../utils/utils';
 
 function TaskDetailsPage({ newCategoryAdded, setTaskChanged }) {
 
@@ -342,14 +344,22 @@ function TaskDetailsPage({ newCategoryAdded, setTaskChanged }) {
           />
 
           {!!comments.results.length && <h3 className={styles.LabelComments}>Comments</h3>}
-          {!!comments.results.length && comments.results.map((comment) => (
-            <CommentCard
-              key={comment.id} 
-              comment={comment} 
-              setComments={setComments} 
-              setError={setError}
-            />
-          ))}
+          {!!comments.results.length && 
+          <InfiniteScroll 
+            children={comments.results.map((comment) => (
+              <CommentCard
+                key={comment.id} 
+                comment={comment} 
+                setComments={setComments} 
+                setError={setError}
+              />
+            ))}
+            dataLength={comments.results.length}
+            loader={<LoadingIcon />}
+            hasMore={!!comments.next}
+            next={() => fetchMoreData(comments, setComments)}
+          />
+          }
           {!comments.results.length && <p className={styles.NoCommentYet}>No Comments Yet.</p>}
         </div>
       </div>

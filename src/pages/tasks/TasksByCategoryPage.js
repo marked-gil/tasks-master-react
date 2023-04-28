@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
@@ -252,6 +252,6 @@ function TasksByCategoryPage({ handleChangeInCategory }) {
       />
     </Col>
   )
-};
+}
 
 export default TasksByCategoryPage;
