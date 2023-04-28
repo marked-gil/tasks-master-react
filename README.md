@@ -2,7 +2,7 @@
 
 ![Am I Responsive Screenshot]()     
 
-Tasks Master is a React application website that is designed and developed to help users in the management of their tasks - be it professional, domestic, or others. Its functionalities are also designed to enhance the efficiency of collaboration with other users as it allows the sharing of tasks with other users. [View Live Website.](http://tasks-master.herokuapp.com/)
+Tasks Master is a React application website that is designed and developed to help users in the management of their tasks - be it professional, domestic, or others. Its functionalities are also designed to enhance the efficiency of collaboration with other users as it allows the sharing of tasks with other users. [View Live Website.](https://tasks-master.herokuapp.com)
 
 ## TABLE OF CONTENTS
 * [**User Experience Design (UXD)**](#user-experience-design-uxd)
@@ -486,13 +486,13 @@ This web application is deployed via Heroku. The following steps were taken:
 4. On my new app's page, there is a row of links, which includes: Overview, Resources, Deploy, Metrics, Activity, Access, and Settings. I went to the 'Deploy' link and clicked on Github as the Deployment Method.
 5. Below the Deployment Method section is the 'Connect to Github' section, where I searched for the name of my new app on Github using the search input field provided. When the name of the repository was displayed, I clicked on the 'connect' button.
 
-[View Live Website](http://tasks-master.herokuapp.com/)
+[View Live Website](https://tasks-master.herokuapp.com/)
 
 ### **Cloning from GitHub**
 
 To clone the repository for this site, do the following steps:
 
-* Go to this URL: https://github.com/marked-gil/tasks-master-re
+* Go to this URL: https://github.com/marked-gil/tasks-master-react
 * Inside the repository, look for the button labelled as 'Code', which is along the rows with other buttons such as 'Go to file' and 'Add file'.
 * Click on the 'Code' button, and a small popup box will show up with a top heading of 'Clone'.
 * In the popup box, click on the 'HTTPS' link and copy the URL just below it.

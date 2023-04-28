@@ -32,7 +32,6 @@ function TaskDetailsPage({ newCategoryAdded, setTaskChanged }) {
   const [ comments, setComments ] = useState({ results: [] });
   const [ isLoaded, setIsLoaded ] = useState(false);
 
-  
   const {
     owner,
     is_owner,
@@ -69,14 +68,8 @@ function TaskDetailsPage({ newCategoryAdded, setTaskChanged }) {
     fetchData();
   }, [id, newCategoryAdded]);
 
-  const cancelEditTaskName = () => {
-    setEditTaskName(!editTaskName);
-    setError("");
-  };
-
-  const cancelEditTaskDescription = () => {
-    setError("");
-    setEditTaskDescription(!editTaskDescription);
+  const cancelEdit = () => {
+    window.location.reload(false);
   };
 
   const handleDataChange = (event) => {
@@ -100,7 +93,6 @@ function TaskDetailsPage({ newCategoryAdded, setTaskChanged }) {
       setTaskData(data);
       setFeedbackMessage("Task is successfully updated.");
       setCloseAllEdits(true);
-      setEditTaskName(false);
       setEditTaskDescription(false);
       setIsLoaded(true);
     } catch (err) {
@@ -243,7 +235,7 @@ function TaskDetailsPage({ newCategoryAdded, setTaskChanged }) {
             <h3 className={styles.HeadingTaskName}>Task Name</h3>
 
             <div className={`${styles.EditTaskNameButtonsGroup}`}>
-              <Button variant="link" onClick={cancelEditTaskName}>
+              <Button variant="link" onClick={cancelEdit}>
                 cancel
               </Button>
               <Button variant="link" onClick={handleSave} className={styles.bold}>
@@ -287,7 +279,7 @@ function TaskDetailsPage({ newCategoryAdded, setTaskChanged }) {
             />
             <h3 className={styles.HeadingDetails}>Details</h3>
             <div className={`${styles.EditTaskDetailsButtonsGroup}`}>
-              <Button variant="link" onClick={cancelEditTaskDescription}>
+              <Button variant="link" onClick={cancelEdit}>
                 cancel
               </Button>
               <Button variant="link" onClick={handleSave} className={styles.bold}>
