@@ -514,6 +514,7 @@ This project uses the following tools:
     * [react-infinite-scroll-component](https://www.npmjs.com/package/react-infinite-scroll-component) - allows infinite scrolling of returned datas, e.g. tasks and comments
     * [Moment.js](https://momentjs.com/) - helps to parse, validate, manipulate, and display dates and times in Javascript
     * [MUI X](https://mui.com/x/react-date-pickers/date-picker/) - where the datepicker was taken from.
+    * [ESLint](https://eslint.org/) - checks code syntax and finds problem
 * [Google Fonts](https://fonts.google.com/)
 * [Freepik](https://www.freepik.com/) - for some icons used in this project.
 * [Flaticon](https://www.flaticon.com/) - for some icones used in this project.
