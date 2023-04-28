@@ -344,23 +344,29 @@ function TaskDetailsPage({ newCategoryAdded, setTaskChanged }) {
           />
 
           {!!comments.results.length && <h3 className={styles.LabelComments}>Comments</h3>}
-          {!!comments.results.length && 
-          <InfiniteScroll 
-            children={comments.results.map((comment) => (
-              <CommentCard
-                key={comment.id} 
-                comment={comment} 
-                setComments={setComments} 
-                setError={setError}
+          
+          <div className={styles.CommentContainer} id="scrollContainer">
+            {!!comments.results.length && 
+              <InfiniteScroll 
+                scrollableTarget="scrollContainer"
+                children={comments.results.map((comment) => (
+                  <CommentCard
+                    key={comment.id} 
+                    comment={comment} 
+                    setComments={setComments} 
+                    setError={setError}
+                  />
+                ))}
+                dataLength={comments.results.length}
+                loader={<LoadingIcon />}
+                hasMore={!!comments.next}
+                next={() => fetchMoreData(comments, setComments)}
               />
-            ))}
-            dataLength={comments.results.length}
-            loader={<LoadingIcon />}
-            hasMore={!!comments.next}
-            next={() => fetchMoreData(comments, setComments)}
-          />
-          }
-          {!comments.results.length && <p className={styles.NoCommentYet}>No Comments Yet.</p>}
+            }
+            {!comments.results.length && 
+              <p className={styles.NoCommentYet}>No Comments Yet.</p>
+            }
+          </div>
         </div>
       </div>
     </Col>

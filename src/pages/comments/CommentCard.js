@@ -12,7 +12,6 @@ function CommentCard(props) {
     setError, 
   } = props;
 
-
   const [ commentChanged, setCommentChanged ] = useState(false);
   const [ editComment, setEditComment ] = useState(comment);
   const [ feedback, setFeedback ] = useState("");

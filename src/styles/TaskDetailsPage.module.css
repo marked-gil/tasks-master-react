@@ -93,6 +93,14 @@
   font-weight: 700;
 }
 
+.CommentContainer {
+  max-height: 50rem;
+  overflow: auto;
+  border-bottom: 4px solid #405e9f;
+  padding-bottom: 20px ;
+  margin-bottom: 1.5rem;
+}
+
 .NoCommentYet {
   font-size: 18px;
   text-align: center;

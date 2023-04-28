@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react';
+import { axiosReq } from '../../api/axiosDefaults';
 import moment from 'moment';
 import TaskPopover from '../../components/TaskPopover';
-import { ListGroup } from 'react-bootstrap';
+import ListGroup from 'react-bootstrap/ListGroup';
 import styles from '../../styles/TasksList.module.css';
-import { axiosReq } from '../../api/axiosDefaults';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import LoadingIcon from '../../components/LoadingIcon';
 import { fetchMoreData } from '../../utils/utils';
