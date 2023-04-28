@@ -72,7 +72,6 @@ function ShareTaskModal(props) {
         setFeedback(`@${userProfile.owner} is added to the task.`)
         setSuccessFeedback(true);
       } catch (err) {
-        console.log(err.response)
         setFeedback("Sorry, an ERROR has occurred while attempting to add the user.")
       }
     }

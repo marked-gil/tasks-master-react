@@ -38,11 +38,6 @@ function TaskDetailsPage({ newCategoryAdded, setTaskChanged }) {
     profile_image,
     task_name, 
     details, 
-    category, 
-    due_date, 
-    due_time, 
-    priority, 
-    progress,
     shared_to,
     is_completed
   } = taskData;
@@ -68,6 +63,10 @@ function TaskDetailsPage({ newCategoryAdded, setTaskChanged }) {
     fetchData();
   }, [id, newCategoryAdded]);
 
+  const handleShareTask = (newTaskData) => {
+    setTaskData(newTaskData);
+  }
+
   const cancelEdit = () => {
     window.location.reload(false);
   };
@@ -81,13 +80,26 @@ function TaskDetailsPage({ newCategoryAdded, setTaskChanged }) {
     ));
   };
 
-  const handleShareTask = (newTaskData) => {
-    setTaskData(newTaskData);
+  const handleAttributesUpdate = async (newTaskData) => {
+    setIsLoaded(false);
+    setError("");
+    try {
+      const { data } = await axiosReq.put(`/tasks/${id}`, {...newTaskData});
+      setTaskData(data);
+      setFeedbackMessage("Task is successfully updated.");
+      setCloseAllEdits(true);
+      setEditTaskDescription(false);
+      setIsLoaded(true);
+    } catch (err) {
+      setError("Sorry, an error has occurred while updating data.");
+      setIsLoaded(true);
+    }
   }
 
   const handleSave = async () => {
     setIsLoaded(false);
     setError("");
+
     try {
       const { data } = await axiosReq.put(`/tasks/${id}`, {...taskData});
       setTaskData(data);
@@ -96,7 +108,8 @@ function TaskDetailsPage({ newCategoryAdded, setTaskChanged }) {
       setEditTaskDescription(false);
       setIsLoaded(true);
     } catch (err) {
-      setError("Sorry, an error has occurred while updating data. Refresh the page and try again.");
+      console.log(err)
+      setError("Sorry, an error has occurred while updating data.");
       setIsLoaded(true);
     }
   };
@@ -123,28 +136,32 @@ function TaskDetailsPage({ newCategoryAdded, setTaskChanged }) {
       {!isLoaded && <LoadingIcon size="6" />}
 
       <div className={styles.Container}>
-      {error && <ErrorDisplay error={error} />}
-
+        {error && <ErrorDisplay error={error} />}
         {feedbackMessage && <FeedbackMessage message={feedbackMessage} />}
+
         <div className="position-relative">
-          <h2>Task Details</h2>
+          <h2 className={styles.HeadingTaskDetails}>Task Details</h2>
 
           {is_owner && 
-            <div className={styles.DeleteSharedButtons}>
-              {/* DELETE BUTTON */}
-              <Button onClick={handleDelete} size="sm" variant='danger'>Delete Task</Button>
+            <>
+              <div className={styles.DeleteSharedButtons}>
+                {/* DELETE BUTTON */}
+                <Button onClick={handleDelete} size="sm" variant='danger'>Delete Task</Button>
 
-              {/* SHARE BUTTON */}
-              {!is_completed && <ShareTaskModal
-                task_name={task_name}
-                task_id={id}
-                set_task_data={setTaskData}
-                taskData={taskData}
-                handleShareTask={handleShareTask}
-                setError={setError}
-                setFeedbackMessage={setFeedbackMessage}
-              />}
-            </div>
+                {/* SHARE BUTTON */}
+                {!is_completed && 
+                  <ShareTaskModal
+                    task_name={task_name}
+                    task_id={id}
+                    set_task_data={setTaskData}
+                    taskData={taskData}
+                    handleShareTask={handleShareTask}
+                    setError={setError}
+                    setFeedbackMessage={setFeedbackMessage}
+                  />}
+              </div>
+              <Button size="sm" className={styles.SetCompleteButton}>Set as COMPLETE</Button>
+            </>
           }
         </div>
 
@@ -152,13 +169,10 @@ function TaskDetailsPage({ newCategoryAdded, setTaskChanged }) {
        <EditTaskAttributes
           is_owner={is_owner}
           handleDataChange={handleDataChange}
-          category={category}
           categories={categories}
-          handleSave={handleSave}
-          due_date={due_date}
-          due_time={due_time}
-          priority={priority}
-          progress={progress}
+          handleAttributesUpdate={handleAttributesUpdate}
+          setTaskData={setTaskData}
+          taskData={taskData}
           closeAllEdits={closeAllEdits}
           setCloseAllEdits={setCloseAllEdits}
           setFeedbackMessage={setFeedbackMessage}

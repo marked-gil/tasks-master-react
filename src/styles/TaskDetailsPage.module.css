@@ -11,6 +11,10 @@
   width: 34rem;
 }
 
+.HeadingTaskDetails {
+  margin-bottom: 36px;
+}
+
 .HeadingTaskName {
   font-size: .95rem;
   font-weight: 400;
@@ -28,6 +32,14 @@
   position: absolute;
   top: 0;
   right: 0;
+}
+
+.SetCompleteButton {
+  position: absolute;
+  right: 0;
+  top: 36px;
+  width: 195px;
+  padding: 4px 0;
 }
 
 .EditTaskNameButton {
@@ -168,7 +180,7 @@
 
   .SmallScreenAvatars {
     display: block;
-    margin-bottom: 18px;
+    margin-bottom: 18px;    
   }
 
   .AccordionBodyAvatar {
@@ -207,6 +219,10 @@
   .Container {
     width: 22rem;
   }
+
+  .TaskDetails {
+    font-size: 15px;
+  }
 }
 
 @media screen and (max-width: 390px) {
@@ -216,6 +232,16 @@
 
   .Container {
     width: 18rem;
+  }
+
+  .HeadingTaskDetails {
+    margin-bottom: 6px;
+  }
+
+  .SetCompleteButton {
+    right: 0;
+    top: 0;
+    width: 140px;
   }
 
   .DeleteSharedButtons {

@@ -3,6 +3,9 @@
   flex-direction: column;
   margin-top: 20px;
   margin-bottom: 10px;
+  padding: 8px;
+  background-color: #c7e3e38e;
+  border-radius: 10px;
 }
 
 .CategoryContainer {
@@ -10,30 +13,34 @@
   position: relative;
 }
 
-.EditFormsInnerBox {
-  display: flex;
-}
-
 .LabelCategory {
   font-size: 18px;
-  margin-right: 1.6rem;
+  width: 6.5rem;
+}
+
+.PriorityProgressGroup {
+  display: flex;
+  column-gap: 24px;
+  padding-left: 6.5rem;
+  margin-bottom: 0;
+}
+
+.EditFormsInnerBox {
+  margin-top: 8px;
+  display: flex;
+  column-gap: 8px;
 }
 
 .LabelDue {
+  display: inline-block;
   font-size: 18px;
-  margin-right: 3.8rem;
+  width: 6.5rem;
 }
 
 .CategoryName {
   font-size: 18px;
   font-weight: 600;
   text-transform: capitalize;
-}
-
-.CategoryButtons {
-  display: flex;
-  column-gap: 8px;
-  margin-left: auto;
 }
 
 .PriorityForm {
@@ -44,12 +51,12 @@
   display: flex;
   justify-content: space-between;
   margin-bottom: 0;
+  position: relative;
 }
 
 .EditFormSelect {
-  width: 16rem;
+  width: 24rem;
   font-size: 18px;
-  margin: 0 16px 16px 0;
   padding: 0 24px 0 16px ;
 }
 
@@ -82,35 +89,58 @@
   border-radius: 6px;
 }
 
+.AttributesEditButton {
+  font-weight: 600;
+  position: absolute;
+  bottom: -5px;
+  right: 0;
+}
+
+.SaveButton {
+  font-size: 18px;
+  font-weight: 600;
+  color: rgb(12, 44, 148);
+}
+
 .EditButtonsTwo {
+  position: absolute;
   align-self: center;
+  bottom: -10px;
+  right: 0;
 }
 
 @media screen and (max-width: 590px) {
+  .MainContainer {
+    margin-bottom: 30px;
+  }
+  
   .CategoryContainer {
-    margin-bottom: .8rem;
+    margin: 12px 0 0;
   }
 
   .LabelCategory {
     font-size: 15px;
-    margin-right: 1rem;
+    width: 4.5rem;
   }
 
   .CategoryName {
     font-size: 15px;
   }
 
-  .EditFormSelect {
-    width: 9rem;
-    font-size: 15px;
-    margin: 0;
-    padding: 0 24px 0 12px ;
-  }
-
   .LabelDue {
     font-size: 15px;
-    margin-right: 2.9rem;
+    width: 4.5rem;
   }
+
+  .PriorityProgressGroup {
+    padding-left: 4.5rem;
+  }
+
+  .EditFormsInnerBox {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+  }  
 
   .DueDateTime {
     font-size: 15px;
@@ -124,6 +154,13 @@
     font-size: 15px;
   }
 
+  .EditFormSelect {
+    width: 20rem;
+    font-size: 15px;
+    margin: 0;
+    padding: 0 24px 0 12px ;
+  }
+
   .PriorityForm {
     width: 6rem;
   }
@@ -131,25 +168,32 @@
   .High {
     font-size: 15px;
   }
+
+  .SaveButton {
+    font-size: 16px;
+  }
+  
+  .EditButtonsTwo {
+    bottom: -40px;
+    right: 0;
+  }
 }
 
 @media screen and (max-width: 465px) {
+  .LabelCategory {
+    font-size: 14px;
+  }
+
   .LabelDue {
-    margin-right: 1.6rem;
+    font-size: 14px;
   }
 
   .DueDateForm {
     width: 100px;
   }
 
-  .EditFormsInnerBox {
-    column-gap: 10px;
-  }
-
-  .EditButtonsTwo {
-    position: absolute;
-    right: 0;
-    top: 142px;
+  .EditFormSelect {
+    width: 16rem;
   }
 }
 
@@ -158,11 +202,14 @@
     margin-bottom: 5px;
   }
 
+  .PriorityProgressGroup {
+    column-gap: 12px;
+  }
+
   .EditFormSelect {
     width: 100%;
-    font-size: 16px;
     padding: 0 24px 0 12px ;
-    margin-bottom: 24px;
+    margin-bottom: 0;
   }
 
   .PriorityForm {
