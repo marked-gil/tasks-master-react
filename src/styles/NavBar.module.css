@@ -1,7 +1,7 @@
 .NavBar {
     background-color: #721817;
-    padding-left: 5rem;
-    padding-right: 5rem;
+    padding-left: 4rem;
+    padding-right: 10rem;
 }
 
 .NavBarOffCanvas {
@@ -65,6 +65,11 @@
     color: #0b6e47;
 }
 
+@media screen and (max-width: 1800px){
+    .NavBar {
+        padding-right: 5rem;
+    }
+}
 
 @media screen and (max-width: 1580px) {
     .ExpandedNavContainer {
@@ -78,7 +83,7 @@
 
 @media screen and (max-width: 1455px) {
     .NavBar {
-        padding-left: 2rem;
+        padding-left: 1.6rem;
         padding-right: 2rem;
     }
 }
@@ -132,7 +137,7 @@
 
 @media screen and (max-width: 356px) {
     .NavBar {
-        padding-left: .3rem;
+        padding-left: .2rem;
         padding-right: .3rem;
     }
 
