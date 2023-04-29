@@ -22,10 +22,11 @@ function TaskDetailsPage({ newCategoryAdded, setTaskChanged }) {
 
   const history = useHistory();
   const { id } = useParams();
+
   const [ taskData, setTaskData ] = useState({});
+  const [ editedTask, setEditedTask ] = useState({});
   const [ categories, setCategories ] = useState({ results: [] });
-  const [ editTaskName, setEditTaskName ] = useState(false);
-  const [ editTaskDescription, setEditTaskDescription ] = useState(false);
+  const [ editTask, setEditTask ] = useState(false);
   const [ closeAllEdits, setCloseAllEdits ] = useState(false);
   const [ feedbackMessage, setFeedbackMessage ] = useState("");
   const [ error, setError ] = useState("");
@@ -67,12 +68,8 @@ function TaskDetailsPage({ newCategoryAdded, setTaskChanged }) {
     setTaskData(newTaskData);
   }
 
-  const cancelEdit = () => {
-    window.location.reload(false);
-  };
-
   const handleDataChange = (event) => {
-    setTaskData(prevState => (
+    setEditedTask(prevState => (
       {
         ...prevState,
         [event.target.name]: event.target.value
@@ -85,28 +82,39 @@ function TaskDetailsPage({ newCategoryAdded, setTaskChanged }) {
     setError("");
     try {
       const { data } = await axiosReq.put(`/tasks/${id}`, {...newTaskData});
-      setTaskData(data);
-      setFeedbackMessage("Task is successfully updated.");
-      setCloseAllEdits(true);
-      setEditTaskDescription(false);
-      setIsLoaded(true);
+      setTimeout(() => {
+        setTaskData(data);
+        setFeedbackMessage("Task is successfully updated.");
+        setCloseAllEdits(true);
+        setEditTask(false);
+        setIsLoaded(true);
+      }, 1000);
     } catch (err) {
       setError("Sorry, an error has occurred while updating data.");
       setIsLoaded(true);
     }
   }
 
-  const handleSave = async () => {
+  const cancelTaskEdit = () => {
+    setEditedTask(taskData);
+    setEditTask(false);
+    setError("");
+    setFeedbackMessage("");
+  };
+
+  const handleTaskUpdate = async () => {
     setIsLoaded(false);
     setError("");
 
     try {
-      const { data } = await axiosReq.put(`/tasks/${id}`, {...taskData});
-      setTaskData(data);
-      setFeedbackMessage("Task is successfully updated.");
-      setCloseAllEdits(true);
-      setEditTaskDescription(false);
-      setIsLoaded(true);
+      const { data } = await axiosReq.put(`/tasks/${id}`, {...taskData, ...editedTask});
+      setTimeout(() => {
+        setTaskData(data);
+        setFeedbackMessage("Task is successfully updated.");
+        setEditTask(false);
+        setCloseAllEdits(true);
+        setIsLoaded(true);
+      }, 1000);
     } catch (err) {
       if (err.response?.data?.task_name) {
         setError("You cannot submit an empty Task Name.")
@@ -117,7 +125,7 @@ function TaskDetailsPage({ newCategoryAdded, setTaskChanged }) {
     }
   };
 
-  const handleDelete = async() => {
+  const handleTaskDelete = async() => {
     setError("");
     setFeedbackMessage("");
     setIsLoaded(false);
@@ -127,7 +135,7 @@ function TaskDetailsPage({ newCategoryAdded, setTaskChanged }) {
         setIsLoaded(true);
         setTaskChanged(true);
         history.goBack();
-      }, 1000)
+      }, 1000);
     } catch (err) {
       setError("An error occurred when attempting to delete the task.");
       setIsLoaded(true);
@@ -149,7 +157,7 @@ function TaskDetailsPage({ newCategoryAdded, setTaskChanged }) {
             <>
               <div className={styles.DeleteSharedButtons}>
                 {/* DELETE BUTTON */}
-                <Button onClick={handleDelete} size="sm" variant='danger'>Delete Task</Button>
+                <Button onClick={handleTaskDelete} size="sm" variant='danger'>Delete Task</Button>
 
                 {/* SHARE BUTTON */}
                 {!is_completed && 
@@ -170,15 +178,12 @@ function TaskDetailsPage({ newCategoryAdded, setTaskChanged }) {
 
         {/* TASK ATTRIBUTES */}
        <EditTaskAttributes
-          is_owner={is_owner}
-          handleDataChange={handleDataChange}
+          taskData={taskData}
           categories={categories}
           handleAttributesUpdate={handleAttributesUpdate}
-          setTaskData={setTaskData}
-          taskData={taskData}
           closeAllEdits={closeAllEdits}
           setCloseAllEdits={setCloseAllEdits}
-          setFeedbackMessage={setFeedbackMessage}
+          is_owner={is_owner}
         />
 
         {/* FOR SMALL SCREEN AVATARS */}
@@ -218,94 +223,77 @@ function TaskDetailsPage({ newCategoryAdded, setTaskChanged }) {
         </Accordion>
 
         {/* TASK NAME */}
-        {!editTaskName && 
+        {!editTask && 
           <div className="position-relative">
             <p className={styles.TaskName}>{task_name}</p>
             <h3 className={`text-muted ${styles.HeadingTaskName}`}>Task Name</h3>
-
-            {is_owner && !editTaskDescription &&
-              <Button 
-                variant="link" 
-                onClick={setEditTaskName}  
-                className={`${styles.EditTaskNameButton}`}
-              >
-                edit
-              </Button>
-            }
           </div>
         }
 
-        {editTaskName && 
+        {editTask && 
           <Form.Group className={`mb-3 position-relative`} controlId="taskName">
             <Form.Control
               as="textarea"
               autoFocus
-              rows={2}
+              rows={3}
               plaintext
               maxLength={150}
               name="task_name"
-              defaultValue={task_name}
+              defaultValue={editedTask.task_name ? editedTask.task_name : task_name}
               onChange={handleDataChange}
-              className={styles.TaskName}
+              className={`${styles.TaskName} ${styles.ActiveForm}`}
               aria-label="Edit the task name"
             />
             <h3 className={styles.HeadingTaskName}>Task Name</h3>
-
-            <div className={`${styles.EditTaskNameButtonsGroup}`}>
-              <Button variant="link" onClick={cancelEdit}>
-                cancel
-              </Button>
-              <Button variant="link" onClick={handleSave} className={styles.bold}>
-                SAVE
-              </Button>
-            </div>
           </Form.Group>
         }
         
         {/* TASK DETAILS/DESCRIPTION */}
-        {!editTaskDescription && 
+        {!editTask && 
           <div className={`${styles.TaskDetailsContainer}`}>
             <p className={styles.TaskDetails}>{details}</p>
             <h3 className={`text-muted ${styles.HeadingDetails}`}>Details</h3>
-
-            {is_owner && !editTaskDescription &&
-              <Button 
-                variant="link" 
-                onClick={setEditTaskDescription} 
-                className={`${styles.EditDetailsButton}`}
-              >
-                edit
-              </Button>
-            }
           </div>
         }
-        {editTaskDescription && 
-          <Form.Group className="mt-5 position-relative" controlId="taskDescription">
+        {editTask && 
+          <Form.Group className="position-relative" controlId="taskDescription">
             <Form.Control
               as="textarea"
               style={{ height:"150px" }}
-              autoFocus
               plaintext
               name="details"
-              defaultValue={details}
+              defaultValue={editedTask.details ? editedTask.details : details}
               maxLength={1000}
               placeholder="Write your details here."
               onChange={handleDataChange}
-              className={styles.TaskDetails}
+              className={`${styles.TaskDetails} ${styles.ActiveForm}`}
               aria-label="Edit task description"
             />
             <h3 className={styles.HeadingDetails}>Details</h3>
-            <div className={`${styles.EditTaskDetailsButtonsGroup}`}>
-              <Button variant="link" onClick={cancelEdit}>
-                cancel
-              </Button>
-              <Button variant="link" onClick={handleSave} className={styles.bold}>
-                SAVE
-              </Button>
-            </div>
           </Form.Group>
-        }  
+        }
 
+        {!editTask && 
+          <Button className="d-block mt-3 mb-2" style={{ width:"100%"}}
+            onClick={setEditTask}  
+          >
+            Edit Task
+          </Button>
+        }
+        {editTask && 
+          <div className="d-flex gap-3 mt-3 mb-2">
+            <Button variant="secondary" style={{ width:"30%"}} 
+              onClick={cancelTaskEdit}
+            >
+              cancel
+            </Button>
+            <Button style={{ width:"70%"}} onClick={handleTaskUpdate}>
+              SAVE
+            </Button>
+          </div>
+        }
+
+        {/* FOR BIG SCREEN AVATARS */}
         <div className={styles.AvatarsOuterContainer}>
           {/* OWNER AVATAR */}
           {profile_image &&

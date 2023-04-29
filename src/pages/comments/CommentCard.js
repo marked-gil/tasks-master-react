@@ -30,6 +30,7 @@ function CommentCard(props) {
 
   const handleSaveEdit = async() => {
     setError("");
+    setFeedback("");
     const formData = new FormData();
     formData.append('reply_to', "")
     formData.append('task', comment.task)
