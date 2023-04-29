@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Link, NavLink, useHistory } from 'react-router-dom';
+import { NavLink, useHistory } from 'react-router-dom';
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
@@ -56,16 +56,37 @@ function NavBar(props) {
   return (
     <>
       <Navbar expand="lg" className={`${styles.NavBar}`}>
-        <Container fluid>
-          <Navbar.Brand className="p-2 flex-grow-1">
+        <Container fluid >
+          <Navbar.Brand className="p-2">
             <img src={logo} alt="tasks master logo" className={styles.Logo}/>
           </Navbar.Brand>
           <Navbar.Toggle aria-controls={`offcanvasNavbar-expand-lg`} onClick={toggleMenu}/>
+
+          <div className={`d-none d-lg-flex flex-grow-1 justify-content-end gap-5 ${styles.ExpandedNavContainer}`}>
+            <SearchForm 
+              setSearchResults={setSearchResults} 
+              setKeywordSearched={setKeywordSearched}
+              className={styles.SearchForm}
+              setIsLoaded={setIsLoaded}
+              setError={setError}
+            />
+            <Nav className={styles.Nav}>
+              <NavLink to="/all-todos" className={styles.NavBarLink} 
+                activeClassName={styles.ActiveLink}
+              >
+                My Tasks
+              </NavLink>
+              <NavLink to="/profile" className={styles.NavBarLink} activeClassName={styles.ActiveLink}>My Profile</NavLink>
+              <SignOutLink className={styles.NavBarLink} />
+              <img src={currentUser?.profile_image} alt="profile avatar" className={styles.Avatar}/>
+            </Nav>
+          </div>
+
           <Navbar.Offcanvas
             id={`offcanvasNavbar-expand-lg`}
             aria-labelledby={`offcanvasNavbarLabel-expand-lg`}
             placement="end"
-            className={styles.NavBarOffCanvas}
+            className={`d-lg-none ${styles.NavBarOffCanvas}`}
             show={menuOpen}
             onHide={handleClose}
           >
@@ -75,23 +96,6 @@ function NavBar(props) {
                 {currentUser?.username}
               </Offcanvas.Title>
             </Offcanvas.Header>
-
-            {/* FOR LARGE SCREEN */}
-            <Offcanvas.Body className={`d-none d-lg-flex`}>
-              <SearchForm 
-                setSearchResults={setSearchResults} 
-                setKeywordSearched={setKeywordSearched}
-                className="d-flex"
-                setIsLoaded={setIsLoaded}
-                setError={setError}
-              />
-              <Nav className={`${styles.Nav} justify-content-end align-items-center flex-grow-1 pe-3`}>
-                <NavLink to="/all-todos" className={`p-0 ${styles.ClrWhite}`} >My Tasks</NavLink>
-                <NavLink to="/profile" className={`p-0 ${styles.ClrWhite}`} >My Profile</NavLink>
-                <SignOutLink className={`p-0 ${styles.ClrWhite}`} />
-                <img src={currentUser?.profile_image} alt="profile avatar" className={styles.Avatar}/>
-              </Nav>
-            </Offcanvas.Body>
 
             {/* FOR SMALL SCREEN */}
             <Offcanvas.Body className={`d-flex flex-column d-lg-none mb-5 ${styles.OffCanvasBody}`}>
@@ -103,9 +107,19 @@ function NavBar(props) {
                 setError={setError}
                 toggleMenu={toggleMenu}
               />
-              <Nav className={`${styles.Nav} mt-4`}>
-                <NavLink to="/all-todos" className={`p-0 `} onClick={toggleMenu}>My Tasks</NavLink>
-                <NavLink to="/profile" className={`p-0`} onClick={toggleMenu}>My Profile</NavLink>
+              <Nav className={`${styles.NavSmallScreen} mt-4`}>
+                <NavLink to="/all-todos" className={`p-0 `} 
+                  activeClassName={styles.OffCanvasActiveLink} 
+                  onClick={toggleMenu}
+                >
+                  My Tasks
+                </NavLink>
+                <NavLink to="/profile" className={`p-0`} 
+                  activeClassName={styles.OffCanvasActiveLink} 
+                  onClick={toggleMenu}
+                >
+                  My Profile
+                </NavLink>
                 <SignOutLink className={`p-0`} />
               </Nav>
 
@@ -140,33 +154,47 @@ function NavBar(props) {
                     Go
                   </Button>
                 </li>
-                <li className="mb-2">
-                  <Link to="/" ><i className="fa-solid fa-calendar-week me-3" onClick={toggleMenu}></i> Today</Link>
+                <li className={`mb-2`}>
+                  <NavLink exact to="/" onClick={toggleMenu} className={styles.OffCanvasLink} 
+                    activeClassName={styles.OffCanvasActiveLink}
+                  >
+                    <i className="fa-solid fa-calendar-week me-3"></i> Today
+                  </NavLink>
                 </li>
-                <li className="mb-2">
-                  <Link to={`/tasks/${moment().add(1, 'days').format('YYYY-MM-DD')}`} onClick={toggleMenu}>
+                <li className={`mb-2`}>
+                  <NavLink to={`/tasks/${moment().add(1, 'days').format('YYYY-MM-DD')}`} onClick={toggleMenu}
+                    className={styles.OffCanvasLink} activeClassName={styles.OffCanvasActiveLink}
+                  >
                     <i className="fa-sharp fa-solid fa-forward me-3"></i> Tomorrow
-                  </Link>
+                  </NavLink>
                 </li>
-                <li className="mb-2">
-                  <Link to="/all-todos" onClick={toggleMenu}>
+                <li className={`mb-2`}>
+                  <NavLink to="/all-todos" onClick={toggleMenu} className={styles.OffCanvasLink}
+                    activeClassName={styles.OffCanvasActiveLink}
+                  >
                     <i className="fa-solid fa-list-check me-3"></i> All Todo Tasks
-                  </Link>
+                  </NavLink>
                 </li>
-                <li className="mb-2">
-                  <Link to="/shared-tasks" onClick={toggleMenu}>
+                <li className={`mb-2`}>
+                  <NavLink to="/shared-tasks" onClick={toggleMenu} className={styles.OffCanvasLink}
+                    activeClassName={styles.OffCanvasActiveLink}
+                  >
                     <i className="fa-sharp fa-solid fa-share me-3"></i> Shared Tasks
-                  </Link>
+                  </NavLink>
                 </li>
                 <li className="mb-2">
-                  <Link to="/overdue-tasks" onClick={toggleMenu}>
+                  <NavLink to="/overdue-tasks" onClick={toggleMenu} className={styles.OffCanvasLink}
+                    activeClassName={styles.OffCanvasActiveLink}
+                  >
                     <i className="fa-sharp fa-solid fa-bell me-3"></i> Overdue Tasks
-                  </Link>
+                  </NavLink>
                 </li>
                 <li>
-                  <Link to="/completed-tasks" onClick={toggleMenu}>
+                  <NavLink to="/completed-tasks" onClick={toggleMenu} className={styles.OffCanvasLink} 
+                    activeClassName={styles.OffCanvasActiveLink}
+                  >
                     <i className="fa-solid fa-check-double me-3"></i> Completed Tasks
-                  </Link>
+                  </NavLink>
                 </li>
               </ul>
 
