@@ -11,7 +11,7 @@ function App() {
   
   const currentUser = useCurrentUser();
   const isLoggedIn = !!localStorage.getItem("refreshTokenTimestamp") || !!currentUser
-
+  
   return (
     <div className={styles.App}>
       <Switch>

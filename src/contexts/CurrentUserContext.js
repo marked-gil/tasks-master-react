@@ -17,14 +17,16 @@ export const CurrentUserProvider = ({ children }) => {
   const [currentUser, setCurrentUser] = useState(null);
   const history = useHistory();
 
-  const isLoggedIn = !!localStorage.getItem("refreshTokenTimestamp") 
+  const hasTokenStored = !!localStorage.getItem("refreshTokenTimestamp") 
 
   const handleMount = async () => {
-    if (isLoggedIn) {
+    if (hasTokenStored) {
       try {
         const { data } = await axiosRes.get("dj-rest-auth/user/");
         setCurrentUser(data);
       } catch (err) {
+        removeTokenTimestamp();
+        history.push("/signin");
       }
     }
   };
