@@ -135,7 +135,7 @@ function ProfilePage ({ currentUser }) {
 
   return (
     <Col className={styles.ProfilePage}>
-      <div className={`position-relative`}>
+      <div className={`position-relative mb-5`}>
         {!isLoaded && <LoadingIcon size="8" />}
         {feedbackMessage && <FeedbackMessage message={feedbackMessage} />}
         <ChangePasswordModal
@@ -258,7 +258,7 @@ function ProfilePage ({ currentUser }) {
           <Button
             variant="secondary" 
             size="sm" 
-            className="mt-5 align-self-start"
+            className={styles.ChangePasswordButton}
             onClick={() => {
               setChangePassModalShow(true)
               setFeedbackMessage("")

@@ -92,7 +92,16 @@
   padding: 24px 0 0 48px;
 }
 
+.ChangePasswordButton {
+  margin-top: 48px;
+  align-self: flex-start;
+}
+
 @media screen and (max-width: 650px) {
+  .ProfilePage {
+    padding: 2.5rem 0 0;
+  }
+
   .Form {
     width: 26rem;
   }
@@ -142,7 +151,7 @@
 
 @media screen and (max-width: 386px) {
   .Form {
-    padding-top: 2rem;
+    padding-top: 1.8rem;
     width: 18rem;
   }
 
@@ -190,5 +199,9 @@
 
   .ButtonsGroup {
     padding: 24px 0 0 0;
+  }
+
+  .ChangePasswordButton {
+    margin-top: 32px;
   }
 }
