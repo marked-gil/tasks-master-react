@@ -24,7 +24,7 @@ function SearchResultsPage(props) {
       <div className={styles.InnerContainer}>
         {error && <ErrorDisplay error={error} />}
         <h2 className={styles.HeadingSearchResults}>Search Results</h2>
-        <p className="mt-4">keyword searched: <span className="ms-2">{keywordSearched}</span></p>
+        <p className="mt-4">keyword searched: <span className="ms-2" style={{ fontWeight: "600"}}>{keywordSearched}</span></p>
 
         <hr />
     
