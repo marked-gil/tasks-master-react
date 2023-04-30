@@ -131,7 +131,7 @@ function TasksByCategoryPage({ handleChangeInCategory }) {
         {error && <ErrorDisplay error={error} />}
 
         <div className={`d-flex flex-column position-relative`}>
-          <h2 className={`mb-0 ${styles.HeadingOne}`}>My Category</h2>
+          <h2 className={`${styles.HeadingOne}`}>My Category</h2>
 
           {!editCategory && 
             <div className={`position-absolute end-0 ${styles.EditDeleteButtons}`}>
@@ -172,7 +172,7 @@ function TasksByCategoryPage({ handleChangeInCategory }) {
         </div>
         
         <div className="position-relative">
-          {!editCategory && !!categoryData.description &&
+          {!editCategory &&
             <>
               <p className="mb-0 mt-4">{categoryData.description || "Add a description."}</p>
               <hr className="m-0" style={{ backgroundColor:"#699df6", color:"#699df6", height:"5px" }}/>

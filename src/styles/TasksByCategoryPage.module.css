@@ -11,6 +11,7 @@
 }
 
 .HeadingOne {
+  margin-bottom: 0;
   text-transform: uppercase;
   font-size: 1.4rem;
   font-weight: 600;
@@ -79,6 +80,7 @@
 
   .HeadingOne {
     font-size: 1.2rem;
+    margin-bottom: 8px;
   }
 
   .HeadingTwo {
@@ -92,7 +94,6 @@
 
   .EditDeleteButtons {
     display: flex;
-    flex-direction: column;
-    row-gap: 10px;
+    column-gap: 5px;
   }
 }

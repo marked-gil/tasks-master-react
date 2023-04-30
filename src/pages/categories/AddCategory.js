@@ -1,10 +1,15 @@
-import axios from 'axios';
 import { useState } from 'react';
-import { Alert, Button, Form, Modal } from 'react-bootstrap';
+import axios from 'axios';
+import Alert from 'react-bootstrap/Alert';
+import Button from 'react-bootstrap/Button';
+import Form from 'react-bootstrap/Form';
+import Modal from 'react-bootstrap/Modal';
 import styles from '../../styles/AddCategory.module.css';
 import LoadingIcon from '../../components/LoadingIcon';
+import { useHistory } from 'react-router-dom';
 
 function AddCategory(props) {
+
   const { 
     currentUser, 
     categories, 
@@ -13,6 +18,7 @@ function AddCategory(props) {
     className 
   } = props;
 
+  const history = useHistory();
   const initialCategoryData = {
     category_name: "",
     description: "",
@@ -52,6 +58,7 @@ function AddCategory(props) {
         setCategories({results: [...categories.results, data]})
         handleChangeInCategory();
         handleClose();
+        history.push(`/categories/${data.id}`);
         setIsLoaded(true);
       }, 500)
     } catch (err) {
