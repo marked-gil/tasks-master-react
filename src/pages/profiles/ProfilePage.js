@@ -22,9 +22,14 @@ function ProfilePage ({ currentUser }) {
   }
 
   const [ profileData, setProfileData ] = useState(initialData);
+  const [ editedProfile, setEditedProfile ] = useState({});
   const [ feedbackMessage, setFeedbackMessage ] = useState("");
   const [ isLoaded, setIsLoaded ] = useState(false);
   const [ errors, setErrors ] = useState({});
+  const [ warningFirstName, setWarningFirstName ] = useState({});
+  const [ warningLastName, setWarningLastName ] = useState({});
+  const [ warningEmail, setWarningEmail ] = useState({});
+
   const [ changePassModalShow, setChangePassModalShow ] = useState(false);
 
   const {
@@ -41,6 +46,7 @@ function ProfilePage ({ currentUser }) {
         try {
           const { data } = await axiosReq.get(`/profiles/${profile_id}`);
           setProfileData(data);
+          setEditedProfile(data);
           setIsLoaded(true);
         } catch (err) {
           setIsLoaded(true);
@@ -51,10 +57,15 @@ function ProfilePage ({ currentUser }) {
     }
   },[profile_id]);
 
-  const handleCancel = () => window.location.reload(false);
+  const handleCancel = () => {
+    setEditedProfile(profileData);
+    setWarningFirstName({});
+    setWarningLastName({});
+    setWarningEmail({});
+  }
 
   const handleChange = (event) => {
-    setProfileData(prevState => ({
+    setEditedProfile(prevState => ({
       ...prevState,
       [event.target.name]: event.target.value
     }))
@@ -62,22 +73,58 @@ function ProfilePage ({ currentUser }) {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+    setFeedbackMessage("");
+    setErrors({});
+
+    let hasChanged = false;
+    let hasBeenEmptied = false;
 
     const formData = new FormData();
-    formData.append('first_name', first_name);
-    formData.append('last_name', last_name);
-    formData.append('email', email);
+    if (editedProfile.first_name !== first_name) {
+      if (editedProfile.first_name.length === 0) {
+        hasBeenEmptied = true;
+        setWarningFirstName({ border: "1px solid red" });
+      } else {
+        formData.append('first_name', editedProfile.first_name);
+        hasChanged = true;
+        setWarningFirstName({})
+      }
+    }
 
-    try {
+    if (editedProfile.last_name !== last_name) {
+      if (editedProfile.last_name.length === 0) {
+        hasBeenEmptied = true;
+        setWarningLastName({ border: "1px solid red" });
+      } else {
+        formData.append('last_name', editedProfile.last_name);
+        hasChanged = true;
+        setWarningLastName({});
+      }
+    }
+
+    if (editedProfile.email !== email) {
+      if (editedProfile.email.length === 0) {
+        hasBeenEmptied = true;
+        setWarningEmail({ border: "1px solid red" });
+      } else {
+        formData.append('email', editedProfile.email);
+        hasChanged = true;
+        setWarningEmail({})
+      }
+    }
+
+    if (hasChanged && !hasBeenEmptied) {
       setIsLoaded(false);
-      setFeedbackMessage("");
-      const { data } = await axiosReq.put(`profiles/${profile_id}/`, formData);
-      setProfileData(data);
-      setFeedbackMessage("Your profile information is successfully updated.");
-      setIsLoaded(true);
-    } catch (err) {
-      setErrors(err.response?.data);
-      setIsLoaded(true);
+      try {
+        const { data } = await axiosReq.put(`profiles/${profile_id}/`, formData);
+        setProfileData(data);
+        setEditedProfile(data);
+        setFeedbackMessage("Your profile information is successfully updated.");
+        setIsLoaded(true);
+      } catch (err) {
+        setErrors(err.response?.data);
+        setIsLoaded(true);
+      }
     }
   };
 
@@ -96,7 +143,7 @@ function ProfilePage ({ currentUser }) {
 
         <h2 className={styles.PageTitle}>My Profile</h2>
 
-          <Form onSubmit={handleSubmit} className={styles.Form}>
+          <Form onSubmit={handleSubmit} noValidate className={styles.Form}>
             <div className={`position-relative ${styles.ImageUsernameDiv}`}>
               <img src={image} alt="profile" className={styles.profileImage} />
               <UpdateProfileImage
@@ -107,6 +154,12 @@ function ProfilePage ({ currentUser }) {
                 className={styles.uploadIcon}
               />
 
+              {errors.generic?.map((error, idx) => (
+                <Alert className={`mb-0 pb-0 pt-0 ${styles.TextCenter}`} key={idx} variant="danger">
+                  {error}
+                </Alert>
+                ))
+              }
               {/* USERNAME */}
               <Form.Group 
                 className={`${styles.UsernameFormGroup} `}
@@ -140,17 +193,17 @@ function ProfilePage ({ currentUser }) {
                 placeholder="Enter your first name"
                 maxLength={50}
                 name="first_name"
-                value={first_name || ""}
+                value={editedProfile.first_name || ""}
                 onChange={handleChange}
+                style={warningFirstName}
               />
-
-              {errors.first_name?.map((error, idx) => (
-                <Alert className={`mt-1 mb-0 pb-0 pt-0 ${styles.TextCenter}`} key={idx} variant="danger">
+            </Form.Group>
+            {errors.first_name?.map((error, idx) => (
+                <Alert className={`mb-0 pb-0 pt-0 ${styles.TextCenter}`} key={idx} variant="danger">
                   {error}
                 </Alert>
                 ))
               }
-            </Form.Group>
 
             {/* LAST NAME */}
             <Form.Group className={`${styles.LastNameGroup}`} controlId="last-name">
@@ -160,17 +213,17 @@ function ProfilePage ({ currentUser }) {
                 maxLength={50}
                 placeholder="Enter your last name"
                 name="last_name"
-                value={last_name || ""}
+                value={editedProfile.last_name || ""}
                 onChange={handleChange}
+                style={warningLastName}
               />
-
-              {errors.last_name?.map((error, idx) => (
-                <Alert className={`mt-1 mb-0 pb-0 pt-0 ${styles.TextCenter}`} key={idx} variant="danger">
+            </Form.Group>
+            {errors.last_name?.map((error, idx) => (
+                <Alert className={`mb-0 pb-0 pt-0 ${styles.TextCenter}`} key={idx} variant="danger">
                   {error}
                 </Alert>
                 ))
               }
-            </Form.Group>
             
             {/* EMAIL */}
             <Form.Group className={`${styles.EmailGroup}`} controlId="email">
@@ -179,16 +232,17 @@ function ProfilePage ({ currentUser }) {
                 type="email"
                 placeholder="Enter your email address"
                 name="email"
-                value={email}
+                value={editedProfile.email || ""}
                 onChange={handleChange}
+                style={warningEmail}
               />
-              {errors.email?.map((error, idx) => (
+            </Form.Group>
+            {errors.email?.map((error, idx) => (
                 <Alert className={`mt-1 mb-0 pb-0 pt-0 text-center`} key={idx} variant="danger">
                   {error}
                 </Alert>
                 ))
               }
-            </Form.Group>
 
             <div className={`${styles.ButtonsGroup}`}>
               <Button variant="secondary" size="sm" onClick={handleCancel}>cancel</Button>
