@@ -136,6 +136,7 @@ function TasksList(props) {
         <span className={`
           ${styles.LegendProgress}
           ${task.progress === "overdue" ? styles.OverdueLegend : ""}
+          ${task.progress === "completed" ? styles.CompletedLegend : "" }
         `}>
           {task.progress}
         </span> | 

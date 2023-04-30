@@ -23,6 +23,8 @@
   margin-right: 4px;
   background-color: #93bdee52;
   border-radius: 5px;
+  display: flex;
+  align-items: center;
 }
 
 .ListGroupItem:hover {
@@ -58,6 +60,12 @@
 
 .OverdueLegend {
   background-color: #f4e174;
+}
+
+.CompletedLegend {
+  font-weight: 600;
+  background-color: #f1f7bd;
+  padding: 0 4px;
 }
 
 .Legend {
