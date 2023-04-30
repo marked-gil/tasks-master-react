@@ -416,9 +416,15 @@ The following are the wireframes used to provide a visual illustration of some o
 
 * **'SIGN IN' Page**    
 ![Sign In Page](readme/features/signin_page.png)
-* **'SIGN UP' Page**
-* **NavBar**
-* **Side Bar**
+* **'SIGN UP' Page**    
+![Sign Up Page](readme/features/signup_page.png)
+* **NavBar**    
+    On Expanded Screen
+    ![NavBar on Expanded Screen](readme/features/navbar.png)    
+    On Mobile Screen
+    ![Offcanvas Navbar on Mobile Screen](readme/features/navbar_offcanvas.png)
+* **Side Bar**      
+
 * **'My Tasks TODAY' Page**
 * **'My Tasks TOMORROW' Page**
 * **'My Tasks on Specific Date' Page**
