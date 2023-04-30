@@ -2,13 +2,13 @@ import { useEffect, useState } from 'react'
 import moment from 'moment';
 import styles from '../styles/SideBar.module.css'
 import { NavLink, useHistory } from 'react-router-dom';
-import { DatePicker } from '@mui/x-date-pickers';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import AddCategory from '../pages/categories/AddCategory';
 import LoadingIcon from './LoadingIcon';
 import AddTask from '../pages/tasks/AddTask';
 import { axiosReq } from '../api/axiosDefaults';
+import DatePickerComponent from './DatePickerComponent';
 
 const SideBar = (props) => {
 
@@ -18,7 +18,6 @@ const SideBar = (props) => {
   } = props;
 
   const history = useHistory();
-  const [ tasksDate, setTasksDate ] = useState(null);
   const [ categoryID, setCategoryID ] = useState("");
   const [ categories, setCategories ] = useState({ results: [] });
   const [ isLoaded, setIsLoaded ] = useState(false);
@@ -37,19 +36,13 @@ const SideBar = (props) => {
     getCategories();
   }, []);
 
-  const handleDateSelection = () => {
-    if (tasksDate) {
-          history.push(`/tasks/${moment(tasksDate).format('YYYY-MM-DD')}`)
-        }
-  };
-  
   const handleCategoryChange = (event) => {
-    setCategoryID(event.target.value)
+    setCategoryID(event.target.value);
   };
 
   const handleSubmitCategory = () => {
     if (categoryID) {
-      history.push(`/categories/${categoryID}`)
+      history.push(`/categories/${categoryID}`);
     }
   }
 
@@ -71,20 +64,7 @@ const SideBar = (props) => {
           />
         </li>
         <li className={`mb-2 d-flex ${styles.DatePickerContainer}`}>
-          <DatePicker
-            className={`me-2`}
-            label="Find Tasks by Date"
-            value={tasksDate} 
-            onChange={newValue => setTasksDate(newValue)}
-            slotProps={{
-              textField: {
-                size: 'small',
-                variant: 'filled', 
-                fullWidth: true,
-              },
-            }}
-          />
-          <Button onClick={handleDateSelection}>Go</Button>
+          <DatePickerComponent />
         </li>
         <li className="mb-2">
           <NavLink exact to="/" className={styles.Link} activeClassName={styles.ActiveLink}>
