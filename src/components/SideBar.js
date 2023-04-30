@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import moment from 'moment';
 import styles from '../styles/SideBar.module.css'
 import { Link, useHistory } from 'react-router-dom';
@@ -8,20 +8,34 @@ import Form from 'react-bootstrap/Form';
 import AddCategory from '../pages/categories/AddCategory';
 import LoadingIcon from './LoadingIcon';
 import AddTask from '../pages/tasks/AddTask';
+import { axiosReq } from '../api/axiosDefaults';
 
 const SideBar = (props) => {
 
   const { 
     currentUser, 
-    setCategories, 
-    categories, 
-    isLoaded,
     handleChangeInCategory
   } = props;
 
   const history = useHistory();
   const [ tasksDate, setTasksDate ] = useState(null);
   const [ categoryID, setCategoryID ] = useState("");
+  const [ categories, setCategories ] = useState({ results: [] });
+  const [ isLoaded, setIsLoaded ] = useState(false);
+
+  useEffect(() => {
+    const getCategories = async () => {
+      setIsLoaded(false);
+      try {
+        const { data } = await axiosReq.get(`/categories/`);
+        setCategories(data);
+        setIsLoaded(true);
+      } catch (err) {
+        setIsLoaded(true);
+      }
+    };
+    getCategories();
+  }, []);
 
   const handleDateSelection = () => {
     if (tasksDate) {

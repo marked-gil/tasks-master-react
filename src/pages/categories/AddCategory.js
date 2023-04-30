@@ -13,7 +13,6 @@ function AddCategory(props) {
     className 
   } = props;
 
-
   const initialCategoryData = {
     category_name: "",
     description: "",
@@ -49,10 +48,12 @@ function AddCategory(props) {
     try {
       setIsLoaded(false);
       const { data } = await axios.post("/categories/", {...newData});
-      setCategories({results: [...categories.results, data]})
-      handleChangeInCategory();
-      handleClose();
-      setIsLoaded(true);
+      setTimeout(() => {
+        setCategories({results: [...categories.results, data]})
+        handleChangeInCategory();
+        handleClose();
+        setIsLoaded(true);
+      }, 500)
     } catch (err) {
       setErrors(err.response?.data);
       setIsLoaded(true);

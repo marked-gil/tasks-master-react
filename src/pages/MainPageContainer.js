@@ -46,8 +46,8 @@ function MainPageContainer(props) {
 
   useEffect(() => {
     const getCategories = async () => {
+      setIsLoaded(false);
       try {
-        setIsLoaded(false);
         const { data } = await axiosReq.get(`/categories/`);
         setCategories(data);
         setIsLoaded(true);
@@ -76,13 +76,7 @@ function MainPageContainer(props) {
       />
       <Container fluid className={styles.MainContent}>
         <Row className={styles.Row}>
-          <SideBar 
-            currentUser={currentUser} 
-            categories={categories} 
-            setCategories={setCategories}
-            isLoaded={isLoaded}
-            handleChangeInCategory={handleChangeInCategory}
-          />
+          <SideBar currentUser={currentUser} handleChangeInCategory={handleChangeInCategory} />
           {profile ? <ProfilePage currentUser={currentUser} /> 
             : tasksTodayPage ? <TasksTodayPage 
                 newCategoryAdded={newCategoryAdded}
