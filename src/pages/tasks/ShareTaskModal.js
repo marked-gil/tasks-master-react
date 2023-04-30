@@ -36,21 +36,26 @@ function ShareTaskModal(props) {
   };
 
   const handleChange = (event) => {
-    setUserSearch(event.target.value)
+    setUserSearch(event.target.value);
   };
 
   const handleSearch = async () => {
     if (userSearch === taskData.owner) {
-      setFeedback("You are already the owner of the task.")
+      setFeedback("You are already the owner of the task.");
       setUserProfile({});
     } else if (taskData.shared_to.length !== 4) {
       if (userSearch) {
         try {
-          const { data } = await axiosReq.get(`/profiles/?search=${userSearch}`)
-          setUserProfile(data.results[0]);
-          setFeedback("")
+          const { data } = await axiosReq.get(`/profiles/?search=${userSearch}`);
+          const searchResult = data.results[0];
+          if (!searchResult) {
+            setFeedback("Username does not exist.");
+          } else {
+            setUserProfile(data.results[0]);
+            setFeedback("");
+          }
         } catch (err) {
-          setFeedback("Sorry, an ERROR has occurred during database search.")
+          setFeedback("Sorry, an ERROR has occurred during database search.");
         }
       }
     } else {
