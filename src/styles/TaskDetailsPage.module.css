@@ -11,8 +11,8 @@
   width: 34rem;
 }
 
-.HeadingTaskDetails {
-  margin-bottom: 36px;
+.AddMarginBottom {
+  margin-bottom: 40px;
 }
 
 .HeadingTaskName {
@@ -40,6 +40,12 @@
   top: 36px;
   width: 195px;
   padding: 4px 0;
+}
+
+.SetIncompleteButton {
+  width: 140px;
+  padding: 4px 0;
+  margin-left: 12px;
 }
 
 .EditTaskNameButton {

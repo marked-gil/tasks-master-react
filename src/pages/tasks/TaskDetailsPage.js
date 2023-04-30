@@ -17,6 +17,7 @@ import ErrorDisplay from '../../components/ErrorDisplay';
 import userAvatar from '../../assets/user-avatar.png';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import { fetchMoreData } from '../../utils/utils';
+import moment from 'moment';
 
 function TaskDetailsPage({ newCategoryAdded, setTaskChanged }) {
 
@@ -68,6 +69,49 @@ function TaskDetailsPage({ newCategoryAdded, setTaskChanged }) {
     setTaskData(newTaskData);
   }
 
+  const handleTaskComplete = () => {
+    const task = {
+      ...taskData,
+      "due_date": moment(new Date(taskData.due_date)).format("yyyy-MM-DD"),
+      "is_completed": true
+    }
+
+    const updateTasks = async () => {
+      setIsLoaded(false);
+      try {
+        const { data } = await axiosReq.put(`/tasks/${id}`, task);
+        setTimeout(() => {
+          setTaskData(data);
+          setFeedbackMessage("This task is set as COMPLETE.")
+          setIsLoaded(true);
+        }, 1000);
+      } catch (err) {
+        setFeedbackMessage("");
+        setError("Sorry, an error has occurred while updating the task.");
+        setIsLoaded(true);
+      }
+    }
+    updateTasks();
+  }
+
+  const handleTaskIncomplete = async () => {
+    setIsLoaded(false);
+    try {
+      const { data } = await axiosReq.put(`/tasks/${id}`, {
+        ...taskData, "datetime_completed": null, "is_completed": false
+      });
+      setTimeout(() => {
+        setTaskData(data);
+        setFeedbackMessage("This task has been UNDONE.")
+        setIsLoaded(true);
+      }, 1000);
+    } catch (err) {
+      setFeedbackMessage("");
+      setError("Sorry, an error has occurred while updating the task.");
+      setIsLoaded(true);
+    }
+  }
+
   const handleDataChange = (event) => {
     setEditedTask(prevState => (
       {
@@ -90,6 +134,7 @@ function TaskDetailsPage({ newCategoryAdded, setTaskChanged }) {
         setIsLoaded(true);
       }, 1000);
     } catch (err) {
+      setFeedbackMessage("");
       setError("Sorry, an error has occurred while updating data.");
       setIsLoaded(true);
     }
@@ -151,11 +196,11 @@ function TaskDetailsPage({ newCategoryAdded, setTaskChanged }) {
         {feedbackMessage && <FeedbackMessage message={feedbackMessage} />}
 
         <div className="position-relative">
-          <h2 className={styles.HeadingTaskDetails}>Task Details</h2>
+          <h2 className={`${styles.HeadingTaskDetails} ${!is_completed && styles.AddMarginBottom}`}>Task Details</h2>
 
           {is_owner && 
             <>
-              <div className={styles.DeleteSharedButtons}>
+              <div className={`${styles.DeleteSharedButtons}`}>
                 {/* DELETE BUTTON */}
                 <Button onClick={handleTaskDelete} size="sm" variant='danger'>Delete Task</Button>
 
@@ -170,8 +215,19 @@ function TaskDetailsPage({ newCategoryAdded, setTaskChanged }) {
                     setError={setError}
                     setFeedbackMessage={setFeedbackMessage}
                   />}
+                {is_completed && 
+                  <Button size="sm" className={styles.SetIncompleteButton} onClick={handleTaskIncomplete}
+                  >
+                    Set as INCOMPLETE
+                  </Button>
+                }
               </div>
-              <Button size="sm" className={styles.SetCompleteButton}>Set as COMPLETE</Button>
+              {/* SET AS COMPLETE BUTTON */}
+              {!is_completed && 
+                <Button size="sm" className={styles.SetCompleteButton} onClick={handleTaskComplete}>
+                  Set as COMPLETE
+                </Button>
+              }
             </>
           }
         </div>

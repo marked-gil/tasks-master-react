@@ -43,7 +43,9 @@ function TaskPopover(props) {
   const handleUndo = async () => {
     try {
       const { data } = await axiosReq.put(`/tasks/${task.id}`, {
-        ...task, "datetime_completed": null, "is_completed": false});
+        ...task, "datetime_completed": null, "is_completed": false
+        }
+      );
         setTasksList(prevState => ({
         results: [...prevState.results.filter(item => item.id !== task.id), data]
       }))
