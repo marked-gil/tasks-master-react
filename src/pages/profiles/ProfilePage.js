@@ -117,10 +117,12 @@ function ProfilePage ({ currentUser }) {
       setIsLoaded(false);
       try {
         const { data } = await axiosReq.put(`profiles/${profile_id}/`, formData);
-        setProfileData(data);
-        setEditedProfile(data);
-        setFeedbackMessage("Your profile information is successfully updated.");
-        setIsLoaded(true);
+        setTimeout(() => {
+          setProfileData(data);
+          setEditedProfile(data);
+          setFeedbackMessage("Your profile information is successfully updated.");
+          setIsLoaded(true);
+        }, 1000)
       } catch (err) {
         setErrors(err.response?.data);
         setIsLoaded(true);
