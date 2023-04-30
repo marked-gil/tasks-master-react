@@ -317,14 +317,15 @@ function TaskDetailsPage({ newCategoryAdded, setTaskChanged }) {
           </Form.Group>
         }
 
-        {!editTask && 
+        {!editTask && is_owner &&
           <Button className="d-block mt-3 mb-2" style={{ width:"100%"}}
             onClick={setEditTask}  
           >
             Edit Task
           </Button>
         }
-        {editTask && 
+
+        {editTask && is_owner &&
           <div className="d-flex gap-3 mt-3 mb-2">
             <Button variant="secondary" style={{ width:"30%"}} 
               onClick={cancelTaskEdit}

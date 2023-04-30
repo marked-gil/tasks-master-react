@@ -161,7 +161,7 @@ function EditTaskAttributes(props) {
 
             {/* DUE DATETIME | PRIORITY | PROGRESS */}
             <div className={styles.DateTimePriorityContainer}>
-              {!showForms && !!due_time &&
+              {!showForms && !!due_date &&
                 <div>
                   <p className={`mb-0`}>
                     <span className={styles.LabelDue}>Due:</span>
