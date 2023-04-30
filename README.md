@@ -1,6 +1,6 @@
 # Tasks Master
 
-![Am I Responsive Screenshot]()     
+![Am I Responsive Screenshot](readme/others/iamresponsive_image.png)     
 
 Tasks Master is a React application website that is designed and developed to help users in the management of their tasks - be it professional, domestic, or others. Its functionalities are also designed to enhance the efficiency of collaboration with other users as it allows the sharing of tasks with other users. [View Live Website.](https://tasks-master.herokuapp.com)
 
@@ -413,6 +413,31 @@ The following are the wireframes used to provide a visual illustration of some o
 ![Navbar Offcanvas](readme/wireframes/navbar_offcanvas.png)
 
 ## Features
+
+* **'SIGN IN' Page**
+* **'SIGN UP' Page**
+* **NavBar**
+* **Side Bar**
+* **'My Tasks TODAY' Page**
+* **'My Tasks TOMORROW' Page**
+* **'My Tasks on Specific Date' Page**
+* **'My All Todo Tasks' Page**
+* **'My Shared Tasks' Page**
+* **'My Overdue Tasks' Page**
+* **'My Completed Tasks' Page**
+* **'My Tasks Per Category' Page**
+* **'Task Details' Page**
+* **'My Profile' Page**
+* **'Search Results' Page**
+* **Task Item**
+* **Task Sharing Component**
+* **Task Options Popover**
+* **Comments**
+* **Add Task Component**
+* **Add Category Component**
+* **Date Picker**
+* **Tasks Filter**
+
 
 [<ins>Back to Table of Contents</ins>](#table-of-contents)
 
