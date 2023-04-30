@@ -41,7 +41,8 @@ function TaskDetailsPage({ newCategoryAdded, setTaskChanged }) {
     task_name, 
     details, 
     shared_to,
-    is_completed
+    is_completed,
+    is_shared
   } = taskData;
 
   useEffect(() => {
@@ -258,22 +259,24 @@ function TaskDetailsPage({ newCategoryAdded, setTaskChanged }) {
                   nameFontSize={"13px"}
                 />
               }
-
-              <div className={`d-flex gap-1 justify-content-evenly flex-wrap`}>
-                {shared_to?.map((user) => (
-                  <ProfileAvatar
-                    key={user}
-                    owner={user}
-                    isOwner={false}
-                    showName={true}
-                    img_src={userAvatar}
-                    imageWidth={"1.5rem"}
-                    taskData={taskData}
-                    setTaskData={setTaskData}
-                    className={`${styles.SharedToAvatar} ${styles.AccordionSharedToAvatar}`}
-                  />))
-                }
-              </div>
+              {/* USERS SHARING THE TASK */}
+              {is_shared && 
+                <div className={`d-flex gap-1 justify-content-evenly flex-wrap`}>
+                  {shared_to?.map((user) => (
+                    <ProfileAvatar
+                      key={user}
+                      owner={user}
+                      isOwner={false}
+                      showName={true}
+                      img_src={userAvatar}
+                      imageWidth={"1.5rem"}
+                      taskData={taskData}
+                      setTaskData={setTaskData}
+                      className={`${styles.SharedToAvatar} ${styles.AccordionSharedToAvatar}`}
+                    />))
+                  }
+                </div>
+              }
             </Accordion.Body>
           </Accordion.Item>
         </Accordion>
