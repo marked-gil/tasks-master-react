@@ -429,21 +429,24 @@ The following are the wireframes used to provide a visual illustration of some o
 ![My Tasks Today page](readme/features/my_tasks_today.png)  
 * **'My Tasks TOMORROW' Page**      
 ![My Tasks Tomorrow page](readme/features/my_tasks_tomorrow.png)    
-* **'My Tasks on Specific Date' Page**      
-![My Tasks Upcoming Tasks page]     
-
+* **'My Tasks on Specific Date' Page**    
+    Upcoming Tasks on Specific Date
+    ![My Upcoming Tasks page](readme/features/upcoming_tasks_page.png)     
+    Previous Tasks on Specific Date
+    ![My Previous Tasks page](readme/features/previous_tasks_page.png)      
 * **'My All Todo Tasks' Page**      
-![My All Todo Tasks page]
+![My All Todo Tasks page](readme/features/all_todo_tasks.png)   
 
 * **'My Shared Tasks' Page**    
 ![My Shared Tasks page](readme/features/shared_tasks_page.png)  
 * **'My Overdue Tasks' Page**   
 ![My Overdue Tasks page](readme/features/overdue_tasks_page.png)    
 * **'My Completed Tasks' Page**     
-
+![My Completed Tasks page](readme/features/completed_tasks_page.png)    
 * **'My Tasks Per Category' Page**  
 ![My Tasks per Category page](readme/features/tasks_per_category_page.png)
-* **'Task Details' Page**
+* **'Task Details' Page**   
+![Task Details page](readme/features/tasks_details_page.png)    
 * **'My Profile' Page**
 * **'Search Results' Page**
 * **Task Item**

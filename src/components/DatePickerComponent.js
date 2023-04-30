@@ -12,9 +12,9 @@ function DatePickerComponent({ toggleMenu }) {
 
   const handleDateSelection = () => {
     if (tasksDate) {
-          history.push(`/tasks/${moment(tasksDate).format('YYYY-MM-DD')}`);
-          toggleMenu && toggleMenu();
-        }
+      history.push(`/tasks/${moment(tasksDate).format('YYYY-MM-DD')}`);
+      toggleMenu && toggleMenu();
+    }
   };
 
   return (
