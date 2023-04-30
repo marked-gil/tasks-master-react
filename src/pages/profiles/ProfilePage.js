@@ -75,6 +75,9 @@ function ProfilePage ({ currentUser }) {
     event.preventDefault();
     setFeedbackMessage("");
     setErrors({});
+    setWarningFirstName({});
+    setWarningLastName({});
+    setWarningEmail({});
 
     let hasChanged = false;
     let hasBeenEmptied = false;
