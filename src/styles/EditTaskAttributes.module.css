@@ -66,10 +66,12 @@
 
 .Priority {
   font-size: 18px;
+  font-weight: 600;
 }
 
 .Progress {
   font-size: 18px;
+  font-weight: 600;
   text-transform: capitalize;
 }
 
@@ -87,6 +89,10 @@
   padding: 0 5px;
   background-color: #eeef9e;
   border-radius: 6px;
+}
+
+.Completed {
+  color: #c3740b;
 }
 
 .AttributesEditButton {

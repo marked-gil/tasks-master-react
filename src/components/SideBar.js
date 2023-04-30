@@ -49,9 +49,9 @@ const SideBar = (props) => {
   return (
     <div className={`${styles.SideBar}`}>
       {isLoaded && 
-        <p className={styles.UserGreeting}>
+        <h2 className={styles.UserGreeting}>
           Hi, <span className={`ms-1 ${styles.Username}`}>{currentUser?.username}</span>!
-        </p>
+        </h2>
       }
       <ul className="d-flex flex-column gap-3 ps-0 mb-5 mt-5 position-relative">
         {!isLoaded && <LoadingIcon size="4" />}
@@ -67,7 +67,7 @@ const SideBar = (props) => {
           <DatePickerComponent />
         </li>
         <li className="mb-2">
-          <NavLink exact to="/" className={styles.Link} activeClassName={styles.ActiveLink}>
+          <NavLink exact to="/" className={styles.Link} activeClassName={styles.ActiveLink} >
             <i className="fa-solid fa-calendar-week me-3"></i> Today
           </NavLink>
         </li>

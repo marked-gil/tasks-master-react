@@ -35,7 +35,12 @@
 }
 
 .ActiveLink {
-  color: #721817;
+  border-top: 3px solid #1358a7;
+  border-bottom: 3px solid #1358a7;
+}
+
+.Link {
+  color: #1358a7;
 }
 
 .Link:hover {

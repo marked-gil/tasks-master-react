@@ -174,7 +174,10 @@ function EditTaskAttributes(props) {
                       {priority === 1 ? "Low" : priority === 2 ? "Medium" : "High"}
                     </span> 
                     <span className={styles.VerticalLine}> | </span>
-                    <span className={`${styles.Progress} ${progress === "overdue" ? styles.Overdue : ""}`}>
+                    <span className={`${styles.Progress} 
+                      ${progress === "overdue" ? styles.Overdue : ""} 
+                      ${progress === "completed" ? styles.Completed : ""}`}
+                    >
                       {progress}
                     </span>
                   </p>
@@ -192,7 +195,9 @@ function EditTaskAttributes(props) {
               { showForms &&
                 <div className={`${styles.EditButtonsTwo}`}>
                   <Button onClick={handleCancelEdit} variant="link" className="ms-3 p-0">cancel</Button>
-                  <Button onClick={handleAttributesUpdate} variant="link" className={styles.SaveButton}>SAVE</Button>
+                  <Button onClick={handleAttributesUpdate} variant="link" className={styles.SaveButton}>
+                    SAVE
+                  </Button>
                 </div>}
               { is_owner && !showForms &&
                 <Button 

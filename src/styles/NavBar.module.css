@@ -57,8 +57,22 @@
     color: #E0E0E2;
 }
 
+.OffCanvasNavBarLink {
+    color: #1358a7;
+}
+
+.OffCanvasNavBarLink:hover {
+    color: #0b6e47;
+}
+
+
 .OffCanvasActiveLink {
-    color: #721817;
+    border-top: 3px solid #1358a7;
+    border-bottom: 3px solid #1358a7;
+}
+
+.OffCanvasLink {
+    color: #1358a7;
 }
 
 .OffCanvasLink:hover {

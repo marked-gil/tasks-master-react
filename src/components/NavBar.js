@@ -100,19 +100,19 @@ function NavBar(props) {
                 toggleMenu={toggleMenu}
               />
               <Nav className={`${styles.NavSmallScreen} mt-4`}>
-                <NavLink to="/all-todos" className={`p-0 `} 
+                <NavLink to="/all-todos" className={`p-0 ${styles.OffCanvasNavBarLink}`} 
                   activeClassName={styles.OffCanvasActiveLink} 
                   onClick={toggleMenu}
                 >
                   My Tasks
                 </NavLink>
-                <NavLink to="/profile" className={`p-0`} 
+                <NavLink to="/profile" className={`p-0 ${styles.OffCanvasNavBarLink}`} 
                   activeClassName={styles.OffCanvasActiveLink} 
                   onClick={toggleMenu}
                 >
                   My Profile
                 </NavLink>
-                <SignOutLink className={`p-0`} />
+                <SignOutLink className={`p-0 ${styles.OffCanvasNavBarLink}`} />
               </Nav>
 
               <hr />
