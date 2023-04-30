@@ -92,7 +92,8 @@ function MainPageContainer(props) {
             : tasksByCategoryPage ? <TasksByCategoryPage handleChangeInCategory={handleChangeInCategory} />
             : completedTasksPage ? <CompletedTasksPage newCategoryAdded={newCategoryAdded} />
             : sharedTasksPage ? <SharedTasksPage newCategoryAdded={newCategoryAdded} />
-            : searchResultsPage ? <SearchResultsPage 
+            : searchResultsPage ? <SearchResultsPage
+                setSearchResults={setSearchResults}
                 searchResults={searchResults} 
                 keywordSearched={keywordSearched}
                 isLoaded={isLoaded}

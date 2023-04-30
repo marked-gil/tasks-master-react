@@ -1,13 +1,25 @@
 .SearchResultsPage {
   position: relative;
-  padding: 5rem 0 0;
+  padding: 3rem 0 0;
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin-bottom: 20px;
 }
 
 .InnerContainer {
   width: 36rem;
+}
+
+.HeadingSearchResults { 
+  font-weight: 600;
+}
+
+.ResultsContainer {
+  max-height: 50rem;
+  overflow: auto;
+  padding-bottom: 20px ;
+  margin-bottom: 1.5rem;
 }
 
 .TaskTitle {

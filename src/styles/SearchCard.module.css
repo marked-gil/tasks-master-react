@@ -7,6 +7,10 @@
   margin-bottom: 0;
 }
 
+.TaskName:hover {
+  text-decoration: underline;
+}
+
 .Category {
   font-size: .9rem;
   margin-bottom: 0;

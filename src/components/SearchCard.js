@@ -8,7 +8,7 @@ function SearchCard({ task, TitleStyle, TextStyle }) {
     <Card className="mb-2">
       <Card.Body className={styles.CardBody}>
         <Card.Title className={TitleStyle}>
-          <Link to={`task/${task.id}`}>{task.task_name}</Link>
+          <Link to={`task/${task.id}`} className={styles.TaskName}>{task.task_name}</Link>
         </Card.Title>
         <Card.Text className={TextStyle}>{task.details}</Card.Text>
         <p className={`text-muted ${styles.Category}`}>
