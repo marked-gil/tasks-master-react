@@ -3,6 +3,7 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import styles from '../../styles/EditTaskAttributes.module.css';
 import moment from 'moment';
+import { axiosReq } from '../../api/axiosDefaults';
 
 
 function EditTaskAttributes(props) {
@@ -10,11 +11,12 @@ function EditTaskAttributes(props) {
   const {
     taskData,
     categories,
-    handleAttributesUpdate,
-    closeAllEdits,
-    setCloseAllEdits,
-    is_owner
-  } =props
+    setIsLoaded,
+    setError,
+    setFeedbackMessage,
+    is_owner,
+    isLoaded
+  } = props
 
   const [ showForms, setShowForms ] = useState(false);
   const [ newTaskData, setNewTaskData ] = useState(taskData);
@@ -31,16 +33,10 @@ function EditTaskAttributes(props) {
     setNewTaskData(taskData);
   }, [taskData]);
 
-  useEffect(() => {
-    if (closeAllEdits) {
-      setShowForms(false);
-    }
-    return setCloseAllEdits(false)
-  }, [closeAllEdits, setCloseAllEdits])
-
   const handleCancelEdit = () => {
     setNewTaskData(taskData);
     setShowForms(false);
+    setError("");
   }
 
   const handleDataChange = (event) => {
@@ -52,9 +48,27 @@ function EditTaskAttributes(props) {
     ))
   };
 
-  const handleUpdate = () => {
-    handleAttributesUpdate(newTaskData);
-  };
+  const handleAttributesUpdate = async () => {
+    setIsLoaded(false);
+    setError("");
+    try {
+      const { data } = await axiosReq.put(`/tasks/${taskData.id}`, {...newTaskData});
+      setTimeout(() => {
+        setNewTaskData(data);
+        setFeedbackMessage("Task is successfully updated.");
+        setShowForms(false);
+        setIsLoaded(true);
+      }, 1000);
+    } catch (err) {
+      setFeedbackMessage("");
+      if (err.response?.data?.due_date) {
+        setError("You need to provide a DUE DATE for your task.");
+      } else {
+        setError("Sorry, an error has occurred while updating data.");
+      }
+      setIsLoaded(true);
+    }
+  }
 
   const DueDateForm = <>
       {/* DUE DATE */}
@@ -69,17 +83,6 @@ function EditTaskAttributes(props) {
           size="sm"
           aria-label="Select a due date"
         />
-      {/* 
-        {errors.due_date?.map((error, idx) => (
-          <Alert className={`mt-1 mb-0 pb-0 pt-0 ${styles.TextCenter}`} key={idx} variant="danger">
-            {
-              error === "Date has wrong format. Use one of these formats instead: YYYY-MM-DD."
-              ? "You need to provide a due date."
-              : error
-            }
-          </Alert>
-          ))
-        } */}
       </Form.Group>
     </>
   
@@ -148,61 +151,64 @@ function EditTaskAttributes(props) {
   return (
     <>
       <div className={styles.MainContainer}>
+        {isLoaded && 
+          <>
+            {/* CATEGORY */}
+            <div className={`${styles.CategoryContainer}`}>
+              <span className={`${styles.LabelCategory}`}>Category:</span>
 
-        {/* CATEGORY */}
-        <div className={`${styles.CategoryContainer}`}>
-          <span className={`${styles.LabelCategory}`}>Category:</span>
+              {!showForms && <span className={styles.CategoryName}>{category}</span> }
 
-          {!showForms && <span className={styles.CategoryName}>{category}</span> }
+              {showForms && CategoryForm}
+            </div>
 
-          {showForms && CategoryForm}
-        </div>
+            {/* DUE DATETIME | PRIORITY | PROGRESS */}
+            <div className={styles.DateTimePriorityContainer}>
+              {!showForms &&
+                <div>
+                  <p className={`mb-0`}>
+                    <span className={styles.LabelDue}>Due:</span>
+                    <span className={`${styles.DueDateTime} ${styles.bold}`}>
+                      {moment(due_date).format("DD MMMM YYYY")} {due_time ? `- ${due_time}` : ""}
+                    </span>
+                  </p> 
+                  <p className={styles.PriorityProgressGroup}>
+                    <span className={`${styles.Priority} ${newTaskData.priority === 3 ? styles.High : ""}`}>
+                      {priority === 1 ? "Low" : priority === 2 ? "Medium" : "High"}
+                    </span> 
+                    <span className={styles.VerticalLine}> | </span>
+                    <span className={`${styles.Progress} ${progress === "overdue" ? styles.Overdue : ""}`}>
+                      {progress}
+                    </span>
+                  </p>
+                </div>
+              }
 
-          {/* DUE DATETIME | PRIORITY | PROGRESS */}
-          <div className={styles.DateTimePriorityContainer}>
-            {!showForms && 
-              <div>
-                <p className={`mb-0`}>
-                  <span className={styles.LabelDue}>Due:</span>
-                  <span className={`${styles.DueDateTime} ${styles.bold}`}>
-                    {moment(due_date).format("DD MMMM YYYY")} {due_time ? `- ${due_time}` : ""}
-                  </span>
-                </p> 
-                <p className={styles.PriorityProgressGroup}>
-                  <span className={`${styles.Priority} ${newTaskData.priority === 3 ? styles.High : ""}`}>
-                    {priority === 1 ? "Low" : priority === 2 ? "Medium" : "High"}
-                  </span> 
-                  <span className={styles.VerticalLine}> | </span>
-                  <span className={`${styles.Progress} ${progress === "overdue" ? styles.Overdue : ""}`}>
-                    {progress}
-                  </span>
-                </p>
-              </div>
-            }
+              {showForms && 
+                <div className={styles.EditFormsInnerBox}>
+                  { DueDateForm }
+                  { DueTimeForm }
+                  { PriorityForm }
+                </div>
+              }
 
-            {showForms && 
-              <div className={styles.EditFormsInnerBox}>
-                { DueDateForm }
-                { DueTimeForm }
-                { PriorityForm }
-              </div>
-            }
-
-            { showForms &&
-              <div className={`${styles.EditButtonsTwo}`}>
-                <Button onClick={handleCancelEdit} variant="link" className="ms-3 p-0">cancel</Button>
-                <Button onClick={handleUpdate} variant="link" className={styles.SaveButton}>SAVE</Button>
-              </div>}
-            { is_owner && !showForms &&
-              <Button 
-                onClick={setShowForms} 
-                variant="link" 
-                className={styles.AttributesEditButton}
-              >
-                edit
-              </Button>
-            }
-          </div>
+              { showForms &&
+                <div className={`${styles.EditButtonsTwo}`}>
+                  <Button onClick={handleCancelEdit} variant="link" className="ms-3 p-0">cancel</Button>
+                  <Button onClick={handleAttributesUpdate} variant="link" className={styles.SaveButton}>SAVE</Button>
+                </div>}
+              { is_owner && !showForms &&
+                <Button 
+                  onClick={setShowForms} 
+                  variant="link" 
+                  className={styles.AttributesEditButton}
+                >
+                  edit
+                </Button>
+              }
+            </div>
+          </>
+        }
       </div>
     </>
   )

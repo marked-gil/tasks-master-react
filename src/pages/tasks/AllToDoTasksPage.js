@@ -27,9 +27,11 @@ function AllToDoTasksPage({ newCategoryAdded }) {
           axiosReq.get(`/tasks/?progress=to-do`),
           axiosReq.get(`/categories/`)
         ]);
-        setTasks(fetchedTasks);
-        setCategories(fetchedCategories);
-        setIsLoaded(true);
+        setTimeout(() => {
+          setTasks(fetchedTasks);
+          setCategories(fetchedCategories);
+          setIsLoaded(true);
+        }, 500)
       } catch (err) {
         setError("An error has occurred while fetching data. Please try refreshing the page.");
         setIsLoaded(true);

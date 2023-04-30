@@ -23,10 +23,12 @@ function CompletedTasksPage({ newCategoryAdded }) {
         const [{ data: fetchedTasks }, { data: fetchedCategories }] = await Promise.all([
           axiosReq.get(`/tasks/?progress=completed&ordering=-due_date`),
           axiosReq.get(`/categories/`)
-        ]) 
-        setTasks(fetchedTasks);
-        setCategories(fetchedCategories);
-        setIsLoaded(true);
+        ]);
+        setTimeout(() => {
+          setTasks(fetchedTasks);
+          setCategories(fetchedCategories);
+          setIsLoaded(true);
+        }, 500)
       } catch (err) {
         setError("An error has occurred while fetching data. Please try refreshing the page.");
         setIsLoaded(true);

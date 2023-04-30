@@ -88,10 +88,11 @@ function AddTask(props) {
   }
 
   const handleSubmit = async () => {
+    setIsLoaded(false);
     const success_message = `Task has been successfully added for ${
       moment(due_date).format("Do MMMM YYYY")}.`
+
     try {
-      setIsLoaded(false);
       const { data } = await axiosReq.post("/tasks/", {...taskData, due_date, due_time, priority});
       handleClose();
       setFeedbackMessage && setFeedbackMessage(success_message)

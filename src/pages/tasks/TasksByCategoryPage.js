@@ -33,16 +33,18 @@ function TasksByCategoryPage({ handleChangeInCategory }) {
 
   useEffect(() => {
     const fetchedData = async () => {
+      setIsLoaded(false);
+      setEditCategory(false);
       try {
-        setIsLoaded(false);
-        setEditCategory(false);
         const [{ data: fetchedTasks }, { data: fetchedCategories }] = await Promise.all([
           axiosReq.get(`/tasks/?category=${id}`),
           axiosReq.get(`/categories/`)
-        ]) 
-        setTasks(fetchedTasks);
-        setCategories(fetchedCategories);
-        setIsLoaded(true);
+        ]);
+        setTimeout(() => {
+          setTasks(fetchedTasks);
+          setCategories(fetchedCategories);
+          setIsLoaded(true);
+        }, 500)
       } catch (err) {
         setError("An error has occurred while fetching data. Please try refreshing the page.")
         setIsLoaded(true);
@@ -57,34 +59,33 @@ function TasksByCategoryPage({ handleChangeInCategory }) {
   };
 
   const handleDataChange = (event) => {
-    setCategoryData(prevState => (
-      {
-        ...prevState,
+    setCategoryData(prevState => ({
+      ...prevState,
         [event.target.name]: event.target.value
-      }
-    ))
+      })
+    )
   };
 
   const handleUpdateCategory = async() => {
+    setError("");
+    setIsLoaded(false);
+
     const formData = new FormData();
     formData.append('category_name', categoryData.category_name);
     formData.append('description', categoryData.description);
-  
     try {
-      setError("");
-      setIsLoaded(false);
       const { data } = await axiosReq.patch(`categories/${id}`, formData);
-      setCategoryData(data);
-      setCategories(prevState => (
-        { 
+      setTimeout(() => {
+        setCategoryData(data);
+        setCategories(prevState => ({ 
           results: prevState.results.map(item => 
-            item.id === data.id ? data : item
-          )
-        }
-      ))
-      setEditCategory(false);
-      handleChangeInCategory();
-      setIsLoaded(true);
+            item.id === data.id ? data : item)
+          })
+        )
+        setEditCategory(false);
+        handleChangeInCategory();
+        setIsLoaded(true);
+      }, 1000);
     } catch (err) {
       if (err.response?.data?.non_field_errors) {
         setError(err.response?.data?.non_field_errors[0])
@@ -109,7 +110,7 @@ function TasksByCategoryPage({ handleChangeInCategory }) {
         handleChangeInCategory();
         setIsLoaded(true);
         history.push("/");
-      }, 1500)
+      }, 1000)
     } catch (err) {
       setError("Sorry, an error has occurred when deleting the category. Refresh the page and try again.")
       setIsLoaded(true);
@@ -132,21 +133,14 @@ function TasksByCategoryPage({ handleChangeInCategory }) {
         <div className={`d-flex flex-column position-relative`}>
           <h2 className={`mb-0 ${styles.HeadingOne}`}>My Category</h2>
 
-          {
-            !editCategory && 
+          {!editCategory && 
             <div className={`position-absolute end-0 ${styles.EditDeleteButtons}`}>
-              <Button 
-                variant="danger" 
-                className={styles.DeleteButton}
-                size="sm"
+              <Button variant="danger" className={styles.DeleteButton} size="sm"
                 onClick={handleDeleteCategory}
               >
                 delete
               </Button>
-              <Button 
-                variant="primary" 
-                className="m-0 ps-4 pe-4"
-                size="sm"
+              <Button variant="primary" className="m-0 ps-4 pe-4" size="sm"
                 onClick={setEditCategory}
               >
                 edit
@@ -195,22 +189,15 @@ function TasksByCategoryPage({ handleChangeInCategory }) {
         </div>
         
         <div className="d-flex justify-content-end">
-          {   
-            editCategory && 
+          {editCategory && 
             <>
-              <Button
-                variant="link" 
-                className="m-0 me-2"
-                size="sm"
+              <Button variant="link" className="m-0 me-2" size="sm"
                 onClick={cancelEditCategory}
               >
                 cancel
               </Button>
             
-              <Button 
-                variant="primary" 
-                className="m-0"
-                size="sm"
+              <Button variant="primary" className="m-0" size="sm"
                 onClick={handleUpdateCategory}
               >
                 SAVE

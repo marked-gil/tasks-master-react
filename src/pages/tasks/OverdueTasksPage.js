@@ -18,15 +18,17 @@ function OverdueTasksPage({ newCategoryAdded }) {
 
   useEffect(() => {
     const fetchedData = async () => {
+      setIsLoaded(false);
       try {
-        setIsLoaded(false);
         const [{ data: fetchedTasks }, { data: fetchedCategories }] = await Promise.all([
           axiosReq.get(`/tasks/?progress=overdue`),
           axiosReq.get(`/categories/`)
         ]);
-        setTasks(fetchedTasks);
-        setCategories(fetchedCategories);
-        setIsLoaded(true);
+        setTimeout(() => {
+          setTasks(fetchedTasks);
+          setCategories(fetchedCategories);
+          setIsLoaded(true);
+        }, 500)
       } catch (err) {
         setError("An ERROR has occurred while fetching data. Please try refreshing the page.")
         setIsLoaded(true);

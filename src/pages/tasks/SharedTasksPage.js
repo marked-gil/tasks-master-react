@@ -28,9 +28,11 @@ function SharedTasksPage({ newCategoryAdded }) {
           axiosReq.get(`/tasks/?is_shared=true`),
           axiosReq.get(`/categories/`)
         ]);
-        setTasks(fetchedTasks);
-        setCategories(fetchedCategories);
-        setIsLoaded(true);
+        setTimeout(() => {
+          setTasks(fetchedTasks);
+          setCategories(fetchedCategories);
+          setIsLoaded(true);
+        }, 500)
       } catch (err) {
         setError("An ERROR has occurred. Please try refreshing the page.");
         setIsLoaded(true);
@@ -84,7 +86,6 @@ function SharedTasksPage({ newCategoryAdded }) {
           setError={setError}
         />
       </div>
-
     </Col>
   )
 }

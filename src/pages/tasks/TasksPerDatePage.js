@@ -19,7 +19,6 @@ function TasksPerDatePage({ newCategoryAdded }) {
   const history = useHistory();
   const is_DueDateTomorrow = moment().add(1, 'days').format('YYYY-MM-DD') === due_date;
   const is_DueDatePrevious = due_date < dateToday;
-  
   const [ showCompletedTasks, setShowCompletedTasks ] = useState(false);
   const [ tasks, setTasks ] = useState({ results: []});
   const [ categories, setCategories ] = useState({ results: [] });
@@ -36,15 +35,17 @@ function TasksPerDatePage({ newCategoryAdded }) {
 
   useEffect(() => {
     const fetchedData = async () => {
+      setIsLoaded(false);
       try {
-        setIsLoaded(false);
         const [{ data: fetchedTasks }, { data: fetchedCategories }] = await Promise.all([
           axiosReq.get(`/tasks/?due_date=${moment(due_date).format("yyyy-MM-DD")}`),
           axiosReq.get(`/categories/`)
         ]);
-        setTasks(fetchedTasks);
-        setCategories(fetchedCategories);
-        setIsLoaded(true);
+        setTimeout(() => {
+          setTasks(fetchedTasks);
+          setCategories(fetchedCategories);
+          setIsLoaded(true);
+        }, 1000)
       } catch (err) {
         setError("An ERROR has occurred. Please try refreshing the page.")
         setIsLoaded(true);

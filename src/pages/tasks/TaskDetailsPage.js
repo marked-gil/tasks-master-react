@@ -28,7 +28,6 @@ function TaskDetailsPage({ newCategoryAdded, setTaskChanged }) {
   const [ editedTask, setEditedTask ] = useState({});
   const [ categories, setCategories ] = useState({ results: [] });
   const [ editTask, setEditTask ] = useState(false);
-  const [ closeAllEdits, setCloseAllEdits ] = useState(false);
   const [ feedbackMessage, setFeedbackMessage ] = useState("");
   const [ error, setError ] = useState("");
   const [ comments, setComments ] = useState({ results: [] });
@@ -47,17 +46,19 @@ function TaskDetailsPage({ newCategoryAdded, setTaskChanged }) {
 
   useEffect(() => {
     const fetchData = async () => {
+      setIsLoaded(false);
       try {
-        setIsLoaded(false);
         const [{data: taskData }, {data: commentData}, {data: fetchedCategories}] = await Promise.all([
           axiosReq.get(`/tasks/${id}`),
           axiosReq.get(`/comments/?task=${id}`),
           axiosReq.get(`/categories/`)
         ]);
-        setTaskData(taskData);
-        setComments(commentData);
-        setCategories(fetchedCategories);
-        setIsLoaded(true);
+        setTimeout(() => {
+          setTaskData(taskData);
+          setComments(commentData);
+          setCategories(fetchedCategories);
+          setIsLoaded(true);
+        }, 500)
       } catch (err) {
         setError("An ERROR has occurred while fetching data. Please try refreshing the page.")
         setIsLoaded(true);
@@ -114,32 +115,12 @@ function TaskDetailsPage({ newCategoryAdded, setTaskChanged }) {
   }
 
   const handleDataChange = (event) => {
-    setEditedTask(prevState => (
-      {
-        ...prevState,
-        [event.target.name]: event.target.value
-      }
-    ));
+    setEditedTask(prevState => ({
+      ...prevState,
+      [event.target.name]: event.target.value
+      })
+    );
   };
-
-  const handleAttributesUpdate = async (newTaskData) => {
-    setIsLoaded(false);
-    setError("");
-    try {
-      const { data } = await axiosReq.put(`/tasks/${id}`, {...newTaskData});
-      setTimeout(() => {
-        setTaskData(data);
-        setFeedbackMessage("Task is successfully updated.");
-        setCloseAllEdits(true);
-        setEditTask(false);
-        setIsLoaded(true);
-      }, 1000);
-    } catch (err) {
-      setFeedbackMessage("");
-      setError("Sorry, an error has occurred while updating data.");
-      setIsLoaded(true);
-    }
-  }
 
   const cancelTaskEdit = () => {
     setEditedTask(taskData);
@@ -158,7 +139,6 @@ function TaskDetailsPage({ newCategoryAdded, setTaskChanged }) {
         setTaskData(data);
         setFeedbackMessage("Task is successfully updated.");
         setEditTask(false);
-        setCloseAllEdits(true);
         setIsLoaded(true);
       }, 1000);
     } catch (err) {
@@ -197,7 +177,9 @@ function TaskDetailsPage({ newCategoryAdded, setTaskChanged }) {
         {feedbackMessage && <FeedbackMessage message={feedbackMessage} />}
 
         <div className="position-relative">
-          <h2 className={`${styles.HeadingTaskDetails} ${!is_completed && styles.AddMarginBottom}`}>Task Details</h2>
+          <h2 className={`${styles.HeadingTaskDetails} ${!is_completed && styles.AddMarginBottom}`}>
+            Task Details
+          </h2>
 
           {is_owner && 
             <>
@@ -217,7 +199,8 @@ function TaskDetailsPage({ newCategoryAdded, setTaskChanged }) {
                     setFeedbackMessage={setFeedbackMessage}
                   />}
                 {is_completed && 
-                  <Button size="sm" className={styles.SetIncompleteButton} onClick={handleTaskIncomplete}
+                  <Button size="sm" className={styles.SetIncompleteButton} 
+                    onClick={handleTaskIncomplete}
                   >
                     Set as INCOMPLETE
                   </Button>
@@ -225,7 +208,9 @@ function TaskDetailsPage({ newCategoryAdded, setTaskChanged }) {
               </div>
               {/* SET AS COMPLETE BUTTON */}
               {!is_completed && 
-                <Button size="sm" className={styles.SetCompleteButton} onClick={handleTaskComplete}>
+                <Button size="sm" className={styles.SetCompleteButton} 
+                  onClick={handleTaskComplete}
+                >
                   Set as COMPLETE
                 </Button>
               }
@@ -237,10 +222,11 @@ function TaskDetailsPage({ newCategoryAdded, setTaskChanged }) {
        <EditTaskAttributes
           taskData={taskData}
           categories={categories}
-          handleAttributesUpdate={handleAttributesUpdate}
-          closeAllEdits={closeAllEdits}
-          setCloseAllEdits={setCloseAllEdits}
+          setIsLoaded={setIsLoaded}
+          setError={setError}
+          setFeedbackMessage={setFeedbackMessage}
           is_owner={is_owner}
+          isLoaded={isLoaded}
         />
 
         {/* FOR SMALL SCREEN AVATARS */}
