@@ -424,15 +424,25 @@ The following are the wireframes used to provide a visual illustration of some o
     On Mobile Screen
     ![Offcanvas Navbar on Mobile Screen](readme/features/navbar_offcanvas.png)
 * **Side Bar**      
+![Side Bar on Expanded Screen](readme/features/sidebar.png)     
+* **'My Tasks TODAY' Page**     
+![My Tasks Today page](readme/features/my_tasks_today.png)  
+* **'My Tasks TOMORROW' Page**      
+![My Tasks Tomorrow page](readme/features/my_tasks_tomorrow.png)    
+* **'My Tasks on Specific Date' Page**      
+![My Tasks Upcoming Tasks page]     
 
-* **'My Tasks TODAY' Page**
-* **'My Tasks TOMORROW' Page**
-* **'My Tasks on Specific Date' Page**
-* **'My All Todo Tasks' Page**
-* **'My Shared Tasks' Page**
-* **'My Overdue Tasks' Page**
-* **'My Completed Tasks' Page**
-* **'My Tasks Per Category' Page**
+* **'My All Todo Tasks' Page**      
+![My All Todo Tasks page]
+
+* **'My Shared Tasks' Page**    
+![My Shared Tasks page](readme/features/shared_tasks_page.png)  
+* **'My Overdue Tasks' Page**   
+![My Overdue Tasks page](readme/features/overdue_tasks_page.png)    
+* **'My Completed Tasks' Page**     
+
+* **'My Tasks Per Category' Page**  
+![My Tasks per Category page](readme/features/tasks_per_category_page.png)
 * **'Task Details' Page**
 * **'My Profile' Page**
 * **'Search Results' Page**
