@@ -421,8 +421,8 @@ The following are the wireframes used to provide a visual illustration of some o
 * **NavBar**    
     On Expanded Screen
     ![NavBar on Expanded Screen](readme/features/navbar.png)    
-    On Mobile Screen
-    ![Offcanvas Navbar on Mobile Screen](readme/features/navbar_offcanvas.png)
+    On Mobile Screen    
+    ![Offcanvas Navbar on Mobile Screen](readme/features/navbar_offcanvas.png)  
 * **Side Bar**      
 ![Side Bar on Expanded Screen](readme/features/sidebar.png)     
 * **'My Tasks TODAY' Page**     
