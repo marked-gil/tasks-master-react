@@ -226,7 +226,6 @@ function TaskDetailsPage({ newCategoryAdded, setTaskChanged }) {
           setError={setError}
           setFeedbackMessage={setFeedbackMessage}
           is_owner={is_owner}
-          isLoaded={isLoaded}
         />
 
         {/* FOR SMALL SCREEN AVATARS */}

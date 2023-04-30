@@ -15,7 +15,6 @@ function EditTaskAttributes(props) {
     setError,
     setFeedbackMessage,
     is_owner,
-    isLoaded
   } = props
 
   const [ showForms, setShowForms ] = useState(false);
@@ -151,20 +150,18 @@ function EditTaskAttributes(props) {
   return (
     <>
       <div className={styles.MainContainer}>
-        {isLoaded && 
-          <>
             {/* CATEGORY */}
-            <div className={`${styles.CategoryContainer}`}>
+            {!!category && <div className={`${styles.CategoryContainer}`}>
               <span className={`${styles.LabelCategory}`}>Category:</span>
 
               {!showForms && <span className={styles.CategoryName}>{category}</span> }
 
               {showForms && CategoryForm}
-            </div>
+            </div>}
 
             {/* DUE DATETIME | PRIORITY | PROGRESS */}
             <div className={styles.DateTimePriorityContainer}>
-              {!showForms &&
+              {!showForms && !!due_time &&
                 <div>
                   <p className={`mb-0`}>
                     <span className={styles.LabelDue}>Due:</span>
@@ -207,8 +204,6 @@ function EditTaskAttributes(props) {
                 </Button>
               }
             </div>
-          </>
-        }
       </div>
     </>
   )

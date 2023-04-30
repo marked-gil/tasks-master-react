@@ -148,65 +148,65 @@ function TasksByCategoryPage({ handleChangeInCategory }) {
             </div>
           }
 
-          <div className="d-flex position-relative">
+          <div>
             {!editCategory &&
               <h2 className={`mb-0 ${styles.HeadingTwo}`}>{categoryData.category_name}</h2>
             }
 
             {editCategory && 
               <>
-                <p className="mb-0 me-2">Category:</p>
-                <Form.Control 
-                  type="text" 
+                <Form.Control
+                  autoFocus
+                  type="text"
+                  plaintext
                   maxLength="50" 
                   name="category_name"
                   defaultValue={category_name}
-                  className="mb-1"
+                  className={styles.CategoryNameForm}
                   onChange={handleDataChange}
                 />
+                <p className="mb-0 me-2">Category</p>
               </>
             }
           </div>
         </div>
         
-        <div className="d-flex mb-1 position-relative">
-          <p className="mb-0 me-2">Description:</p>
-          {!editCategory && 
-            <p className="mb-0">{categoryData.description}</p>
+        <div className="position-relative">
+          {!editCategory && !!categoryData.description &&
+            <>
+              <p className="mb-0 mt-4">{categoryData.description || "Add a description."}</p>
+              <hr className="m-0" style={{ backgroundColor:"#699df6", color:"#699df6", height:"5px" }}/>
+              <p className="mb-0 me-2 mb-3 text-muted">Description</p>
+            </>
           }
 
           {editCategory &&
-            <Form.Control 
-              as="textarea" 
-              row="2"
-              style={{maxHeight:"100px"}}
-              maxLength="100" 
-              name="description"
-              defaultValue={description}
-              onChange={handleDataChange}
-            />
-          }
-        </div>
-        
-        <div className="d-flex justify-content-end">
-          {editCategory && 
             <>
-              <Button variant="link" className="m-0 me-2" size="sm"
-                onClick={cancelEditCategory}
-              >
-                cancel
-              </Button>
-            
-              <Button variant="primary" className="m-0" size="sm"
-                onClick={handleUpdateCategory}
-              >
-                SAVE
-              </Button>
+              <Form.Control 
+                as="textarea" 
+                row="3"
+                plaintext
+                style={{maxHeight:"100px"}}
+                maxLength="100" 
+                name="description"
+                defaultValue={description}
+                className={styles.DescriptionForm}
+                onChange={handleDataChange}
+              />
+              <p className="mb-4 me-2 text-muted">Description</p>
+
+              <div className={`${styles.SaveCancelButtons}`}>
+                <Button variant="link" className="m-0 me-2" size="sm" onClick={cancelEditCategory}>
+                  cancel
+                </Button>
+              
+                <Button variant="primary" className="m-0 ps-4 pe-4" size="sm" onClick={handleUpdateCategory}>
+                  SAVE
+                </Button>
+              </div>
             </>
           }
         </div>
-
-        <hr />
 
         <TasksFilter
           setFilters={setFilters}
