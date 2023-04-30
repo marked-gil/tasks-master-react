@@ -9,11 +9,11 @@ import SignOutLink from '../pages/auth/SignOutLink';
 import SearchForm from './SearchForm'
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
-import { DatePicker } from '@mui/x-date-pickers';
 import AddTask from '../pages/tasks/AddTask';
 import moment from 'moment';
 import AddCategory from '../pages/categories/AddCategory';
 import logo from '../assets/tasks-master-logo-small.png';
+import DatePickerComponent from './DatePickerComponent';
 
 function NavBar(props) {
 
@@ -29,19 +29,11 @@ function NavBar(props) {
   } = props;
 
   const history = useHistory();
-  const [ tasksDate, setTasksDate ] = useState(null);
   const [ categoryID, setCategoryID ] = useState("");
   const [menuOpen, setMenuOpen] = useState(false);
   const toggleMenu = () => setMenuOpen(!menuOpen);
   const handleClose = () => setMenuOpen(false);
 
-  const handleDateSelection = () => {
-    if (tasksDate) {
-          history.push(`/tasks/${moment(tasksDate).format('YYYY-MM-DD')}`);
-          toggleMenu();
-        }
-  };
-  
   const handleCategoryChange = (event) => {
     setCategoryID(event.target.value)
   };
@@ -135,24 +127,7 @@ function NavBar(props) {
                   />
                 </li>
                 <li className={`mb-2 d-flex ${styles.DatePickerContainer}`}>
-                  <DatePicker
-                    className={`me-2`}
-                    label="Find Tasks by Date"
-                    value={tasksDate} 
-                    onChange={newValue => setTasksDate(newValue)}
-                    slotProps={{
-                      textField: {
-                        size: 'small',
-                        variant: 'filled', 
-                        fullWidth: true,
-                      },
-                    }}
-                  />
-                  <Button 
-                    onClick={handleDateSelection}
-                  >
-                    Go
-                  </Button>
+                  <DatePickerComponent />
                 </li>
                 <li className={`mb-2`}>
                   <NavLink exact to="/" onClick={toggleMenu} className={styles.OffCanvasLink} 
