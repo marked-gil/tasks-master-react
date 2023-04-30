@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import moment from 'moment';
 import styles from '../styles/SideBar.module.css'
-import { Link, useHistory } from 'react-router-dom';
+import { NavLink, useHistory } from 'react-router-dom';
 import { DatePicker } from '@mui/x-date-pickers';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
@@ -85,32 +85,36 @@ const SideBar = (props) => {
           <Button onClick={handleDateSelection}>Go</Button>
         </li>
         <li className="mb-2">
-          <Link to="/"><i className="fa-solid fa-calendar-week me-3"></i> Today</Link>
+          <NavLink exact to="/" className={styles.Link} activeClassName={styles.ActiveLink}>
+            <i className="fa-solid fa-calendar-week me-3"></i> Today
+          </NavLink>
         </li>
         <li className="mb-2">
-          <Link to={`/tasks/${moment().add(1, 'days').format('YYYY-MM-DD')}`}>
+          <NavLink to={`/tasks/${moment().add(1, 'days').format('YYYY-MM-DD')}`} className={styles.Link}
+            activeClassName={styles.ActiveLink}
+          >
             <i className="fa-sharp fa-solid fa-forward me-3"></i> Tomorrow
-          </Link>
+          </NavLink>
         </li>
         <li className="mb-2">
-          <Link to="/all-todos">
+          <NavLink to="/all-todos" className={styles.Link} activeClassName={styles.ActiveLink}>
             <i className="fa-solid fa-list-check me-3"></i> All Todo Tasks
-          </Link>
+          </NavLink>
         </li>
         <li className="mb-2">
-          <Link to="/shared-tasks">
+          <NavLink to="/shared-tasks" className={styles.Link} activeClassName={styles.ActiveLink}>
             <i className="fa-sharp fa-solid fa-share me-3"></i> Shared Tasks
-          </Link>
+          </NavLink>
         </li>
         <li className="mb-2">
-          <Link to="/overdue-tasks">
+          <NavLink to="/overdue-tasks" className={styles.Link} activeClassName={styles.ActiveLink}>
             <i className="fa-sharp fa-solid fa-bell me-3"></i> Overdue Tasks
-          </Link>
+          </NavLink>
         </li>
         <li>
-          <Link to="/completed-tasks">
+          <NavLink to="/completed-tasks" className={styles.Link} activeClassName={styles.ActiveLink}>
             <i className="fa-solid fa-check-double me-3"></i> Completed Tasks
-          </Link>
+          </NavLink>
         </li>
       </ul>
 
