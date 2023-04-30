@@ -414,7 +414,8 @@ The following are the wireframes used to provide a visual illustration of some o
 
 ## Features
 
-* **'SIGN IN' Page**
+* **'SIGN IN' Page**    
+![Sign In Page](readme/features/signin_page.png)
 * **'SIGN UP' Page**
 * **NavBar**
 * **Side Bar**
