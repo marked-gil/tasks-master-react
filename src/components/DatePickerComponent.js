@@ -5,14 +5,15 @@ import moment from 'moment';
 import { useHistory } from 'react-router-dom';
 
 
-function DatePickerComponent() {
+function DatePickerComponent({ toggleMenu }) {
 
   const history = useHistory();
   const [ tasksDate, setTasksDate ] = useState(null);
 
   const handleDateSelection = () => {
     if (tasksDate) {
-          history.push(`/tasks/${moment(tasksDate).format('YYYY-MM-DD')}`)
+          history.push(`/tasks/${moment(tasksDate).format('YYYY-MM-DD')}`);
+          toggleMenu();
         }
   };
 
@@ -26,10 +27,11 @@ function DatePickerComponent() {
         slotProps={{
           textField: {
             size: 'small',
-            variant: 'filled', 
+            variant: 'filled',
             fullWidth: true,
           },
         }}
+        desktopModeMediaQuery="(min-width: 992px)"
       />
       <Button onClick={handleDateSelection}>Go</Button>
     </>

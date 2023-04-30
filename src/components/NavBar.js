@@ -127,7 +127,7 @@ function NavBar(props) {
                   />
                 </li>
                 <li className={`mb-2 d-flex ${styles.DatePickerContainer}`}>
-                  <DatePickerComponent />
+                  <DatePickerComponent toggleMenu={toggleMenu} />
                 </li>
                 <li className={`mb-2`}>
                   <NavLink exact to="/" onClick={toggleMenu} className={styles.OffCanvasLink} 
