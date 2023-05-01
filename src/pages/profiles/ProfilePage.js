@@ -9,6 +9,8 @@ import UpdateProfileImage from './UpdateProfileImage';
 import LoadingIcon from '../../components/LoadingIcon';
 import FeedbackMessage from '../../components/FeedbackMessage';
 import ChangePasswordModal from '../auth/ChangePasswordModal';
+import DeleteProfileModal from './DeleteProfileModal';
+import ErrorDisplay from '../../components/ErrorDisplay';
 
 function ProfilePage ({ currentUser }) {
 
@@ -26,10 +28,11 @@ function ProfilePage ({ currentUser }) {
   const [ feedbackMessage, setFeedbackMessage ] = useState("");
   const [ isLoaded, setIsLoaded ] = useState(false);
   const [ errors, setErrors ] = useState({});
+  const [ error, setError ] = useState("");
   const [ warningFirstName, setWarningFirstName ] = useState({});
   const [ warningLastName, setWarningLastName ] = useState({});
   const [ warningEmail, setWarningEmail ] = useState({});
-
+  const [ showDeleteModal, setShowDeleteModal ]= useState(false);
   const [ changePassModalShow, setChangePassModalShow ] = useState(false);
 
   const {
@@ -52,7 +55,6 @@ function ProfilePage ({ currentUser }) {
           setIsLoaded(true);
         }
       }
-
       handleMount();
     }
   },[profile_id]);
@@ -137,7 +139,9 @@ function ProfilePage ({ currentUser }) {
     <Col className={styles.ProfilePage}>
       <div className={`position-relative mb-5`}>
         {!isLoaded && <LoadingIcon size="8" />}
+        {error && <ErrorDisplay error={error} />}
         {feedbackMessage && <FeedbackMessage message={feedbackMessage} />}
+
         <ChangePasswordModal
           setIsLoaded={setIsLoaded}
           setFeedbackMessage={setFeedbackMessage}
@@ -254,6 +258,16 @@ function ProfilePage ({ currentUser }) {
               <Button variant="primary" type="submit">Update</Button>
             </div>
           </Form>
+        
+        <DeleteProfileModal 
+          show={showDeleteModal} 
+          onHide={() => setShowDeleteModal(false)}
+          profile_id={profile_id}
+          setIsLoaded={setIsLoaded}
+          setError={setError}
+          setShowDeleteModal={setShowDeleteModal}
+        />
+
         <div className="d-flex flex-column">
           <Button
             variant="secondary" 
@@ -266,7 +280,12 @@ function ProfilePage ({ currentUser }) {
           >
             Change Password
           </Button>
-        </div>
+          <Button size="sm" variant="danger" className={styles.DeleteProfileButton}
+            onClick={setShowDeleteModal}
+          >
+            Delete Profile
+          </Button>
+      </div>
       </div>
     </Col>
   )

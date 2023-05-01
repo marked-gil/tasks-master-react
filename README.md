@@ -436,7 +436,6 @@ The following are the wireframes used to provide a visual illustration of some o
     ![My Previous Tasks page](readme/features/previous_tasks_page.png)      
 * **'My All Todo Tasks' Page**      
 ![My All Todo Tasks page](readme/features/all_todo_tasks.png)   
-
 * **'My Shared Tasks' Page**    
 ![My Shared Tasks page](readme/features/shared_tasks_page.png)  
 * **'My Overdue Tasks' Page**   
