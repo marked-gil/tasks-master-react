@@ -1,8 +1,8 @@
 import { useState } from 'react';
+import { Link, useHistory } from 'react-router-dom';
 import axios from 'axios';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
-import { Link, useHistory } from 'react-router-dom';
 import styles from '../../styles/SignInPage.module.css'
 import Alert from 'react-bootstrap/Alert';
 import { useSetCurrentUser } from '../../contexts/CurrentUserContext';
@@ -24,7 +24,9 @@ function SignInPage() {
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      const { data } = await axios.post("/dj-rest-auth/login/", signInData);
+      const { data } = await axios.post("/dj-rest-auth/login/", {
+        ...signInData, username: signInData.username.toLowerCase() 
+      });
       setCurrentUser(data.user);
       setTokenTimestamp(data);
       history.push('/');
