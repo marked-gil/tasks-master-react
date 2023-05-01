@@ -446,11 +446,16 @@ The following are the wireframes used to provide a visual illustration of some o
 ![My Tasks per Category page](readme/features/tasks_per_category_page.png)
 * **'Task Details' Page**   
 ![Task Details page](readme/features/tasks_details_page.png)    
-* **'My Profile' Page**
-* **'Search Results' Page**
-* **Task Item**
-* **Task Sharing Component**
-* **Task Options Popover**
+* **'My Profile' Page**     
+![My Profile page](readme/features/profile_page.png)    
+* **'Search Results' Page**     
+![Search Results page](readme/features/search_results_page.png) 
+* **Task Item**     
+![Task item](readme/features/task_item.png)     
+* **Task Sharing Component**        
+![Task Sharing component](readme/features/task_sharing_modal.png)       
+* **Task Options Popover**      
+![Task options popover](readme/features/task_popover.png)   
 * **Comments**
 * **Add Task Component**
 * **Add Category Component**

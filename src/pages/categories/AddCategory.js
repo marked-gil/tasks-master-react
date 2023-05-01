@@ -126,10 +126,10 @@ function AddCategory(props) {
         </Modal.Body>
 
         <Modal.Footer>
-          <Button variant="secondary" onClick={handleClose}>
+          <Button variant="secondary" size="sm" onClick={handleClose}>
             cancel
           </Button>
-          <Button variant="primary" onClick={handleSubmit}>
+          <Button variant="primary" onClick={handleSubmit} style={{ width: "8rem" }}>
             ADD
           </Button>
         </Modal.Footer>
