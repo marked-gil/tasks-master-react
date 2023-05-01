@@ -98,10 +98,6 @@
   border: none;
 }
 
-.DeleteProfileButton {
-  align-self: flex-end;
-}
-
 @media screen and (max-width: 650px) {
   .ProfilePage {
     padding: 2.5rem 0 0;
