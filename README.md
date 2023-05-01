@@ -456,12 +456,20 @@ The following are the wireframes used to provide a visual illustration of some o
 ![Task Sharing component](readme/features/task_sharing_modal.png)       
 * **Task Options Popover**      
 ![Task options popover](readme/features/task_popover.png)   
-* **Comments**
-* **Add Task Component**
-* **Add Category Component**
-* **Date Picker**
-* **Tasks Filter**
-
+* **Comments**      
+![Comment](readme/features/comment.png)
+* **Add Task Component**    
+![Add Task modal](readme/features/add_task.png)     
+* **Add Category Component**        
+![Add category modal](readme/features/add_category.png)     
+* **Date Picker**       
+    Large Screen    
+    ![Date picker for large screen](readme/features/datepicker-llarge-screen.png)        
+    Small Screen    
+    ![Date picker for smalle screen](readme/features/datepicker-small-screen.png)
+* **Tasks Filter**      
+![Task filter 1](readme/features/task_filter.png)       
+![Task filter 2](readme/features/task_filter_2.png)     
 
 [<ins>Back to Table of Contents</ins>](#table-of-contents)
 
