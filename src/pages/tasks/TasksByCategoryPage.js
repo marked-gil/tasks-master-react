@@ -31,6 +31,20 @@ function TasksByCategoryPage({ handleChangeInCategory }) {
     getCategory(id, setCategoryData, setError);
   }, [id, editCategory]);
 
+  const handleError = (err) => {
+    if (err.response?.data?.category) {
+      err.response?.data?.category.map(data => {
+        if (data.includes("is not a valid UUID")) {
+          history.push("/")
+        }
+      })
+    } else {
+      setError("An error has occurred while fetching data. Please try refreshing the page.")
+    }
+    setIsLoaded(true);
+  }
+    
+
   useEffect(() => {
     const fetchedData = async () => {
       setIsLoaded(false);
@@ -46,8 +60,7 @@ function TasksByCategoryPage({ handleChangeInCategory }) {
           setIsLoaded(true);
         }, 500)
       } catch (err) {
-        setError("An error has occurred while fetching data. Please try refreshing the page.")
-        setIsLoaded(true);
+        handleError(err);
       }
     }
     fetchedData();
