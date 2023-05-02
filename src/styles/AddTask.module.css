@@ -19,7 +19,7 @@
 
 .InnerContainer {
   display: flex;
-  gap: 1;
+  gap: 12px;
   width: 450px;
 }
 
@@ -34,6 +34,10 @@
 @media screen and (max-width: 991px) {
   .CategorySelect {
     margin-right: 0;
+  }
+
+  .InnerContainer {
+    gap: 6px;
   }
 
   .DueDateFormGroup {

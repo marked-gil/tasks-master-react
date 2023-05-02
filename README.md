@@ -515,9 +515,7 @@ The following are the wireframes used to provide a visual illustration of some o
 [<ins>Back to Table of Contents</ins>](#table-of-contents)
 
 ## Testing
-To view all the testing performed on this project, click on this [Link]().
-
-<-----------> ADD LINK HERE <----------->
+To view all the testing performed on this project, click on this [Link](https://github.com/marked-gil/tasks-master-react/blob/main/TESTING.md).
 
 ## Deployment
 

@@ -17,4 +17,16 @@ This project has undergone manual testing, and below are the results:
 ![Front-end-testing-5](readme/manual-testing/front-end-testing-5.png)   
 ![Front-end-testing-6](readme/manual-testing/front-end-testing-6.png)   
 
+
+## ESLint
+To ensure that the Javascript code in this project follows standard and is clean the [ESLint](https://eslint.org/) was installed and utilized. And all issued raised by the eslint were fixed.
+
+
 ## Validators
+*** CSS ***
+
+** WAVE - Web Accessibility Evaluation Tool **
+
+## Lighthouse Testing
+
+## Responsiveness
