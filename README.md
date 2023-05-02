@@ -367,8 +367,14 @@ The following are the User Stories that guided the creation of this React app:
 
 #### Design Choice
 
-* Color Choices:
-
+* Color Choices:    
+    The following are the colors used in this project:      
+    **Nav Bar**     
+    ![Nav Bar colors](readme/colors/navbar_colors.png)      
+    **Side Bar**    
+    ![Side Bar colors](readme/colors/sidebar_colors.png)        
+    **Footer**      
+    ![Footer colors](readme/colors/footer_colors.png)
 * Typography:
     * [Source Sans Pro(https://fonts.google.com/specimen/Source+Sans+Pro?query=source)] - from Google Fonts
 
