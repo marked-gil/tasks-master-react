@@ -53,7 +53,7 @@ function SignUpPage() {
             <Form.Control
               type="text"
               placeholder="Enter a username"
-              maxLength={15}
+              maxLength={20}
               name="username"
               value={username}
               onChange={handleChange}

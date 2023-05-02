@@ -63,6 +63,7 @@ function SignInPage() {
               type="text"
               placeholder="Enter your username"
               name="username"
+              maxLength={20}
               value={username}
               onChange={handleChange}
             />
