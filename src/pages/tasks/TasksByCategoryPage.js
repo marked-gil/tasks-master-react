@@ -39,12 +39,11 @@ function TasksByCategoryPage({ handleChangeInCategory }) {
         }
       })
     } else {
-      setError("An error has occurred while fetching data. Please try refreshing the page.")
+      setError("An error has occurred while fetching data. Try refreshing the page.")
     }
     setIsLoaded(true);
   }
     
-
   useEffect(() => {
     const fetchedData = async () => {
       setIsLoaded(false);

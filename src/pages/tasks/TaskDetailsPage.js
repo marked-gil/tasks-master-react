@@ -44,6 +44,21 @@ function TaskDetailsPage({ newCategoryAdded, setTaskChanged }) {
     is_shared
   } = taskData;
 
+  const handleError = (err) => {
+    if (err.response?.data?.task) {
+      err.response?.data?.task.map(data => {
+        if (data.includes("is not a valid UUID")) {
+          history.push("/")
+        }
+      })
+    } else if (err.response?.data?.detail === "Not found.") {
+        history.push("/")
+    } else {
+      setError("An error has occurred while fetching data. Try refreshing the page.")
+    }
+    setIsLoaded(true);
+  }
+
   useEffect(() => {
     const fetchData = async () => {
       setIsLoaded(false);
@@ -60,8 +75,7 @@ function TaskDetailsPage({ newCategoryAdded, setTaskChanged }) {
           setIsLoaded(true);
         }, 500)
       } catch (err) {
-        setError("An ERROR has occurred while fetching data. Please try refreshing the page.")
-        setIsLoaded(true);
+        handleError(err);
       }
     }
     fetchData();
