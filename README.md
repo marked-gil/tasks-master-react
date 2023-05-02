@@ -515,14 +515,9 @@ The following are the wireframes used to provide a visual illustration of some o
 [<ins>Back to Table of Contents</ins>](#table-of-contents)
 
 ## Testing
-This project has been manual testing, and below are the results:
+To view all the testing performed on this project, click on this [Link]().
 
-![Front-end-testing-1](readme/manual-testing/front-end-testing-1.png)   
-![Front-end-testing-2](readme/manual-testing/front-end-testing-2.png)   
-![Front-end-testing-3](readme/manual-testing/front-end-testing-3.png)   
-![Front-end-testing-4](readme/manual-testing/front-end-testing-4.png)   
-![Front-end-testing-5](readme/manual-testing/front-end-testing-5.png)   
-![Front-end-testing-6](readme/manual-testing/front-end-testing-6.png)   
+<-----------> ADD LINK HERE <----------->
 
 ## Deployment
 
