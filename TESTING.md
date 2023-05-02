@@ -1,8 +1,11 @@
 #TESTING
 
 ## TABLE OF CONTENTS
-* (Manual TEsting for User Stories)
-* Validators
+* [**Manual TEsting for User Stories**](#manual-testing)
+* [*ESLint*](#eslint)
+* [**Validators**](#validators)
+* [Lighthouse Testing](#lighthouse-testing)
+* [Responsiveness](#responsiveness)
 
 
 [>> **BACK TO README** <<](https://github.com/marked-gil/tasks-master-react#readme)
@@ -22,13 +25,21 @@ This project has undergone manual testing, and below are the results:
 To ensure that the Javascript code in this project follows standard and is clean the [ESLint](https://eslint.org/) was installed and utilized. And all issued raised by the eslint were fixed.
 
 
-## Validators
+## Validator 
+
+* **W3C CSS Validator**   
 All CSS files on this project were validated by [W3C Validation Service](https://jigsaw.w3.org/css-validator/), and all results showed "**NO ERROR FOUND**".
 
   ![W3C CSS Validator Result](readme/others/css_validator.png)
 
-** WAVE - Web Accessibility Evaluation Tool **
+* **WAVE - Web Accessibility Evaluation Tool**
+---> Content here <---
 
 ## Lighthouse Testing
 
 ## Responsiveness
+
+The responsiveness of this application has been testing on the **Chrome Developer tools**, and **Safari Responsive Design Mode**. And this site was designed to be responsive down to the smallest screen of **320px**.
+* Chrome Developer Tools    
+  ![Galaxy S5](readme/responsiveness/chrome-galaxyS5.png)
+  ![iphone12 Pro](readme/responsiveness/chrome-iphone12pro.png)

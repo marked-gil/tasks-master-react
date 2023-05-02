@@ -17,7 +17,7 @@ Tasks Master is a React application website that is designed and developed to he
     * [**Skeleton**](#skeleton)
         * [Wireframes](#wireframes)
     * [Surface]
-        * [Color and Contrast]
+        * [Color and Contrast]n 
 * [Features](#features)
 * [Features for Future Implementation](#features-left-for-future-implementation)
 * [Fixed Bugs](#fixed-bugs)
