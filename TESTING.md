@@ -23,7 +23,9 @@ To ensure that the Javascript code in this project follows standard and is clean
 
 
 ## Validators
-*** CSS ***
+All CSS files on this project were validated by [W3C Validation Service](https://jigsaw.w3.org/css-validator/), and all results showed "**NO ERROR FOUND**".
+
+  ![W3C CSS Validator Result](readme/others/css_validator.png)
 
 ** WAVE - Web Accessibility Evaluation Tool **
 

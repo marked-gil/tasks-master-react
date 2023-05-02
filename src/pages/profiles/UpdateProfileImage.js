@@ -1,5 +1,8 @@
 import { useEffect, useRef, useState } from 'react';
-import { Button, Figure, Form, Modal } from 'react-bootstrap';
+import Button from 'react-bootstrap/Button';
+import Figure from 'react-bootstrap/Figure';
+import Form from 'react-bootstrap/Form';
+import Modal from 'react-bootstrap/Modal';
 import { axiosReq } from '../../api/axiosDefaults';
 import LoadingIcon from '../../components/LoadingIcon';
 import { useSetCurrentUser } from '../../contexts/CurrentUserContext';

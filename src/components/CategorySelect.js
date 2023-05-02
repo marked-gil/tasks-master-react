@@ -1,6 +1,5 @@
 import Alert from 'react-bootstrap/Alert';
 import Form from 'react-bootstrap/Form';
-import styles from '../styles/CategorySelect.module.css'
 
 
 function CategorySelect({ className, category, handleChange, categories, errors }) {
@@ -26,7 +25,7 @@ function CategorySelect({ className, category, handleChange, categories, errors 
 
       {errors?.category?.map((error, idx) => (
         <Alert
-          className={`mt-1 mb-0 pb-0 pt-0 ${styles.TextCenter}`} key={idx} variant="danger"
+          className={`mt-1 mb-0 pb-0 pt-0 text-center`} key={idx} variant="danger"
         >
           { 
             error === "This field may not be null."
