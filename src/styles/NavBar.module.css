@@ -36,7 +36,10 @@
 }
 
 .Avatar {
-    width: 2rem;
+    border-radius: 6px;
+    width: 2.5rem;
+    height: 2.5rem;
+    object-fit: contain;
 }
 
 .NavBarLink {

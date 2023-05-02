@@ -49,6 +49,8 @@ function NavBar(props) {
     <>
       <Navbar expand="lg" className={`${styles.NavBar}`}>
         <Container fluid >
+          
+          {/* FOR LARGE SCREEN */}
           <Navbar.Brand className="p-2">
             <img src={logo} alt="tasks master logo" className={styles.Logo}/>
           </Navbar.Brand>
@@ -74,6 +76,7 @@ function NavBar(props) {
             </Nav>
           </div>
 
+          {/* FOR SMALL SCREEN */}
           <Navbar.Offcanvas
             id={`offcanvasNavbar-expand-lg`}
             aria-labelledby={`offcanvasNavbarLabel-expand-lg`}
@@ -89,7 +92,6 @@ function NavBar(props) {
               </Offcanvas.Title>
             </Offcanvas.Header>
 
-            {/* FOR SMALL SCREEN */}
             <Offcanvas.Body className={`d-flex flex-column d-lg-none mb-5 ${styles.OffCanvasBody}`}>
               <SearchForm 
                 setSearchResults={setSearchResults} 
