@@ -18,6 +18,7 @@ import userAvatar from '../../assets/user-avatar.png';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import { fetchMoreData } from '../../utils/utils';
 import moment from 'moment';
+import Spinner from 'react-bootstrap/Spinner';
 
 function TaskDetailsPage({ newCategoryAdded, setTaskChanged }) {
 
@@ -415,7 +416,7 @@ function TaskDetailsPage({ newCategoryAdded, setTaskChanged }) {
                   />
                 ))}
                 dataLength={comments.results.length}
-                loader={<LoadingIcon />}
+                loader={<Spinner animation="grow" variant="success" />}
                 hasMore={!!comments.next}
                 next={() => fetchMoreData(comments, setComments)}
               />

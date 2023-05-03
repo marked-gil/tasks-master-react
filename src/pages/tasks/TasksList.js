@@ -3,11 +3,13 @@ import { axiosReq } from '../../api/axiosDefaults';
 import moment from 'moment';
 import TaskPopover from '../../components/TaskPopover';
 import ListGroup from 'react-bootstrap/ListGroup';
+import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
+import Spinner from 'react-bootstrap/Spinner';
+import Tooltip from 'react-bootstrap/Tooltip';
 import styles from '../../styles/TasksList.module.css';
 import InfiniteScroll from 'react-infinite-scroll-component';
-import LoadingIcon from '../../components/LoadingIcon';
 import { fetchMoreData } from '../../utils/utils';
-import { OverlayTrigger, Tooltip } from 'react-bootstrap';
+
 
 function TasksList(props) {
 
@@ -164,7 +166,7 @@ function TasksList(props) {
                       task.is_completed ? TasksListItem(task, task.is_completed) : ""
                   ))}
                   dataLength={tasksList.results.length}
-                  loader={<LoadingIcon />}
+                  loader={<Spinner animation="grow" variant="success" />}
                   hasMore={!!tasksList.next}
                   next={() => fetchMoreData(tasksList, setTasksList)}
                 />
@@ -177,7 +179,7 @@ function TasksList(props) {
                     : !task.is_completed ? TasksListItem(task) : ""
                   ))}
                   dataLength={tasksList.results.length}
-                  loader={<LoadingIcon />}
+                  loader={<Spinner animation="grow" variant="success" />}
                   hasMore={!!tasksList.next}
                   next={() => fetchMoreData(tasksList, setTasksList)}
                 />

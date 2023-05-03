@@ -5,6 +5,7 @@ import LoadingIcon from '../../components/LoadingIcon';
 import ErrorDisplay from '../../components/ErrorDisplay';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import { fetchMoreData } from '../../utils/utils';
+import Spinner from 'react-bootstrap/Spinner';
 
 function SearchResultsPage(props) {
 
@@ -40,7 +41,7 @@ function SearchResultsPage(props) {
               />
             ))}
             dataLength={searchResults.results.length}
-            loader={<LoadingIcon />}
+            loader={<Spinner animation="grow" variant="success" />}
             hasMore={!!searchResults.next}
             next={() => fetchMoreData(searchResults, setSearchResults)}
             endMessage={hasReturnedResults ? <p className="mt-4 mb-0 text-center">End of Results.</p> : ""}
