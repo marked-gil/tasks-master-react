@@ -73,7 +73,7 @@ function AddCategory(props) {
         <i className="fa-solid fa-plus"></i> Add Category
       </Button>
 
-      <Modal size="lg" show={show} onHide={handleClose}>
+      <Modal size="md" show={show} onHide={handleClose}>
         {!isLoaded && <LoadingIcon size="5" />}
         <Modal.Header closeButton>
           <Modal.Title className="ps-3">Add Category</Modal.Title>
