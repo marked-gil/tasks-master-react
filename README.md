@@ -2,7 +2,9 @@
 
 ![Am I Responsive Screenshot](readme/others/iamresponsive_image.png)     
 
-Tasks Master is a React application website that is designed and developed to help users in the management of their tasks - be it professional, domestic, or others. Its functionalities are also designed to enhance the efficiency of collaboration with other users as it allows the sharing of tasks with other users. [View Live Website.](https://tasks-master.herokuapp.com)
+Tasks Master is a React application website that is designed and developed to help users in the management of their tasks - be it professional, domestic, or others. Its functionalities are also designed to enhance the efficiency of collaboration as it allows the sharing of tasks with other users. This site provides a simple and intuitive platform for users to manage their tasks. They can create multiple tasks, categorize them, set due dates/times, and assign a priority level for each task. Comments on a task can also be posted by users who are sharing the task.
+[View Live Website.](https://tasks-master.herokuapp.com)
+
 
 ## TABLE OF CONTENTS
 * [**User Experience Design (UXD)**](#user-experience-design-uxd)
@@ -16,16 +18,16 @@ Tasks Master is a React application website that is designed and developed to he
         * [Design Choice](#design-choice)
     * [**Skeleton**](#skeleton)
         * [Wireframes](#wireframes)
-    * [Surface]
+    * [**Surface**]
         * [Color and Contrast]
-* [Features](#features)
-* [Features for Future Implementation](#features-left-for-future-implementation)
-* [Fixed Bugs](#fixed-bugs)
-* [Testing](#testing)
-* [Deployment](#deployment)
-* [Technologies](#technologies)
-* [Credits](#credits)
-* [Acknowledgment](#acknowledgment)
+* [**Features**](#features)
+* [**Features for Future Implementation**](#features-left-for-future-implementation)
+* [**Fixed Bugs**](#fixed-bugs)
+* [**Testing**](#testing)
+* [**Deployment**](#deployment)
+* [**Technologies**](#technologies)
+* [**Credits**](#credits)
+* [**Acknowledgment**](#acknowledgment)
 
 ## User Experience Design (UXD)
 
@@ -41,7 +43,9 @@ The main goal of this site is to aid users in managing and organizing their day-
 * People who love to set goals and plan ahead
 
 #### **The Use of Agile Methodology**
-Using the Agile Methodology, the development of the project began with the creation of seven (7) EPICS to provide a framework for the website's design and structure. Each EPIC comprised multiple User Stories that detailed the project's features. A total of 35 User Stories were formulated for the Front-End, out of which 33 were successfully implemented, while the remaining 2 were deferred for future implementation. The 33 User Stories were distributed among four iterations, each with a distinct timeline due to the creator's other work commitments.
+Using the Agile Methodology, the development of the project began with the creation of seven (7) EPICS to provide a framework for the website's design and structure. Each EPIC is comprised of multiple User Stories that detailed the project's features. A total of 35 User Stories were formulated for the Front-End, out of which 33 were successfully implemented, while the remaining 2 were deferred for future implementation. The 33 User Stories were distributed among four iterations, each with a distinct timeline due to the creator's other work commitments.
+
+A story point (ranging from 2-8) and priority label (Must-Have, Should-Have, Could-Have, and Won’t-Have) were assigned to each User Story to guide the estimation of time needed for implementation and prioritize the most vital components of the site. Acceptance criteria were included in each User Story, which served as a basis for determining successful implementation. Tasks were also specified for the creator to fulfill the acceptance criteria. 
 
 Github’s Kanban board is a very useful tool that this project used. Here is the link for the project’s Kanban board: [**Tasks Master Kanban**](https://github.com/users/marked-gil/projects/17)
 
@@ -365,18 +369,6 @@ The following are the User Stories that guided the creation of this React app:
 
 [<ins>Back to Table of Contents</ins>](#table-of-contents)
 
-#### Design Choice
-
-* Color Choices:    
-    The following are the colors used in this project:      
-    **Nav Bar**     
-    ![Nav Bar colors](readme/colors/navbar_colors.png)      
-    **Side Bar**    
-    ![Side Bar colors](readme/colors/sidebar_colors.png)        
-    **Footer**      
-    ![Footer colors](readme/colors/footer_colors.png)
-* Typography:
-    * [Source Sans Pro(https://fonts.google.com/specimen/Source+Sans+Pro?query=source)] - from Google Fonts
 
 ### **SKELETON**
 
@@ -425,7 +417,7 @@ The following are the wireframes used to provide a visual illustration of some o
 * **'SIGN UP' Page**    
 ![Sign Up Page](readme/features/signup_page.png)
 * **NavBar**    
-    On Expanded Screen
+    On Expanded Screen      
     ![NavBar on Expanded Screen](readme/features/navbar.png)    
     On Mobile Screen    
     ![Offcanvas Navbar on Mobile Screen](readme/features/navbar_offcanvas.png)  
@@ -435,10 +427,10 @@ The following are the wireframes used to provide a visual illustration of some o
 ![My Tasks Today page](readme/features/my_tasks_today.png)  
 * **'My Tasks TOMORROW' Page**      
 ![My Tasks Tomorrow page](readme/features/my_tasks_tomorrow.png)    
-* **'My Tasks on Specific Date' Page**    
-    Upcoming Tasks on Specific Date
-    ![My Upcoming Tasks page](readme/features/upcoming_tasks_page.png)     
-    Previous Tasks on Specific Date
+* **'My Tasks on Specific Date' Page**      
+    Upcoming Tasks on Specific Date     
+    ![My Upcoming Tasks page](readme/features/upcoming_tasks_page.png)      
+    Previous Tasks on Specific Date     
     ![My Previous Tasks page](readme/features/previous_tasks_page.png)      
 * **'My All Todo Tasks' Page**      
 ![My All Todo Tasks page](readme/features/all_todo_tasks.png)   
@@ -448,9 +440,9 @@ The following are the wireframes used to provide a visual illustration of some o
 ![My Overdue Tasks page](readme/features/overdue_tasks_page.png)    
 * **'My Completed Tasks' Page**     
 ![My Completed Tasks page](readme/features/completed_tasks_page.png)    
-* **'My Tasks Per Category' Page**  
-![My Tasks per Category page](readme/features/tasks_per_category_page.png)
-* **'Task Details' Page**   
+* **'My Tasks Per Category' Page**      
+![My Tasks per Category page](readme/features/tasks_per_category_page.png)  
+* **'Task Details' Page**       
 ![Task Details page](readme/features/tasks_details_page.png)    
 * **'My Profile' Page**     
 ![My Profile page](readme/features/profile_page.png)    
@@ -478,6 +470,20 @@ The following are the wireframes used to provide a visual illustration of some o
 ![Task filter 2](readme/features/task_filter_2.png)     
 
 [<ins>Back to Table of Contents</ins>](#table-of-contents)
+
+### **Surface**
+
+* Color Choices:    
+    The following are the colors used in this project:      
+    **Nav Bar**     
+    ![Nav Bar colors](readme/colors/navbar_colors.png)      
+    **Side Bar**    
+    ![Side Bar colors](readme/colors/sidebar_colors.png)        
+    **Footer**      
+    ![Footer colors](readme/colors/footer_colors.png)
+* Typography:
+    * [Source Sans Pro](https://fonts.google.com/specimen/Source+Sans+Pro?query=source) - from Google Fonts
+
 
 ## Features Left for Future Implementation
 
