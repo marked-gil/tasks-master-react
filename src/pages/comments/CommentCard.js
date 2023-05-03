@@ -67,7 +67,7 @@ function CommentCard(props) {
         <Card.Title className={styles.Username}>{comment.owner}</Card.Title>
         <i className="fa-solid fa-ellipsis-vertical fa-xs"></i>
         <Card.Subtitle className="p-0 m-0">
-          {moment(comment.datetime_created, "DD MMM YYYY | HH:mm").fromNow()}
+          {moment.utc(comment.datetime_created, "DD MMM YYYY | HH:mm").fromNow()}
         </Card.Subtitle>
       </div>
         <Card.Body className={`pt-1 pb-1`}>
