@@ -25,7 +25,8 @@ function EditTaskAttributes(props) {
     due_date,
     due_time,
     priority,
-    progress
+    progress,
+    is_completed
   } = newTaskData;
 
   useEffect(() => {
@@ -199,7 +200,7 @@ function EditTaskAttributes(props) {
                     SAVE
                   </Button>
                 </div>}
-              { is_owner && !showForms &&
+              { is_owner && !showForms && !is_completed &&
                 <Button 
                   onClick={setShowForms} 
                   variant="link" 

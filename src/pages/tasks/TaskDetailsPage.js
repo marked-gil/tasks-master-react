@@ -331,7 +331,7 @@ function TaskDetailsPage({ newCategoryAdded, setTaskChanged }) {
           </Form.Group>
         }
 
-        {!editTask && is_owner &&
+        {!editTask && is_owner && !is_completed &&
           <Button className="d-block mt-3 mb-2" style={{ width:"100%"}}
             onClick={setEditTask}  
           >
