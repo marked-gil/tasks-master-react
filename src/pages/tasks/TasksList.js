@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react';
-import { axiosReq } from '../../api/axiosDefaults';
 import moment from 'moment-timezone';
 import TaskPopover from '../../components/TaskPopover';
 import ListGroup from 'react-bootstrap/ListGroup';
@@ -25,31 +24,20 @@ function TasksList(props) {
     setError
   } = props;
 
-  const dateToday = moment().format("YYYY-MM-DD");
+  const local_timezone = moment.tz.guess(true)  
   const [ tasksList, setTasksList ] = useState({ results: [] });
 
   useEffect(() => {
-    const updateOverdueTasks = async () => {
-      for (let task of tasks.results) {
-        if (task.progress !== 'completed' && task.progress !== 'overdue')
-          if (task.due_date === dateToday) {
-            if (task.due_time < moment().format("HH:MM")) {
-              try {
-                await axiosReq.put(`tasks/${task.id}`, {...task, 'progress': 'overdue'})
-              } catch (err) {
-              }
-            }
-          } else if (task.due_date < dateToday) {
-            try {
-              await axiosReq.put(`tasks/${task.id}`, {...task, 'progress': 'overdue'})
-            } catch (err) {
-            }
-          }
-      }
-    }
-    updateOverdueTasks();
     setTasksList(tasks);
-  },[tasks, dateToday])
+  },[tasks])
+
+  const taskDueTime = (due_date, due_time) => {
+    const utcDateTime = `${due_date}T${due_time}`;
+    const utcDueTime = moment.utc(utcDateTime);
+    const local_due_time = utcDueTime.tz(local_timezone);
+  
+    return local_due_time.format('HH:mm')
+  }
 
   const taskPriority = (task) => {
     return (
@@ -122,7 +110,7 @@ function TasksList(props) {
           ${styles.DateTimeContainer}`
         }
       >
-        {!!showTime && task.due_time}
+        {!!showTime && task.due_time && taskDueTime(task.due_date, task.due_time)}
         {!!showTime && !task.due_time && <i className="fa-solid fa-minus"></i>}
         {!!showDate && moment(task.due_date).format("DD MMM YYYY")}
       </p>
