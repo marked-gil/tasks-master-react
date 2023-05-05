@@ -89,51 +89,40 @@ function AddTask(props) {
 
   const handleSubmit = async () => {
     setIsLoaded(false);
-    const success_message = `Task has been successfully added for ${
-      moment(due_date).format("Do MMMM YYYY")}.`
+    const success_message = `Task has been successfully added for ${moment(due_date).format("Do MMMM YYYY")}.`
+    const local_timezone = moment.tz.guess(true)
 
+    try {
       if (due_time) {
-        // Recognizes local timezone and converts local time to UTC before saving into the database
-        const local_timezone = moment.tz.guess(true)
+        // Converts local time to UTC before saving into the database
         const local_due_time = moment.tz(`1970-01-01T${due_time}`, local_timezone);
         const utcTime = local_due_time.utc().format('HH:mm');
 
-        try {
-          const { data } = await axiosReq.post("/tasks/", {
-            ...taskData, due_date, 'due_time': utcTime, priority
-          });
-          handleClose();
-          setFeedbackMessage && setFeedbackMessage(success_message)
-          if (task_date === moment(due_date).format("YYYY-MM-DD") || 
-              (allTodos && moment(due_date).format("YYYY-MM-DD") >= moment().format("YYYY-MM-DD"))) {
-            setTasks({results: [...tasks.results, data]});
-          }
-          setIsLoaded(true);
-          pushToPage && history.push(`/tasks/${moment(due_date).format("YYYY-MM-DD")}`)
-          toggleMenu && toggleMenu();
-        } catch (err) {
-          setShowErrors(err.response?.data);
-          setIsLoaded(true);
+        const { data } = await axiosReq.post("/tasks/", {...taskData, due_date, 'due_time': utcTime, priority});
+
+        if (task_date === moment(due_date).format("YYYY-MM-DD") || 
+            (allTodos && moment(due_date).format("YYYY-MM-DD") >= moment().format("YYYY-MM-DD"))) {
+          setTasks({results: [...tasks.results, data]});
         }
       } else {
         // Runs when no due_time is submitted
-        try {
-          const { data } = await axiosReq.post("/tasks/", {...taskData, due_date, due_time, priority});
-          handleClose();
-          setFeedbackMessage && setFeedbackMessage(success_message)
-          if (task_date === moment(due_date).format("YYYY-MM-DD") || 
-              (allTodos && moment(due_date).format("YYYY-MM-DD") >= moment().format("YYYY-MM-DD"))) {
-            setTasks({results: [...tasks.results, data]});
-          }
-          setIsLoaded(true);
-          pushToPage && history.push(`/tasks/${moment(due_date).format("YYYY-MM-DD")}`)
-          toggleMenu && toggleMenu();
-        } catch (err) {
-          setShowErrors(err.response?.data);
-          setIsLoaded(true);
+        const { data } = await axiosReq.post("/tasks/", {
+          ...taskData, due_date, 'due_time': due_time, priority
+        });
+        if (task_date === moment(due_date).format("YYYY-MM-DD") || 
+            (allTodos && moment(due_date).format("YYYY-MM-DD") >= moment().format("YYYY-MM-DD"))) {
+          setTasks({results: [...tasks.results, data]});
         }
       }
-      
+      handleClose();
+      setFeedbackMessage && setFeedbackMessage(success_message)
+      setIsLoaded(true);
+      pushToPage && history.push(`/tasks/${moment(due_date).format("YYYY-MM-DD")}`)
+      toggleMenu && toggleMenu();
+    } catch (err) {
+      setShowErrors(err.response?.data);
+      setIsLoaded(true);
+    }
   }
 
   return (

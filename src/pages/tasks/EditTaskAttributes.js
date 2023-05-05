@@ -17,6 +17,7 @@ function EditTaskAttributes(props) {
     is_owner,
   } = props
 
+  const local_timezone = moment.tz.guess(true)
   const [ showForms, setShowForms ] = useState(false);
   const [ newTaskData, setNewTaskData ] = useState(taskData);
 
@@ -41,18 +42,30 @@ function EditTaskAttributes(props) {
 
   const handleDataChange = (event) => {
     setNewTaskData(prevState => (
-      {
-        ...prevState,
+      {...prevState,
         [event.target.name]: event.target.value
       }
     ))
   };
 
+  const taskDueTime = (due_date, due_time) => {
+    const utcDateTime = `${due_date}T${due_time}`;
+    const utcDueTime = moment.utc(utcDateTime);
+    const local_due_time = utcDueTime.tz(local_timezone);
+  
+    return local_due_time.format('HH:mm')
+  }
+
   const handleAttributesUpdate = async () => {
     setIsLoaded(false);
     setError("");
+
+    const local_due_time = moment.tz(`1970-01-01T${due_time}`, local_timezone);
+    const utcTime = local_due_time.utc().format('HH:mm');
+    console.log(utcTime)
+
     try {
-      const { data } = await axiosReq.put(`/tasks/${taskData.id}`, {...newTaskData});
+      const { data } = await axiosReq.put(`/tasks/${taskData.id}`, {...newTaskData, utcTime});
       setTimeout(() => {
         setNewTaskData(data);
         setFeedbackMessage("Task is successfully updated.");
@@ -94,7 +107,8 @@ function EditTaskAttributes(props) {
           type="time"
           id="due_time"
           name="due_time"
-          value={due_time}
+          // value={due_time}
+          defaultValue={taskDueTime(due_date, due_time)}
           onChange={handleDataChange}
           size="sm"
           aria-label="Select a due time"
@@ -167,7 +181,7 @@ function EditTaskAttributes(props) {
                   <p className={`mb-0`}>
                     <span className={styles.LabelDue}>Due:</span>
                     <span className={`${styles.DueDateTime} ${styles.bold}`}>
-                      {moment(due_date).format("DD MMMM YYYY")} {due_time ? `- ${due_time}` : ""}
+                      {moment(due_date).format("DD MMMM YYYY")} {due_time ? `- ${taskDueTime(due_date, due_time)}` : ""}
                     </span>
                   </p> 
                   <p className={styles.PriorityProgressGroup}>
