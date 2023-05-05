@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { Button, Card, Form } from 'react-bootstrap';
 import { axiosReq, axiosRes } from '../../api/axiosDefaults';
 import styles from '../../styles/CommentCard.module.css';
-import moment from 'moment';
+import moment from 'moment-timezone';
 
 function CommentCard(props) {
 

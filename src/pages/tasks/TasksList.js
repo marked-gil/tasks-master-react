@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { axiosReq } from '../../api/axiosDefaults';
-import moment from 'moment';
+import moment from 'moment-timezone';
 import TaskPopover from '../../components/TaskPopover';
 import ListGroup from 'react-bootstrap/ListGroup';
 import OverlayTrigger from 'react-bootstrap/OverlayTrigger';

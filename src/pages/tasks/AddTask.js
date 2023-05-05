@@ -92,21 +92,48 @@ function AddTask(props) {
     const success_message = `Task has been successfully added for ${
       moment(due_date).format("Do MMMM YYYY")}.`
 
-    try {
-      const { data } = await axiosReq.post("/tasks/", {...taskData, due_date, due_time, priority});
-      handleClose();
-      setFeedbackMessage && setFeedbackMessage(success_message)
-      if (task_date === moment(due_date).format("YYYY-MM-DD") || 
-          (allTodos && moment(due_date).format("YYYY-MM-DD") >= moment().format("YYYY-MM-DD"))) {
-        setTasks({results: [...tasks.results, data]});
+      if (due_time) {
+        // Recognizes local timezone and converts local time to UTC before saving into the database
+        const local_timezone = moment.tz.guess(true)
+        const local_due_time = moment.tz(`1970-01-01T${due_time}`, local_timezone);
+        const utcTime = local_due_time.utc().format('HH:mm');
+
+        try {
+          const { data } = await axiosReq.post("/tasks/", {
+            ...taskData, due_date, 'due_time': utcTime, priority
+          });
+          handleClose();
+          setFeedbackMessage && setFeedbackMessage(success_message)
+          if (task_date === moment(due_date).format("YYYY-MM-DD") || 
+              (allTodos && moment(due_date).format("YYYY-MM-DD") >= moment().format("YYYY-MM-DD"))) {
+            setTasks({results: [...tasks.results, data]});
+          }
+          setIsLoaded(true);
+          pushToPage && history.push(`/tasks/${moment(due_date).format("YYYY-MM-DD")}`)
+          toggleMenu && toggleMenu();
+        } catch (err) {
+          setShowErrors(err.response?.data);
+          setIsLoaded(true);
+        }
+      } else {
+        // Runs when no due_time is submitted
+        try {
+          const { data } = await axiosReq.post("/tasks/", {...taskData, due_date, due_time, priority});
+          handleClose();
+          setFeedbackMessage && setFeedbackMessage(success_message)
+          if (task_date === moment(due_date).format("YYYY-MM-DD") || 
+              (allTodos && moment(due_date).format("YYYY-MM-DD") >= moment().format("YYYY-MM-DD"))) {
+            setTasks({results: [...tasks.results, data]});
+          }
+          setIsLoaded(true);
+          pushToPage && history.push(`/tasks/${moment(due_date).format("YYYY-MM-DD")}`)
+          toggleMenu && toggleMenu();
+        } catch (err) {
+          setShowErrors(err.response?.data);
+          setIsLoaded(true);
+        }
       }
-      setIsLoaded(true);
-      pushToPage && history.push(`/tasks/${moment(due_date).format("YYYY-MM-DD")}`)
-      toggleMenu && toggleMenu();
-    } catch (err) {
-      setShowErrors(err.response?.data);
-      setIsLoaded(true);
-    }
+      
   }
 
   return (
@@ -198,8 +225,7 @@ function AddTask(props) {
                   {/* Error Feedback */}
                   {showErrors?.due_date?.map((error, idx) => (
                     <Alert className={`mt-1 mb-0 pb-0 pt-0 ${styles.TextCenter}`} key={idx} variant="danger">
-                      {
-                        error === "Date has wrong format. Use one of these formats instead: YYYY-MM-DD."
+                      {error === "Date has wrong format. Use one of these formats instead: YYYY-MM-DD."
                         ? "You need to provide a due date."
                         : error
                       }
