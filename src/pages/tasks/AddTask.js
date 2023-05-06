@@ -91,7 +91,7 @@ function AddTask(props) {
   const handleSubmit = async () => {
     setIsLoaded(false);
     const success_message = `Task has been successfully added for ${moment(due_date).format("Do MMMM YYYY")}.`
-    const local_due_date = moment.tz(`${due_date}T01:00:00`, local_timezone);
+    const local_due_date = moment.tz(`${due_date}T00:00:00`, local_timezone);
     const utcDueDate = local_due_date.utc().format("YYYY-MM-DD");
 
     try {

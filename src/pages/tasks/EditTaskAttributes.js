@@ -29,7 +29,8 @@ function EditTaskAttributes(props) {
     priority,
     progress,
     is_completed,
-    shared_to
+    shared_to,
+    due_datetime
   } = newTaskData;
 
   useEffect(() => {
@@ -50,12 +51,20 @@ function EditTaskAttributes(props) {
     ))
   };
 
-  const taskDueTime = (due_date, due_time) => {
-    const utcDateTime = `${due_date}T${due_time}`;
-    const utcDueTime = moment.utc(utcDateTime);
-    const local_due_time = utcDueTime.tz(local_timezone);
+  const taskDueTime = (due_datetime) => {
+    const utcDateTime = due_datetime;
+    const utcMoment = moment.utc(utcDateTime);
+    const local_due_time = utcMoment.tz(local_timezone);
   
     return local_due_time.format('HH:mm')
+  }
+
+  const taskDueDate = (due_datetime) => {
+    const utcDateTime = due_datetime;
+    const utcMoment = moment.utc(utcDateTime);
+    const local_due_time = utcMoment.tz(local_timezone);
+  
+    return local_due_time.format('DD MMMM YYYY')
   }
 
   const handleAttributesUpdate = async () => {
@@ -97,7 +106,6 @@ function EditTaskAttributes(props) {
         }, 1000);
       }
     } catch (err) {
-      console.log(err.response)
       setFeedbackMessage("");
       if (err.response?.data?.due_date) {
         setError("You need to provide a DUE DATE for your task.");
@@ -116,7 +124,6 @@ function EditTaskAttributes(props) {
           type="date"
           id="due_date"
           name="due_date"
-          value={due_date}
           onChange={handleDataChange}
           size="sm"
           aria-label="Select a due date"
@@ -132,8 +139,7 @@ function EditTaskAttributes(props) {
           type="time"
           id="due_time"
           name="due_time"
-          // value={due_time}
-          defaultValue={due_time && taskDueTime(due_date, due_time)}
+          defaultValue={due_time && taskDueTime(due_datetime)}
           onChange={handleDataChange}
           size="sm"
           aria-label="Select a due time"
@@ -206,7 +212,7 @@ function EditTaskAttributes(props) {
                   <p className={`mb-0`}>
                     <span className={styles.LabelDue}>Due:</span>
                     <span className={`${styles.DueDateTime} ${styles.bold}`}>
-                      {moment(due_date).format("DD MMMM YYYY")} {due_time ? `- ${taskDueTime(due_date, due_time)}` : ""}
+                      {taskDueDate(due_datetime)} {due_time ? `- ${taskDueTime(due_datetime)}` : ""}
                     </span>
                   </p> 
                   <p className={styles.PriorityProgressGroup}>

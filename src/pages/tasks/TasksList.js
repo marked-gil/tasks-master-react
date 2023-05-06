@@ -31,11 +31,18 @@ function TasksList(props) {
     setTasksList(tasks);
   },[tasks])
 
-  const taskDueTime = (due_date, due_time) => {
-    const utcDateTime = `${due_date}T${due_time}`;
+  const taskDueTime = (due_datetime) => {
+    const utcDateTime = due_datetime;
     const utcMoment = moment.utc(utcDateTime);
     const local_due_time = utcMoment.tz(local_timezone);
     return local_due_time.format('HH:mm')
+  }
+
+  const taskDueDate = (due_datetime) => {
+    const utcDateTime = due_datetime;
+    const utcMoment = moment.utc(utcDateTime);
+    const local_due_date = utcMoment.tz(local_timezone);
+    return local_due_date.format('YYYY-MM-DD')
   }
 
   const taskPriority = (task) => {
@@ -66,7 +73,7 @@ function TasksList(props) {
           ${styles.ListGroupItem} 
           ${completed ? styles.Completed : ""}
           ${task.progress === "overdue" ? styles.OverdueTask : ""}
-        `} 
+        `}
         action
         href={`/task/${task.id}`}
       > 
@@ -109,9 +116,9 @@ function TasksList(props) {
           ${styles.DateTimeContainer}`
         }
       >
-        {!!showTime && task.due_time && taskDueTime(task.due_date, task.due_time)}
+        {!!showTime && task.due_time && taskDueTime(task.due_datetime)}
         {!!showTime && !task.due_time && <i className="fa-solid fa-minus"></i>}
-        {!!showDate && task.due_date}
+        {!!showDate && taskDueDate(task.due_datetime)}
 
       </p>
       {/* LEGEND */}
