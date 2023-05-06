@@ -22,12 +22,14 @@ function EditTaskAttributes(props) {
   const [ newTaskData, setNewTaskData ] = useState(taskData);
 
   const {
+    task_name,
     category,
     due_date,
     due_time,
     priority,
     progress,
-    is_completed
+    is_completed,
+    shared_to
   } = newTaskData;
 
   useEffect(() => {
@@ -60,19 +62,42 @@ function EditTaskAttributes(props) {
     setIsLoaded(false);
     setError("");
 
-    const local_due_time = moment.tz(`1970-01-01T${due_time}`, local_timezone);
-    const utcTime = local_due_time.utc().format('HH:mm');
-    console.log(utcTime)
-
     try {
-      const { data } = await axiosReq.put(`/tasks/${taskData.id}`, {...newTaskData, utcTime});
-      setTimeout(() => {
-        setNewTaskData(data);
-        setFeedbackMessage("Task is successfully updated.");
-        setShowForms(false);
-        setIsLoaded(true);
-      }, 1000);
+      if (due_time) {
+        const local_due_time = moment.tz(`1970-01-01T${due_time}`, local_timezone);
+        const utcTime = local_due_time.utc().format('HH:mm');
+        const { data } = await axiosReq.put(`/tasks/${taskData.id}`, {
+          task_name, 
+          category, 
+          shared_to, 
+          priority, 
+          'due_date': due_date, 
+          'due_time': utcTime
+        });
+        setTimeout(() => {
+          setNewTaskData(data);
+          setFeedbackMessage("Task is successfully updated.");
+          setShowForms(false);
+          setIsLoaded(true);
+        }, 1000);
+      } else {
+        const { data } = await axiosReq.put(`/tasks/${taskData.id}`, {
+          task_name, 
+          category, 
+          shared_to, 
+          priority, 
+          'due_date': due_date, 
+          due_time
+        });
+        setTimeout(() => {
+          setNewTaskData(data);
+          setFeedbackMessage("Task is successfully updated.");
+          setShowForms(false);
+          setIsLoaded(true);
+        }, 1000);
+      }
     } catch (err) {
+      console.log(err.response)
       setFeedbackMessage("");
       if (err.response?.data?.due_date) {
         setError("You need to provide a DUE DATE for your task.");
@@ -108,7 +133,7 @@ function EditTaskAttributes(props) {
           id="due_time"
           name="due_time"
           // value={due_time}
-          defaultValue={taskDueTime(due_date, due_time)}
+          defaultValue={due_time && taskDueTime(due_date, due_time)}
           onChange={handleDataChange}
           size="sm"
           aria-label="Select a due time"

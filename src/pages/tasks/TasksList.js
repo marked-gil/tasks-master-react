@@ -33,8 +33,8 @@ function TasksList(props) {
 
   const taskDueTime = (due_date, due_time) => {
     const utcDateTime = `${due_date}T${due_time}`;
-    const utcDueTime = moment.utc(utcDateTime);
-    const local_due_time = utcDueTime.tz(local_timezone);
+    const utcMoment = moment.utc(utcDateTime);
+    const local_due_time = utcMoment.tz(local_timezone);
   
     return local_due_time.format('HH:mm')
   }
@@ -112,7 +112,8 @@ function TasksList(props) {
       >
         {!!showTime && task.due_time && taskDueTime(task.due_date, task.due_time)}
         {!!showTime && !task.due_time && <i className="fa-solid fa-minus"></i>}
-        {!!showDate && moment(task.due_date).format("DD MMM YYYY")}
+        {!!showDate && task.due_date}
+
       </p>
       {/* LEGEND */}
       <p className={
