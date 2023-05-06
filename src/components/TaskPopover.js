@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { axiosReq, axiosRes } from '../api/axiosDefaults';
 import { useHistory } from 'react-router-dom';
 import moment from 'moment';
@@ -15,6 +16,7 @@ function TaskPopover(props) {
   } = props;
 
   const history = useHistory();
+  const [ isButtonDisabled, setIsButtonDisabled ] = useState(false);
 
   const handleView = () => {
     history.push(`/task/${task.id}`)
@@ -55,6 +57,8 @@ function TaskPopover(props) {
   }
 
   const handleDelete = () => {
+    setIsButtonDisabled(true);
+
     const deleteTask = async () => {
       let task_id = ""
       if (typeof task === 'object') {
@@ -70,6 +74,7 @@ function TaskPopover(props) {
             {results: prevState.results.filter(item => item.id !== task.id)}
           ))
         }
+        setIsButtonDisabled(false);
       } catch (err) {
         setError("Sorry, an error has occurred while deleting the task.")
       }
@@ -81,7 +86,9 @@ function TaskPopover(props) {
   const popover = (
     <Popover id="popover-basic">
       <Popover.Body className="p-0">
-        {task.is_owner && <Button onClick={handleDelete} className="me-1" variant="danger" size="sm">Delete</Button>}
+        {task.is_owner && 
+          <Button onClick={handleDelete} disabled={isButtonDisabled} className="me-1" variant="danger" size="sm">Delete</Button>
+        }
         <Button onClick={handleView} className="me-1" size="sm">View</Button>
         {task.is_owner && !task.is_completed && <Button onClick={handleComplete} size="sm">Done</Button>}
         {task.is_owner && task.is_completed && <Button onClick={handleUndo} size="sm">Undo</Button>}
