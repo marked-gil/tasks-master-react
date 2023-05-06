@@ -35,7 +35,6 @@ function TasksList(props) {
     const utcDateTime = `${due_date}T${due_time}`;
     const utcMoment = moment.utc(utcDateTime);
     const local_due_time = utcMoment.tz(local_timezone);
-  
     return local_due_time.format('HH:mm')
   }
 
