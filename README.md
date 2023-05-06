@@ -3,6 +3,7 @@
 ![Am I Responsive Screenshot](readme/others/iamresponsive_image.png)     
 
 Tasks Master is a React application website that is designed and developed to help users in the management of their tasks - be it professional, domestic, or others. Its functionalities are also designed to enhance the efficiency of collaboration as it allows the sharing of tasks with other users. This site provides a simple and intuitive platform for users to manage their tasks. They can create multiple tasks, categorize them, set due dates/times, and assign a priority level for each task. Comments on a task can also be posted by users who are sharing the task.
+The timezone used on this site is specifically 'Europe/Dublin'.
 [View Live Website.](https://tasks-master.herokuapp.com)
 
 
@@ -18,8 +19,7 @@ Tasks Master is a React application website that is designed and developed to he
         * [Design Choice](#design-choice)
     * [**Skeleton**](#skeleton)
         * [Wireframes](#wireframes)
-    * [**Surface**]
-        * [Color and Contrast]
+    * [**Surface**](#surface)
 * [**Features**](#features)
 * [**Features for Future Implementation**](#features-left-for-future-implementation)
 * [**Fixed Bugs**](#fixed-bugs)
@@ -509,6 +509,7 @@ The following are the wireframes used to provide a visual illustration of some o
     * Validate the entered password on the modal after the user clicks ‘delete account’, and delete the account when the password is valid.
     * Redirect the user to the ‘Sign In’ page when the profile is successfully deleted, and show a feedback message.
 
+* Make the timezone of the site dynamic so it can detect the user's local timezone.
 
 ## Fixed Bugs
 * ISSUE:    
