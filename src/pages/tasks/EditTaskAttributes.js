@@ -17,20 +17,16 @@ function EditTaskAttributes(props) {
     is_owner,
   } = props
 
-  const local_timezone = moment.tz.guess(true)
   const [ showForms, setShowForms ] = useState(false);
   const [ newTaskData, setNewTaskData ] = useState(taskData);
 
   const {
-    task_name,
     category,
     due_date,
     due_time,
     priority,
     progress,
     is_completed,
-    shared_to,
-    due_datetime
   } = newTaskData;
 
   useEffect(() => {
@@ -51,60 +47,18 @@ function EditTaskAttributes(props) {
     ))
   };
 
-  const taskDueTime = (due_datetime) => {
-    const utcDateTime = due_datetime;
-    const utcMoment = moment.utc(utcDateTime);
-    const local_due_time = utcMoment.tz(local_timezone);
-  
-    return local_due_time.format('HH:mm')
-  }
-
-  const taskDueDate = (due_datetime) => {
-    const utcDateTime = due_datetime;
-    const utcMoment = moment.utc(utcDateTime);
-    const local_due_time = utcMoment.tz(local_timezone);
-  
-    return local_due_time.format('DD MMMM YYYY')
-  }
-
   const handleAttributesUpdate = async () => {
     setIsLoaded(false);
     setError("");
 
     try {
-      if (due_time) {
-        const local_due_time = moment.tz(`1970-01-01T${due_time}`, local_timezone);
-        const utcTime = local_due_time.utc().format('HH:mm');
-        const { data } = await axiosReq.put(`/tasks/${taskData.id}`, {
-          task_name, 
-          category, 
-          shared_to, 
-          priority, 
-          'due_date': due_date, 
-          'due_time': utcTime
-        });
-        setTimeout(() => {
-          setNewTaskData(data);
-          setFeedbackMessage("Task is successfully updated.");
-          setShowForms(false);
-          setIsLoaded(true);
-        }, 1000);
-      } else {
-        const { data } = await axiosReq.put(`/tasks/${taskData.id}`, {
-          task_name, 
-          category, 
-          shared_to, 
-          priority, 
-          'due_date': due_date, 
-          due_time
-        });
-        setTimeout(() => {
-          setNewTaskData(data);
-          setFeedbackMessage("Task is successfully updated.");
-          setShowForms(false);
-          setIsLoaded(true);
-        }, 1000);
-      }
+      const { data } = await axiosReq.put(`/tasks/${taskData.id}`, {...newTaskData});
+      setTimeout(() => {
+        setNewTaskData(data);
+        setFeedbackMessage("Task is successfully updated.");
+        setShowForms(false);
+        setIsLoaded(true);
+      }, 1000);
     } catch (err) {
       setFeedbackMessage("");
       if (err.response?.data?.due_date) {
@@ -124,6 +78,7 @@ function EditTaskAttributes(props) {
           type="date"
           id="due_date"
           name="due_date"
+          value={due_date}
           onChange={handleDataChange}
           size="sm"
           aria-label="Select a due date"
@@ -139,7 +94,7 @@ function EditTaskAttributes(props) {
           type="time"
           id="due_time"
           name="due_time"
-          defaultValue={due_time && taskDueTime(due_datetime)}
+          value={due_time}
           onChange={handleDataChange}
           size="sm"
           aria-label="Select a due time"
@@ -212,7 +167,7 @@ function EditTaskAttributes(props) {
                   <p className={`mb-0`}>
                     <span className={styles.LabelDue}>Due:</span>
                     <span className={`${styles.DueDateTime} ${styles.bold}`}>
-                      {taskDueDate(due_datetime)} {due_time ? `- ${taskDueTime(due_datetime)}` : ""}
+                      {moment(due_date).format("DD MMMM YYYY")} {due_time ? `- ${due_time}` : ""}
                     </span>
                   </p> 
                   <p className={styles.PriorityProgressGroup}>

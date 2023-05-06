@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react';
-import moment from 'moment-timezone';
 import TaskPopover from '../../components/TaskPopover';
 import ListGroup from 'react-bootstrap/ListGroup';
 import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
@@ -24,26 +23,11 @@ function TasksList(props) {
     setError
   } = props;
 
-  const local_timezone = moment.tz.guess(true)  
   const [ tasksList, setTasksList ] = useState({ results: [] });
 
   useEffect(() => {
     setTasksList(tasks);
   },[tasks])
-
-  const taskDueTime = (due_datetime) => {
-    const utcDateTime = due_datetime;
-    const utcMoment = moment.utc(utcDateTime);
-    const local_due_time = utcMoment.tz(local_timezone);
-    return local_due_time.format('HH:mm')
-  }
-
-  const taskDueDate = (due_datetime) => {
-    const utcDateTime = due_datetime;
-    const utcMoment = moment.utc(utcDateTime);
-    const local_due_date = utcMoment.tz(local_timezone);
-    return local_due_date.format('YYYY-MM-DD')
-  }
 
   const taskPriority = (task) => {
     return (
@@ -116,10 +100,9 @@ function TasksList(props) {
           ${styles.DateTimeContainer}`
         }
       >
-        {!!showTime && task.due_time && taskDueTime(task.due_datetime)}
+        {!!showTime && task.due_time && task.due_time}
         {!!showTime && !task.due_time && <i className="fa-solid fa-minus"></i>}
-        {!!showDate && taskDueDate(task.due_datetime)}
-
+        {!!showDate && task.due_date}
       </p>
       {/* LEGEND */}
       <p className={
