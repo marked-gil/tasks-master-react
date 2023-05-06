@@ -32,6 +32,7 @@ function AddTask(props) {
     category: "",
   };
 
+  const local_timezone = moment.tz.guess(true)
   const history = useHistory();
   const [ taskData, setTaskData ] = useState(initialTaskData);
   const [ dueDate, setDueDate ] = useState({due_date: "" });
@@ -90,15 +91,18 @@ function AddTask(props) {
   const handleSubmit = async () => {
     setIsLoaded(false);
     const success_message = `Task has been successfully added for ${moment(due_date).format("Do MMMM YYYY")}.`
-    const local_timezone = moment.tz.guess(true)
+    const local_due_date = moment.tz(`${due_date}T01:00:00`, local_timezone);
+    const utcDueDate = local_due_date.utc().format("YYYY-MM-DD");
 
     try {
       if (due_time) {
         // Converts local time to UTC before saving into the database
         const local_due_time = moment.tz(`1970-01-01T${due_time}`, local_timezone);
-        const utcTime = local_due_time.utc().format('HH:mm');
+        const utcDueTime = local_due_time.utc().format('HH:mm');
 
-        const { data } = await axiosReq.post("/tasks/", {...taskData, due_date, 'due_time': utcTime, priority});
+        const { data } = await axiosReq.post("/tasks/", {
+          ...taskData, 'due_date': utcDueDate, 'due_time': utcDueTime, priority
+        });
 
         if (task_date === moment(due_date).format("YYYY-MM-DD") || 
             (allTodos && moment(due_date).format("YYYY-MM-DD") >= moment().format("YYYY-MM-DD"))) {
@@ -107,7 +111,7 @@ function AddTask(props) {
       } else {
         // Runs when no due_time is submitted
         const { data } = await axiosReq.post("/tasks/", {
-          ...taskData, due_date, 'due_time': due_time, priority
+          ...taskData, 'due_date': utcDueDate, 'due_time': due_time, priority
         });
         if (task_date === moment(due_date).format("YYYY-MM-DD") || 
             (allTodos && moment(due_date).format("YYYY-MM-DD") >= moment().format("YYYY-MM-DD"))) {
