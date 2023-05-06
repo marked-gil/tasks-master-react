@@ -61,7 +61,8 @@ function TasksFilter(props) {
                 onChange={handleFilterChange}
                 aria-label="Order today's tasks" 
                 size="sm"
-              >
+              > 
+                <option value="" disabled selected>Select...</option>
                 {!removeOrderByTime && <option value="due_time">Due Time - Ascending</option>}
                 {!removeOrderByTime && <option value="-due_time">Due Time - Descending</option>}
                 {!removeOrderByDate && <option value="due_date">Due Date - Ascending</option>}
