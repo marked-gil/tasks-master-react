@@ -51,7 +51,7 @@ function SignInPage() {
 
         <Form onSubmit={handleSubmit} className={styles.Form}>
           {errors?.non_field_errors?.map((error, idx) => (
-            <Alert className={`mt-1 mb-0 pb-0 pt-0 ${styles.TextCenter}`} key={idx} variant="danger">
+            <Alert className={`mt-1 mb-0 pb-0 pt-0 text-center`} key={idx} variant="danger">
               {error}
             </Alert>
             ))
@@ -69,7 +69,7 @@ function SignInPage() {
             />
 
             {errors?.username?.map((error, idx) => (
-              <Alert className={`mt-1 mb-0 pb-0 pt-0 ${styles.TextCenter}`} key={idx} variant="danger">
+              <Alert className={`mt-1 mb-0 pb-0 pt-0 text-center`} key={idx} variant="danger">
                 {error}
               </Alert>
               ))
@@ -87,7 +87,7 @@ function SignInPage() {
             />
 
             {errors?.password?.map((error, idx) => (
-              <Alert className={`mt-1 mb-0 pb-0 pt-0 ${styles.TextCenter}`} key={idx} variant="danger">
+              <Alert className={`mt-1 mb-0 pb-0 pt-0 text-center`} key={idx} variant="danger">
                 {error}
               </Alert>
               ))
