@@ -11,7 +11,8 @@
     <meta
     name="keywords"
     content="todo, to-do, productivity, work, home, task, task management, goal tracking, prioritization, note-taking, focus, automation, comment, collaboration"
-  />
+    />
+    <meta name="author" content="Mark Gil Dacutan">
     <!-- FAVICON LINKS -->
     <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
     <link rel="apple-touch-icon" sizes="180x180" href="%PUBLIC_URL%/logo192.png">
@@ -33,11 +34,6 @@
       href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:ital,wght@0,200;0,300;0,400;0,600;0,700;0,900;1,200;1,300;1,400;1,600&display=swap" 
       rel="stylesheet"
     >
-
-    <!-- Momentjs and Moment-Timezone scripts -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment-timezone/0.5.32/moment-timezone-with-data.min.js"></script>
-
     <!-- Fontawesome Link -->
     <script src="https://kit.fontawesome.com/3f9e0fb241.js" crossorigin="anonymous"></script>
     <!--
@@ -66,11 +62,5 @@
       To begin the development, run `npm start` or `yarn start`.
       To create a production bundle, use `npm run build` or `yarn build`.
     -->
-
-    <!-- Gets the timezone via the browser -->
-    <script>
-      const timezone = moment.tz.guess();
-      document.getElementById("timezone").value = timezone;
-    </script>
   </body>
 </html>
