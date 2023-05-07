@@ -1,5 +1,7 @@
 import { useState } from 'react';
-import { Button, Card, Form } from 'react-bootstrap';
+import Button from 'react-bootstrap/Button';
+import Card from 'react-bootstrap/Card';
+import Form from 'react-bootstrap/Form';
 import { axiosReq, axiosRes } from '../../api/axiosDefaults';
 import styles from '../../styles/CommentCard.module.css';
 import moment from 'moment-timezone';
