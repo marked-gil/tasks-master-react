@@ -37,7 +37,6 @@ function MainPageContainer(props) {
 
   const currentUser = useCurrentUser();
   const [ changeInCategories, setChangeInCategories ] = useState(false);
-  // const [ newCategoryAdded, setNewCategoryAdded ] = useState(false);
   const [ newTaskAdded, setNewTaskAdded ] = useState(false);
   const [ categories, setCategories ] = useState({ results: [] });
   const [ searchResults, setSearchResults ] = useState({ results: [] });
@@ -61,7 +60,6 @@ function MainPageContainer(props) {
   }, [changeInCategories]);
 
   const handleChangeInCategory = () => {
-    // setNewCategoryAdded(!newCategoryAdded);
     setChangeInCategories(!changeInCategories)
   }
 
@@ -84,6 +82,7 @@ function MainPageContainer(props) {
             handleChangeInCategory={handleChangeInCategory} 
             setNewTaskAdded={setNewTaskAdded}
             newTaskAdded={newTaskAdded}
+            changeInCategories={changeInCategories}
           />
           {profile ? <ProfilePage currentUser={currentUser} /> 
             : tasksTodayPage ? <TasksTodayPage 

@@ -15,6 +15,7 @@ const SideBar = (props) => {
   const { 
     currentUser, 
     handleChangeInCategory,
+    changeInCategories,
     setNewTaskAdded,
     newTaskAdded
   } = props;
@@ -36,7 +37,7 @@ const SideBar = (props) => {
       }
     };
     getCategories();
-  }, []);
+  }, [changeInCategories]);
 
   const handleCategoryChange = (event) => {
     setCategoryID(event.target.value);
