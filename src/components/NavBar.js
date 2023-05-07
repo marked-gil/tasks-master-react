@@ -44,6 +44,7 @@ function NavBar(props) {
       history.push(`/categories/${categoryID}`);
       toggleMenu();
     }
+    setCategoryID("");
   };
 
   return (
@@ -188,7 +189,8 @@ function NavBar(props) {
                   name="category_name"
                   onChange={handleCategoryChange}
                 >
-                  <option>Select a Category</option>
+                  {!categories.results.length && <option value="">No Categories</option>}
+                  {!!categories.results.length && <option value="">Select a Category</option>}
                   {categories.results.map((cat) => (
                     <option value={cat.id} key={cat.category_name}>
                       {cat.category_name}
