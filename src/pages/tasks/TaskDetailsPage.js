@@ -148,6 +148,7 @@ function TaskDetailsPage({ changeInCategories, setTaskChanged }) {
   const handleTaskUpdate = async () => {
     setIsLoaded(false);
     setError("");
+    setFeedbackMessage("");
 
     try {
       const { data } = await axiosReq.put(`/tasks/${id}`, {...taskData, ...editedTask});
