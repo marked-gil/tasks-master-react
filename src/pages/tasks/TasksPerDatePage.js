@@ -54,8 +54,9 @@ function TasksPerDatePage({ changeInCategories, newTaskAdded }) {
               history.push("/");
             }
           })
-        } 
-        setError("An ERROR has occurred. Please try refreshing the page.")
+        } else {
+          setError("An ERROR has occurred. Please try refreshing the page.")
+        }
         setIsLoaded(true);
       }
     }
