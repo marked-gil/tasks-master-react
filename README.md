@@ -2,8 +2,8 @@
 
 ![Am I Responsive Screenshot](readme/others/iamresponsive_image.png)     
 
-Tasks Master is a React application website that is designed and developed to help users in the management of their tasks - be it professional, domestic, or others. Its functionalities are also designed to enhance the efficiency of collaboration as it allows the sharing of tasks with other users. This site provides a simple and intuitive platform for users to manage their tasks. They can create multiple tasks, categorize them, set due dates/times, and assign a priority level for each task. Comments on a task can also be posted by users who are sharing the task.
-The timezone used on this site is specifically 'Europe/Dublin'.
+Tasks Master is a React application website that is designed and developed to help users in the management of their tasks - be it professional, domestic, or others. Its functionalities are also designed to enhance the efficiency of collaboration as it allows the sharing of tasks with other users. This site provides a simple and intuitive platform for users to manage their tasks. They can create multiple tasks, categorize them, set due dates/times, and assign a priority level for each task. Comments on a task can also be posted by users who are sharing the task.     
+The timezone used on this site is specifically **'Europe/Dublin'**.
 [View Live Website.](https://tasks-master.herokuapp.com)
 
 
@@ -16,7 +16,6 @@ The timezone used on this site is specifically 'Europe/Dublin'.
         * [EPICS](#epics)
     * [**Scope**](#scope)
         * [Planned Features / User Stories](#planned-features--user-stories)
-        * [Design Choice](#design-choice)
     * [**Skeleton**](#skeleton)
         * [Wireframes](#wireframes)
     * [**Surface**](#surface)
@@ -34,7 +33,7 @@ The timezone used on this site is specifically 'Europe/Dublin'.
 ### **STRATEGY**
 
 #### **Main Goal:**
-The main goal of this site is to aid users in managing and organizing their day-to-day tasks and foster efficient collaboration with other users. Overall, this is a productivity application that seeks to help users manage their everyday life.
+The main goal of this site is to facilitate users in efficiently managing and organizing their day-to-day tasks while enabling seamless collaboration with others. By providing a productivity-focused platform, users can streamline their daily routines and effectively manage their personal and professional lives.
 
 #### **Target Audience:**
 * People (young and old) who can use computers or mobile phones
@@ -45,7 +44,7 @@ The main goal of this site is to aid users in managing and organizing their day-
 #### **The Use of Agile Methodology**
 Using the Agile Methodology, the development of the project began with the creation of seven (7) EPICS to provide a framework for the website's design and structure. Each EPIC is comprised of multiple User Stories that detailed the project's features. A total of 35 User Stories were formulated for the Front-End, out of which 33 were successfully implemented, while the remaining 2 were deferred for future implementation. The 33 User Stories were distributed among four iterations, each with a distinct timeline due to the creator's other work commitments.
 
-A story point (ranging from 2-8) and priority label (Must-Have, Should-Have, Could-Have, and Won’t-Have) were assigned to each User Story to guide the estimation of time needed for implementation and prioritize the most vital components of the site. Acceptance criteria were included in each User Story, which served as a basis for determining successful implementation. Tasks were also specified for the creator to fulfill the acceptance criteria. 
+A story point (ranging from 2-8) and priority label (Must-Have, Should-Have, Could-Have, and Won’t-Have) were assigned to each User Story to guide the estimation of time needed for implementation and prioritize the most vital components of the site. Acceptance criteria were included in each User Story, which served as a basis for determining successful implementation. Tasks were also specified for the creator to fulfil the acceptance criteria. 
 
 Github’s Kanban board is a very useful tool that this project used. Here is the link for the project’s Kanban board: [**Tasks Master Kanban**](https://github.com/users/marked-gil/projects/17)
 
@@ -411,6 +410,7 @@ The following are the wireframes used to provide a visual illustration of some o
 ![Navbar Offcanvas](readme/wireframes/navbar_offcanvas.png)
 
 ## Features
+The following are the significant features included in the application:
 
 * **'SIGN IN' Page**    
 ![Sign In Page](readme/features/signin_page.png)
