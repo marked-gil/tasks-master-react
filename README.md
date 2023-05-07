@@ -509,7 +509,9 @@ The following are the wireframes used to provide a visual illustration of some o
     * Validate the entered password on the modal after the user clicks ‘delete account’, and delete the account when the password is valid.
     * Redirect the user to the ‘Sign In’ page when the profile is successfully deleted, and show a feedback message.
 
-* Make the timezone of the site dynamic so it can detect the user's local timezone.
+* To make the timezone of the site dynamic so it can detect the user's local timezone, and therefore make the site useful to users around the globe.
+
+* To use a text-area for the task description that allows the entry of multiple lines of text and lists.
 
 ## Fixed Bugs
 * ISSUE:    
@@ -589,7 +591,12 @@ This project uses the following tools:
 * [Grammarly](https://www.grammarly.com/) - used to check the grammar of the contents in this project   
 * [Looka](https://looka.com/) - used to create the logo
 * [removebg](https://www.remove.bg/) - used to remove the logo's background
-* Web browsers (Google Chrome, Firefox, Safari, Microsoft Edge) 
+* [Eightshapes.com](https://contrast-grid.eightshapes.com/) - for the Contrast Grid, which guides compliance with WCAG 2.0 minimum contrast requirements
+* For Testing and Validation:       
+    * [CI Python Linter](https://pep8ci.herokuapp.com/)  
+    * [W3C CSS Validator](https://jigsaw.w3.org/css-validator/)
+    * [WAVE - Web Accessibility Evaluation Tool](https://wave.webaim.org/)
+    * Lighthouse Testing
 
 [<ins>Back to Table of Contents</ins>](#table-of-contents)
 
