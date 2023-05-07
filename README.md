@@ -551,6 +551,9 @@ This web application is deployed via Heroku. The following steps were taken:
 4. On my new app's page, there is a row of links, which includes: Overview, Resources, Deploy, Metrics, Activity, Access, and Settings. I went to the 'Deploy' link and clicked on Github as the Deployment Method.
 5. Below the Deployment Method section is the 'Connect to Github' section, where I searched for the name of my new app on Github using the search input field provided. When the name of the repository was displayed, I clicked on the 'connect' button.
 
+    *Note:* As mentioned in the 'Fixed Bugs' section, inside 'Settings', add the following config variable:       
+    > `NODE_OPTIONS = --max_old_space_size=2560`
+
 [View Live Website](https://tasks-master.herokuapp.com/)
 
 ### **Cloning from GitHub**
