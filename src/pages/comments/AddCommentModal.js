@@ -1,6 +1,9 @@
 import { useState } from 'react';
+import Alert from 'react-bootstrap/Alert';
+import Button from 'react-bootstrap/Button';
+import Form from 'react-bootstrap/Form';
+import Modal from 'react-bootstrap/Modal';
 import styles from '../../styles/AddCommentModal.module.css';
-import { Alert, Button, Form, Modal } from 'react-bootstrap';
 import { axiosRes } from '../../api/axiosDefaults';
 
 // Component for adding new comments
