@@ -1,6 +1,7 @@
 import spinner from '../assets/loading-spinner.svg';
 import styles from '../styles/LoadingIcon.module.css';
 
+
 function LoadingIcon({ size }) {
   return (
     <div className={styles.LoadingIcon}>

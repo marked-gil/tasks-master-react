@@ -4,7 +4,7 @@ import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
 import Popover from 'react-bootstrap/Popover';
 
 
-function UserSharingPopover({ children, taskData, setTaskData, sharingUser }) {
+function UserSharingPopover({ children, taskData, setTaskData, sharingUser, setError }) {
 
   const {
     id, 
@@ -26,7 +26,7 @@ function UserSharingPopover({ children, taskData, setTaskData, sharingUser }) {
         setTaskData(data)
       }
     } catch (err) {
-      console.log(err.response?.data)
+      setError("An error occurred while removing the user. Try again later.")
     }
   }
 

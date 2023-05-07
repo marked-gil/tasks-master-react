@@ -273,6 +273,7 @@ function TaskDetailsPage({ changeInCategories, setTaskChanged }) {
                       imageWidth={"1.5rem"}
                       taskData={taskData}
                       setTaskData={setTaskData}
+                      setError={setError}
                       className={`${styles.SharedToAvatar} ${styles.AccordionSharedToAvatar}`}
                     />))
                   }
@@ -386,6 +387,7 @@ function TaskDetailsPage({ changeInCategories, setTaskChanged }) {
                 nameFontSize={"13px"}
                 className={styles.SharedToAvatar}
                 taskData={taskData}
+                setError={setError}
                 setTaskData={setTaskData}
               />  
               ))

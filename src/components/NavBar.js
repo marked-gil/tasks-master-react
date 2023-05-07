@@ -15,6 +15,7 @@ import AddCategory from '../pages/categories/AddCategory';
 import logo from '../assets/tasks-master-logo-small.png';
 import DatePickerComponent from './DatePickerComponent';
 
+
 function NavBar(props) {
 
   const { 

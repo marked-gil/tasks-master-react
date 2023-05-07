@@ -10,6 +10,7 @@ import AddTask from '../pages/tasks/AddTask';
 import { axiosReq } from '../api/axiosDefaults';
 import DatePickerComponent from './DatePickerComponent';
 
+
 const SideBar = (props) => {
 
   const { 

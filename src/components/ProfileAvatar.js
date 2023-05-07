@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import UserSharingPopover from './UserSharingPopover';
 
+
 function ProfileAvatar(props) {
 
   const {
@@ -12,7 +13,8 @@ function ProfileAvatar(props) {
     img_src,
     taskData,
     setTaskData,
-    className
+    className,
+    setError
   } = props;
 
   const [ showDelete, setShowDelete ] = useState(false);
@@ -45,6 +47,7 @@ function ProfileAvatar(props) {
           taskData={taskData}
           setTaskData={setTaskData}
           sharingUser={owner}
+          setError={setError}
         >
           <i className="fa-solid fa-trash-can fa-lg position-absolute" 
           style={{ color:"red", top:"10px", left:"10px", cursor:"pointer" }}></i>

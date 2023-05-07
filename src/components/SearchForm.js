@@ -5,6 +5,7 @@ import { axiosReq } from '../api/axiosDefaults';
 import { useHistory } from 'react-router-dom';
 import styles from '../styles/SearchForm.module.css';
 
+// Component that renders the search bar
 function SearchForm(props) {
 
   const { 

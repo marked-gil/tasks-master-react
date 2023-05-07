@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import Alert from 'react-bootstrap/Alert';
 
+
 function ErrorDisplay({error}) {
   const [show, setShow] = useState(true);
 

@@ -3,6 +3,7 @@ import { Card } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import styles from '../styles/SearchCard.module.css';
 
+// Component that displays each search result
 function SearchCard({ task, TitleStyle, TextStyle }) {
   return (
     <Card className="mb-2">
