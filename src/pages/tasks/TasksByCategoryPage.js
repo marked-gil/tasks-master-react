@@ -13,6 +13,7 @@ import TasksFilter from '../../components/TasksFilter';
 import { axiosReq, axiosRes } from '../../api/axiosDefaults';
 import LoadingIcon from '../../components/LoadingIcon';
 
+
 function TasksByCategoryPage({ handleChangeInCategory }) {
 
   const { id } = useParams();

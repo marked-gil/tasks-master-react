@@ -6,6 +6,7 @@ import moment from 'moment';
 import { axiosReq } from '../../api/axiosDefaults';
 
 
+// Component that displays, and allows editing of, the task's attributes
 function EditTaskAttributes(props) {
 
   const {

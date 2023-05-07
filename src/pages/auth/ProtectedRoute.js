@@ -1,7 +1,8 @@
 import { Redirect, Route } from 'react-router-dom';
 
+// Protects significant routes from the access of unauthenticated users
 export function ProtectedRoute (props) {
-  
+
   const { 
     isLoggedIn,
     exact,

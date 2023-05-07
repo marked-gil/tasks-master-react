@@ -20,6 +20,7 @@ import { fetchMoreData } from '../../utils/utils';
 import moment from 'moment';
 import Spinner from 'react-bootstrap/Spinner';
 
+
 function TaskDetailsPage({ changeInCategories, setTaskChanged }) {
 
   const history = useHistory();

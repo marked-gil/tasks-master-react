@@ -1,5 +1,8 @@
 import { useState } from 'react';
-import { Alert, Button, Form, Modal } from 'react-bootstrap';
+import Alert from 'react-bootstrap/Alert';
+import Button from 'react-bootstrap/Button';
+import Form from 'react-bootstrap/Form';
+import Modal from 'react-bootstrap/Modal';
 import { axiosReq } from '../../api/axiosDefaults';
 
 function ChangePasswordModal(props) {
@@ -77,7 +80,9 @@ function ChangePasswordModal(props) {
           setFieldErrors({})
           setNewPassword(initialData)
           }}
-        >Close</Button>
+        >
+          Close
+        </Button>
       </Modal.Footer>
     </Modal>
   );

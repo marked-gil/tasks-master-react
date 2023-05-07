@@ -4,6 +4,7 @@ import { axiosReq, axiosRes } from '../../api/axiosDefaults';
 import styles from '../../styles/CommentCard.module.css';
 import moment from 'moment-timezone';
 
+// Component that displays each comment
 function CommentCard(props) {
 
   const { 

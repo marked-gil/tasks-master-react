@@ -7,6 +7,7 @@ import { axiosReq } from '../../api/axiosDefaults';
 import LoadingIcon from '../../components/LoadingIcon';
 import { useSetCurrentUser } from '../../contexts/CurrentUserContext';
 
+
 function UpdateProfileImage(props) {
   
   const { 

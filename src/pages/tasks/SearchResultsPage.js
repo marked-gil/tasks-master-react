@@ -7,6 +7,7 @@ import InfiniteScroll from 'react-infinite-scroll-component';
 import { fetchMoreData } from '../../utils/utils';
 import Spinner from 'react-bootstrap/Spinner';
 
+
 function SearchResultsPage(props) {
 
   const { 

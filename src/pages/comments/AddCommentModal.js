@@ -3,6 +3,7 @@ import styles from '../../styles/AddCommentModal.module.css';
 import { Alert, Button, Form, Modal } from 'react-bootstrap';
 import { axiosRes } from '../../api/axiosDefaults';
 
+// Component for adding new comments
 function AddCommentModal(props) {
 
   const { 

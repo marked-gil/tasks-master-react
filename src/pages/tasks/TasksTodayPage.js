@@ -11,6 +11,7 @@ import TasksList from './TasksList';
 import LoadingIcon from '../../components/LoadingIcon';
 import FeedbackMessage from '../../components/FeedbackMessage';
 
+
 function TasksTodayPage({ changeInCategories, taskChanged }) {
 
   const dateToday = moment().format("YYYY-MM-DD");

@@ -10,6 +10,7 @@ import LoadingIcon from '../../components/LoadingIcon';
 import FeedbackMessage from '../../components/FeedbackMessage';
 import ChangePasswordModal from '../auth/ChangePasswordModal';
 
+
 function ProfilePage ({ currentUser }) {
 
   const profile_id = currentUser?.profile_id

@@ -3,6 +3,7 @@ import { NavLink } from 'react-router-dom';
 import { useSetCurrentUser } from '../../contexts/CurrentUserContext';
 import { removeTokenTimestamp } from '../../utils/utils';
 
+
 function SignOutLink({ className }) {
   const setCurrentUser = useSetCurrentUser();
 

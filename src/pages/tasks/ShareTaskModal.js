@@ -6,6 +6,7 @@ import Form from 'react-bootstrap/Form';
 import InputGroup from 'react-bootstrap/InputGroup';
 import styles from '../../styles/ShareTaskModal.module.css'
 
+// Component that renders the modal for sharing task to users
 function ShareTaskModal(props) {
 
   const {

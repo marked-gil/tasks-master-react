@@ -12,6 +12,7 @@ import AddTask from './AddTask';
 import FeedbackMessage from '../../components/FeedbackMessage';
 import LoadingIcon from '../../components/LoadingIcon';
 
+
 function TasksPerDatePage({ changeInCategories, newTaskAdded }) {
 
   const dateToday = moment().format('YYYY-MM-DD');

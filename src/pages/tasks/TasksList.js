@@ -8,7 +8,7 @@ import styles from '../../styles/TasksList.module.css';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import { fetchMoreData } from '../../utils/utils';
 
-
+// Component that renders the list of tasks
 function TasksList(props) {
 
   const {

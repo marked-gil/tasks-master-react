@@ -10,6 +10,7 @@ import CategorySelect from '../../components/CategorySelect';
 import LoadingIcon from '../../components/LoadingIcon';
 import styles from '../../styles/AddTask.module.css';
 
+// Component for adding new tasks
 function AddTask(props) {
 
   const { 

@@ -8,6 +8,7 @@ import { axiosReq } from '../../api/axiosDefaults';
 import { getFilteredTasks } from '../../api/taskMethods';
 import LoadingIcon from '../../components/LoadingIcon';
 
+
 function CompletedTasksPage({ changeInCategories }) {
 
   const [ tasks, setTasks ] = useState({ results: []});

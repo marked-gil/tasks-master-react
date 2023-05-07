@@ -9,6 +9,7 @@ import { useSetCurrentUser } from '../../contexts/CurrentUserContext';
 import { setTokenTimestamp } from '../../utils/utils';
 import logo from '../../assets/tasks-master-logo-small.png';
 
+
 function SignInPage() {
   const setCurrentUser = useSetCurrentUser();
 

@@ -10,6 +10,7 @@ import TasksFilter from '../../components/TasksFilter';
 import FeedbackMessage from '../../components/FeedbackMessage';
 import LoadingIcon from '../../components/LoadingIcon';
 
+
 function AllToDoTasksPage({ changeInCategories }) {
 
   const [ tasks, setTasks ] = useState({ results: [] });

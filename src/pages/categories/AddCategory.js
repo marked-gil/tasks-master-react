@@ -8,6 +8,7 @@ import styles from '../../styles/AddCategory.module.css';
 import LoadingIcon from '../../components/LoadingIcon';
 import { useHistory } from 'react-router-dom';
 
+// Component for adding new category
 function AddCategory(props) {
 
   const { 
