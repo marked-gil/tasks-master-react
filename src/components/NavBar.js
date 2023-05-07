@@ -182,7 +182,7 @@ function NavBar(props) {
 
               <div className={`d-flex justify-content-between mt-2 ${styles.CategoryFormContainer}`}>
                 <Form.Select
-                  className={`me-2`}
+                  className={`me-2 text-capitalize`}
                   style={{width: "15rem"}}
                   aria-label="Select category"
                   name="category_name"
