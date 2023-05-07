@@ -1,4 +1,6 @@
-import { Accordion, Button, Form } from 'react-bootstrap';
+import Accordion from 'react-bootstrap/Accordion';
+import Button from 'react-bootstrap/Button';
+import Form from 'react-bootstrap/Form';
 import styles from '../styles/TasksFilter.module.css';
 
 
@@ -18,8 +20,7 @@ function TasksFilter(props) {
 
   const handleFilterChange = (event) => {
     setFilters(prevState => (
-      {
-        ...prevState,
+      {...prevState,
         [event.target.name]: event.target.value
       }
     ))
