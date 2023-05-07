@@ -20,7 +20,7 @@ import { fetchMoreData } from '../../utils/utils';
 import moment from 'moment';
 import Spinner from 'react-bootstrap/Spinner';
 
-function TaskDetailsPage({ newCategoryAdded, setTaskChanged }) {
+function TaskDetailsPage({ changeInCategories, setTaskChanged }) {
 
   const history = useHistory();
   const { id } = useParams();
@@ -80,7 +80,7 @@ function TaskDetailsPage({ newCategoryAdded, setTaskChanged }) {
       }
     }
     fetchData();
-  }, [id, newCategoryAdded]);
+  }, [id, changeInCategories]);
 
   const handleShareTask = (newTaskData) => {
     setTaskData(newTaskData);

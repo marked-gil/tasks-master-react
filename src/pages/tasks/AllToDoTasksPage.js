@@ -10,7 +10,7 @@ import TasksFilter from '../../components/TasksFilter';
 import FeedbackMessage from '../../components/FeedbackMessage';
 import LoadingIcon from '../../components/LoadingIcon';
 
-function AllToDoTasksPage({ newCategoryAdded }) {
+function AllToDoTasksPage({ changeInCategories }) {
 
   const [ tasks, setTasks ] = useState({ results: [] });
   const [ categories, setCategories ] = useState({ results: [] });
@@ -38,7 +38,7 @@ function AllToDoTasksPage({ newCategoryAdded }) {
       }
     }
     getTodoTasks()
-  }, [newCategoryAdded]);
+  }, [changeInCategories]);
 
   const handleFilterSubmit = async () => {
     setError("");

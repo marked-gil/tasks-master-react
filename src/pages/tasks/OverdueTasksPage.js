@@ -8,7 +8,7 @@ import { getFilteredTasks } from '../../api/taskMethods';
 import TasksFilter from '../../components/TasksFilter';
 import LoadingIcon from '../../components/LoadingIcon';
 
-function OverdueTasksPage({ newCategoryAdded }) {
+function OverdueTasksPage({ changeInCategories }) {
 
   const [ tasks, setTasks ] = useState({ results: []});
   const [ categories, setCategories ] = useState({ results: [] });
@@ -35,7 +35,7 @@ function OverdueTasksPage({ newCategoryAdded }) {
       }
     } 
     fetchedData();
-  }, [newCategoryAdded]);
+  }, [changeInCategories]);
 
   const handleFilterSubmit = async () => {
     setError("");

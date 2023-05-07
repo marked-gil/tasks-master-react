@@ -12,7 +12,7 @@ import AddTask from './AddTask';
 import FeedbackMessage from '../../components/FeedbackMessage';
 import LoadingIcon from '../../components/LoadingIcon';
 
-function TasksPerDatePage({ newCategoryAdded, newTaskAdded }) {
+function TasksPerDatePage({ changeInCategories, newTaskAdded }) {
 
   const dateToday = moment().format('YYYY-MM-DD');
   const { due_date } = useParams();
@@ -52,7 +52,7 @@ function TasksPerDatePage({ newCategoryAdded, newTaskAdded }) {
       }
     }
     fetchedData();
-  }, [due_date, newCategoryAdded, newTaskAdded]);
+  }, [due_date, changeInCategories, newTaskAdded]);
 
   const handleFilterSubmit = async () => {
     setError("")

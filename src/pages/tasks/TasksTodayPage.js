@@ -11,7 +11,7 @@ import TasksList from './TasksList';
 import LoadingIcon from '../../components/LoadingIcon';
 import FeedbackMessage from '../../components/FeedbackMessage';
 
-function TasksTodayPage({ newCategoryAdded, taskChanged }) {
+function TasksTodayPage({ changeInCategories, taskChanged }) {
 
   const dateToday = moment().format("YYYY-MM-DD");
   const [ showCompletedTasks, setShowCompletedTasks ] = useState(false);
@@ -41,7 +41,7 @@ function TasksTodayPage({ newCategoryAdded, taskChanged }) {
       }
     }
     fetchedData();
-  }, [dateToday, newCategoryAdded, taskChanged]);
+  }, [dateToday, changeInCategories, taskChanged]);
   
   const handleFilterSubmit = async () => {
     setError("");

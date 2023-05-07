@@ -36,7 +36,8 @@ function MainPageContainer(props) {
   } = props;
 
   const currentUser = useCurrentUser();
-  const [ newCategoryAdded, setNewCategoryAdded ] = useState(false);
+  const [ changeInCategories, setChangeInCategories ] = useState(false);
+  // const [ newCategoryAdded, setNewCategoryAdded ] = useState(false);
   const [ newTaskAdded, setNewTaskAdded ] = useState(false);
   const [ categories, setCategories ] = useState({ results: [] });
   const [ searchResults, setSearchResults ] = useState({ results: [] });
@@ -57,10 +58,11 @@ function MainPageContainer(props) {
       }
     };
     getCategories();
-  }, [newCategoryAdded]);
+  }, [changeInCategories]);
 
   const handleChangeInCategory = () => {
-    setNewCategoryAdded(!newCategoryAdded);
+    // setNewCategoryAdded(!newCategoryAdded);
+    setChangeInCategories(!changeInCategories)
   }
 
   return (
@@ -85,19 +87,19 @@ function MainPageContainer(props) {
           />
           {profile ? <ProfilePage currentUser={currentUser} /> 
             : tasksTodayPage ? <TasksTodayPage 
-                newCategoryAdded={newCategoryAdded}
+                changeInCategories={changeInCategories}
                 taskChanged={taskChanged}
               />
-            : taskDetailsPage ? <TaskDetailsPage 
-                newCategoryAdded={newCategoryAdded}
+            : taskDetailsPage ? <TaskDetailsPage
+                changeInCategories={changeInCategories}
                 setTaskChanged={setTaskChanged}
               />
-            : tasksPerDatePage ? <TasksPerDatePage newCategoryAdded={newCategoryAdded} newTaskAdded={newTaskAdded} /> 
-            : allTodoTasksPage ? <AllToDoTasksPage newCategoryAdded={newCategoryAdded} /> 
-            : overdueTasksPage ? <OverdueTasksPage newCategoryAdded={newCategoryAdded} />
+            : tasksPerDatePage ? <TasksPerDatePage changeInCategories={changeInCategories} newTaskAdded={newTaskAdded} /> 
+            : allTodoTasksPage ? <AllToDoTasksPage changeInCategories={changeInCategories} /> 
+            : overdueTasksPage ? <OverdueTasksPage changeInCategories={changeInCategories}   />
             : tasksByCategoryPage ? <TasksByCategoryPage handleChangeInCategory={handleChangeInCategory} />
-            : completedTasksPage ? <CompletedTasksPage newCategoryAdded={newCategoryAdded} />
-            : sharedTasksPage ? <SharedTasksPage newCategoryAdded={newCategoryAdded} />
+            : completedTasksPage ? <CompletedTasksPage changeInCategories={changeInCategories} />
+            : sharedTasksPage ? <SharedTasksPage changeInCategories={changeInCategories} />
             : searchResultsPage ? <SearchResultsPage
                 setSearchResults={setSearchResults}
                 searchResults={searchResults} 
