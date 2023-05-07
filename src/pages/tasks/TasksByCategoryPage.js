@@ -7,7 +7,6 @@ import TasksList from './TasksList';
 import AddTask from './AddTask';
 import styles from '../../styles/TasksByCategoryPage.module.css';
 import { useHistory, useParams } from 'react-router-dom';
-import { getCategory } from '../../api/categoryMethods';
 import { getFilteredTasks } from '../../api/taskMethods';
 import TasksFilter from '../../components/TasksFilter';
 import { axiosReq, axiosRes } from '../../api/axiosDefaults';
@@ -28,10 +27,6 @@ function TasksByCategoryPage({ handleChangeInCategory }) {
   const [ editCategory, setEditCategory ] = useState(false);
   const { category_name, description } = categoryData;
 
-  useEffect(() => {
-    getCategory(id, setCategoryData, setError);
-  }, [id, editCategory]);
-
   const handleError = (err) => {
     if (err.response?.data?.category) {
       err.response?.data?.category.map(data => {
@@ -39,6 +34,8 @@ function TasksByCategoryPage({ handleChangeInCategory }) {
           history.push("/")
         }
       })
+    } else if (err.response?.data?.detail === "Not found.") {
+      history.push("/")
     } else {
       setError("An error has occurred while fetching data. Try refreshing the page.")
     }
@@ -50,11 +47,17 @@ function TasksByCategoryPage({ handleChangeInCategory }) {
       setIsLoaded(false);
       setEditCategory(false);
       try {
-        const [{ data: fetchedTasks }, { data: fetchedCategories }] = await Promise.all([
+        const [
+          { data: fetchedCategory },
+          { data: fetchedTasks },
+          { data: fetchedCategories }
+        ] = await Promise.all([
+          axiosReq.get(`/categories/${id}`),
           axiosReq.get(`/tasks/?category=${id}`),
           axiosReq.get(`/categories/`)
         ]);
         setTimeout(() => {
+          setCategoryData(fetchedCategory);
           setTasks(fetchedTasks);
           setCategories(fetchedCategories);
           setIsLoaded(true);
