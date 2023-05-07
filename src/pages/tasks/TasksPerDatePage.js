@@ -48,6 +48,13 @@ function TasksPerDatePage({ changeInCategories, newTaskAdded }) {
           setIsLoaded(true);
         }, 1000)
       } catch (err) {
+        if (err.response?.data?.due_date) {
+          err.response?.data?.due_date.map(data => {
+            if (data.includes("Enter a valid date")) {
+              history.push("/");
+            }
+          })
+        } 
         setError("An ERROR has occurred. Please try refreshing the page.")
         setIsLoaded(true);
       }
