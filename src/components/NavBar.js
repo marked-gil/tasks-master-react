@@ -206,6 +206,7 @@ function NavBar(props) {
                 setCategories={setCategories}
                 handleChangeInCategory={handleChangeInCategory}
                 className={styles.AddCategory}
+                toggleMenu={toggleMenu}
               />
               
             </Offcanvas.Body>

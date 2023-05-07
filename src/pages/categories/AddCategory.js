@@ -16,7 +16,8 @@ function AddCategory(props) {
     categories, 
     setCategories, 
     handleChangeInCategory,
-    className 
+    className,
+    toggleMenu 
   } = props;
 
   const history = useHistory();
@@ -45,7 +46,7 @@ function AddCategory(props) {
   };
 
   const handleSubmit = async () => {
-
+    setIsLoaded(false);
     const newData = {
       owner: currentUser?.pk,
       category_name: categoryData.category_name.toLocaleLowerCase(),
@@ -53,12 +54,12 @@ function AddCategory(props) {
     }
 
     try {
-      setIsLoaded(false);
       const { data } = await axios.post("/categories/", {...newData});
       setTimeout(() => {
         setCategories({results: [...categories.results, data]})
         handleChangeInCategory();
         handleClose();
+        toggleMenu && toggleMenu();
         history.push(`/categories/${data.id}`);
         setIsLoaded(true);
       }, 500)
