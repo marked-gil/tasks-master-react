@@ -37,6 +37,7 @@ function MainPageContainer(props) {
 
   const currentUser = useCurrentUser();
   const [ newCategoryAdded, setNewCategoryAdded ] = useState(false);
+  const [ newTaskAdded, setNewTaskAdded ] = useState(false);
   const [ categories, setCategories ] = useState({ results: [] });
   const [ searchResults, setSearchResults ] = useState({ results: [] });
   const [ keywordSearched, setKeywordSearched ] = useState("");
@@ -76,7 +77,12 @@ function MainPageContainer(props) {
       />
       <Container fluid className={styles.MainContent}>
         <Row className={styles.Row}>
-          <SideBar currentUser={currentUser} handleChangeInCategory={handleChangeInCategory} />
+          <SideBar 
+            currentUser={currentUser} 
+            handleChangeInCategory={handleChangeInCategory} 
+            setNewTaskAdded={setNewTaskAdded}
+            newTaskAdded={newTaskAdded}
+          />
           {profile ? <ProfilePage currentUser={currentUser} /> 
             : tasksTodayPage ? <TasksTodayPage 
                 newCategoryAdded={newCategoryAdded}
@@ -86,7 +92,7 @@ function MainPageContainer(props) {
                 newCategoryAdded={newCategoryAdded}
                 setTaskChanged={setTaskChanged}
               />
-            : tasksPerDatePage ? <TasksPerDatePage newCategoryAdded={newCategoryAdded} /> 
+            : tasksPerDatePage ? <TasksPerDatePage newCategoryAdded={newCategoryAdded} newTaskAdded={newTaskAdded} /> 
             : allTodoTasksPage ? <AllToDoTasksPage newCategoryAdded={newCategoryAdded} /> 
             : overdueTasksPage ? <OverdueTasksPage newCategoryAdded={newCategoryAdded} />
             : tasksByCategoryPage ? <TasksByCategoryPage handleChangeInCategory={handleChangeInCategory} />

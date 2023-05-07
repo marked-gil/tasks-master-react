@@ -14,7 +14,9 @@ const SideBar = (props) => {
 
   const { 
     currentUser, 
-    handleChangeInCategory
+    handleChangeInCategory,
+    setNewTaskAdded,
+    newTaskAdded
   } = props;
 
   const history = useHistory();
@@ -61,6 +63,8 @@ const SideBar = (props) => {
             pushToPages
             className={styles.AddTask}
             pushToPage
+            setNewTaskAdded={setNewTaskAdded}
+            newTaskAdded={newTaskAdded}
           />
         </li>
         <li className={`mb-2 d-flex ${styles.DatePickerContainer}`}>

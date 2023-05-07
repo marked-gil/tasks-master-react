@@ -23,7 +23,9 @@ function AddTask(props) {
     pushToPage,
     setError,
     toggleMenu,
-    setEditCategory
+    setEditCategory,
+    setNewTaskAdded,
+    newTaskAdded
   } = props;
 
   const initialTaskData = { 
@@ -103,7 +105,14 @@ function AddTask(props) {
       handleClose();
       setFeedbackMessage && setFeedbackMessage(success_message)
       setIsLoaded(true);
-      pushToPage && history.push(`/tasks/${moment(due_date).format("YYYY-MM-DD")}`)
+
+      if (pushToPage) {
+        if (history.location.pathname === `/tasks/${moment(due_date).format("YYYY-MM-DD")}`) {
+          setNewTaskAdded(!newTaskAdded);
+        } else {
+          history.push(`/tasks/${moment(due_date).format("YYYY-MM-DD")}`)
+        }
+      }
       toggleMenu && toggleMenu();
     } catch (err) {
       setShowErrors(err.response?.data);
