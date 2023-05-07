@@ -41,7 +41,7 @@ function ShareTaskModal(props) {
   };
 
   const handleSearch = async () => {
-    if (userSearch === taskData.owner) {
+    if (userSearch.toLowerCase() === taskData.owner.toLowerCase()) {
       setFeedback("You are already the owner of the task.");
       setUserProfile({});
     } else if (taskData.shared_to.length !== 4) {
