@@ -1,4 +1,4 @@
-// This code is copied from CI's Moments App Walkthrough Project
+// This is a modified code from CI's Moments App Walkthrough Project
 
 import { createContext, useContext, useState, useEffect, useMemo } from "react";
 import axios from "axios";
