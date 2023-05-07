@@ -42,7 +42,7 @@ All CSS files on this project were validated by [W3C Validation Service](https:/
 
 ## Responsiveness
 
-The responsiveness of this application has been testing on the **Chrome Developer tools**. And this site was designed to be responsive down to the smallest screen of **320px**.
+The responsiveness of this application has been tested on the **Chrome Developer tools**. And this site was designed to be responsive down to the smallest screen of **320px**.
 * Chrome Developer Tools    
   ![Galaxy S5](readme/responsiveness/chrome-galaxyS5.png)
   ![iphone12 Pro](readme/responsiveness/chrome-iphone12pro.png)   
