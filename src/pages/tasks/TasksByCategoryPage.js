@@ -11,6 +11,7 @@ import { getFilteredTasks } from '../../api/taskMethods';
 import TasksFilter from '../../components/TasksFilter';
 import { axiosReq, axiosRes } from '../../api/axiosDefaults';
 import LoadingIcon from '../../components/LoadingIcon';
+import FeedbackMessage from '../../components/FeedbackMessage';
 
 
 function TasksByCategoryPage({ handleChangeInCategory }) {
@@ -25,6 +26,8 @@ function TasksByCategoryPage({ handleChangeInCategory }) {
   const [ error, setError ] = useState("");
   const [ isLoaded, setIsLoaded ] = useState(false);
   const [ editCategory, setEditCategory ] = useState(false);
+  const [ feedbackMessage, setFeedbackMessage ] = useState("");
+
   const { category_name, description } = categoryData;
 
   const handleError = (err) => {
@@ -145,6 +148,7 @@ function TasksByCategoryPage({ handleChangeInCategory }) {
 
       <div className={styles.InnerContainer}>
         {error && <ErrorDisplay error={error} />}
+        {feedbackMessage && <FeedbackMessage message={feedbackMessage} />}
 
         <div className={`d-flex flex-column position-relative`}>
           <h2 className={`${styles.HeadingOne}`}>My Category</h2>
@@ -251,6 +255,8 @@ function TasksByCategoryPage({ handleChangeInCategory }) {
         setError={setError}
         categories={categories}
         setEditCategory={setEditCategory}
+        setFeedbackMessage={setFeedbackMessage}
+        categoryPage={category_name}
         className="mb-5"
       />
     </Col>

@@ -117,6 +117,7 @@ const SideBar = (props) => {
           style={{width: "15rem"}}
           aria-label="Select category"
           name="category_name"
+          value={categoryID}
           onChange={handleCategoryChange}
           size="lg"
         > 

@@ -20,7 +20,8 @@ function AddTask(props) {
     setTasks, 
     categories, 
     setFeedbackMessage, 
-    allTodos, 
+    allTodos,
+    categoryPage,
     pushToPage,
     setError,
     toggleMenu,
@@ -103,6 +104,11 @@ function AddTask(props) {
           (allTodos && moment(due_date).format("YYYY-MM-DD") >= moment().format("YYYY-MM-DD"))) {
         setTasks({results: [...tasks.results, data]});
       }
+
+      if (categoryPage && categoryPage === category) {
+        setTasks({results: [...tasks.results, data]});
+      }
+
       handleClose();
       setFeedbackMessage && setFeedbackMessage(success_message)
       setIsLoaded(true);
